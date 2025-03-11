@@ -21835,7 +21835,12 @@ Example 3:
 Input: s = "abc"
 Output: 1
 
+@param {string} s
+@return {number}
 
+var numberOfSubstrings = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
