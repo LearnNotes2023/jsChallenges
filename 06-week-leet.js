@@ -21882,7 +21882,14 @@ console.log("==========================================")
 // @return {number}
 
 var maximumCount = function(nums) {
-    
+    let negCount = 0, posCount = 0;
+
+    for (let num of nums) {
+        if (num < 0) negCount++;
+        else if (num > 0) posCount++;
+    }
+
+    return Math.max(negCount, posCount);
 };
 
 console.log("==========================================")
