@@ -21917,6 +21917,7 @@ The array will become [1, 0, 1].
 For i = 1 (l = 0, r = 2, val = 1):
 Decrement values at indices [0, 1, 2] by [1, 0, 1] respectively.
 The array will become [0, 0, 0], which is a Zero Array. Therefore, the minimum value of k is 2.
+
 Example 2:
 Input: nums = [4,3,2,1], queries = [[1,3,2],[0,2,1]]
 Output: -1
@@ -21928,7 +21929,14 @@ For i = 1 (l = 0, r = 2, val = 1):
 Decrement values at indices [0, 1, 2] by [1, 1, 0] respectively.
 The array will become [3, 0, 0, 0], which is not a Zero Array.
 
-
+/**
+ * @param {number[]} nums
+ * @param {number[][]} queries
+ * @return {number}
+ */
+var minZeroArray = function(nums, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
