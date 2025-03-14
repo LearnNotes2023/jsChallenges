@@ -21993,7 +21993,13 @@ Output: 0
 Explanation: There are 11 children but only 7 candies in total, so it is impossible to ensure each child receives at least one candy. 
 Thus, each child gets no candy and the answer is 0.
 
+@param {number[]} candies
+@param {number} k
+@return {number}
 
+var maximumCandies = function(candies, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
