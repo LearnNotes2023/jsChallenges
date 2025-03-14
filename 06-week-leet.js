@@ -21998,7 +21998,30 @@ console.log("==========================================")
 // @return {number}
 
 var maximumCandies = function(candies, k) {
+    if (k === 0) return 0; // Edge case: no children
     
+    let left = 1, right = Math.max(...candies);
+    let result = 0;
+
+    const canDistribute = (mid) => {
+        let count = 0;
+        for (let candy of candies) {
+            count += Math.floor(candy / mid);
+        }
+        return count >= k;
+    };
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (canDistribute(mid)) {
+            result = mid; // Valid allocation, try for a larger size
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
