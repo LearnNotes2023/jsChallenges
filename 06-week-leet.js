@@ -22051,8 +22051,13 @@ Output: 2
 Explanation: There are 7 ways to rob the houses. 
 The way which leads to minimum capability is to rob the house at index 0 and 4. Return max(nums[0], nums[4]) = 2.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
-
+var minCapability = function(nums, k) {
+    
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
