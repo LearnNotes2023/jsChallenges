@@ -22056,8 +22056,37 @@ console.log("==========================================")
 // @return {number}
 
 var minCapability = function(nums, k) {
+    let left = Math.min(...nums);
+    let right = Math.max(...nums);
     
+    const canRobK = (capability) => {
+        let count = 0;
+        let i = 0;
+        
+        while (i < nums.length) {
+            if (nums[i] <= capability) {
+                count++;
+                i++;  // Skip adjacent house
+            }
+            i++;  // Move to next house
+        }
+        
+        return count >= k;
+    };
+
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        
+        if (canRobK(mid)) {
+            right = mid;  // Try to find a smaller capability
+        } else {
+            left = mid + 1;  // Increase capability
+        }
+    }
+    
+    return left;
 };
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
