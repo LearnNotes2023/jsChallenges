@@ -22121,7 +22121,27 @@ console.log("==========================================")
 // @return {number}
 
 var repairCars = function(ranks, cars) {
+    let left = 1, right = Math.min(...ranks) * cars * cars; 
     
+    const canRepairInTime = (time) => {
+        let repaired = 0;
+        for (let rank of ranks) {
+            repaired += Math.floor(Math.sqrt(time / rank)); 
+            if (repaired >= cars) return true; 
+        }
+        return false;
+    };
+
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        if (canRepairInTime(mid)) {
+            right = mid; 
+        } else {
+            left = mid + 1; 
+        }
+    }
+
+    return left;
 };
 
 console.log("==========================================")
