@@ -22116,7 +22116,13 @@ Explanation:
 - The third mechanic will repair one car. The time required is 8 * 1 * 1 = 8 minutes.
 It can be proved that the cars cannot be repaired in less than 16 minutes.​​​​​
 
+@param {number[]} ranks
+@param {number} cars
+@return {number}
 
+var repairCars = function(ranks, cars) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
