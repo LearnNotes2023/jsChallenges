@@ -22167,7 +22167,13 @@ Output: false
 Explanation: 
 There is no way to divide nums into 4 / 2 = 2 pairs such that the pairs satisfy every condition.
 
-
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var divideArray = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
