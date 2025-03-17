@@ -22171,7 +22171,21 @@ console.log("==========================================")
 // @return {boolean}
 
 var divideArray = function(nums) {
+    let count = new Map();
     
+    // Count the occurrences of each number
+    for (let num of nums) {
+        count.set(num, (count.get(num) || 0) + 1);
+    }
+    
+    // Check if each count is even
+    for (let freq of count.values()) {
+        if (freq % 2 !== 0) {
+            return false;
+        }
+    }
+    
+    return true;
 };
 
 console.log("==========================================")
