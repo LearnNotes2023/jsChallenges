@@ -22212,7 +22212,12 @@ Input: nums = [3,1,5,11,13]
 Output: 1
 Explanation: The length of the longest nice subarray is 1. Any subarray of length 1 can be chosen.
 
+@param {number[]} nums
+@return {number}
 
+var longestNiceSubarray = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
