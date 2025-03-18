@@ -22216,8 +22216,23 @@ console.log("==========================================")
 // @return {number}
 
 var longestNiceSubarray = function(nums) {
+    let maxLen = 0;
+    let left = 0;
+    let bitMask = 0;
     
+    for (let right = 0; right < nums.length; right++) {
+        while ((bitMask & nums[right]) !== 0) {
+            bitMask ^= nums[left]; // Remove leftmost element from bitMask
+            left++;
+        }
+        
+        bitMask |= nums[right]; // Add new element to bitMask
+        maxLen = Math.max(maxLen, right - left + 1);
+    }
+    
+    return maxLen;
 };
+
 
 console.log("==========================================")
 // console.log("==========================================")
