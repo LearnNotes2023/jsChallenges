@@ -22263,7 +22263,21 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(nums) {
+    let n = nums.length;
+    let ops = 0;
     
+    for (let i = 0; i <= n - 3; i++) {
+        if (nums[i] === 0) {
+            // Flip the next three elements
+            for (let j = 0; j < 3; j++) {
+                nums[i + j] ^= 1;
+            }
+            ops++;
+        }
+    }
+    
+    // Check if all elements are 1
+    return nums.every(num => num === 1) ? ops : -1;
 };
 
 console.log("==========================================")
