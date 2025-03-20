@@ -22308,8 +22308,14 @@ Output: [0]
 Explanation:
 To achieve the cost of 0 in the first query, we need to move on the following edges: 1->2 (weight 1), 2->1 (weight 6), 1->2 (weight 1).
 
+@param {number} n
+@param {number[][]} edges
+@param {number[][]} query
+@return {number[]}
 
-
+var minimumCost = function(n, edges, query) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
