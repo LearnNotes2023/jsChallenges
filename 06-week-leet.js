@@ -22313,8 +22313,57 @@ console.log("==========================================")
 // @param {number[][]} query
 // @return {number[]}
 
-var minimumCost = function(n, edges, query) {
-    
+class UnionFind {
+    constructor(n) {
+        this.parent = Array.from({ length: n }, (_, i) => i);
+        this.size = Array(n).fill(1);
+    }
+
+    find(x) {
+        if (this.parent[x] !== x) {
+            this.parent[x] = this.find(this.parent[x]); // Path compression
+        }
+        return this.parent[x];
+    }
+
+    union(a, b) {
+        let pa = this.find(a), pb = this.find(b);
+        if (pa === pb) return false;
+        if (this.size[pa] > this.size[pb]) {
+            this.parent[pb] = pa;
+            this.size[pa] += this.size[pb];
+        } else {
+            this.parent[pa] = pb;
+            this.size[pb] += this.size[pa];
+        }
+        return true;
+    }
+}
+
+var minimumCost = function(n, edges, queries) {
+    let g = new Array(n).fill(-1);
+    let uf = new UnionFind(n);
+
+    // Build the Union-Find structure
+    for (let [u, v, _] of edges) {
+        uf.union(u, v);
+    }
+
+    // Compute the minimum AND value for each connected component
+    for (let [u, _, w] of edges) {
+        let root = uf.find(u);
+        g[root] &= w;
+    }
+
+    // Query function
+    function queryCost(u, v) {
+        if (u === v) return 0;
+        let a = uf.find(u), b = uf.find(v);
+        return a === b ? g[a] : -1;
+    }
+
+    return queries.map(([s, t]) => queryCost(s, t));
+};    
 };
 
 console.log("==========================================")
