@@ -22404,7 +22404,44 @@ console.log("==========================================")
 // @return {string[]}
 
 var findAllRecipes = function(recipes, ingredients, supplies) {
+    let recipeSet = new Set(recipes);
+    let supplySet = new Set(supplies);
+    let graph = new Map(); // Adjacency list
+    let inDegree = new Map(); // Count of missing ingredients
     
+    // Initialize graph and in-degree count
+    for (let i = 0; i < recipes.length; i++) {
+        let recipe = recipes[i];
+        inDegree.set(recipe, ingredients[i].length);
+        for (let ing of ingredients[i]) {
+            if (!graph.has(ing)) graph.set(ing, []);
+            graph.get(ing).push(recipe);
+        }
+    }
+    
+    let queue = []; // Processable recipes
+    for (let supply of supplies) {
+        if (graph.has(supply)) {
+            queue.push(supply);
+        }
+    }
+    
+    let result = [];
+    while (queue.length) {
+        let ing = queue.shift();
+        if (recipeSet.has(ing)) result.push(ing);
+        
+        if (graph.has(ing)) {
+            for (let recipe of graph.get(ing)) {
+                inDegree.set(recipe, inDegree.get(recipe) - 1);
+                if (inDegree.get(recipe) === 0) {
+                    queue.push(recipe);
+                }
+            }
+        }
+    }
+    
+    return result;
 };
 
 
