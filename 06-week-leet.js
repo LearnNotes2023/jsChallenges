@@ -22398,7 +22398,14 @@ We can create "bread" since we have the ingredients "yeast" and "flour".
 We can create "sandwich" since we have the ingredient "meat" and can create the ingredient "bread".
 We can create "burger" since we have the ingredient "meat" and can create the ingredients "bread" and "sandwich".
  
+@param {string[]} recipes
+@param {string[][]} ingredients
+@param {string[]} supplies
+@return {string[]}
 
+var findAllRecipes = function(recipes, ingredients, supplies) {
+    
+};
 
 
 
