@@ -22474,7 +22474,40 @@ console.log("==========================================")
 // @return {number}
 
 var countCompleteComponents = function(n, edges) {
+    // Create adjacency list
+    let adj = Array.from({ length: n }, () => new Set());
+    for (let [u, v] of edges) {
+        adj[u].add(v);
+        adj[v].add(u);
+    }
     
+    let visited = new Array(n).fill(false);
+    let count = 0;
+    
+    const dfs = (node, component) => {
+        visited[node] = true;
+        component.push(node);
+        for (let neighbor of adj[node]) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, component);
+            }
+        }
+    };
+    
+    for (let i = 0; i < n; i++) {
+        if (!visited[i]) {
+            let component = [];
+            dfs(i, component);
+            
+            // Check if the component is complete
+            let size = component.length;
+            let isComplete = component.every(node => adj[node].size === size - 1);
+            
+            if (isComplete) count++;
+        }
+    }
+    
+    return count;
 };
 
 console.log("==========================================")
