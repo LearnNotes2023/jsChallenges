@@ -22469,8 +22469,13 @@ Explanation: The component containing vertices 0, 1, and 2 is complete since the
 On the other hand, the component containing vertices 3, 4, and 5 is not complete since there is no edge between vertices 4 and 5. 
 Thus, the number of complete components in this graph is 1.
 
+@param {number} n
+@param {number[][]} edges
+@return {number}
 
-
+var countCompleteComponents = function(n, edges) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
