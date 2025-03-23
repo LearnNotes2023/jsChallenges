@@ -22539,7 +22539,13 @@ Input: n = 2, roads = [[1,0,10]]
 Output: 1
 Explanation: There is only one way to go from intersection 0 to intersection 1, and it takes 10 minutes.
 
+@param {number} n
+@param {number[][]} roads
+@return {number}
 
+var countPaths = function(n, roads) {
+    
+};
 
 
 console.log("==========================================")
