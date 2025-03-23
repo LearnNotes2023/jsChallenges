@@ -22544,7 +22544,43 @@ console.log("==========================================")
 // @return {number}
 
 var countPaths = function(n, roads) {
+    const MOD = 1e9 + 7;
+    const graph = new Array(n).fill(0).map(() => []);
     
+    // Build adjacency list
+    for (const [u, v, time] of roads) {
+        graph[u].push([v, time]);
+        graph[v].push([u, time]);
+    }
+    
+    // Min-heap priority queue (min distance first)
+    const minHeap = [[0, 0]]; // [time, node]
+    const dist = new Array(n).fill(Infinity);
+    const ways = new Array(n).fill(0);
+    
+    dist[0] = 0;
+    ways[0] = 1;
+    
+    while (minHeap.length > 0) {
+        const [time, node] = minHeap.shift(); // Extract min (Dijkstra's step)
+        
+        if (time > dist[node]) continue; // Skip if outdated
+        
+        for (const [neighbor, travelTime] of graph[node]) {
+            const newTime = time + travelTime;
+            
+            if (newTime < dist[neighbor]) {
+                dist[neighbor] = newTime;
+                ways[neighbor] = ways[node];
+                minHeap.push([newTime, neighbor]);
+                minHeap.sort((a, b) => a[0] - b[0]); // Maintain min-heap order
+            } else if (newTime === dist[neighbor]) {
+                ways[neighbor] = (ways[neighbor] + ways[node]) % MOD;
+            }
+        }
+    }
+    
+    return ways[n - 1];
 };
 
 
