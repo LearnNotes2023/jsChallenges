@@ -22611,7 +22611,13 @@ Output: 0
 Explanation:
 Meetings are scheduled for all working days.
 
+@param {number} days
+@param {number[][]} meetings
+@return {number}
 
+var countDays = function(days, meetings) {
+    
+};
 
 
 console.log("==========================================")
