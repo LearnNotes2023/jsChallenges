@@ -22616,8 +22616,35 @@ console.log("==========================================")
 // @return {number}
 
 var countDays = function(days, meetings) {
+    // Sort meetings by start day
+    meetings.sort((a, b) => a[0] - b[0]);
+
+    let totalMeetingDays = 0;
+    let prevStart = -1, prevEnd = -1;
+
+    for (let [start, end] of meetings) {
+        if (start > prevEnd) {
+            // Add previous merged interval days
+            if (prevStart !== -1) {
+                totalMeetingDays += (prevEnd - prevStart + 1);
+            }
+            // Start new interval
+            prevStart = start;
+            prevEnd = end;
+        } else {
+            // Merge overlapping interval
+            prevEnd = Math.max(prevEnd, end);
+        }
+    }
     
+    // Add the last merged interval
+    if (prevStart !== -1) {
+        totalMeetingDays += (prevEnd - prevStart + 1);
+    }
+
+    return days - totalMeetingDays;
 };
+
 
 
 console.log("==========================================")
