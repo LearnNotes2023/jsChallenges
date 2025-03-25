@@ -22683,8 +22683,27 @@ console.log("==========================================")
 // @return {boolean}
 
 var checkValidCuts = function(n, rectangles) {
+    const xs = rectangles.map(([startX, , endX]) => [startX, endX]);
+    const ys = rectangles.map(([, startY, , endY]) => [startY, endY]);
+    return Math.max(countMerged(xs), countMerged(ys)) >= 3;
+  };
+  
+  function countMerged(intervals) {
+    let count = 0;
+    let prevEnd = 0;
     
-};
+    intervals.sort(([aStart], [bStart]) => aStart - bStart);
+    
+    for (const [start, end] of intervals) {
+      if (start < prevEnd) {
+        prevEnd = Math.max(prevEnd, end);
+      } else {
+        prevEnd = end;
+        count++;
+      }
+    }
+    return count;
+  }
 
 console.log("==========================================")
 // console.log("==========================================")
