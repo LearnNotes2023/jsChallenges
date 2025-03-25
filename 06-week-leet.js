@@ -22678,7 +22678,13 @@ Output: false
 Explanation:
 We cannot make two horizontal or two vertical cuts that satisfy the conditions. Hence, output is false.
 
+@param {number} n
+@param {number[][]} rectangles
+@return {boolean}
 
+var checkValidCuts = function(n, rectangles) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
