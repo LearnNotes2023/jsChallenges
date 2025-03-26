@@ -22737,7 +22737,24 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(grid, x) {
+    let nums = grid.flat();  // Flatten the 2D grid to 1D array
+    nums.sort((a, b) => a - b);  // Sort the array
+
+    let mod = nums[0] % x;
     
+    // Check if it's possible to make the grid uni-value
+    for (let num of nums) {
+        if (num % x !== mod) return -1;
+    }
+    
+    let median = nums[Math.floor(nums.length / 2)]; // Find the median
+    let operations = 0;
+    
+    for (let num of nums) {
+        operations += Math.abs(num - median) / x; // Compute steps to median
+    }
+    
+    return operations;
 };
 
 console.log("==========================================")
