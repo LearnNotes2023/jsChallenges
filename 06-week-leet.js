@@ -22732,6 +22732,13 @@ Input: grid = [[1,2],[3,4]], x = 2
 Output: -1
 Explanation: It is impossible to make every element equal.
 
+@param {number[][]} grid
+@param {number} x
+@return {number}
+
+var minOperations = function(grid, x) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
