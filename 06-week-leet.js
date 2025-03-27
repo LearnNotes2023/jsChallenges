@@ -22797,9 +22797,39 @@ console.log("==========================================")
 // @return {number}
 
 var minimumIndex = function(nums) {
+    const n = nums.length;
     
+    // Step 1: Find the dominant element
+    let countMap = new Map();
+    for (let num of nums) {
+        countMap.set(num, (countMap.get(num) || 0) + 1);
+    }
+    
+    let dominant = -1;
+    let maxCount = 0;
+    for (let [num, count] of countMap) {
+        if (count * 2 > n) {
+            dominant = num;
+            maxCount = count;
+            break;
+        }
+    }
+    
+    if (dominant === -1) return -1; // No dominant element found
+    
+    // Step 2: Find the minimum valid split
+    let leftCount = 0;
+    for (let i = 0; i < n - 1; i++) {
+        if (nums[i] === dominant) leftCount++;
+        let rightCount = maxCount - leftCount;
+        
+        if (leftCount * 2 > (i + 1) && rightCount * 2 > (n - i - 1)) {
+            return i;
+        }
+    }
+    
+    return -1;
 };
-
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
