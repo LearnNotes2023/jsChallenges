@@ -22793,7 +22793,12 @@ Input: nums = [3,3,3,3,7,2,2]
 Output: -1
 Explanation: It can be shown that there is no valid split.
 
+@param {number[]} nums
+@return {number}
 
+var minimumIndex = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
