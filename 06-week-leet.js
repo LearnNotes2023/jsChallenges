@@ -22852,7 +22852,13 @@ Input: grid = [[5,2,1],[1,1,2]], queries = [3]
 Output: [0]
 Explanation: We can not get any points because the value of the top left cell is already greater than or equal to 3.
 
+@param {number[][]} grid
+@param {number[]} queries
+@return {number[]}
 
+var maxPoints = function(grid, queries) {
+    
+};
 
 
 console.log("==========================================")
