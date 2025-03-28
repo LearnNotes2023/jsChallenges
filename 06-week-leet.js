@@ -22857,8 +22857,99 @@ console.log("==========================================")
 // @return {number[]}
 
 var maxPoints = function(grid, queries) {
-    
+    const DIRS = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    const m = grid.length, n = grid[0].length;
+    const querySize = queries.length;
+    const answers = new Array(querySize).fill(0);
+
+    // Convert queries into an array of objects (index, value) and sort by value
+    let indexedQueries = queries.map((query, i) => ({ index: i, value: query }));
+    indexedQueries.sort((a, b) => a.value - b.value);
+
+    let minHeap = new MinHeap();
+    minHeap.push([grid[0][0], 0, 0]); // (grid[i][j], i, j)
+    let seen = new Set(["0,0"]);
+    let accumulate = 0;
+
+    for (let { index, value } of indexedQueries) {
+        while (!minHeap.isEmpty()) {
+            let [val, i, j] = minHeap.peek();
+            if (val >= value) break; // Stop if the smallest neighbor is still larger
+
+            minHeap.pop();
+            accumulate++;
+
+            for (let [dx, dy] of DIRS) {
+                let x = i + dx, y = j + dy;
+                if (x < 0 || x >= m || y < 0 || y >= n || seen.has(`${x},${y}`)) continue;
+                
+                minHeap.push([grid[x][y], x, y]);
+                seen.add(`${x},${y}`);
+            }
+        }
+        answers[index] = accumulate;
+    }
+
+    return answers;
 };
+
+// Optimized MinHeap (Priority Queue)
+class MinHeap {
+    constructor() {
+        this.heap = [];
+    }
+
+    push(val) {
+        this.heap.push(val);
+        this._heapifyUp();
+    }
+
+    pop() {
+        if (this.heap.length === 1) return this.heap.pop();
+        const min = this.heap[0];
+        this.heap[0] = this.heap.pop();
+        this._heapifyDown();
+        return min;
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+
+    isEmpty() {
+        return this.heap.length === 0;
+    }
+
+    _heapifyUp() {
+        let idx = this.heap.length - 1;
+        while (idx > 0) {
+            let parentIdx = Math.floor((idx - 1) / 2);
+            if (this.heap[parentIdx][0] <= this.heap[idx][0]) break;
+            [this.heap[parentIdx], this.heap[idx]] = [this.heap[idx], this.heap[parentIdx]];
+            idx = parentIdx;
+        }
+    }
+
+    _heapifyDown() {
+        let idx = 0;
+        while (true) {
+            let leftIdx = 2 * idx + 1;
+            let rightIdx = 2 * idx + 2;
+            let smallest = idx;
+
+            if (leftIdx < this.heap.length && this.heap[leftIdx][0] < this.heap[smallest][0]) {
+                smallest = leftIdx;
+            }
+            if (rightIdx < this.heap.length && this.heap[rightIdx][0] < this.heap[smallest][0]) {
+                smallest = rightIdx;
+            }
+            if (smallest === idx) break;
+
+            [this.heap[idx], this.heap[smallest]] = [this.heap[smallest], this.heap[idx]];
+            idx = smallest;
+        }
+    }
+}
 
 
 console.log("==========================================")
