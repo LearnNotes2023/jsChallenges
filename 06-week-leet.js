@@ -22988,10 +22988,78 @@ console.log("==========================================")
 // @param {number[]} nums
 // @param {number} k
 // @return {number}
-
-var maximumScore = function(nums, k) {
-    
-};
+// in SWIFT
+class Solution {
+    func maximumScore(_ nums: [Int], _ k: Int) -> Int {
+        let MOD = 1_000_000_007
+        var k = k  // Make a mutable copy of k
+        let n = nums.count
+        var upper = nums.max()! + 1
+        var prime = [Bool](repeating: true, count: upper)
+        prime[0] = false
+        prime[1] = false
+        var primeScore = [Int](repeating: 0, count: upper)
+        for i in 2..<upper {
+            if prime[i] {
+                var j = i
+                while j < upper {
+                    primeScore[j] += 1
+                    prime[j] = false
+                    j += i
+                }
+            }
+        }
+        var nextGreaterElement = [Int](repeating: n, count: n)
+        var s = [Int]()
+        for i in (0..<n).reversed() {
+            while !s.isEmpty && primeScore[nums[i]] >= primeScore[nums[s.last!]] {
+                s.popLast()
+            }
+            nextGreaterElement[i] = s.isEmpty ? n : s.last!
+            s.append(i)
+        }
+        var prevGreaterOrEqualElement = [Int](repeating: -1, count: n)
+        s.removeAll()
+        for i in 0..<n {
+            while !s.isEmpty && primeScore[nums[i]] > primeScore[nums[s.last!]] {
+                s.popLast()
+            }
+            prevGreaterOrEqualElement[i] = s.isEmpty ? -1 : s.last!
+            s.append(i)
+        }
+        var res = 1
+        var tuples = [(num: Int, index: Int)]()
+        for i in 0..<n {
+            tuples.append((nums[i], i))
+        }
+        tuples.sort { a, b in
+            a.num > b.num
+        }
+        for (num, i) in tuples {
+            let operations = min(
+                (i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)
+            res = (res * pow(num, operations, MOD)) % MOD
+            k -= operations
+            if k == 0 {
+                return res
+            }
+        }
+        return res
+    }
+    func pow(_ x: Int, _ n: Int, _ mod: Int) -> Int {
+        var res = 1
+        var x = x
+        var n = n
+        while n > 0 {
+            if n % 2 == 1 {
+                res = (res * x) % mod
+            }
+            x = (x * x) % mod
+            n /= 2
+        }
+        return res
+    }
+}
 
 
 console.log("==========================================")
