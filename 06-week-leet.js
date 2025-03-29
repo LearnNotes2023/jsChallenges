@@ -22985,7 +22985,13 @@ Explanation: To get a score of 4788, we can apply the following operations:
 Hence, we multipy the score by nums[2]. The score becomes 342 * 14 = 4788.
 It can be proven that 4788 is the highest score one can obtain.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var maximumScore = function(nums, k) {
+    
+};
 
 
 console.log("==========================================")
