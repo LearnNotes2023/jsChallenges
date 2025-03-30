@@ -23083,8 +23083,12 @@ Example 2:
 Input: s = "eccbbbbdec"
 Output: [10]
 
+@param {string} s
+@return {number[]}
 
-
+var partitionLabels = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
