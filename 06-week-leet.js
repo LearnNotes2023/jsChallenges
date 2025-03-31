@@ -22989,77 +22989,77 @@ console.log("==========================================")
 // @param {number} k
 // @return {number}
 // in SWIFT
-class Solution {
-    func maximumScore(_ nums: [Int], _ k: Int) -> Int {
-        let MOD = 1_000_000_007
-        var k = k  // Make a mutable copy of k
-        let n = nums.count
-        var upper = nums.max()! + 1
-        var prime = [Bool](repeating: true, count: upper)
-        prime[0] = false
-        prime[1] = false
-        var primeScore = [Int](repeating: 0, count: upper)
-        for i in 2..<upper {
-            if prime[i] {
-                var j = i
-                while j < upper {
-                    primeScore[j] += 1
-                    prime[j] = false
-                    j += i
-                }
-            }
-        }
-        var nextGreaterElement = [Int](repeating: n, count: n)
-        var s = [Int]()
-        for i in (0..<n).reversed() {
-            while !s.isEmpty && primeScore[nums[i]] >= primeScore[nums[s.last!]] {
-                s.popLast()
-            }
-            nextGreaterElement[i] = s.isEmpty ? n : s.last!
-            s.append(i)
-        }
-        var prevGreaterOrEqualElement = [Int](repeating: -1, count: n)
-        s.removeAll()
-        for i in 0..<n {
-            while !s.isEmpty && primeScore[nums[i]] > primeScore[nums[s.last!]] {
-                s.popLast()
-            }
-            prevGreaterOrEqualElement[i] = s.isEmpty ? -1 : s.last!
-            s.append(i)
-        }
-        var res = 1
-        var tuples = [(num: Int, index: Int)]()
-        for i in 0..<n {
-            tuples.append((nums[i], i))
-        }
-        tuples.sort { a, b in
-            a.num > b.num
-        }
-        for (num, i) in tuples {
-            let operations = min(
-                (i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)
-            res = (res * pow(num, operations, MOD)) % MOD
-            k -= operations
-            if k == 0 {
-                return res
-            }
-        }
-        return res
-    }
-    func pow(_ x: Int, _ n: Int, _ mod: Int) -> Int {
-        var res = 1
-        var x = x
-        var n = n
-        while n > 0 {
-            if n % 2 == 1 {
-                res = (res * x) % mod
-            }
-            x = (x * x) % mod
-            n /= 2
-        }
-        return res
-    }
-}
+// class Solution {
+//     func maximumScore(_ nums: [Int], _ k: Int) -> Int {
+//         let MOD = 1_000_000_007
+//         var k = k  // Make a mutable copy of k
+//         let n = nums.count
+//         var upper = nums.max()! + 1
+//         var prime = [Bool](repeating: true, count: upper)
+//         prime[0] = false
+//         prime[1] = false
+//         var primeScore = [Int](repeating: 0, count: upper)
+//         for i in 2..<upper {
+//             if prime[i] {
+//                 var j = i
+//                 while j < upper {
+//                     primeScore[j] += 1
+//                     prime[j] = false
+//                     j += i
+//                 }
+//             }
+//         }
+//         var nextGreaterElement = [Int](repeating: n, count: n)
+//         var s = [Int]()
+//         for i in (0..<n).reversed() {
+//             while !s.isEmpty && primeScore[nums[i]] >= primeScore[nums[s.last!]] {
+//                 s.popLast()
+//             }
+//             nextGreaterElement[i] = s.isEmpty ? n : s.last!
+//             s.append(i)
+//         }
+//         var prevGreaterOrEqualElement = [Int](repeating: -1, count: n)
+//         s.removeAll()
+//         for i in 0..<n {
+//             while !s.isEmpty && primeScore[nums[i]] > primeScore[nums[s.last!]] {
+//                 s.popLast()
+//             }
+//             prevGreaterOrEqualElement[i] = s.isEmpty ? -1 : s.last!
+//             s.append(i)
+//         }
+//         var res = 1
+//         var tuples = [(num: Int, index: Int)]()
+//         for i in 0..<n {
+//             tuples.append((nums[i], i))
+//         }
+//         tuples.sort { a, b in
+//             a.num > b.num
+//         }
+//         for (num, i) in tuples {
+//             let operations = min(
+//                 (i - prevGreaterOrEqualElement[i]) * (nextGreaterElement[i] - i), k)
+//             res = (res * pow(num, operations, MOD)) % MOD
+//             k -= operations
+//             if k == 0 {
+//                 return res
+//             }
+//         }
+//         return res
+//     }
+//     func pow(_ x: Int, _ n: Int, _ mod: Int) -> Int {
+//         var res = 1
+//         var x = x
+//         var n = n
+//         while n > 0 {
+//             if n % 2 == 1 {
+//                 res = (res * x) % mod
+//             }
+//             x = (x * x) % mod
+//             n /= 2
+//         }
+//         return res
+//     }
+// }
 
 
 console.log("==========================================")
@@ -23112,7 +23112,35 @@ var partitionLabels = function(s) {
 
 
 console.log("==========================================")
-// console.log("==========================================")
+
+2551. Put Marbles in Bags
+Hard
+You have k bags. You are given a 0-indexed integer array weights where weights[i] is the weight of the ith marble. You are also given the integer k.
+Divide the marbles into the k bags according to the following rules:
+No bag is empty.
+If the ith marble and jth marble are in a bag, then all marbles with an index between the ith and jth indices should also be in that same bag.
+If a bag consists of all the marbles with an index from i to j inclusively, then the cost of the bag is weights[i] + weights[j].
+The score after distributing the marbles is the sum of the costs of all the k bags.
+Return the difference between the maximum and minimum scores among marble distributions.
+
+Example 1:
+Input: weights = [1,3,5,1], k = 2
+Output: 4
+Explanation: 
+The distribution [1],[3,5,1] results in the minimal score of (1+1) + (3+1) = 6. 
+The distribution [1,3],[5,1], results in the maximal score of (1+3) + (5+1) = 10. 
+Thus, we return their difference 10 - 6 = 4.
+
+Example 2:
+Input: weights = [1, 3], k = 2
+Output: 0
+Explanation: The only distribution possible is [1],[3]. 
+Since both the maximal and minimal score are the same, we return 0.
+ 
+
+
+
+console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
