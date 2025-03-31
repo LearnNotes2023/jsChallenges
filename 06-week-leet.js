@@ -23137,7 +23137,13 @@ Output: 0
 Explanation: The only distribution possible is [1],[3]. 
 Since both the maximal and minimal score are the same, we return 0.
  
+@param {number[]} weights
+@param {number} k
+@return {number}
 
+var putMarbles = function(weights, k) {
+    
+};
 
 
 console.log("==========================================")
