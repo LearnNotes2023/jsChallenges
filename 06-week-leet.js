@@ -23190,7 +23190,25 @@ console.log("==========================================")
 // @return {number}
 
 var maximumTripletValue = function(nums) {
-    
+    let maxVal = 0;
+    let n = nums.length;
+
+    for (let j = 1; j < n - 1; j++) {
+        let maxLeft = -Infinity; // Max nums[i] for i < j
+        let maxRight = -Infinity; // Max nums[k] for k > j
+
+        for (let i = 0; i < j; i++) {
+            maxLeft = Math.max(maxLeft, nums[i]);
+        }
+
+        for (let k = j + 1; k < n; k++) {
+            maxRight = Math.max(maxRight, nums[k]);
+            let value = (maxLeft - nums[j]) * maxRight;
+            maxVal = Math.max(maxVal, value);
+        }
+    }
+
+    return maxVal;
 };
 
 console.log("==========================================")
