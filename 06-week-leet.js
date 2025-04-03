@@ -23281,7 +23281,31 @@ console.log("==========================================")
 // @return {number}
 
 var maximumTripletValue = function(nums) {
-    
+    let n = nums.length;
+    if (n < 3) return 0; // Edge case, not enough elements
+
+    let maxPrefix = nums[0]; // max value of nums[i] before j
+    let maxDiff = Number.NEGATIVE_INFINITY; // max (nums[i] - nums[j])
+    let maxSuffix = new Array(n).fill(0); // max nums[k] after j
+
+    // Build suffix max array
+    maxSuffix[n - 1] = nums[n - 1];
+    for (let i = n - 2; i >= 0; i--) {
+        maxSuffix[i] = Math.max(maxSuffix[i + 1], nums[i]);
+    }
+
+    let maxValue = 0;
+
+    // Iterate over j (middle element)
+    for (let j = 1; j < n - 1; j++) {
+        maxDiff = Math.max(maxDiff, maxPrefix - nums[j]);
+        maxPrefix = Math.max(maxPrefix, nums[j]);
+
+        let bestK = maxSuffix[j + 1]; // Best nums[k] after j
+        maxValue = Math.max(maxValue, maxDiff * bestK);
+    }
+
+    return maxValue;
 };
 
 
