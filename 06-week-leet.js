@@ -23347,7 +23347,22 @@ console.log("==========================================")
 // @return {TreeNode}
 
 var lcaDeepestLeaves = function(root) {
-    
+    function dfs(node) {
+        if (!node) return [0, null]; // Base case: depth 0, no LCA
+        
+        let [leftDepth, leftLCA] = dfs(node.left);
+        let [rightDepth, rightLCA] = dfs(node.right);
+        
+        if (leftDepth === rightDepth) {
+            return [leftDepth + 1, node]; // Current node is LCA of deepest leaves
+        } else if (leftDepth > rightDepth) {
+            return [leftDepth + 1, leftLCA]; // Deeper subtree LCA is propagated
+        } else {
+            return [rightDepth + 1, rightLCA];
+        }
+    }
+
+    return dfs(root)[1]; // Return the LCA node
 };
 
 console.log("==========================================")
