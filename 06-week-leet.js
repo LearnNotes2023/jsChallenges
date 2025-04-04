@@ -23336,6 +23336,19 @@ Input: root = [0,1,3,null,2]
 Output: [2]
 Explanation: The deepest leaf node in the tree is 2, the lca of one node is itself.
 
+Definition for a binary tree node.
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+
+@param {TreeNode} root
+@return {TreeNode}
+
+var lcaDeepestLeaves = function(root) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
