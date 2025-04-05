@@ -23387,7 +23387,19 @@ Example 3:
 Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 Output: [8,9,9,9,0,0,0,1]
 
+Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
 
+@param {ListNode} l1
+@param {ListNode} l2
+@return {ListNode}
+
+var addTwoNumbers = function(l1, l2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
