@@ -23445,7 +23445,37 @@ console.log("==========================================")
 // @return {number[]}
 
 var largestDivisibleSubset = function(nums) {
+    if (nums.length === 0) return [];
 
+    nums.sort((a, b) => a - b); // Step 1: Sort
+
+    const dp = new Array(nums.length).fill(1);     // Step 2: Subset lengths
+    const prev = new Array(nums.length).fill(-1);  // Step 3: Backtracking
+
+    let maxIdx = 0;
+
+    // Step 4: Build dp and prev arrays
+    for (let i = 1; i < nums.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (nums[i] % nums[j] === 0 && dp[j] + 1 > dp[i]) {
+                dp[i] = dp[j] + 1;
+                prev[i] = j;
+            }
+        }
+        if (dp[i] > dp[maxIdx]) {
+            maxIdx = i;
+        }
+    }
+
+    // Step 5: Reconstruct the subset
+    const result = [];
+    let k = maxIdx;
+    while (k >= 0) {
+        result.push(nums[k]);
+        k = prev[k];
+    }
+
+    return result.reverse(); // Subset in increasing order
 };
 
 
