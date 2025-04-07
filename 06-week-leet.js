@@ -23499,7 +23499,22 @@ console.log("==========================================")
 // @return {boolean}
 
 var canPartition = function(nums) {
+    const total = nums.reduce((a, b) => a + b, 0);
     
+    // If total sum is odd, we can't partition into equal subsets
+    if (total % 2 !== 0) return false;
+
+    const target = total / 2;
+    const dp = new Array(target + 1).fill(false);
+    dp[0] = true; // base case: sum 0 is always possible
+
+    for (let num of nums) {
+        for (let i = target; i >= num; i--) {
+            dp[i] = dp[i] || dp[i - num];
+        }
+    }
+
+    return dp[target];
 };
 
 console.log("==========================================")
