@@ -23495,7 +23495,12 @@ Input: nums = [1,2,3,5]
 Output: false
 Explanation: The array cannot be partitioned into equal sum subsets.
 
+@param {number[]} nums
+@return {boolean}
 
+var canPartition = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
