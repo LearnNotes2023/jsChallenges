@@ -23549,7 +23549,12 @@ Output: 0
 Explanation:
 The array already contains distinct elements. Therefore, the answer is 0.
 
+@param {number[]} nums
+@return {number}
 
+var minimumOperations = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
