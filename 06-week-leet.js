@@ -23553,7 +23553,23 @@ console.log("==========================================")
 // @return {number}
 
 var minimumOperations = function(nums) {
-    
+    let seen = new Set();
+    let i = nums.length - 1;
+
+    // Move backwards until we find a duplicate
+    while (i >= 0) {
+        if (seen.has(nums[i])) {
+            break;
+        }
+        seen.add(nums[i]);
+        i--;
+    }
+
+    // i + 1 is the length of prefix to remove
+    let toRemove = i + 1;
+
+    // Number of operations: ceil(toRemove / 3)
+    return Math.ceil(toRemove / 3);
 };
 
 console.log("==========================================")
