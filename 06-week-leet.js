@@ -23607,7 +23607,18 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(nums, k) {
-    
+    // If any number is less than k, it's impossible to make everything equal to k
+    for (let num of nums) {
+        if (num < k) return -1;
+    }
+
+    // Use a set to collect unique numbers greater than k
+    let unique = new Set();
+    for (let num of nums) {
+        if (num > k) unique.add(num);
+    }
+
+    return unique.size;
 };
 
 console.log("==========================================")
