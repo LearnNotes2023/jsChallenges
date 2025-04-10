@@ -23649,6 +23649,15 @@ Input: start = 1000, finish = 2000, limit = 4, s = "3000"
 Output: 0
 Explanation: All integers in the range [1000..2000] are smaller than 3000, hence "3000" cannot be a suffix of any integer in this range.
 
+@param {number} start
+@param {number} finish
+@param {number} limit
+@param {string} s
+@return {number}
+
+var numberOfPowerfulInt = function(start, finish, limit, s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
