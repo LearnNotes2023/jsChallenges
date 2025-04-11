@@ -23713,7 +23713,13 @@ Input: low = 1200, high = 1230
 Output: 4
 Explanation: There are 4 symmetric integers between 1200 and 1230: 1203, 1212, 1221, and 1230.
 
+@param {number} low
+@param {number} high
+@return {number}
 
+var countSymmetricIntegers = function(low, high) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
