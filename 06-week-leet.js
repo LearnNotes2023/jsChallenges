@@ -23718,7 +23718,24 @@ console.log("==========================================")
 // @return {number}
 
 var countSymmetricIntegers = function(low, high) {
-    
+    let count = 0;
+
+    for (let num = low; num <= high; num++) {
+        const str = num.toString();
+        const len = str.length;
+
+        if (len % 2 !== 0) continue; // Skip odd-length numbers
+
+        const mid = len / 2;
+        const firstHalfSum = [...str.slice(0, mid)].reduce((a, b) => a + parseInt(b), 0);
+        const secondHalfSum = [...str.slice(mid)].reduce((a, b) => a + parseInt(b), 0);
+
+        if (firstHalfSum === secondHalfSum) {
+            count++;
+        }
+    }
+
+    return count;
 };
 
 console.log("==========================================")
