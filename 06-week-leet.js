@@ -23774,7 +23774,66 @@ console.log("==========================================")
 // @return {number}
 
 var countGoodIntegers = function(n, k) {
-    
+    const factorial = Array(n + 1).fill(1);
+    for (let i = 1; i <= n; i++) {
+        factorial[i] = factorial[i - 1] * i;
+    }
+
+    const isPalindrome = (s) => s === s.split('').reverse().join('');
+    const getDigitFreqKey = (s) => {
+        const freq = Array(10).fill(0);
+        for (let ch of s) freq[+ch]++;
+        return freq.join(',');
+    };
+
+    // Generate all n-digit palindromes
+    const palindromes = new Set();
+    const halfLen = Math.floor((n + 1) / 2);
+    const start = 10 ** (halfLen - 1);
+    const end = 10 ** halfLen - 1;
+
+    for (let i = start; i <= end; i++) {
+        let half = i.toString();
+        let full = n % 2 === 0
+            ? half + half.split('').reverse().join('')
+            : half + half.slice(0, -1).split('').reverse().join('');
+        let num = parseInt(full);
+        if (num % k === 0) {
+            palindromes.add(getDigitFreqKey(full));
+        }
+    }
+
+    // Count permutations with valid digit frequencies
+    const countPermutations = (freqStr) => {
+        const freq = freqStr.split(',').map(Number);
+        const total = freq.reduce((a, b) => a + b, 0);
+        let count = factorial[total];
+        for (let f of freq) {
+            if (f > 1) count /= factorial[f];
+        }
+
+        // Remove permutations that start with 0
+        if (freq[0] === 0) return count;
+
+        // Subtract permutations where '0' is at the front
+        let zeroFront = 0;
+        if (freq[0] > 0) {
+            freq[0]--;
+            let subTotal = total - 1;
+            zeroFront = factorial[subTotal];
+            for (let f of freq) {
+                if (f > 1) zeroFront /= factorial[f];
+            }
+            freq[0]++; // Restore
+        }
+        return count - zeroFront;
+    };
+
+    let result = 0;
+    for (let key of palindromes) {
+        result += countPermutations(key);
+    }
+    return result;
 };
 
 console.log("==========================================")
