@@ -23769,7 +23769,13 @@ Example 3:
 Input: n = 5, k = 6
 Output: 2468
 
+@param {number} n
+@param {number} k
+@return {number}
 
+var countGoodIntegers = function(n, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
