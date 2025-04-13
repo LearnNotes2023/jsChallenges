@@ -23863,7 +23863,28 @@ console.log("==========================================")
 // @return {number}
 
 var countGoodNumbers = function(n) {
+    const MOD = 1_000_000_007n;
     
+    const modPow = (base, exponent) => {
+        let result = 1n;
+        base = BigInt(base);
+        exponent = BigInt(exponent);
+        
+        while (exponent > 0) {
+            if (exponent % 2n === 1n) {
+                result = (result * base) % MOD;
+            }
+            base = (base * base) % MOD;
+            exponent = exponent / 2n;
+        }
+        return result;
+    };
+
+    let evenCount = Math.ceil(n / 2);
+    let oddCount = Math.floor(n / 2);
+
+    let result = (modPow(5, evenCount) * modPow(4, oddCount)) % MOD;
+    return Number(result);
 };
 
 
