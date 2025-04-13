@@ -23859,7 +23859,12 @@ Example 3:
 Input: n = 50
 Output: 564908303
 
+@param {number} n
+@return {number}
 
+var countGoodNumbers = function(n) {
+    
+};
 
 
 console.log("==========================================")
