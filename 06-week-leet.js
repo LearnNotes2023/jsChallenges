@@ -23911,6 +23911,15 @@ Input: arr = [1,1,2,2,3], a = 0, b = 0, c = 1
 Output: 0
 Explanation: No triplet satisfies all conditions.
 
+@param {number[]} arr
+@param {number} a
+@param {number} b
+@param {number} c
+@return {number}
+
+var countGoodTriplets = function(arr, a, b, c) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
