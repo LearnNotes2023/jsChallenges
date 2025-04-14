@@ -23891,7 +23891,9 @@ var countGoodNumbers = function(n) {
 console.log("==========================================")
 
 // 1534. Count Good Triplets
+
 // Easy
+
 // Given an array of integers arr, and three integers a, b and c. You need to find the number of good triplets.
 // A triplet (arr[i], arr[j], arr[k]) is good if the following conditions are true:
 // 0 <= i < j < k < arr.length
