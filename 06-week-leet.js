@@ -23963,8 +23963,64 @@ console.log("==========================================")
 // @param {number[]} nums2
 // @return {number}
 
+class BIT {
+    constructor(n) {
+        this.tree = new Array(n + 1).fill(0);
+        this.n = n;
+    }
+
+    update(i, delta) {
+        i += 1;
+        while (i <= this.n) {
+            this.tree[i] += delta;
+            i += i & -i;
+        }
+    }
+
+    query(i) {
+        i += 1;
+        let sum = 0;
+        while (i > 0) {
+            sum += this.tree[i];
+            i -= i & -i;
+        }
+        return sum;
+    }
+}
+
 var goodTriplets = function(nums1, nums2) {
-    
+    const n = nums1.length;
+    const pos2 = Array(n);
+    for (let i = 0; i < n; i++) {
+        pos2[nums2[i]] = i;
+    }
+
+    // Map nums1 to their corresponding pos2 positions
+    const mapped = nums1.map(x => pos2[x]);
+
+    // BIT for prefix counts (left counts)
+    const bitLeft = new BIT(n);
+    const leftSmaller = Array(n).fill(0);
+    for (let i = 0; i < n; i++) {
+        leftSmaller[i] = bitLeft.query(mapped[i] - 1);
+        bitLeft.update(mapped[i], 1);
+    }
+
+    // BIT for suffix counts (right counts)
+    const bitRight = new BIT(n);
+    const rightGreater = Array(n).fill(0);
+    for (let i = n - 1; i >= 0; i--) {
+        rightGreater[i] = bitRight.query(n - 1) - bitRight.query(mapped[i]);
+        bitRight.update(mapped[i], 1);
+    }
+
+    // Count good triplets
+    let count = 0;
+    for (let i = 0; i < n; i++) {
+        count += leftSmaller[i] * rightGreater[i];
+    }
+
+    return count;
 };
 
 
