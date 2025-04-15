@@ -23959,7 +23959,13 @@ Input: nums1 = [4,0,1,3,2], nums2 = [4,1,0,2,3]
 Output: 4
 Explanation: The 4 good triplets are (4,0,3), (4,0,2), (4,1,3), and (4,1,2).
 
+@param {number[]} nums1
+@param {number[]} nums2
+@return {number}
 
+var goodTriplets = function(nums1, nums2) {
+    
+};
 
 
 // console.log("==========================================")
