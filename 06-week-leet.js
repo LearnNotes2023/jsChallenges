@@ -24051,7 +24051,32 @@ console.log("==========================================")
 // @return {number}
 
 var countGood = function(nums, k) {
-    
+    let left = 0;
+    let freq = new Map();
+    let pairCount = 0;
+    let result = 0;
+
+    for (let right = 0; right < nums.length; right++) {
+        let num = nums[right];
+        let count = freq.get(num) || 0;
+        pairCount += count;
+        freq.set(num, count + 1);
+
+        while (pairCount >= k) {
+            result += nums.length - right;
+            let leftNum = nums[left];
+            let leftCount = freq.get(leftNum);
+            pairCount -= leftCount - 1;
+            if (leftCount === 1) {
+                freq.delete(leftNum);
+            } else {
+                freq.set(leftNum, leftCount - 1);
+            }
+            left++;
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
