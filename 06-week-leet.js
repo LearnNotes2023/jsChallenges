@@ -24046,6 +24046,14 @@ Explanation: There are 4 different good subarrays:
 - [1,4,3,2,2,4] that has 2 pairs.
 - [4,3,2,2,4] that has 2 pairs.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
+
+var countGood = function(nums, k) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
