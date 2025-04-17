@@ -24101,7 +24101,13 @@ Input: nums = [1,2,3,4], k = 1
 Output: 0
 Explanation: Since no value in nums is repeated, there are no pairs (i,j) that meet all the requirements.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var countPairs = function(nums, k) {
+    
+};
 
 
 console.log("==========================================")
