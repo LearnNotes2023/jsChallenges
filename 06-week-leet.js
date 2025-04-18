@@ -24148,7 +24148,12 @@ Output: "1"
 Explanation:
 This is the base case.
 
+@param {number} n
+@return {string}
 
+var countAndSay = function(n) {
+    
+};
 
 
 console.log("==========================================")
