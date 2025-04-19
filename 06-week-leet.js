@@ -24218,6 +24218,41 @@ At t=140, key=1 expires.
 At t=200, get(1) is called but the cache is empty so -1 is returned.
 At t=250, count() returns 0 because the cache is empty.
 
+var TimeLimitedCache = function() {
+    
+};
+
+/** 
+ * @param {number} key
+ * @param {number} value
+ * @param {number} duration time until expiration in ms
+ * @return {boolean} if un-expired key already existed
+ */
+TimeLimitedCache.prototype.set = function(key, value, duration) {
+    console.log(key, value, duration)
+};
+
+/** 
+ * @param {number} key
+ * @return {number} value associated with key
+ */
+TimeLimitedCache.prototype.get = function(key) {
+    
+};
+
+/** 
+ * @return {number} count of non-expired keys
+ */
+TimeLimitedCache.prototype.count = function() {
+    
+};
+
+/**
+ * const timeLimitedCache = new TimeLimitedCache()
+ * timeLimitedCache.set(1, 42, 1000); // false
+ * timeLimitedCache.get(1) // 42
+ * timeLimitedCache.count() // 1
+ */
 
 console.log("==========================================")
 // console.log("==========================================")
