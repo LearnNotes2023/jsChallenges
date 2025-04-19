@@ -24219,7 +24219,7 @@ console.log("==========================================")
 // At t=250, count() returns 0 because the cache is empty.
 
 var TimeLimitedCache = function() {
-    
+    this.cache = new Map();
 };
 
 // @param {number} key
@@ -24228,27 +24228,55 @@ var TimeLimitedCache = function() {
 // @return {boolean} if un-expired key already existed
 
 TimeLimitedCache.prototype.set = function(key, value, duration) {
-    console.log(key, value, duration)
+    const now = Date.now();
+    const existed = this.cache.has(key) && this.cache.get(key).expiresAt > now;
+
+    // Clear previous timeout if exists
+    if (this.cache.has(key)) {
+        clearTimeout(this.cache.get(key).timeoutId);
+    }
+
+    const expiresAt = now + duration;
+    const timeoutId = setTimeout(() => {
+        this.cache.delete(key);
+    }, duration);
+
+    this.cache.set(key, { value, expiresAt, timeoutId });
+    return existed;
 };
 
 // @param {number} key
 // @return {number} value associated with key
 
 TimeLimitedCache.prototype.get = function(key) {
-    
+    const entry = this.cache.get(key);
+    if (!entry) return -1;
+
+    const now = Date.now();
+    if (entry.expiresAt > now) {
+        return entry.value;
+    } else {
+        this.cache.delete(key);
+        return -1;
+    }
 };
 
 // @return {number} count of non-expired keys
 
 TimeLimitedCache.prototype.count = function() {
-    
+    const now = Date.now();
+    let activeCount = 0;
+
+    for (const [key, entry] of this.cache) {
+        if (entry.expiresAt > now) {
+            activeCount++;
+        } else {
+            this.cache.delete(key);
+        }
+    }
+
+    return activeCount;
 };
-
-// const timeLimitedCache = new TimeLimitedCache()
-// timeLimitedCache.set(1, 42, 1000); // false
-// timeLimitedCache.get(1) // 42
-// timeLimitedCache.count() // 1
-
 
 console.log("==========================================")
 // console.log("==========================================")
