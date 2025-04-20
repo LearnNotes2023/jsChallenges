@@ -24304,7 +24304,22 @@ console.log("==========================================")
 // @return {number}
 
 var numRabbits = function(answers) {
+    const countMap = new Map();
     
+    // Count frequency of each answer
+    for (let ans of answers) {
+        countMap.set(ans, (countMap.get(ans) || 0) + 1);
+    }
+    
+    let total = 0;
+    
+    for (let [k, count] of countMap.entries()) {
+        const groupSize = k + 1;
+        const groupCount = Math.ceil(count / groupSize);
+        total += groupCount * groupSize;
+    }
+    
+    return total;
 };
 
 console.log("==========================================")
