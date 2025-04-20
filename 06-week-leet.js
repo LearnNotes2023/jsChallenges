@@ -24300,6 +24300,12 @@ Example 2:
 Input: answers = [10,10,10]
 Output: 11
 
+@param {number[]} answers
+@return {number}
+
+var numRabbits = function(answers) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
