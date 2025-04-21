@@ -24359,7 +24359,14 @@ Input: differences = [4,-7,2], lower = 3, upper = 6
 Output: 0
 Explanation: There are no possible hidden sequences. Thus, we return 0.
 
+@param {number[]} differences
+@param {number} lower
+@param {number} upper
+@return {number}
 
+var numberOfArrays = function(differences, lower, upper) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
