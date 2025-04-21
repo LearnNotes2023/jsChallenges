@@ -24365,7 +24365,19 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfArrays = function(differences, lower, upper) {
+    let minSum = 0, maxSum = 0;
+    let curr = 0;
     
+    for (let diff of differences) {
+        curr += diff;
+        minSum = Math.min(minSum, curr);
+        maxSum = Math.max(maxSum, curr);
+    }
+    
+    let minX = lower - minSum;
+    let maxX = upper - maxSum;
+    
+    return Math.max(0, maxX - minX + 1);
 };
 
 console.log("==========================================")
