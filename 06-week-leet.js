@@ -24413,7 +24413,13 @@ Explanation: The following are the possible ideal arrays:
 - Arrays starting with the value 3 (1 array): [3,3,3,3,3]
 There are a total of 9 + 1 + 1 = 11 distinct ideal arrays.
  
+@param {number} n
+@param {number} maxValue
+@return {number}
 
+var idealArrays = function(n, maxValue) {
+    
+};
 
 
 
