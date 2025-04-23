@@ -24506,8 +24506,38 @@ console.log("==========================================")
 // @return {number}
 
 var countLargestGroup = function(n) {
-    
+    const map = new Map();
+
+    for (let i = 1; i <= n; i++) {
+        const sum = digitSum(i);
+        map.set(sum, (map.get(sum) || 0) + 1);
+    }
+
+    let maxSize = 0;
+    for (const size of map.values()) {
+        if (size > maxSize) {
+            maxSize = size;
+        }
+    }
+
+    let count = 0;
+    for (const size of map.values()) {
+        if (size === maxSize) {
+            count++;
+        }
+    }
+
+    return count;
 };
+
+function digitSum(num) {
+    let sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num = Math.floor(num / 10);
+    }
+    return sum;
+}
 
 console.log("==========================================")
 // console.log("==========================================")
