@@ -24502,7 +24502,12 @@ Input: n = 2
 Output: 2
 Explanation: There are 2 groups [1], [2] of size 1.
 
+@param {number} n
+@return {number}
 
+var countLargestGroup = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
