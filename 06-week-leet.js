@@ -24563,7 +24563,20 @@ console.log("==========================================")
 // @return {number}
 
 var countCompleteSubarrays = function(nums) {
-    
+    const totalUnique = new Set(nums).size;
+    let count = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        const seen = new Set();
+        for (let j = i; j < nums.length; j++) {
+            seen.add(nums[j]);
+            if (seen.size === totalUnique) {
+                count++;
+            }
+        }
+    }
+
+    return count;
 };
 
 console.log("==========================================")
