@@ -24623,9 +24623,31 @@ console.log("==========================================")
 // @return {number}
 
 var countInterestingSubarrays = function(nums, modulo, k) {
-    
-};
+    let count = 0;
+    let prefix = 0;
+    const map = new Map();
+    map.set(0, 1); // Initialize with prefix mod 0 having occurred once
 
+    for (let num of nums) {
+        // Check if current element contributes to the count
+        if (num % modulo === k) {
+            prefix += 1;
+        }
+
+        // Get the current prefix mod
+        let currMod = prefix % modulo;
+
+        // We're looking for (currMod - k + modulo) % modulo in the map
+        let target = (currMod - k + modulo) % modulo;
+
+        count += map.get(target) || 0;
+
+        // Update the map with the current mod
+        map.set(currMod, (map.get(currMod) || 0) + 1);
+    }
+
+    return count;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
