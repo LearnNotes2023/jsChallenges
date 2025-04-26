@@ -24693,6 +24693,22 @@ calls = [
 Output: [{"t": 70, inputs: [1]}, {"t": 120, inputs: [2]}]
 Explanation:
 
+@param {Function} fn
+@param {number} t milliseconds
+@return {Function}
+
+var debounce = function(fn, t) {
+    
+    return function(...args) {
+        
+    }
+};
+
+const log = debounce(console.log, 100);
+log('Hello'); // cancelled
+log('Hello'); // cancelled
+log('Hello'); // Logged at t=100ms
+
 
 console.log("==========================================")
 // console.log("==========================================")
