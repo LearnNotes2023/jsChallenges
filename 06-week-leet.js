@@ -24698,10 +24698,17 @@ console.log("==========================================")
 // @return {Function}
 
 var debounce = function(fn, t) {
-    
+    let timerId = null; // store the current timer
+
     return function(...args) {
+        if (timerId !== null) {
+            clearTimeout(timerId); // cancel the previous timer
+        }
         
-    }
+        timerId = setTimeout(() => {
+            fn(...args); // call the function with latest arguments
+        }, t);
+    };
 };
 
 // const log = debounce(console.log, 100);
