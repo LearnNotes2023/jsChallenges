@@ -24735,6 +24735,12 @@ Output: 0
 Explanation:
 [1,1,1] is the only subarray of length 3. However, its first and third numbers do not add to half the middle number.
 
+@param {number[]} nums
+@return {number}
+
+var countSubarrays = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
