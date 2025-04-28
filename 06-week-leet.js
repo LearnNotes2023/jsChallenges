@@ -24783,7 +24783,21 @@ console.log("==========================================")
 // @return {number}
 
 var countSubarrays = function(nums, k) {
+    let n = nums.length;
+    let left = 0, sum = 0, ans = 0;
     
+    for (let right = 0; right < n; right++) {
+        sum += nums[right];
+        
+        while (left <= right && sum * (right - left + 1) >= k) {
+            sum -= nums[left];
+            left++;
+        }
+        
+        ans += (right - left + 1);
+    }
+    
+    return ans;
 };
 
 console.log("==========================================")
