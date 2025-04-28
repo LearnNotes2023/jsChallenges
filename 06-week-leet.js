@@ -24778,6 +24778,13 @@ Every subarray except [1,1,1] has a score less than 5.
 [1,1,1] has a score (1 + 1 + 1) * 3 = 9, which is greater than 5.
 Thus, there are 5 subarrays having scores less than 5.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
+
+var countSubarrays = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
