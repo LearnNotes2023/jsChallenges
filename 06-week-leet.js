@@ -24847,7 +24847,33 @@ console.log("==========================================")
 // @return {Promise<any>}
 
 var promiseAll = function(functions) {
-    
+    return new Promise((resolve, reject) => {
+        const results = new Array(functions.length);
+        let completed = 0;
+
+        if (functions.length === 0) {
+            resolve([]);
+            return;
+        }
+
+        functions.forEach((fn, i) => {
+            let promise;
+            try {
+                promise = fn();
+            } catch (err) {
+                reject(err);
+                return;
+            }
+
+            promise.then(value => {
+                results[i] = value;
+                completed++;
+                if (completed === functions.length) {
+                    resolve(results);
+                }
+            }).catch(reject);
+        });
+    });
 };
 
 // const promise = promiseAll([() => new Promise(res => res(42))])
