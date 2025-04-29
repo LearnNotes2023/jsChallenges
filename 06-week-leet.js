@@ -24843,7 +24843,18 @@ Input: functions = [
 Output: {"t": 150, "resolved": [4, 10, 16]}
 Explanation: All the promises resolved with a value. The returned promise resolved when the last promise resolved.
 
+/**
+ * @param {Array<Function>} functions
+ * @return {Promise<any>}
+ */
+var promiseAll = function(functions) {
+    
+};
 
+/**
+ * const promise = promiseAll([() => new Promise(res => res(42))])
+ * promise.then(console.log); // [42]
+ */
 
 console.log("==========================================")
 // console.log("==========================================")
