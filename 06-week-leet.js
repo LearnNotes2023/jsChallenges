@@ -24956,7 +24956,16 @@ We can assign the magical pills and tasks as follows:
 - Assign worker 1 to task 1 (10 + 10 >= 15)
 The last pill is not given because it will not make any worker strong enough for the last task.
 
-
+/**
+ * @param {number[]} tasks
+ * @param {number[]} workers
+ * @param {number} pills
+ * @param {number} strength
+ * @return {number}
+ */
+var maxTaskAssign = function(tasks, workers, pills, strength) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
