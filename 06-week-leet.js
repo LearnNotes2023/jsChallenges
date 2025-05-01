@@ -24962,9 +24962,66 @@ console.log("==========================================")
 // @param {number} strength
 // @return {number}
 
-var maxTaskAssign = function(tasks, workers, pills, strength) {
-    
-};
+let tasks = [];
+let workers = [];
+let pills = 0;
+let strength = 0;
+
+function sortInputArrays() {
+  tasks.sort((a, b) => a - b);
+  workers.sort((a, b) => a - b);
+}
+
+function canAssignTasks(x) {
+  let remainingPills = pills;
+  const availableTasks = [];
+  let taskIndex = 0;
+  const workerStartIndex = workers.length - x;
+
+  for (let workerIndex = workerStartIndex; workerIndex < workers.length; ++workerIndex) {
+    while (taskIndex < x && tasks[taskIndex] <= workers[workerIndex] + strength) {
+      availableTasks.push(tasks[taskIndex]);
+      taskIndex++;
+    }
+
+    if (availableTasks.length === 0) {
+      return false;
+    }
+
+    if (availableTasks[0] <= workers[workerIndex]) {
+      availableTasks.shift(); // Do without pill
+    } else if (remainingPills > 0) {
+      remainingPills--;
+      availableTasks.pop(); // Use pill on hardest remaining task
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+function maxTaskAssign(t, w, p, s) {
+  tasks = t;
+  workers = w;
+  pills = p;
+  strength = s;
+
+  sortInputArrays();
+
+  let left = 0;
+  let right = Math.min(workers.length, tasks.length);
+
+  while (left < right) {
+    const mid = Math.floor((left + right + 1) / 2);
+    if (canAssignTasks(mid)) {
+      left = mid;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return left;
+}
 
 console.log("==========================================")
 // console.log("==========================================")
