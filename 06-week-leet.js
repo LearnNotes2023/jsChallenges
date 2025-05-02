@@ -25053,9 +25053,45 @@ console.log("==========================================")
 // @return {string}
 
 var pushDominoes = function(dominoes) {
-    
-};
+    const n = dominoes.length;
+    const forces = new Array(n).fill(0);
+    let force = 0;
 
+    // Left to right pass: handle 'R'
+    for (let i = 0; i < n; i++) {
+        if (dominoes[i] === 'R') {
+            force = n; // Start strong force
+        } else if (dominoes[i] === 'L') {
+            force = 0; // Cancel rightward force
+        } else {
+            force = Math.max(force - 1, 0); // Decrease force
+        }
+        forces[i] += force;
+    }
+
+    // Right to left pass: handle 'L'
+    force = 0;
+    for (let i = n - 1; i >= 0; i--) {
+        if (dominoes[i] === 'L') {
+            force = n;
+        } else if (dominoes[i] === 'R') {
+            force = 0;
+        } else {
+            force = Math.max(force - 1, 0);
+        }
+        forces[i] -= force;
+    }
+
+    // Build result based on net force
+    let result = '';
+    for (let f of forces) {
+        if (f > 0) result += 'R';
+        else if (f < 0) result += 'L';
+        else result += '.';
+    }
+
+    return result;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
