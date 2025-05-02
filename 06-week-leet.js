@@ -25049,7 +25049,12 @@ Example 2:
 Input: dominoes = ".L.R...LR..L.."
 Output: "LL.RR.LLRRLL.."
 
+@param {string} dominoes
+@return {string}
 
+var pushDominoes = function(dominoes) {
+    
+};
 
 
 console.log("==========================================")
