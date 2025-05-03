@@ -25121,7 +25121,25 @@ console.log("==========================================")
 // @return {number}
 
 var minDominoRotations = function(tops, bottoms) {
-    
+    const check = (target) => {
+        let rotationsTop = 0;
+        let rotationsBottom = 0;
+
+        for (let i = 0; i < tops.length; i++) {
+            if (tops[i] !== target && bottoms[i] !== target) {
+                return Infinity; // impossible case
+            } else if (tops[i] !== target) {
+                rotationsTop++; // need to rotate to bring target to top
+            } else if (bottoms[i] !== target) {
+                rotationsBottom++; // need to rotate to bring target to bottom
+            }
+        }
+
+        return Math.min(rotationsTop, rotationsBottom);
+    };
+
+    let rotations = Math.min(check(tops[0]), check(bottoms[0]));
+    return rotations === Infinity ? -1 : rotations;
 };
 
 
