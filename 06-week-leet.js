@@ -25163,9 +25163,22 @@ console.log("==========================================")
 // @return {number}
 
 var numEquivDominoPairs = function(dominoes) {
-    
-};
+    const map = {};
+    let count = 0;
 
+    for (let [a, b] of dominoes) {
+        // Normalize the domino by sorting the two values
+        const key = a < b ? `${a}${b}` : `${b}${a}`;
+
+        // If this normalized domino was seen before, we can form a pair with each previous occurrence
+        count += map[key] || 0;
+
+        // Update the count for this domino key
+        map[key] = (map[key] || 0) + 1;
+    }
+
+    return count;
+};
 
 
 console.log("==========================================")
