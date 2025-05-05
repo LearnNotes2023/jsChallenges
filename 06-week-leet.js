@@ -25200,7 +25200,12 @@ Example 2:
 Input: n = 1
 Output: 1
 
+@param {number} n
+@return {number}
 
+var numTilings = function(n) {
+    
+};
 
 
 console.log("==========================================")
