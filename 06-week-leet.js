@@ -25287,7 +25287,12 @@ Example 3:
 Input: moveTime = [[0,1],[1,2]]
 Output: 3
 
+@param {number[][]} moveTime
+@return {number}
 
+var minTimeToReach = function(moveTime) {
+    
+};
 
 
 console.log("==========================================")
