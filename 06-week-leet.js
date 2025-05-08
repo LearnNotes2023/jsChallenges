@@ -25351,7 +25351,12 @@ At time t == 1, move from room (1, 0) to room (1, 1) in two seconds.
 At time t == 3, move from room (1, 1) to room (1, 2) in one second.
 At time t == 4, move from room (1, 2) to room (1, 3) in two seconds.
 
+@param {number[][]} moveTime
+@return {number}
 
+var minTimeToReach = function(moveTime) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
