@@ -25417,7 +25417,12 @@ Output: 0
 Explanation:
 None of the permutations of num are balanced, so the answer is 0.
 
+@param {string} num
+@return {number}
 
+var countBalancedPermutations = function(num) {
+    
+};
 
 
 console.log("==========================================")
