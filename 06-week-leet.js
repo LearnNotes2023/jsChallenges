@@ -25496,7 +25496,13 @@ Input: nums1 = [2,0,2,0], nums2 = [1,4]
 Output: -1
 Explanation: It is impossible to make the sum of both arrays equal.
 
+@param {number[]} nums1
+@param {number[]} nums2
+@return {number}
 
+var minSum = function(nums1, nums2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
