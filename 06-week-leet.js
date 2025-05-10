@@ -25501,7 +25501,40 @@ console.log("==========================================")
 // @return {number}
 
 var minSum = function(nums1, nums2) {
-    
+    let s1 = 0, z1 = 0;
+    for (let n of nums1) {
+        if (n === 0) z1++;
+        else s1 += n;
+    }
+
+    let s2 = 0, z2 = 0;
+    for (let n of nums2) {
+        if (n === 0) z2++;
+        else s2 += n;
+    }
+
+    // Minimum additions due to zeros
+    let minAdd1 = z1;  // all zeros in nums1 become 1
+    let minAdd2 = z2;  // all zeros in nums2 become 1
+
+    // Starting sums after replacing all zeros with 1
+    let total1 = s1 + minAdd1;
+    let total2 = s2 + minAdd2;
+
+    // Case 1: totals are already equal
+    if (total1 === total2) return total1;
+
+    // Case 2: try to increase the smaller total
+    if (total1 < total2) {
+        // Can we increase nums1 using z1 values? Each 0 can become up to 'x', so total1 += (x - 1)
+        let diff = total2 - total1;
+        if (diff <= z1 * (1e9 - 1)) return total2;  // We can always add enough to match
+    } else {
+        let diff = total1 - total2;
+        if (diff <= z2 * (1e9 - 1)) return total1;
+    }
+
+    return -1;
 };
 
 console.log("==========================================")
