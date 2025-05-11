@@ -25563,7 +25563,12 @@ Input: obj = [null, false, 0]
 Output: false
 Explanation: The array has 3 elements so it is not empty.
 
+@param {Object|Array} obj
+@return {boolean}
 
+var isEmpty = function(obj) {
+    
+};
 
 
 
