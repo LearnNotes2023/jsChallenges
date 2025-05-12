@@ -25599,7 +25599,12 @@ Input: digits = [3,7,5]
 Output: []
 Explanation: No even integers can be formed using the given digits.
 
+@param {number[]} digits
+@return {number[]}
 
+var findEvenNumbers = function(digits) {
+    
+};
 
 
 
