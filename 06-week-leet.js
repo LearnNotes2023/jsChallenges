@@ -25603,9 +25603,36 @@ console.log("==========================================")
 // @return {number[]}
 
 var findEvenNumbers = function(digits) {
+    const result = new Set();
+    const count = new Array(10).fill(0);
     
-};
+    // Count occurrences of each digit
+    for (let digit of digits) {
+        count[digit]++;
+    }
 
+    // Try all 3-digit numbers from 100 to 999
+    for (let num = 100; num < 1000; num++) {
+        if (num % 2 !== 0) continue; // Skip odd numbers
+
+        const hundreds = Math.floor(num / 100);
+        const tens = Math.floor((num % 100) / 10);
+        const ones = num % 10;
+
+        const tempCount = [...count];
+
+        // Check if digits exist in the original array
+        tempCount[hundreds]--;
+        tempCount[tens]--;
+        tempCount[ones]--;
+
+        if (tempCount[hundreds] >= 0 && tempCount[tens] >= 0 && tempCount[ones] >= 0) {
+            result.add(num);
+        }
+    }
+
+    return Array.from(result).sort((a, b) => a - b);
+};
 
 
 console.log("==========================================")
