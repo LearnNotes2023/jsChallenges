@@ -25678,7 +25678,13 @@ First Transformation (t = 1):
 String after the first transformation: "babcl"
 Final Length of the string: The string is "babcl", which has 5 characters.
 
+@param {string} s
+@param {number} t
+@return {number}
 
+var lengthAfterTransformations = function(s, t) {
+    
+};
 
 
 
