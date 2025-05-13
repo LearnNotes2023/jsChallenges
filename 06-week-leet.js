@@ -25683,9 +25683,30 @@ console.log("==========================================")
 // @return {number}
 
 var lengthAfterTransformations = function(s, t) {
-    
-};
+    const MOD = 1e9 + 7;
+    let count = new Array(26).fill(0);
 
+    // Initial count of each character
+    for (let char of s) {
+        count[char.charCodeAt(0) - 97]++;
+    }
+
+    for (let step = 0; step < t; step++) {
+        let newCount = new Array(26).fill(0);
+        for (let i = 0; i < 26; i++) {
+            if (i === 25) { // 'z'
+                newCount[0] = (newCount[0] + count[i]) % MOD; // 'a'
+                newCount[1] = (newCount[1] + count[i]) % MOD; // 'b'
+            } else {
+                newCount[i + 1] = (newCount[i + 1] + count[i]) % MOD;
+            }
+        }
+        count = newCount;
+    }
+
+    // Final length is the sum of all character counts
+    return count.reduce((sum, val) => (sum + val) % MOD, 0);
+};
 
 
 console.log("==========================================")
