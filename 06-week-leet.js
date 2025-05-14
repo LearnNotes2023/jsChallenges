@@ -25756,7 +25756,14 @@ First Transformation (t = 1):
 String after the first transformation: "bcabcdlm"
 Final Length of the string: The string is "bcabcdlm", which has 8 characters.
 
+@param {string} s
+@param {number} t
+@param {number[]} nums
+@return {number}
 
+var lengthAfterTransformations = function(s, t, nums) {
+    
+};
 
 
 console.log("==========================================")
