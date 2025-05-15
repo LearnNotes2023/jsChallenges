@@ -25847,7 +25847,13 @@ Explanation: A subsequence that can be selected is ["a","b","c"] because groups[
 Another subsequence that can be selected is ["a","b","d"] because groups[0] != groups[1] and groups[1] != groups[3]. 
 It can be shown that the length of the longest subsequence of indices that satisfies the condition is 3.
 
+@param {string[]} words
+@param {number[]} groups
+@return {string[]}
 
+var getLongestSubsequence = function(words, groups) {
+    
+};
 
 
 console.log("==========================================")
