@@ -25905,7 +25905,43 @@ console.log("==========================================")
 // @return {string[]}
 
 var getWordsInLongestSubsequence = function(words, groups) {
-    
+    const n = words.length;
+
+    // Helper to calculate Hamming Distance
+    function hammingDistance(a, b) {
+        let dist = 0;
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) dist++;
+        }
+        return dist;
+    }
+
+    // dp[i] will store the best subsequence ending at i
+    const dp = Array(n).fill(null).map((_, i) => [i]); // initialize with just the word at i
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+            if (
+                groups[j] !== groups[i] &&
+                words[j].length === words[i].length &&
+                hammingDistance(words[j], words[i]) === 1
+            ) {
+                if (dp[j].length + 1 > dp[i].length) {
+                    dp[i] = [...dp[j], i];
+                }
+            }
+        }
+    }
+
+    // Find the longest path in dp
+    let best = [];
+    for (let i = 0; i < n; i++) {
+        if (dp[i].length > best.length) {
+            best = dp[i];
+        }
+    }
+
+    return best.map(i => words[i]);
 };
 
 console.log("==========================================")
