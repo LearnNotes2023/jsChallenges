@@ -25900,7 +25900,13 @@ Hence, the answer is [words[0],words[1],words[2],words[3]] = ["a","b","c","d"].
 It has the longest length among all subsequences of indices that satisfy the conditions.
 Hence, it is the only answer.
 
+@param {string[]} words
+@param {number[]} groups
+@return {string[]}
 
+var getWordsInLongestSubsequence = function(words, groups) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
