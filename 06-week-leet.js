@@ -26015,7 +26015,62 @@ console.log("==========================================")
 // @return {number}
 
 var colorTheGrid = function(m, n) {
-    
+    const MOD = 1e9 + 7;
+    const colors = [0, 1, 2]; // Representing red, green, blue
+
+    // Generate all valid column states (no adjacent same colors)
+    const generateStates = (pos = 0, state = [], result = []) => {
+        if (pos === m) {
+            result.push([...state]);
+            return;
+        }
+        for (let color of colors) {
+            if (pos > 0 && state[pos - 1] === color) continue;
+            state.push(color);
+            generateStates(pos + 1, state, result);
+            state.pop();
+        }
+        return result;
+    };
+
+    // Convert array state to string for hashing
+    const stateToStr = (state) => state.join(',');
+
+    const validStates = generateStates();
+    const stateIndex = new Map();
+    validStates.forEach((state, idx) => stateIndex.set(stateToStr(state), idx));
+
+    // Precompute valid transitions between states
+    const transitions = new Array(validStates.length).fill(0).map(() => []);
+    for (let i = 0; i < validStates.length; i++) {
+        for (let j = 0; j < validStates.length; j++) {
+            let a = validStates[i];
+            let b = validStates[j];
+            let compatible = true;
+            for (let k = 0; k < m; k++) {
+                if (a[k] === b[k]) {
+                    compatible = false;
+                    break;
+                }
+            }
+            if (compatible) transitions[i].push(j);
+        }
+    }
+
+    // DP: dp[col][state] = number of ways to fill up to col with current state
+    let dp = new Array(validStates.length).fill(1); // Base case: first column
+    for (let col = 1; col < n; col++) {
+        let newDp = new Array(validStates.length).fill(0);
+        for (let i = 0; i < validStates.length; i++) {
+            for (let j of transitions[i]) {
+                newDp[j] = (newDp[j] + dp[i]) % MOD;
+            }
+        }
+        dp = newDp;
+    }
+
+    // Sum all valid configurations for the last column
+    return dp.reduce((sum, val) => (sum + val) % MOD, 0);
 };
 
 console.log("==========================================")
