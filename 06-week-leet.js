@@ -26010,7 +26010,13 @@ Example 3:
 Input: m = 5, n = 5
 Output: 580986
 
+@param {number} m
+@param {number} n
+@return {number}
 
+var colorTheGrid = function(m, n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
