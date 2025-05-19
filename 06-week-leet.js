@@ -26098,7 +26098,12 @@ nums[1] + nums[2] = 4 + 5 = 9, which is greater than nums[0] = 3.
 Since the sum of the two sides is greater than the third side for all three cases, therefore, it can form a triangle.
 As all the sides are of different lengths, it will form a scalene triangle.
 
+@param {number[]} nums
+@return {string}
 
+var triangleType = function(nums) {
+    
+};
 
 
 console.log("==========================================")
