@@ -26155,7 +26155,27 @@ console.log("==========================================")
 // @return {boolean}
 
 var isZeroArray = function(nums, queries) {
-    
+    const n = nums.length;
+    const needs = [...nums];
+    const freq = new Array(n + 1).fill(0);
+
+    // Build a frequency array to determine how many times each index is covered
+    for (let [l, r] of queries) {
+        freq[l]++;
+        freq[r + 1]--;
+    }
+
+    // Get actual frequency (prefix sum)
+    for (let i = 1; i < n; i++) {
+        freq[i] += freq[i - 1];
+    }
+
+    // Now check if we can decrement each nums[i] within the allowed number of times
+    for (let i = 0; i < n; i++) {
+        if (needs[i] > freq[i]) return false;
+    }
+
+    return true;
 };
 
 
