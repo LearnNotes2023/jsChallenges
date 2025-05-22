@@ -26289,49 +26289,52 @@ console.log("==========================================")
 // @param {number[][]} queries
 // @return {number}
 
-var maxRemoval = function(nums, queries) {
-  const n = nums.length;
-  const m = queries.length;
+// import java.util.*;
 
-  // Sort queries by their right endpoint ascending
-  queries.sort((a, b) => a[1] - b[1]);
-
-  let left = 0, right = m, answer = -1;
-
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-
-    // Remove first mid queries (smallest right endpoint)
-    const diff = new Array(n + 1).fill(0);
-
-    for (let i = mid; i < m; i++) {
-      let [l, r] = queries[i];
-      diff[l] += 1;
-      if (r + 1 <= n) diff[r + 1] -= 1;
-    }
-
-    for (let i = 1; i < n; i++) {
-      diff[i] += diff[i - 1];
-    }
-
-    let canCover = true;
-    for (let i = 0; i < n; i++) {
-      if (diff[i] < nums[i]) {
-        canCover = false;
-        break;
-      }
-    }
-
-    if (canCover) {
-      answer = mid;
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
-  }
-
-  return answer;
-};
+// class Solution {
+//     public int maxRemoval(int[] nums, int[][] queries) {
+//         int n = nums.length;
+//         PriorityQueue<Integer> usedQuery = new PriorityQueue<>(); // Min-heap (stores end points)
+//         PriorityQueue<Integer> availableQuery = new PriorityQueue<>(Collections.reverseOrder()); // Max-heap (stores end points)
+        
+//         // Sort queries by start point
+//         Arrays.sort(queries, (a, b) -> Integer.compare(a[0], b[0]));
+        
+//         int queryPos = 0;
+//         int appliedCount = 0;
+        
+//         for (int i = 0; i < n; i++) {
+//             // Push all queries starting at `i` into availableQuery
+//             while (queryPos < queries.length && queries[queryPos][0] == i) {
+//                 availableQuery.offer(queries[queryPos][1]);
+//                 queryPos++;
+//             }
+            
+//             // Adjust nums[i] by subtracting the number of active queries covering it
+//             nums[i] -= usedQuery.size();
+            
+//             // Apply queries if nums[i] > 0
+//             while (nums[i] > 0 && !availableQuery.isEmpty() && availableQuery.peek() >= i) {
+//                 int end = availableQuery.poll();
+//                 usedQuery.offer(end);
+//                 nums[i]--;
+//                 appliedCount++;
+//             }
+            
+//             // If nums[i] couldn't be reduced to zero
+//             if (nums[i] > 0) {
+//                 return -1;
+//             }
+            
+//             // Remove queries that end at `i` from usedQuery
+//             while (!usedQuery.isEmpty() && usedQuery.peek() == i) {
+//                 usedQuery.poll();
+//             }
+//         }
+        
+//         return queries.length - appliedCount;
+//     }
+// }
 
 console.log("==========================================")
 // console.log("==========================================")
