@@ -26290,7 +26290,47 @@ console.log("==========================================")
 // @return {number}
 
 var maxRemoval = function(nums, queries) {
-    
+  const n = nums.length;
+  const m = queries.length;
+
+  // Sort queries by their right endpoint ascending
+  queries.sort((a, b) => a[1] - b[1]);
+
+  let left = 0, right = m, answer = -1;
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    // Remove first mid queries (smallest right endpoint)
+    const diff = new Array(n + 1).fill(0);
+
+    for (let i = mid; i < m; i++) {
+      let [l, r] = queries[i];
+      diff[l] += 1;
+      if (r + 1 <= n) diff[r + 1] -= 1;
+    }
+
+    for (let i = 1; i < n; i++) {
+      diff[i] += diff[i - 1];
+    }
+
+    let canCover = true;
+    for (let i = 0; i < n; i++) {
+      if (diff[i] < nums[i]) {
+        canCover = false;
+        break;
+      }
+    }
+
+    if (canCover) {
+      answer = mid;
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return answer;
 };
 
 console.log("==========================================")
