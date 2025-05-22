@@ -26285,8 +26285,13 @@ Output: -1
 Explanation:
 nums cannot be converted to a zero array even after using all the queries.
 
+@param {number[]} nums
+@param {number[][]} queries
+@return {number}
 
-
+var maxRemoval = function(nums, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
