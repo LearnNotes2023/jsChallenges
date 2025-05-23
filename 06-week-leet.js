@@ -26354,6 +26354,14 @@ Input: nums = []
 Output: -1
 Explanation: Because there are no elements, return -1.
 
+@return {null|boolean|number|string|Array|Object}
+
+Array.prototype.last = function() {
+    
+};
+
+const arr = [1, 2, 3];
+arr.last(); // 3
 
 
 console.log("==========================================")
