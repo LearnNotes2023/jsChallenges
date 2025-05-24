@@ -26387,7 +26387,13 @@ Input: words = ["abc","bcd","aaaa","cbc"], x = "z"
 Output: []
 Explanation: "z" does not occur in any of the words. Hence, we return an empty array.
 
+@param {string[]} words
+@param {character} x
+@return {number[]}
 
+var findWordsContaining = function(words, x) {
+    
+};
 
 
 console.log("==========================================")
