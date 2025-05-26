@@ -26423,7 +26423,13 @@ Input: colors = "a", edges = [[0,0]]
 Output: -1
 Explanation: There is a cycle from 0 to 0.
 
+@param {string} colors
+@param {number[][]} edges
+@return {number}
 
+var largestPathValue = function(colors, edges) {
+    
+};
 
 
 console.log("==========================================")
