@@ -26428,9 +26428,54 @@ console.log("==========================================")
 // @return {number}
 
 var largestPathValue = function(colors, edges) {
-    
-};
+    const n = colors.length;
+    const graph = Array.from({ length: n }, () => []);
+    const indegree = Array(n).fill(0);
 
+    // Build the graph and indegree array
+    for (let [u, v] of edges) {
+        graph[u].push(v);
+        indegree[v]++;
+    }
+
+    // Initialize queue for topological sort
+    const queue = [];
+    for (let i = 0; i < n; i++) {
+        if (indegree[i] === 0) queue.push(i);
+    }
+
+    // 26 color count per node
+    const count = Array.from({ length: n }, () => Array(26).fill(0));
+    let visited = 0;
+    let res = 0;
+
+    while (queue.length > 0) {
+        const node = queue.shift();
+        visited++;
+
+        // Get current node's color index
+        const colorIndex = colors.charCodeAt(node) - 97;
+        // Increment color count for this node
+        count[node][colorIndex]++;
+        res = Math.max(res, count[node][colorIndex]);
+
+        // Traverse neighbors
+        for (let neighbor of graph[node]) {
+            // Update color counts for neighbor
+            for (let i = 0; i < 26; i++) {
+                count[neighbor][i] = Math.max(
+                    count[neighbor][i],
+                    count[node][i]
+                );
+            }
+
+            indegree[neighbor]--;
+            if (indegree[neighbor] === 0) queue.push(neighbor);
+        }
+    }
+
+    return visited === n ? res : -1;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
