@@ -26511,7 +26511,13 @@ Explanation: In the given example:
 - Integers in the range [1, 5] that are divisible by 1 are [1,2,3,4,5], num2 is the sum of those integers = 15.
 We return 0 - 15 = -15 as the answer.
 
+@param {number} n
+@param {number} m
+@return {number}
 
+var differenceOfSums = function(n, m) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
