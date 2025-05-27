@@ -26516,7 +26516,11 @@ console.log("==========================================")
 // @return {number}
 
 var differenceOfSums = function(n, m) {
-    
+    let totalSum = (n * (n + 1)) / 2;
+    let countDivByM = Math.floor(n / m);
+    let divSum = m * (countDivByM * (countDivByM + 1)) / 2;
+    let nonDivSum = totalSum - divSum;
+    return nonDivSum - divSum;
 };
 
 console.log("==========================================")
