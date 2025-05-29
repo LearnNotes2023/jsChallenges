@@ -26627,7 +26627,13 @@ Output: [3,6,6,6,6]
 Explanation:
 For every i, connect node i of the first tree with any node of the second tree.
 
+@param {number[][]} edges1
+@param {number[][]} edges2
+@return {number[]}
 
+var maxTargetNodes = function(edges1, edges2) {
+    
+};
 
 
 console.log("==========================================")
