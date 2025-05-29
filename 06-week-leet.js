@@ -26632,9 +26632,56 @@ console.log("==========================================")
 // @return {number[]}
 
 var maxTargetNodes = function(edges1, edges2) {
-    
-};
+    const buildGraph = (n, edges) => {
+        const graph = Array.from({ length: n }, () => []);
+        for (const [u, v] of edges) {
+            graph[u].push(v);
+            graph[v].push(u);
+        }
+        return graph;
+    };
 
+    const getParity = (graph) => {
+        const n = graph.length;
+        const parity = Array(n).fill(-1);
+        const dfs = (node, p) => {
+            parity[node] = p;
+            for (const nei of graph[node]) {
+                if (parity[nei] === -1) {
+                    dfs(nei, 1 - p);
+                }
+            }
+        };
+        dfs(0, 0);
+        let even = 0, odd = 0;
+        for (const p of parity) {
+            if (p === 0) even++;
+            else odd++;
+        }
+        return [parity, even, odd];
+    };
+
+    const n = edges1.length + 1;
+    const m = edges2.length + 1;
+    const graph1 = buildGraph(n, edges1);
+    const graph2 = buildGraph(m, edges2);
+
+    const [parity1, even1, odd1] = getParity(graph1);
+    const [_, even2, odd2] = getParity(graph2);
+
+    const res = Array(n);
+    for (let i = 0; i < n; i++) {
+        const p = parity1[i];
+        // Try connecting to Tree2 even-parity node
+        // That makes parity(x in Tree2) flipped
+        // parity(x in Tree1) stays the same
+        const targetsIfConnectToEven = (p === 0 ? even1 : odd1) + odd2;
+        const targetsIfConnectToOdd  = (p === 0 ? even1 : odd1) + even2;
+        res[i] = Math.max(targetsIfConnectToEven, targetsIfConnectToOdd);
+    }
+
+    return res;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
