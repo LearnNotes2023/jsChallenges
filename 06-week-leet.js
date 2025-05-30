@@ -26713,9 +26713,36 @@ console.log("==========================================")
 // @return {number}
 
 var closestMeetingNode = function(edges, node1, node2) {
-    
-};
+    const getDistances = (startNode) => {
+        const distances = new Array(edges.length).fill(Infinity);
+        let current = startNode;
+        let dist = 0;
 
+        while (current !== -1 && distances[current] === Infinity) {
+            distances[current] = dist;
+            current = edges[current];
+            dist++;
+        }
+
+        return distances;
+    };
+
+    const dist1 = getDistances(node1);
+    const dist2 = getDistances(node2);
+
+    let minDist = Infinity;
+    let answer = -1;
+
+    for (let i = 0; i < edges.length; i++) {
+        const maxDist = Math.max(dist1[i], dist2[i]);
+        if (dist1[i] !== Infinity && dist2[i] !== Infinity && maxDist < minDist) {
+            minDist = maxDist;
+            answer = i;
+        }
+    }
+
+    return answer;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
