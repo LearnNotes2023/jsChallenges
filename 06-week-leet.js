@@ -26782,7 +26782,12 @@ n == board.length == board[i].length
 board[i][j] is either -1 or in the range [1, n2].
 The squares labeled 1 and n2 are not the starting points of any snake or ladder.
 
+@param {number[][]} board
+@return {number}
 
+var snakesAndLadders = function(board) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
