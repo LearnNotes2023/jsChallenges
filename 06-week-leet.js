@@ -26848,8 +26848,35 @@ console.log("==========================================")
 // @param {number} limit
 // @return {number}
 
+function combination(n, k) {
+    if (k < 0 || k > n) return 0;
+    let res = 1;
+    for (let i = 1; i <= k; i++) {
+        res = res * (n - i + 1) / i;
+    }
+    return res;
+}
+
 var distributeCandies = function(n, limit) {
-    
+    let total = combination(n + 2, 2);
+
+    for (let i = 1; i <= 3; i++) {
+        let sign = (i % 2 === 1) ? -1 : 1;
+        let ways = 0;
+
+        // Inclusion-Exclusion: choose i variables to exceed the limit
+        // Number of ways to choose i out of 3 variables
+        let choose = combination(3, i);
+        let remaining = n - i * (limit + 1);
+
+        if (remaining >= 0) {
+            ways = combination(remaining + 2, 2);
+        }
+
+        total += sign * choose * ways;
+    }
+
+    return total;
 };
 
 
