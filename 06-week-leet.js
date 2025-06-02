@@ -26901,7 +26901,12 @@ Output: 4
 Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
 The third child gets 1 candy because it satisfies the above two conditions.
  
+@param {number[]} ratings
+@return {number}
 
+var candy = function(ratings) {
+    
+};
 
 
 console.log("==========================================")
