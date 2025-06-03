@@ -26961,7 +26961,48 @@ console.log("==========================================")
 // @return {number}
 
 var maxCandies = function(status, candies, keys, containedBoxes, initialBoxes) {
-    
+    let n = status.length;
+    let hasKey = new Array(n).fill(false);
+    let seen = new Array(n).fill(false); // track if box is already processed
+    let ownedBoxes = new Set(initialBoxes);
+    let queue = [];
+    let res = 0;
+
+    // Initially enqueue all boxes we own that are open
+    for (let box of initialBoxes) {
+        if (status[box] === 1) {
+            queue.push(box);
+            seen[box] = true;
+        }
+    }
+
+    while (queue.length > 0) {
+        let curr = queue.shift();
+        res += candies[curr];
+
+        // Add new keys
+        for (let key of keys[curr]) {
+            if (!hasKey[key]) {
+                hasKey[key] = true;
+                // If we own the box and haven't processed it yet
+                if (ownedBoxes.has(key) && !seen[key]) {
+                    queue.push(key);
+                    seen[key] = true;
+                }
+            }
+        }
+
+        // Add new boxes
+        for (let newBox of containedBoxes[curr]) {
+            ownedBoxes.add(newBox);
+            if ((status[newBox] === 1 || hasKey[newBox]) && !seen[newBox]) {
+                queue.push(newBox);
+                seen[newBox] = true;
+            }
+        }
+    }
+
+    return res;
 };
 
 console.log("==========================================")
