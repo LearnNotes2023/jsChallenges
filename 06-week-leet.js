@@ -26953,6 +26953,16 @@ Output: 6
 Explanation: You have initially box 0. Opening it you can find boxes 1,2,3,4 and 5 and their keys.
 The total number of candies will be 6.
 
+@param {number[]} status
+@param {number[]} candies
+@param {number[][]} keys
+@param {number[][]} containedBoxes
+@param {number[]} initialBoxes
+@return {number}
+
+var maxCandies = function(status, candies, keys, containedBoxes, initialBoxes) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
