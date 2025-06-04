@@ -27030,7 +27030,13 @@ Output: "g"
 Explanation: 
 The only possible split is: "g", "g", "g", and "g".
 
+@param {string} word
+@param {number} numFriends
+@return {string}
 
+var answerString = function(word, numFriends) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
