@@ -27034,10 +27034,35 @@ console.log("==========================================")
 // @param {number} numFriends
 // @return {string}
 
-var answerString = function(word, numFriends) {
-    
-};
+function answerString(word, numFriends) {
+    if (numFriends === 1) return word;
 
+    const s = lastSubstring(word);
+    const sz = word.length - numFriends + 1;
+    return s.slice(0, Math.min(s.length, sz));
+}
+
+// Same as Leetcode 1163. Last Substring in Lexicographical Order
+function lastSubstring(s) {
+    let i = 0;
+    let j = 1;
+    let k = 0;
+
+    while (j + k < s.length) {
+        if (s[i + k] === s[j + k]) {
+            k++;
+        } else if (s[i + k] > s[j + k]) {
+            j = j + k + 1;
+            k = 0;
+        } else {
+            i = Math.max(i + k + 1, j);
+            j = i + 1;
+            k = 0;
+        }
+    }
+
+    return s.slice(i);
+}
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
