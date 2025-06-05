@@ -27103,9 +27103,40 @@ console.log("==========================================")
 // @return {string}
 
 var smallestEquivalentString = function(s1, s2, baseStr) {
-    
-};
+    const parent = new Array(26).fill(0).map((_, i) => i);
 
+    const find = (x) => {
+        if (parent[x] !== x) {
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    };
+
+    const union = (x, y) => {
+        const px = find(x);
+        const py = find(y);
+        if (px === py) return;
+        if (px < py) {
+            parent[py] = px;
+        } else {
+            parent[px] = py;
+        }
+    };
+
+    for (let i = 0; i < s1.length; i++) {
+        const a = s1.charCodeAt(i) - 97;
+        const b = s2.charCodeAt(i) - 97;
+        union(a, b);
+    }
+
+    let result = '';
+    for (let ch of baseStr) {
+        const root = find(ch.charCodeAt(0) - 97);
+        result += String.fromCharCode(root + 97);
+    }
+
+    return result;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
