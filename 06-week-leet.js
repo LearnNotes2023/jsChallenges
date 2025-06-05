@@ -27097,7 +27097,14 @@ Output: "aauaaaaada"
 Explanation: We group the equivalent characters in s1 and s2 as [a,o,e,r,s,c], [l,p], [g,t] and [d,m], 
 thus all letters in baseStr except 'u' and 'd' are transformed to 'a', the answer is "aauaaaaada".
 
+@param {string} s1
+@param {string} s2
+@param {string} baseStr
+@return {string}
 
+var smallestEquivalentString = function(s1, s2, baseStr) {
+    
+};
 
 
 console.log("==========================================")
