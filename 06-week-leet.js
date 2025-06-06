@@ -27177,9 +27177,33 @@ console.log("==========================================")
 // @return {string}
 
 var robotWithString = function(s) {
-    
-};
+    const n = s.length;
+    const minSuffix = Array(n);
+    minSuffix[n - 1] = s[n - 1];
 
+    // Build the minSuffix array
+    for (let i = n - 2; i >= 0; i--) {
+        minSuffix[i] = s[i] < minSuffix[i + 1] ? s[i] : minSuffix[i + 1];
+    }
+
+    const stack = [];
+    let result = "";
+
+    for (let i = 0; i < n; i++) {
+        stack.push(s[i]);
+        // Pop from stack if it's less than or equal to the smallest character left in s
+        while (stack.length > 0 && (i === n - 1 || stack[stack.length - 1] <= minSuffix[i + 1])) {
+            result += stack.pop();
+        }
+    }
+
+    // Empty the remaining stack
+    while (stack.length > 0) {
+        result += stack.pop();
+    }
+
+    return result;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
