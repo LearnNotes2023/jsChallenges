@@ -27173,7 +27173,12 @@ Initially p="", s="bdda", t="".
 Perform first operation four times p="", s="", t="bdda".
 Perform second operation four times p="addb", s="", t="".
  
+@param {string} s
+@return {string}
 
+var robotWithString = function(s) {
+    
+};
 
 
 console.log("==========================================")
