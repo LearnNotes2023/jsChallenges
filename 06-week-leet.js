@@ -27226,7 +27226,12 @@ Output: "abc"
 Explanation:
 There is no '*' in the string.
 
+@param {string} s
+@return {string}
 
+var clearStars = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
