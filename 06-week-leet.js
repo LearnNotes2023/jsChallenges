@@ -27312,8 +27312,36 @@ console.log("==========================================")
 // @return {number}
 
 var findKthNumber = function(n, k) {
-    
+    let curr = 1;
+    k--;  // we start from 1, so skip the first number
+
+    while (k > 0) {
+        let count = getCount(curr, n);
+        if (count <= k) {
+            // Skip entire subtree
+            k -= count;
+            curr += 1;  // move to next sibling
+        } else {
+            // Go deeper
+            k -= 1;
+            curr *= 10;
+        }
+    }
+
+    return curr;
 };
+
+function getCount(prefix, n) {
+    let count = 0;
+    let curr = prefix;
+    let next = prefix + 1;
+    while (curr <= n) {
+        count += Math.min(n + 1, next) - curr;
+        curr *= 10;
+        next *= 10;
+    }
+    return count;
+}
 
 console.log("==========================================")
 // console.log("==========================================")
