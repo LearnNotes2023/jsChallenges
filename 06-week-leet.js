@@ -27367,7 +27367,12 @@ Explanation:
 The character 'a' has an odd frequency of 3, and 'c' has an even frequency of 2.
 The maximum difference is 3 - 2 = 1.
 
+@param {string} s
+@return {number}
 
+var maxDifference = function(s) {
+    
+};
 
 // console.log("==========================================")
 // console.log("==========================================")
