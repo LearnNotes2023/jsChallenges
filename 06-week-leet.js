@@ -27371,7 +27371,25 @@ console.log("==========================================")
 // @return {number}
 
 var maxDifference = function(s) {
-    
+    const freq = new Array(26).fill(0);
+
+    for (let char of s) {
+        freq[char.charCodeAt(0) - 97]++;
+    }
+
+    let maxOdd = -Infinity;
+    let minEven = Infinity;
+
+    for (let count of freq) {
+        if (count === 0) continue;
+        if (count % 2 === 1) {
+            maxOdd = Math.max(maxOdd, count);
+        } else {
+            minEven = Math.min(minEven, count);
+        }
+    }
+
+    return (maxOdd === -Infinity || minEven === Infinity) ? 0 : maxOdd - minEven;
 };
 
 // console.log("==========================================")
