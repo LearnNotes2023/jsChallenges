@@ -27420,7 +27420,13 @@ Example 3:
 Input: s = "110", k = 3
 Output: -1
 
+@param {string} s
+@param {number} k
+@return {number}
 
+var maxDifference = function(s, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
