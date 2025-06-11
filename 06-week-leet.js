@@ -27424,9 +27424,40 @@ console.log("==========================================")
 // @param {number} k
 // @return {number}
 
-var maxDifference = function(s, k) {
-    
-};
+function maxDifference(S, k) {
+    const s = S.split('').map(Number);
+    let ans = -Infinity;
+
+    for (let a = 0; a < 5; a++) {
+        for (let b = 0; b < 5; b++) {
+            if (a === b) continue;
+
+            let curA = 0, curB = 0, preA = 0, preB = 0;
+            const t = [
+                [Infinity, Infinity],
+                [Infinity, Infinity],
+            ];
+            let l = -1;
+
+            for (let r = 0; r < s.length; r++) {
+                const x = s[r];
+                if (x === a) curA++;
+                if (x === b) curB++;
+
+                while (r - l >= k && curB - preB >= 2) {
+                    t[preA & 1][preB & 1] = Math.min(t[preA & 1][preB & 1], preA - preB);
+                    l++;
+                    if (s[l] === a) preA++;
+                    if (s[l] === b) preB++;
+                }
+
+                ans = Math.max(ans, curA - curB - t[(curA & 1) ^ 1][curB & 1]);
+            }
+        }
+    }
+
+    return ans;
+}
 
 console.log("==========================================")
 // console.log("==========================================")
