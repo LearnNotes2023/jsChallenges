@@ -27478,6 +27478,12 @@ Output: 5
 Explanation:
 The adjacent elements nums[0] and nums[1] have the maximum absolute difference of |-5 - (-10)| = 5.
 
+@param {number[]} nums
+@return {number}
+
+var maxAdjacentDistance = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
