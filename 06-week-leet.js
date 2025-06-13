@@ -27515,7 +27515,14 @@ Input: nums = [4,2,1,2], p = 1
 Output: 0
 Explanation: Let the indices 1 and 3 form a pair. The difference of that pair is |2 - 2| = 0, which is the minimum we can attain.
  
-
+/**
+ * @param {number[]} nums
+ * @param {number} p
+ * @return {number}
+ */
+var minimizeMax = function(nums, p) {
+    
+};
 
 
 console.log("==========================================")
