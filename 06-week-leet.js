@@ -27520,7 +27520,32 @@ console.log("==========================================")
 // @return {number}
 
 var minimizeMax = function(nums, p) {
-    
+    nums.sort((a, b) => a - b);
+
+    const canFormPairs = (maxDiff) => {
+        let count = 0;
+        for (let i = 1; i < nums.length;) {
+            if (nums[i] - nums[i - 1] <= maxDiff) {
+                count++;
+                i += 2; // skip the next element to avoid reusing
+            } else {
+                i++;
+            }
+        }
+        return count >= p;
+    };
+
+    let left = 0, right = nums[nums.length - 1] - nums[0];
+    while (left < right) {
+        const mid = Math.floor((left + right) / 2);
+        if (canFormPairs(mid)) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return left;
 };
 
 
