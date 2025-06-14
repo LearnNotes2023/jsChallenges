@@ -27580,9 +27580,22 @@ console.log("==========================================")
 // @return {number}
 
 var minMaxDifference = function(num) {
-    
-};
+    const strNum = num.toString();
+    let maxVal = num;
+    let minVal = num;
 
+    for (let from = 0; from <= 9; from++) {
+        for (let to = 0; to <= 9; to++) {
+            if (from === to) continue;
+            const replaced = strNum.split('').map(ch => ch === from.toString() ? to.toString() : ch).join('');
+            const val = Number(replaced);
+            maxVal = Math.max(maxVal, val);
+            minVal = Math.min(minVal, val);
+        }
+    }
+
+    return maxVal - minVal;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
