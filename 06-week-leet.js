@@ -27576,7 +27576,13 @@ Explanation:
 The maximum value that can be returned by the function is 99 (if 0 is replaced by 9) and the minimum value that can be returned by the function is 0 (if 9 is replaced by 0).
 Thus, we return 99.
 
-
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var minMaxDifference = function(num) {
+    
+};
 
 
 console.log("==========================================")
