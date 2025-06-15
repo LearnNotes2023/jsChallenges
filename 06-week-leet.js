@@ -27623,7 +27623,12 @@ Explanation: The first time pick x = 9 and y = 9 and store the new integer in a.
 The second time pick x = 9 and y = 1 and store the new integer in b.
 We have now a = 9 and b = 1 and max difference = 8
 
+@param {number} num
+@return {number}
 
+var maxDiff = function(num) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
