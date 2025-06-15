@@ -27627,7 +27627,40 @@ console.log("==========================================")
 // @return {number}
 
 var maxDiff = function(num) {
-    
+    const str = num.toString();
+
+    // === MAXIMIZE ===
+    // Replace the first digit that is not '9' with '9'
+    let maxStr = '';
+    for (let ch of str) {
+        if (ch !== '9') {
+            maxStr = str.split(ch).join('9');
+            break;
+        }
+    }
+    if (maxStr === '') maxStr = str; // Already all 9s
+    const maxNum = parseInt(maxStr);
+
+    // === MINIMIZE ===
+    let minStr = '';
+    const first = str[0];
+    if (first !== '1') {
+        // Replace first digit with '1'
+        minStr = str.split(first).join('1');
+    } else {
+        // Replace first non-'0' and non-'1' digit with '0'
+        for (let i = 1; i < str.length; i++) {
+            const ch = str[i];
+            if (ch !== '0' && ch !== '1') {
+                minStr = str.split(ch).join('0');
+                break;
+            }
+        }
+        if (minStr === '') minStr = str; // Nothing to replace
+    }
+    const minNum = parseInt(minStr);
+
+    return maxNum - minNum;
 };
 
 console.log("==========================================")
