@@ -27690,7 +27690,12 @@ Output: 9
 Explanation:
 The maximum difference occurs with i = 0 and j = 3, nums[j] - nums[i] = 10 - 1 = 9.
 
+@param {number[]} nums
+@return {number}
 
+var maximumDifference = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
