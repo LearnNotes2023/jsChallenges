@@ -27737,7 +27737,14 @@ Output: 2
 Explanation:
 The good arrays are [1, 2, 1, 2, 1] and [2, 1, 2, 1, 2]. Hence, the answer is 2.
 
+@param {number} n
+@param {number} m
+@param {number} k
+@return {number}
 
+var countGoodArrays = function(n, m, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
