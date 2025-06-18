@@ -27821,7 +27821,13 @@ Output: [[2,2,12],[4,8,5],[5,9,7],[7,8,5],[5,9,10],[11,12,2]]
 Explanation:
 The difference between any two elements in each array is less than or equal to 14.
 
- 
+@param {number[]} nums
+@param {number} k
+@return {number[][]}
+
+var divideArray = function(nums, k) {
+    
+};
 
 
 
