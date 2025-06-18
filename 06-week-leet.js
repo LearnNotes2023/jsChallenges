@@ -27826,7 +27826,21 @@ console.log("==========================================")
 // @return {number[][]}
 
 var divideArray = function(nums, k) {
-    
+    nums.sort((a, b) => a - b); // Sort array in ascending order
+    const result = [];
+
+    for (let i = 0; i < nums.length; i += 3) {
+        const group = [nums[i], nums[i + 1], nums[i + 2]];
+        const maxDiff = group[2] - group[0]; // since sorted, max diff is last - first
+
+        if (maxDiff > k) {
+            return [];
+        }
+
+        result.push(group);
+    }
+
+    return result;
 };
 
 
