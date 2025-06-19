@@ -27882,7 +27882,13 @@ The difference between the maximum and minimum value in the second subsequences 
 The difference between the maximum and minimum value in the third subsequences is 5 - 5 = 0.
 Since three subsequences were created, we return 3. It can be shown that 3 is the minimum number of subsequences needed.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var partitionArray = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
