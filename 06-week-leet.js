@@ -27935,7 +27935,13 @@ Explanation:
 Change s[1] from 'S' to 'N', and s[4] from 'E' to 'W'. The string s becomes "NNWWWW".
 The maximum Manhattan distance from the origin that can be achieved is 6. Hence, 6 is the output.
 
+@param {string} s
+@param {number} k
+@return {number}
 
+var maxDistance = function(s, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
