@@ -27940,7 +27940,27 @@ console.log("==========================================")
 // @return {number}
 
 var maxDistance = function(s, k) {
-    
+    const directions = [['N', 'E'], ['N', 'W'], ['S', 'E'], ['S', 'W']];
+    let maxDist = 0;
+
+    for (const [d1, d2] of directions) {
+        let curr = 0, rem = k;
+        for (let i = 0; i < s.length; i++) {
+            if (s[i] === d1 || s[i] === d2) {
+                if (rem > 0) {
+                    rem--;
+                    curr++;
+                } else {
+                    curr--;
+                }
+            } else {
+                curr++;
+            }
+            maxDist = Math.max(maxDist, curr);
+        }
+    }
+
+    return maxDist;
 };
 
 console.log("==========================================")
