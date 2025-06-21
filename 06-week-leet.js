@@ -27990,7 +27990,13 @@ Output: 1
 Explanation: We can make word 2-special by deleting 1 occurrence of "b". 
 Therefore, word becomes equal to "aaaaaa" where each letter's frequency is now uniformly 6.
 
+@param {string} word
+@param {number} k
+@return {number}
 
+var minimumDeletions = function(word, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
