@@ -27995,7 +27995,30 @@ console.log("==========================================")
 // @return {number}
 
 var minimumDeletions = function(word, k) {
-    
+    const freq = new Map();
+
+    // Count frequency of each character
+    for (const char of word) {
+        freq.set(char, (freq.get(char) || 0) + 1);
+    }
+
+    const counts = Array.from(freq.values());
+    let minDeletions = Infinity;
+
+    // Try each frequency as target frequency
+    for (let target of counts) {
+        let deletions = 0;
+        for (let count of counts) {
+            if (count > target + k) {
+                deletions += count - (target + k);
+            } else if (count < target) {
+                deletions += count;
+            }
+        }
+        minDeletions = Math.min(minDeletions, deletions);
+    }
+
+    return minDeletions;
 };
 
 console.log("==========================================")
