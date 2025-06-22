@@ -28052,7 +28052,14 @@ Similar to the previous example, we are forming the first three groups "abc", "d
 For the last group, we can only use the character 'j' from the string. To complete this group, we add 'x' twice.
 Thus, the 4 groups formed are "abc", "def", "ghi", and "jxx".
 
+@param {string} s
+@param {number} k
+@param {character} fill
+@return {string[]}
 
+var divideString = function(s, k, fill) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
