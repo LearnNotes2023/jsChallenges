@@ -28112,7 +28112,13 @@ Output: 20379000
 Explanation: The 17 smallest 7-mirror numbers are:
 1, 2, 3, 4, 5, 6, 8, 121, 171, 242, 292, 16561, 65656, 2137312, 4602064, 6597956, 6958596
 
+@param {number} k
+@param {number} n
+@return {number}
 
+var kMirror = function(k, n) {
+    
+};
 
 
 console.log("==========================================")
