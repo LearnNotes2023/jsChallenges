@@ -28117,7 +28117,46 @@ console.log("==========================================")
 // @return {number}
 
 var kMirror = function(k, n) {
-    
+    // Helper: Check if string is a palindrome
+    const isPalindrome = (s) => s === [...s].reverse().join('');
+
+    // Helper: Convert to base-k
+    const toBaseK = (num, base) => {
+        let res = '';
+        while (num > 0) {
+            res = (num % base) + res;
+            num = Math.floor(num / base);
+        }
+        return res;
+    };
+
+    let count = 0;
+    let sum = 0;
+    let length = 1;
+
+    // Generate palindromes until n valid ones found
+    while (count < n) {
+        // Generate palindromes of current length
+        let start = Math.pow(10, Math.floor((length - 1) / 2));
+        let end = Math.pow(10, Math.floor((length + 1) / 2));
+
+        for (let i = start; i < end; i++) {
+            let str = i.toString();
+            // Make full palindrome
+            let pal = str + [...str.slice(0, length % 2 ? -1 : str.length)].reverse().join('');
+            let num = parseInt(pal);
+
+            if (isPalindrome(toBaseK(num, k))) {
+                sum += num;
+                count++;
+                if (count === n) return sum;
+            }
+        }
+
+        length++;
+    }
+
+    return sum;
 };
 
 
