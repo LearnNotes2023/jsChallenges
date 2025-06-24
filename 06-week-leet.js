@@ -28193,7 +28193,27 @@ console.log("==========================================")
 // @return {number[]}
 
 var findKDistantIndices = function(nums, key, k) {
-    
+    const keyIndices = [];
+    const resultSet = new Set();
+
+    // Step 1: Find all indices where nums[j] == key
+    for (let j = 0; j < nums.length; j++) {
+        if (nums[j] === key) {
+            keyIndices.push(j);
+        }
+    }
+
+    // Step 2: For each such index j, add all i such that |i - j| <= k
+    for (const j of keyIndices) {
+        const start = Math.max(0, j - k);
+        const end = Math.min(nums.length - 1, j + k);
+        for (let i = start; i <= end; i++) {
+            resultSet.add(i);
+        }
+    }
+
+    // Step 3: Convert to array and sort
+    return Array.from(resultSet).sort((a, b) => a - b);
 };
 
 console.log("==========================================")
