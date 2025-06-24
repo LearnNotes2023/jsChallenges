@@ -28187,7 +28187,14 @@ Output: [0,1,2,3,4]
 Explanation: For all indices i in nums, there exists some index j such that |i - j| <= k and nums[j] == key, so every index is a k-distant index. 
 Hence, we return [0,1,2,3,4].
 
+@param {number[]} nums
+@param {number} key
+@param {number} k
+@return {number[]}
 
+var findKDistantIndices = function(nums, key, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
