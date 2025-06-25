@@ -28258,7 +28258,48 @@ console.log("==========================================")
 // @return {number}
 
 var kthSmallestProduct = function(nums1, nums2, k) {
-    
+    const m = nums1.length;
+    const n = nums2.length;
+
+    const countLessEqual = (x) => {
+        let count = 0;
+        for (let a of nums1) {
+            if (a > 0) {
+                // binary search in nums2 for a * b <= x ⇒ b <= x / a
+                let left = 0, right = n - 1;
+                while (left <= right) {
+                    let mid = Math.floor((left + right) / 2);
+                    if (a * nums2[mid] <= x) left = mid + 1;
+                    else right = mid - 1;
+                }
+                count += left;
+            } else if (a < 0) {
+                // binary search in nums2 for a * b <= x ⇒ b >= ceil(x / a)
+                let left = 0, right = n - 1;
+                while (left <= right) {
+                    let mid = Math.floor((left + right) / 2);
+                    if (a * nums2[mid] <= x) right = mid - 1;
+                    else left = mid + 1;
+                }
+                count += (n - left);
+            } else {
+                if (x >= 0) count += n; // 0 * any = 0 <= x
+                // else, zero contributes nothing
+            }
+        }
+        return count;
+    };
+
+    let left = -1e10, right = 1e10;
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        if (countLessEqual(mid) < k) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return left;
 };
 
 console.log("==========================================")
