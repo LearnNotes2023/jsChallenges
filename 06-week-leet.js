@@ -28252,6 +28252,14 @@ Explanation: The 3 smallest products are:
 - nums1[4] * nums2[0] = 2 * (-3) = -6
 The 3rd smallest product is -6.
 
+@param {number[]} nums1
+@param {number[]} nums2
+@param {number} k
+@return {number}
+
+var kthSmallestProduct = function(nums1, nums2, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
