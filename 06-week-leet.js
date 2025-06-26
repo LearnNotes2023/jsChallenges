@@ -28326,6 +28326,13 @@ Output: 6
 Explanation: "000001" is the longest subsequence of s that makes up a binary number less than or equal to 1, as this number is equal to 1 in decimal.
 The length of this subsequence is 6, so 6 is returned.
 
+@param {string} s
+@param {number} k
+@return {number}
+
+var longestSubsequence = function(s, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
