@@ -28331,7 +28331,32 @@ console.log("==========================================")
 // @return {number}
 
 var longestSubsequence = function(s, k) {
+    let count = 0;
+    let value = 0n;
+    let pow = 1n;
+    const kBig = BigInt(k);
+    const n = s.length;
     
+    let i = n - 1; // Use i outside the loop
+    for (; i >= 0; i--) {
+        if (s[i] === '0') {
+            count++;
+        } else {
+            if (value + pow <= kBig) {
+                value += pow;
+                count++;
+            }
+        }
+        pow *= 2n;
+        if (pow > kBig) break;
+    }
+
+    // Add any remaining '0's on the left
+    for (let j = i - 1; j >= 0; j--) {
+        if (s[j] === '0') count++;
+    }
+
+    return count;
 };
 
 console.log("==========================================")
