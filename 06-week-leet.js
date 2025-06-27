@@ -28392,9 +28392,47 @@ console.log("==========================================")
 // @return {string}
 
 var longestSubsequenceRepeatedK = function(s, k) {
-    
-};
+    const freq = {};
+    for (let c of s) freq[c] = (freq[c] || 0) + 1;
 
+    // Filter characters that appear at least k times
+    const chars = Object.keys(freq).filter(c => freq[c] >= k).sort().reverse();
+    if (chars.length === 0) return "";
+
+    // Check if target * k is a subsequence of s
+    function isSubsequence(s, target, k) {
+        let i = 0;
+        const t = target.repeat(k);
+        for (let c of s) {
+            if (c === t[i]) i++;
+            if (i === t.length) return true;
+        }
+        return false;
+    }
+
+    // Start from "", level by level
+    let queue = [""];
+    let result = "";
+
+    while (queue.length > 0) {
+        let nextLevel = [];
+        for (let candidate of queue) {
+            for (let c of chars) {
+                const next = candidate + c;
+                if (isSubsequence(s, next, k)) {
+                    nextLevel.push(next);
+                    // update if longer or lex greater
+                    if (next.length > result.length || (next.length === result.length && next > result)) {
+                        result = next;
+                    }
+                }
+            }
+        }
+        queue = nextLevel;
+    }
+
+    return result;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
