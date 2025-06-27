@@ -28387,7 +28387,13 @@ Input: s = "ab", k = 2
 Output: ""
 Explanation: There is no subsequence repeated 2 times. Empty string is returned.
 
+@param {string} s
+@param {number} k
+@return {string}
 
+var longestSubsequenceRepeatedK = function(s, k) {
+    
+};
 
 
 console.log("==========================================")
