@@ -28466,7 +28466,20 @@ console.log("==========================================")
 // @return {number[]}
 
 var maxSubsequence = function(nums, k) {
+    // Step 1: Pair numbers with their indices
+    let paired = nums.map((num, index) => [num, index]);
     
+    // Step 2: Sort by value descending
+    paired.sort((a, b) => b[0] - a[0]);
+    
+    // Step 3: Take top k elements
+    let topK = paired.slice(0, k);
+    
+    // Step 4: Sort the top k elements by original index to preserve order
+    topK.sort((a, b) => a[1] - b[1]);
+    
+    // Step 5: Extract and return the values
+    return topK.map(item => item[0]);
 };
 
 console.log("==========================================")
