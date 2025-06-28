@@ -28461,6 +28461,13 @@ Explanation:
 The subsequence has the largest sum of 3 + 4 = 7. 
 Another possible subsequence is [4, 3].
 
+@param {number[]} nums
+@param {number} k
+@return {number[]}
+
+var maxSubsequence = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
