@@ -28570,7 +28570,23 @@ console.log("==========================================")
 // @return {number}
 
 var findLHS = function(nums) {
-    
+    const map = new Map();
+
+    // Step 1: Build frequency map
+    for (let num of nums) {
+        map.set(num, (map.get(num) || 0) + 1);
+    }
+
+    let maxLength = 0;
+
+    // Step 2: Check adjacent values
+    for (let [key, value] of map) {
+        if (map.has(key + 1)) {
+            maxLength = Math.max(maxLength, value + map.get(key + 1));
+        }
+    }
+
+    return maxLength;
 };
 
 console.log("==========================================")
