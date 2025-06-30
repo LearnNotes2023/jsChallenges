@@ -28566,6 +28566,12 @@ Output: 0
 Explanation:
 No harmonic subsequence exists.
 
+@param {number[]} nums
+@return {number}
+
+var findLHS = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
