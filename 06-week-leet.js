@@ -28615,6 +28615,12 @@ Example 3:
 Input: word = "aaaa"
 Output: 4
 
+@param {string} word
+@return {number}
+
+var possibleStringCount = function(word) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
