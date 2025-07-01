@@ -28619,7 +28619,30 @@ console.log("==========================================")
 // @return {number}
 
 var possibleStringCount = function(word) {
-    
+    let groups = [];
+    let i = 0;
+    const n = word.length;
+
+    // Step 1: Find all groups of repeated characters
+    while (i < n) {
+        let j = i;
+        while (j < n && word[j] === word[i]) {
+            j++;
+        }
+        const len = j - i;
+        if (len >= 2) {
+            groups.push(len);
+        }
+        i = j;
+    }
+
+    // Step 2: For each group, count how many unique shorter versions it can produce
+    let total = 1; // original string itself
+    for (let len of groups) {
+        total += len - 1; // from len-1 down to 1 (we skip full length since it's already counted)
+    }
+
+    return total;
 };
 
 console.log("==========================================")
