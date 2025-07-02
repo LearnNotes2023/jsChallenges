@@ -28670,7 +28670,13 @@ Example 3:
 Input: word = "aaabbb", k = 3
 Output: 8
 
+@param {string} word
+@param {number} k
+@return {number}
 
+var possibleStringCount = function(word, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
