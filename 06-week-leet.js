@@ -28725,7 +28725,12 @@ Example 2:
 Input: k = 10
 Output: "c"
 
+@param {number} k
+@return {character}
 
+var kthCharacter = function(k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
