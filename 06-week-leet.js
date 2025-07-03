@@ -28729,7 +28729,15 @@ console.log("==========================================")
 // @return {character}
 
 var kthCharacter = function(k) {
-    
+    let word = 'a';
+    while (word.length < k) {
+        let next = '';
+        for (let i = 0; i < word.length; i++) {
+            next += String.fromCharCode((word.charCodeAt(i) - 97 + 1) % 26 + 97);
+        }
+        word += next;
+    }
+    return word[k - 1];
 };
 
 console.log("==========================================")
