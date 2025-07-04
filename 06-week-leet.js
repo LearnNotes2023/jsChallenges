@@ -28771,7 +28771,13 @@ Appends "bb" to "aa", word becomes "aabb".
 Appends "aabb" to "aabb", word becomes "aabbaabb".
 Appends "bbccbbcc" to "aabbaabb", word becomes "aabbaabbbbccbbcc".
  
+@param {number} k
+@param {number[]} operations
+@return {character}
 
+var kthCharacter = function(k, operations) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
