@@ -28776,7 +28776,32 @@ console.log("==========================================")
 // @return {character}
 
 var kthCharacter = function(k, operations) {
-    
+    let len = 1;
+    const lengths = [];
+
+    // First: precompute lengths of the word after each operation
+    for (let op of operations) {
+        lengths.push(len);
+        len *= 2;
+    }
+
+    let shifts = 0;
+    for (let i = operations.length - 1; i >= 0; i--) {
+        let half = lengths[i];
+
+        if (k > half) {
+            k -= half; // move to second half
+
+            if (operations[i] === 1) {
+                shifts += 1; // it's a shifted copy
+            }
+        }
+        // else: it's in the original half, just continue
+    }
+
+    // final character is 'a' shifted right by `shifts`
+    const code = ((97 + shifts) % 26);
+    return String.fromCharCode((('a'.charCodeAt(0) - 97 + shifts) % 26) + 97);
 };
 
 console.log("==========================================")
