@@ -28830,7 +28830,22 @@ console.log("==========================================")
 // @return {number}
 
 var findLucky = function(arr) {
-    
+    const freq = {};
+
+    // Step 1: Count frequency of each number
+    for (let num of arr) {
+        freq[num] = (freq[num] || 0) + 1;
+    }
+
+    // Step 2: Find all lucky numbers
+    let result = -1;
+    for (let num in freq) {
+        if (parseInt(num) === freq[num]) {
+            result = Math.max(result, parseInt(num));
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
