@@ -28826,6 +28826,12 @@ Input: arr = [2,2,2,3,3]
 Output: -1
 Explanation: There are no lucky numbers in the array.
 
+@param {number[]} arr
+@return {number}
+
+var findLucky = function(arr) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
