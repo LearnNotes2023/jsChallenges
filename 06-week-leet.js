@@ -28876,6 +28876,33 @@ findSumPairs.add(0, 1); // now nums2 = [2,4,5,4,5,4]
 findSumPairs.add(1, 1); // now nums2 = [2,5,5,4,5,4]
 findSumPairs.count(7);  // return 11; pairs (2,1), (2,2), (2,4), (3,1), (3,2), (3,4), (4,1), (4,2), (4,4) make 2 + 5 and pairs (5,3), (5,5) make 3 + 4
 
+@param {number[]} nums1
+@param {number[]} nums2
+
+var FindSumPairs = function(nums1, nums2) {
+    
+};
+
+// @param {number} index 
+// @param {number} val
+// @return {void}
+
+FindSumPairs.prototype.add = function(index, val) {
+    
+};
+
+// @param {number} tot
+// @return {number}
+
+FindSumPairs.prototype.count = function(tot) {
+    
+};
+
+// Your FindSumPairs object will be instantiated and called as such:
+// var obj = new FindSumPairs(nums1, nums2)
+// obj.add(index,val)
+// var param_2 = obj.count(tot)
+
 
 console.log("==========================================")
 // console.log("==========================================")
