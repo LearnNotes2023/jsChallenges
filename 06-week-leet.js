@@ -28945,7 +28945,12 @@ Example 2:
 Input: events= [[1,2],[2,3],[3,4],[1,2]]
 Output: 4
 
+@param {number[][]} events
+@return {number}
 
+var maxEvents = function(events) {
+    
+};
 
 
 console.log("==========================================")
