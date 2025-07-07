@@ -28948,10 +28948,95 @@ console.log("==========================================")
 // @param {number[][]} events
 // @return {number}
 
-var maxEvents = function(events) {
-    
-};
+class MinHeap {
+    constructor() {
+        this.heap = [];
+    }
 
+    push(val) {
+        this.heap.push(val);
+        this._heapifyUp();
+    }
+
+    pop() {
+        if (this.size() === 0) return null;
+        const top = this.heap[0];
+        const last = this.heap.pop();
+        if (this.size() > 0) {
+            this.heap[0] = last;
+            this._heapifyDown();
+        }
+        return top;
+    }
+
+    peek() {
+        return this.heap[0] ?? null;
+    }
+
+    size() {
+        return this.heap.length;
+    }
+
+    _heapifyUp() {
+        let i = this.heap.length - 1;
+        while (i > 0) {
+            const parent = Math.floor((i - 1) / 2);
+            if (this.heap[i] >= this.heap[parent]) break;
+            [this.heap[i], this.heap[parent]] = [this.heap[parent], this.heap[i]];
+            i = parent;
+        }
+    }
+
+    _heapifyDown() {
+        let i = 0;
+        const length = this.heap.length;
+        while (true) {
+            let left = 2 * i + 1;
+            let right = 2 * i + 2;
+            let smallest = i;
+
+            if (left < length && this.heap[left] < this.heap[smallest]) {
+                smallest = left;
+            }
+            if (right < length && this.heap[right] < this.heap[smallest]) {
+                smallest = right;
+            }
+            if (smallest === i) break;
+            [this.heap[i], this.heap[smallest]] = [this.heap[smallest], this.heap[i]];
+            i = smallest;
+        }
+    }
+}
+
+var maxEvents = function(events) {
+    events.sort((a, b) => a[0] - b[0]); // Sort by start day
+    const heap = new MinHeap();
+    let day = 0, i = 0, res = 0;
+
+    // Find maximum day we need to consider
+    let maxDay = Math.max(...events.map(e => e[1]));
+
+    for (day = 1; day <= maxDay; day++) {
+        // Add events that start today
+        while (i < events.length && events[i][0] === day) {
+            heap.push(events[i][1]);
+            i++;
+        }
+
+        // Remove events that have already ended
+        while (heap.size() && heap.peek() < day) {
+            heap.pop();
+        }
+
+        // Attend the event that ends the earliest
+        if (heap.size()) {
+            heap.pop();
+            res++;
+        }
+    }
+
+    return res;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
