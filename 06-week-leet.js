@@ -29070,9 +29070,37 @@ console.log("==========================================")
 // @return {number}
 
 var maxValue = function(events, k) {
-    
-};
+    events.sort((a, b) => a[1] - b[1]); // sort by end time
 
+    // Extract start times for binary search
+    let starts = events.map(e => e[0]);
+    let n = events.length;
+
+    // Binary search to find the last event that ends before current event starts
+    function findLastNonConflict(index) {
+        let left = 0, right = index - 1, target = events[index][0];
+        while (left <= right) {
+            let mid = Math.floor((left + right) / 2);
+            if (events[mid][1] < target) left = mid + 1;
+            else right = mid - 1;
+        }
+        return right;
+    }
+
+    // dp[i][j]: max value by considering first i events and attending j events
+    let dp = Array.from({length: n + 1}, () => Array(k + 1).fill(0));
+
+    for (let i = 1; i <= n; i++) {
+        let [start, end, value] = events[i - 1];
+        let prevIndex = findLastNonConflict(i - 1);
+        for (let j = 1; j <= k; j++) {
+            // skip or take the event
+            dp[i][j] = Math.max(dp[i - 1][j], dp[prevIndex + 1][j - 1] + value);
+        }
+    }
+
+    return dp[n][k];
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
