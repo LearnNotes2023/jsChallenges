@@ -29065,7 +29065,13 @@ Input: events = [[1,1,1],[2,2,2],[3,3,3],[4,4,4]], k = 3
 Output: 9
 Explanation: Although the events do not overlap, you can only attend 3 events. Pick the highest valued three.
 
+@param {number[][]} events
+@param {number} k
+@return {number}
 
+var maxValue = function(events, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
