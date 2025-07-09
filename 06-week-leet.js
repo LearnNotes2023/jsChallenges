@@ -29139,7 +29139,25 @@ console.log("==========================================")
 // @return {number}
 
 var maxFreeTime = function(eventTime, k, startTime, endTime) {
-    
+    const getGaps = () => {
+        const gaps = [startTime[0]];
+        for (let i = 1; i < startTime.length; i++) {
+            gaps.push(startTime[i] - endTime[i - 1]);
+        }
+        gaps.push(eventTime - endTime[endTime.length - 1]);
+        return gaps;
+    };
+
+    const gaps = getGaps();
+    let windowSum = gaps.slice(0, k + 1).reduce((a, b) => a + b, 0);
+    let result = windowSum;
+
+    for (let i = k + 1; i < gaps.length; i++) {
+        windowSum += gaps[i] - gaps[i - k - 1];
+        result = Math.max(result, windowSum);
+    }
+
+    return result;
 };
 
 console.log("==========================================")
