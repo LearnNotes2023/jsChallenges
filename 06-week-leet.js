@@ -29197,6 +29197,14 @@ Output: 0
 Explanation:
 There is no time during the event not occupied by meetings.
 
+@param {number} eventTime
+@param {number[]} startTime
+@param {number[]} endTime
+@return {number}
+
+var maxFreeTime = function(eventTime, startTime, endTime) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
