@@ -29270,6 +29270,13 @@ Explanation:
 - At time 10, the meetings in rooms 1 and 2 finish. The fifth meeting starts in room 1 for the time period [10,12).
 Room 0 held 1 meeting while rooms 1 and 2 each held 2 meetings, so we return 1. 
 
+@param {number} n
+@param {number[][]} meetings
+@return {number}
+
+var mostBooked = function(n, meetings) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
