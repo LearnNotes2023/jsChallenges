@@ -29275,7 +29275,52 @@ console.log("==========================================")
 // @return {number}
 
 var mostBooked = function(n, meetings) {
-    
+    // Sort meetings by start time
+    meetings.sort((a, b) => a[0] - b[0]);
+
+    // Each room's next available time (initially 0)
+    let roomAvailable = Array(n).fill(0);
+    // Count of meetings held by each room
+    let count = Array(n).fill(0);
+
+    for (let [start, end] of meetings) {
+        let duration = end - start;
+
+        // Try to find a free room
+        let found = false;
+        for (let i = 0; i < n; i++) {
+            if (roomAvailable[i] <= start) {
+                // Room is free, schedule the meeting
+                roomAvailable[i] = end;
+                count[i]++;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            // No room available — find the room that gets free the earliest
+            let earliestTime = Infinity;
+            let chosenRoom = -1;
+
+            for (let i = 0; i < n; i++) {
+                if (roomAvailable[i] < earliestTime) {
+                    earliestTime = roomAvailable[i];
+                    chosenRoom = i;
+                }
+            }
+
+            // Delay the meeting to the time the chosen room is free
+            roomAvailable[chosenRoom] += duration;
+            count[chosenRoom]++;
+        }
+    }
+
+    // Find room with max meetings
+    let maxMeetings = Math.max(...count);
+    for (let i = 0; i < n; i++) {
+        if (count[i] === maxMeetings) return i;
+    }
 };
 
 console.log("==========================================")
