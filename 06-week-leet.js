@@ -29369,7 +29369,62 @@ console.log("==========================================")
 // @return {number[]}
 
 var earliestAndLatest = function(n, firstPlayer, secondPlayer) {
-    
+    const memo = new Map();
+
+    const dfs = (players, round) => {
+        const key = players.join(',') + '|' + round;
+        if (memo.has(key)) return memo.get(key);
+
+        let minRound = Infinity, maxRound = -Infinity;
+        const m = players.length;
+
+        const half = Math.floor(m / 2);
+        const mid = m % 2 === 1 ? players[half] : null;
+
+        const matchPairs = [];
+        for (let i = 0; i < half; i++) {
+            matchPairs.push([players[i], players[m - 1 - i]]);
+        }
+
+        const backtrack = (index, next) => {
+            if (index === matchPairs.length) {
+                if (mid !== null) next.push(mid);
+                next.sort((a, b) => a - b);
+                const [earliest, latest] = dfs(next, round + 1);
+                minRound = Math.min(minRound, earliest);
+                maxRound = Math.max(maxRound, latest);
+                return;
+            }
+
+            const [a, b] = matchPairs[index];
+
+            // If a and b are firstPlayer and secondPlayer, they fight now
+            if ((a === firstPlayer && b === secondPlayer) || (a === secondPlayer && b === firstPlayer)) {
+                minRound = Math.min(minRound, round);
+                maxRound = Math.max(maxRound, round);
+                return;
+            }
+
+            // If either is one of the strong players, they win
+            if (a === firstPlayer || a === secondPlayer) {
+                backtrack(index + 1, [...next, a]);
+            } else if (b === firstPlayer || b === secondPlayer) {
+                backtrack(index + 1, [...next, b]);
+            } else {
+                // Try both possibilities
+                backtrack(index + 1, [...next, a]);
+                backtrack(index + 1, [...next, b]);
+            }
+        };
+
+        backtrack(0, []);
+        const result = [minRound, maxRound];
+        memo.set(key, result);
+        return result;
+    };
+
+    const players = Array.from({ length: n }, (_, i) => i + 1);
+    return dfs(players, 1);
 };
 
 
