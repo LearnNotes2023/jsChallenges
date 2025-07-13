@@ -29454,7 +29454,13 @@ Explanation:
 The trainer can be matched with any of the 3 players.
 Each player can only be matched with one trainer, so the maximum answer is 1.
  
+@param {number[]} players
+@param {number[]} trainers
+@return {number}
 
+var matchPlayersAndTrainers = function(players, trainers) {
+    
+};
 
 
 console.log("==========================================")
