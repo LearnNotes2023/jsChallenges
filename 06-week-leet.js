@@ -29549,7 +29549,12 @@ Output: false
 Explanation:
 This word contains a '$' character and does not have a consonant.
 
+@param {string} word
+@return {boolean}
 
+var isValid = function(word) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
