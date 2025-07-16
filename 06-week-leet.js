@@ -29607,7 +29607,39 @@ console.log("==========================================")
 // @return {number}
 
 var maximumLength = function(nums) {
+    const n = nums.length;
+    if(n === 0) return 0;
+    if(n === 1) return 1;
     
+    // Count homogeneous possibilities.
+    let countEven = 0, countOdd = 0;
+    for (let num of nums) {
+        if(num % 2 === 0) countEven++;
+        else countOdd++;
+    }
+    
+    // Helper to compute the length of the alternating subsequence
+    // given the expected starting parity (0 for even, 1 for odd)
+    const getAltLength = (expected) => {
+        let length = 0;
+        for (let num of nums) {
+            if (num % 2 === expected) {
+                length++;
+                expected = 1 - expected;  // flip parity expectation
+            }
+        }
+        return length;
+    };
+    
+    let altStartingEven = getAltLength(0);
+    let altStartingOdd = getAltLength(1);
+    let altMax = Math.max(altStartingEven, altStartingOdd);
+    
+    // The answer is the maximum of homogeneous or alternating sequence.
+    // Note: a subsequence of length 2 is always valid, so if none of our
+    // choices yields at least 2, the answer would be 1, but problem inputs 
+    // are assumed to have a valid pair.
+    return Math.max(countEven, countOdd, altMax);
 };
 
 console.log("==========================================")
