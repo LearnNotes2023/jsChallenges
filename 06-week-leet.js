@@ -29603,6 +29603,12 @@ Output: 2
 Explanation:
 The longest valid subsequence is [1, 3].
 
+@param {number[]} nums
+@return {number}
+
+var maximumLength = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
