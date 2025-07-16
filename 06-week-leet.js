@@ -29577,37 +29577,69 @@ var isValid = function(word) {
 
 console.log("==========================================")
 
-3201. Find the Maximum Length of Valid Subsequence I
-Medium
-You are given an integer array nums.
-A subsequence sub of nums with length x is called valid if it satisfies:
-(sub[0] + sub[1]) % 2 == (sub[1] + sub[2]) % 2 == ... == (sub[x - 2] + sub[x - 1]) % 2.
-Return the length of the longest valid subsequence of nums.
-A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
+// 3201. Find the Maximum Length of Valid Subsequence I
+// Medium
+// You are given an integer array nums.
+// A subsequence sub of nums with length x is called valid if it satisfies:
+// (sub[0] + sub[1]) % 2 == (sub[1] + sub[2]) % 2 == ... == (sub[x - 2] + sub[x - 1]) % 2.
+// Return the length of the longest valid subsequence of nums.
+// A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.
 
-Example 1:
-Input: nums = [1,2,3,4]
-Output: 4
-Explanation:
-The longest valid subsequence is [1, 2, 3, 4].
+// Example 1:
+// Input: nums = [1,2,3,4]
+// Output: 4
+// Explanation:
+// The longest valid subsequence is [1, 2, 3, 4].
 
-Example 2:
-Input: nums = [1,2,1,1,2,1,2]
-Output: 6
-Explanation:
-The longest valid subsequence is [1, 2, 1, 2, 1, 2].
+// Example 2:
+// Input: nums = [1,2,1,1,2,1,2]
+// Output: 6
+// Explanation:
+// The longest valid subsequence is [1, 2, 1, 2, 1, 2].
 
-Example 3:
-Input: nums = [1,3]
-Output: 2
-Explanation:
-The longest valid subsequence is [1, 3].
+// Example 3:
+// Input: nums = [1,3]
+// Output: 2
+// Explanation:
+// The longest valid subsequence is [1, 3].
 
-@param {number[]} nums
-@return {number}
+// @param {number[]} nums
+// @return {number}
 
 var maximumLength = function(nums) {
+    const n = nums.length;
+    if(n === 0) return 0;
+    if(n === 1) return 1;
     
+    // Count homogeneous possibilities.
+    let countEven = 0, countOdd = 0;
+    for (let num of nums) {
+        if(num % 2 === 0) countEven++;
+        else countOdd++;
+    }
+    
+    // Helper to compute the length of the alternating subsequence
+    // given the expected starting parity (0 for even, 1 for odd)
+    const getAltLength = (expected) => {
+        let length = 0;
+        for (let num of nums) {
+            if (num % 2 === expected) {
+                length++;
+                expected = 1 - expected;  // flip parity expectation
+            }
+        }
+        return length;
+    };
+    
+    let altStartingEven = getAltLength(0);
+    let altStartingOdd = getAltLength(1);
+    let altMax = Math.max(altStartingEven, altStartingOdd);
+    
+    // The answer is the maximum of homogeneous or alternating sequence.
+    // Note: a subsequence of length 2 is always valid, so if none of our
+    // choices yields at least 2, the answer would be 1, but problem inputs 
+    // are assumed to have a valid pair.
+    return Math.max(countEven, countOdd, altMax);
 };
 
 console.log("==========================================")
