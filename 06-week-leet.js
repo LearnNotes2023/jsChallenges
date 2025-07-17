@@ -29668,7 +29668,42 @@ console.log("==========================================")
 // @return {number}
 
 var maximumLength = function(nums, k) {
-    
+    const dp = new Map(); // target -> Map(remainder -> length)
+    let maxLen = 1;
+
+    for (let num of nums) {
+        let r = num % k;
+        const updates = [];
+
+        for (let [target, innerMap] of dp.entries()) {
+            let needed = (target - r + k) % k;
+            if (innerMap.has(needed)) {
+                let newLen = innerMap.get(needed) + 1;
+                if (!innerMap.has(r) || innerMap.get(r) < newLen) {
+                    updates.push([target, r, newLen]);
+                    maxLen = Math.max(maxLen, newLen);
+                }
+            }
+        }
+
+        // Start a new target based on future pairs
+        for (let t = 0; t < k; t++) {
+            if (!dp.has(t)) dp.set(t, new Map());
+        }
+
+        // Single element can start subsequence for any target
+        for (let target = 0; target < k; target++) {
+            let map = dp.get(target);
+            if (!map.has(r)) map.set(r, 1);
+        }
+
+        // Apply updates
+        for (let [target, r2, val] of updates) {
+            dp.get(target).set(r2, val);
+        }
+    }
+
+    return maxLen;
 };
 
 console.log("==========================================")
