@@ -29737,8 +29737,12 @@ If we remove nums[2] = 5 and nums[3] = 8, the resultant array will be [7,9,1,3].
 To obtain the minimum difference, we should remove nums[1] = 9 and nums[4] = 1. The resultant array becomes [7,5,8,3]. The difference in sums of the two parts is (7+5) - (8+3) = 1.
 It can be shown that it is not possible to obtain a difference smaller than 1.
  
+@param {number[]} nums
+@return {number}
 
-
+var minimumDifference = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
