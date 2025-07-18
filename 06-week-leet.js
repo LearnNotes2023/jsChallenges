@@ -29740,10 +29740,122 @@ console.log("==========================================")
 // @param {number[]} nums
 // @return {number}
 
-var minimumDifference = function(nums) {
-    
-};
+class MinHeap {
+    constructor() { this.heap = []; }
+    push(val) {
+        this.heap.push(val);
+        this._up(this.heap.length - 1);
+    }
+    pop() {
+        if (this.size() === 1) return this.heap.pop();
+        const top = this.heap[0];
+        this.heap[0] = this.heap.pop();
+        this._down(0);
+        return top;
+    }
+    size() { return this.heap.length; }
+    _up(i) {
+        while (i > 0) {
+            const p = (i - 1) >> 1;
+            if (this.heap[i] >= this.heap[p]) break;
+            [this.heap[i], this.heap[p]] = [this.heap[p], this.heap[i]];
+            i = p;
+        }
+    }
+    _down(i) {
+        const n = this.heap.length;
+        while (true) {
+            let smallest = i;
+            const l = i * 2 + 1, r = i * 2 + 2;
+            if (l < n && this.heap[l] < this.heap[smallest]) smallest = l;
+            if (r < n && this.heap[r] < this.heap[smallest]) smallest = r;
+            if (smallest === i) break;
+            [this.heap[i], this.heap[smallest]] = [this.heap[smallest], this.heap[i]];
+            i = smallest;
+        }
+    }
+}
 
+class MaxHeap {
+    constructor() { this.heap = []; }
+    push(val) {
+        this.heap.push(val);
+        this._up(this.heap.length - 1);
+    }
+    pop() {
+        if (this.size() === 1) return this.heap.pop();
+        const top = this.heap[0];
+        this.heap[0] = this.heap.pop();
+        this._down(0);
+        return top;
+    }
+    size() { return this.heap.length; }
+    _up(i) {
+        while (i > 0) {
+            const p = (i - 1) >> 1;
+            if (this.heap[i] <= this.heap[p]) break;
+            [this.heap[i], this.heap[p]] = [this.heap[p], this.heap[i]];
+            i = p;
+        }
+    }
+    _down(i) {
+        const n = this.heap.length;
+        while (true) {
+            let largest = i;
+            const l = i * 2 + 1, r = i * 2 + 2;
+            if (l < n && this.heap[l] > this.heap[largest]) largest = l;
+            if (r < n && this.heap[r] > this.heap[largest]) largest = r;
+            if (largest === i) break;
+            [this.heap[i], this.heap[largest]] = [this.heap[largest], this.heap[i]];
+            i = largest;
+        }
+    }
+}
+
+var minimumDifference = function(nums) {
+    const n = nums.length / 3;
+
+    // Step 1: Left sums (smallest sum of n elements from first 2n)
+    const left = new Array(2 * n);
+    const maxHeap = new MaxHeap();
+    let sum = 0;
+    for (let i = 0; i < 2 * n; i++) {
+        sum += nums[i];
+        maxHeap.push(nums[i]);
+        if (maxHeap.size() > n) {
+            sum -= maxHeap.pop();
+        }
+        if (maxHeap.size() === n) {
+            left[i] = sum;
+        } else {
+            left[i] = Infinity;
+        }
+    }
+
+    // Step 2: Right sums (largest sum of n elements from last 2n)
+    const right = new Array(2 * n);
+    const minHeap = new MinHeap();
+    sum = 0;
+    for (let i = nums.length - 1; i >= n; i--) {
+        sum += nums[i];
+        minHeap.push(nums[i]);
+        if (minHeap.size() > n) {
+            sum -= minHeap.pop();
+        }
+        if (minHeap.size() === n) {
+            right[i] = sum;
+        } else {
+            right[i] = -Infinity;
+        }
+    }
+
+    // Step 3: Compute minimal difference
+    let res = Infinity;
+    for (let i = n - 1; i < 2 * n; i++) {
+        res = Math.min(res, left[i] - right[i + 1]);
+    }
+    return res;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
