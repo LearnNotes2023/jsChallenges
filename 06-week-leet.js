@@ -29926,8 +29926,16 @@ console.log("==========================================")
 // @return {Object}
 
 Array.prototype.groupBy = function(fn) {
-    
+    return this.reduce((grouped, item) => {
+        const key = fn(item); // Apply the function to get the key
+        if (!grouped[key]) {
+            grouped[key] = []; // Initialize an array if the key doesn't exist
+        }
+        grouped[key].push(item); // Push the item to the corresponding key
+        return grouped;
+    }, {}); // Start with an empty object
 };
+
 
 // [1,2,3].groupBy(String) // {"1":[1],"2":[2],"3":[3]}
 
