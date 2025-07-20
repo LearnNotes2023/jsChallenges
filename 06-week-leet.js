@@ -29987,6 +29987,12 @@ Output: [["c"],["c","d"],["a"],["a","b"]]
 Explanation: All folders are unique in the file system.
 Note that the returned array can be in a different order as the order does not matter.
 
+@param {string[][]} paths
+@return {string[][]}
+
+var deleteDuplicateFolder = function(paths) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
