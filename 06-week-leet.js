@@ -29991,7 +29991,70 @@ console.log("==========================================")
 // @return {string[][]}
 
 var deleteDuplicateFolder = function(paths) {
-    
+    // Step 1: Build a tree
+    class Node {
+        constructor(name) {
+            this.name = name;
+            this.children = new Map();
+            this.deleted = false;
+        }
+    }
+
+    const root = new Node("");
+
+    for (let path of paths) {
+        let cur = root;
+        for (let folder of path) {
+            if (!cur.children.has(folder)) {
+                cur.children.set(folder, new Node(folder));
+            }
+            cur = cur.children.get(folder);
+        }
+    }
+
+    // Step 2: Serialize subtrees
+    const map = new Map();
+
+    function serialize(node) {
+        if (node.children.size === 0) return "";
+
+        const parts = [];
+        for (let [name, child] of [...node.children.entries()].sort()) {
+            parts.push(name + serialize(child));
+        }
+        const serial = `(${parts.join("")})`;
+        if (!map.has(serial)) map.set(serial, []);
+        map.get(serial).push(node);
+        return serial;
+    }
+
+    serialize(root);
+
+    // Step 3: Mark duplicates
+    for (let nodes of map.values()) {
+        if (nodes.length > 1) {
+            for (let node of nodes) {
+                node.deleted = true;
+            }
+        }
+    }
+
+    // Step 4: DFS to collect remaining paths
+    const res = [];
+
+    function dfs(node, path) {
+        for (let [name, child] of node.children) {
+            if (!child.deleted) {
+                path.push(name);
+                res.push([...path]);
+                dfs(child, path);
+                path.pop();
+            }
+        }
+    }
+
+    dfs(root, []);
+    return res;
 };
 
 console.log("==========================================")
