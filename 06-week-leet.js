@@ -30080,7 +30080,13 @@ Input: arr = [[3, 4], [5, 2], [10, 1]], fn = (x) => x[1]
 Output: [[10, 1], [5, 2], [3, 4]]
 Explanation: arr is sorted in ascending order by number at index=1. 
 
+@param {Array} arr
+@param {Function} fn
+@return {Array}
 
+var sortBy = function(arr, fn) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
