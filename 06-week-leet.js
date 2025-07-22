@@ -30107,7 +30107,12 @@ Input: nums = [5,2,1,2,5,2,1,2,5]
 Output: 8
 Explanation: The optimal subarray here is [5,2,1] or [1,2,5].
 
+@param {number[]} nums
+@return {number}
 
+var maximumUniqueSubarray = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
