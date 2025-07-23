@@ -30172,7 +30172,24 @@ console.log("==========================================")
 // @return {Array}
 
 var join = function(arr1, arr2) {
-    
+    let map = new Map();
+
+    // Function to merge two objects with arr2 overriding arr1
+    function mergeObjects(obj1, obj2) {
+        return { ...obj1, ...obj2 };
+    }
+
+    // Process both arrays
+    for (let obj of [...arr1, ...arr2]) {
+        if (map.has(obj.id)) {
+            map.set(obj.id, mergeObjects(map.get(obj.id), obj));
+        } else {
+            map.set(obj.id, obj);
+        }
+    }
+
+    // Convert map values to array and sort by id
+    return Array.from(map.values()).sort((a, b) => a.id - b.id);
 };
 
 console.log("==========================================")
