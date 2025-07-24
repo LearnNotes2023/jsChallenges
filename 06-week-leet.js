@@ -30226,7 +30226,13 @@ Explanation: The diagram above shows a way to make a pair of removals.
 The score is the difference between the largest and smallest XOR value which is 0 - 0 = 0.
 We cannot obtain a smaller score than 0.
  
+@param {number[]} nums
+@param {number[][]} edges
+@return {number}
 
+var minimumScore = function(nums, edges) {
+    
+};
 
 
 console.log("==========================================")
