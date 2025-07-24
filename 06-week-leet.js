@@ -30231,7 +30231,68 @@ console.log("==========================================")
 // @return {number}
 
 var minimumScore = function(nums, edges) {
+    const n = nums.length;
+    const graph = Array.from({ length: n }, () => []);
     
+    // Build tree
+    for (const [u, v] of edges) {
+        graph[u].push(v);
+        graph[v].push(u);
+    }
+
+    const subXor = Array(n).fill(0);
+    const inTime = Array(n).fill(0);
+    const outTime = Array(n).fill(0);
+    let time = 0;
+
+    const dfs = (u, parent) => {
+        inTime[u] = time++;
+        subXor[u] = nums[u];
+        for (const v of graph[u]) {
+            if (v !== parent) {
+                dfs(v, u);
+                subXor[u] ^= subXor[v];
+            }
+        }
+        outTime[u] = time++;
+    };
+
+    dfs(0, -1);
+    const totalXor = subXor[0];
+    let res = Infinity;
+
+    const isAncestor = (u, v) => inTime[u] < inTime[v] && outTime[u] > outTime[v];
+
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            if (i === 0 || j === 0) continue; // edge from root
+
+            const a = i, b = j;
+
+            let x1, x2, x3;
+            if (isAncestor(a, b)) {
+                // a is ancestor of b
+                x1 = subXor[b];
+                x2 = subXor[a] ^ subXor[b];
+                x3 = totalXor ^ subXor[a];
+            } else if (isAncestor(b, a)) {
+                // b is ancestor of a
+                x1 = subXor[a];
+                x2 = subXor[b] ^ subXor[a];
+                x3 = totalXor ^ subXor[b];
+            } else {
+                // disjoint
+                x1 = subXor[a];
+                x2 = subXor[b];
+                x3 = totalXor ^ subXor[a] ^ subXor[b];
+            }
+
+            const vals = [x1, x2, x3];
+            res = Math.min(res, Math.max(...vals) - Math.min(...vals));
+        }
+    }
+
+    return res;
 };
 
 
