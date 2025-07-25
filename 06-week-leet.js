@@ -30327,10 +30327,38 @@ console.log("==========================================")
 // @param {number[]} nums
 // @return {number}
 
-var maxSum = function(nums) {
-    
-};
+function maxSum(nums) {
+    // Find the maximum value in the array
+    const maxElement = Math.max(...nums);
 
+    // If the maximum value is less than or equal to zero, return it
+    if (maxElement <= 0) {
+        return maxElement;
+    }
+
+    // Create a set to track elements that have been added to the sum
+    const uniqueElementsSet = new Set();
+
+    // Initialize the sum to zero
+    let sum = 0;
+
+    // Iterate through the array
+    for (const number of nums) {
+        // If the number is negative or already added, skip it
+        if (number < 0 || uniqueElementsSet.has(number)) {
+            continue;
+        }
+
+        // Add the number to the sum
+        sum += number;
+
+        // Add the number to the set to mark it as added
+        uniqueElementsSet.add(number);
+    }
+
+    // Return the computed sum
+    return sum;
+}
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
