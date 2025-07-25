@@ -30324,7 +30324,12 @@ Output: 3
 Explanation:
 Delete the elements nums[2] == -1 and nums[3] == -2, and select the subarray [2, 1] from [1, 2, 1, 0, -1] to obtain the maximum sum.
 
+@param {number[]} nums
+@return {number}
 
+var maxSum = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
