@@ -30385,7 +30385,13 @@ Remove [1, 2] from conflictingPairs. Now, conflictingPairs = [[2, 5], [3, 5]].
 There are 12 subarrays in nums where [2, 5] and [3, 5] do not appear together.
 The maximum number of subarrays we can achieve after removing one element from conflictingPairs is 12.
 
+@param {number} n
+@param {number[][]} conflictingPairs
+@return {number}
 
+var maxSubarrays = function(n, conflictingPairs) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
