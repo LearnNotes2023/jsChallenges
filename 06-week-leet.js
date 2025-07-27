@@ -30427,7 +30427,12 @@ At index 4: The closest non-equal neighbors of 4 are 5 and 1. Since 4 < 5 and 4 
 At index 5: There is no non-equal neighbor of 1 on the right, so index 5 is neither a hill nor a valley.
 There are 0 hills and valleys so we return 0.
 
+@param {number[]} nums
+@return {number}
 
+var countHillValley = function(nums) {
+    
+};
 
 
 console.log("==========================================")
