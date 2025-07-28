@@ -30496,7 +30496,23 @@ console.log("==========================================")
 // @return {Array}
 
 var flat = function (arr, n) {
-    
+    const flatten = (arr, currentDepth) => {
+        let result = [];
+
+        for (let el of arr) {
+            if (Array.isArray(el) && currentDepth < n) {
+                // Recurse deeper if allowed
+                result.push(...flatten(el, currentDepth + 1));
+            } else {
+                // Either a primitive or depth limit reached
+                result.push(el);
+            }
+        }
+
+        return result;
+    };
+
+    return flatten(arr, 0);
 };
 
 console.log("==========================================")
