@@ -30491,7 +30491,13 @@ Output
 Explanation
 The maximum depth of any subarray is 1. Thus, all of them are flattened.
  
+@param {Array} arr
+@param {number} depth
+@return {Array}
 
+var flat = function (arr, n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
