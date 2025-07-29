@@ -30551,7 +30551,30 @@ console.log("==========================================")
 // @return {number[]}
 
 var smallestSubarrays = function(nums) {
-    
+    const n = nums.length;
+    const answer = new Array(n).fill(0);
+    const bitPos = new Array(32).fill(-1); // Store latest position where bit i is set
+
+    for (let i = n - 1; i >= 0; i--) {
+        // Update bit positions for nums[i]
+        for (let b = 0; b < 32; b++) {
+            if ((nums[i] & (1 << b)) !== 0) {
+                bitPos[b] = i;
+            }
+        }
+
+        // Find the furthest bit that we need to include to get full OR
+        let furthest = i;
+        for (let b = 0; b < 32; b++) {
+            if (bitPos[b] !== -1) {
+                furthest = Math.max(furthest, bitPos[b]);
+            }
+        }
+
+        answer[i] = furthest - i + 1;
+    }
+
+    return answer;
 };
 
 console.log("==========================================")
