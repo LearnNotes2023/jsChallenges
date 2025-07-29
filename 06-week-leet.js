@@ -30547,7 +30547,13 @@ Starting at index 0, the shortest subarray that yields the maximum bitwise OR is
 Starting at index 1, the shortest subarray that yields the maximum bitwise OR is of length 1.
 Therefore, we return [2,1].
 
-
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var smallestSubarrays = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
