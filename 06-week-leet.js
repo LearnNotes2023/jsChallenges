@@ -30603,7 +30603,12 @@ Explanation:
 The maximum possible bitwise AND of a subarray is 4.
 The longest subarray with that value is [4], so we return 1.
 
+@param {number[]} nums
+@return {number}
 
+var longestSubarray = function(nums) {
+    
+};
 
 
 
