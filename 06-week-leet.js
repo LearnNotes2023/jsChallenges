@@ -30651,7 +30651,12 @@ Input: arr = [1,2,4]
 Output: 6
 Explanation: The possible results are 1, 2, 3, 4, 6, and 7.
 
+@param {number[]} arr
+@return {number}
 
+var subarrayBitwiseORs = function(arr) {
+    
+};
 
 
 console.log("==========================================")
