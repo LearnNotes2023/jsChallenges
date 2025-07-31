@@ -30655,9 +30655,26 @@ console.log("==========================================")
 // @return {number}
 
 var subarrayBitwiseORs = function(arr) {
-    
-};
+    let res = new Set();
+    let prev = new Set();
 
+    for (let num of arr) {
+        let cur = new Set();
+        cur.add(num);
+
+        for (let x of prev) {
+            cur.add(x | num);
+        }
+
+        for (let x of cur) {
+            res.add(x);
+        }
+
+        prev = cur;
+    }
+
+    return res.size;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
