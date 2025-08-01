@@ -30695,9 +30695,25 @@ console.log("==========================================")
 // @return {number[][]}
 
 var generate = function(numRows) {
-    
-};
+    const triangle = [];
 
+    for (let i = 0; i < numRows; i++) {
+        const row = [1]; // Start each row with 1
+
+        for (let j = 1; j < i; j++) {
+            // Each number is the sum of the two numbers above it
+            row.push(triangle[i - 1][j - 1] + triangle[i - 1][j]);
+        }
+
+        if (i > 0) {
+            row.push(1); // End each row with 1 (except the first)
+        }
+
+        triangle.push(row);
+    }
+
+    return triangle;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
