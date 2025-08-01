@@ -30691,6 +30691,12 @@ Example 2:
 Input: numRows = 1
 Output: [[1]]
 
+@param {number} numRows
+@return {number[][]}
+
+var generate = function(numRows) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
