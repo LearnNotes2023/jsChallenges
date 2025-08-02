@@ -30740,9 +30740,34 @@ console.log("==========================================")
 // @return {number}
 
 var minCost = function(basket1, basket2) {
-    
-};
+    const count = new Map();
 
+    // Step 1: Count total occurrences
+    for (const num of basket1) count.set(num, (count.get(num) || 0) + 1);
+    for (const num of basket2) count.set(num, (count.get(num) || 0) - 1);
+
+    // Step 2: Check if it's possible
+    const toSwap = [];
+    for (const [key, val] of count.entries()) {
+        if (val % 2 !== 0) return -1; // odd difference means impossible
+        // store only half of the difference since each swap fixes two
+        for (let i = 0; i < Math.abs(val) / 2; i++) {
+            toSwap.push(key);
+        }
+    }
+
+    // Step 3: Calculate the minimum swap cost
+    toSwap.sort((a, b) => a - b); // sort to use smallest elements first
+    const minElem = Math.min(...basket1, ...basket2); // globally smallest fruit cost
+    let res = 0;
+
+    for (let i = 0; i < toSwap.length / 2; i++) {
+        // For each pair, either swap directly or use two swaps through minElem
+        res += Math.min(toSwap[i], minElem * 2);
+    }
+
+    return res;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
