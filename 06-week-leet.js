@@ -30735,7 +30735,13 @@ Input: basket1 = [2,3,4,1], basket2 = [3,2,5,1]
 Output: -1
 Explanation: It can be shown that it is impossible to make both the baskets equal.
 
+@param {number[]} basket1
+@param {number[]} basket2
+@return {number}
 
+var minCost = function(basket1, basket2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
