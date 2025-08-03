@@ -30815,7 +30815,30 @@ console.log("==========================================")
 // @return {number}
 
 var maxTotalFruits = function(fruits, startPos, k) {
-    
+    const n = fruits.length;
+    let maxFruits = 0;
+    let left = 0;
+    let total = 0;
+
+    for (let right = 0; right < n; ++right) {
+        total += fruits[right][1];
+
+        // Slide the left pointer while this window is invalid
+        while (
+            left <= right && 
+            Math.min(
+                Math.abs(startPos - fruits[left][0]) + (fruits[right][0] - fruits[left][0]),
+                Math.abs(startPos - fruits[right][0]) + (fruits[right][0] - fruits[left][0])
+            ) > k
+        ) {
+            total -= fruits[left][1];
+            left++;
+        }
+
+        maxFruits = Math.max(maxFruits, total);
+    }
+
+    return maxFruits;
 };
 
 console.log("==========================================")
