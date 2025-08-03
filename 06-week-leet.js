@@ -30809,7 +30809,14 @@ Output: 0
 Explanation:
 You can move at most k = 2 steps and cannot reach any position with fruits.
 
+@param {number[][]} fruits
+@param {number} startPos
+@param {number} k
+@return {number}
 
+var maxTotalFruits = function(fruits, startPos, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
