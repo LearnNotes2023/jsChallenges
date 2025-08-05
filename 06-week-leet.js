@@ -30935,7 +30935,28 @@ console.log("==========================================")
 // @return {number}
 
 var numOfUnplacedFruits = function(fruits, baskets) {
-    
+    const n = baskets.length;
+    const used = Array(n).fill(false); // tracks which baskets are used
+    let unplaced = 0;
+
+    for (let i = 0; i < fruits.length; i++) {
+        const fruit = fruits[i];
+        let placed = false;
+
+        for (let j = 0; j < n; j++) {
+            if (!used[j] && baskets[j] >= fruit) {
+                used[j] = true; // mark this basket as used
+                placed = true;
+                break;
+            }
+        }
+
+        if (!placed) {
+            unplaced++;
+        }
+    }
+
+    return unplaced;
 };
 
 console.log("==========================================")
