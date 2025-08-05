@@ -30930,7 +30930,13 @@ fruits[1] = 6 cannot be placed in baskets[1] = 4 (insufficient capacity) but can
 fruits[2] = 1 is placed in baskets[1] = 4.
 Since all fruits are successfully placed, we return 0.
 
+@param {number[]} fruits
+@param {number[]} baskets
+@return {number}
 
+var numOfUnplacedFruits = function(fruits, baskets) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
