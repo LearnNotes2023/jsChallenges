@@ -30994,7 +30994,28 @@ console.log("==========================================")
 // @return {number}
 
 var numOfUnplacedFruits = function(fruits, baskets) {
-    
+    const n = fruits.length;
+    const m = baskets.length;
+    const used = new Array(m).fill(false);
+    let unplaced = 0;
+
+    for (let i = 0; i < n; i++) {
+        let fruit = fruits[i];
+        let found = false;
+
+        // Use one shared pointer to avoid redundant scans
+        for (let j = 0; j < m; j++) {
+            if (!used[j] && baskets[j] >= fruit) {
+                used[j] = true;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) unplaced++;
+    }
+
+    return unplaced;
 };
 
 console.log("==========================================")
