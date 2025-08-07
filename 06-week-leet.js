@@ -31057,7 +31057,12 @@ The 2nd child moves on the path (0,1) -> (1,1).
 The 3rd child moves on the path (1,0) -> (1,1).
 In total they collect 1 + 1 + 1 + 1 = 4 fruits.
 
- 
+@param {number[][]} fruits
+@return {number}
+
+var maxCollectedFruits = function(fruits) {
+    
+};
 
 
 console.log("==========================================")
