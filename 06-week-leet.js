@@ -31154,6 +31154,12 @@ If we perform the fourth operation, A will become empty on performing operation 
 and both A and B become empty on performing operation 2.
 So the total probability of A becoming empty first plus half the probability that A and B become empty at the same time, is 0.71875.
 
+@param {number} n
+@return {number}
+
+var soupServings = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
