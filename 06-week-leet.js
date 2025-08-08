@@ -31158,7 +31158,38 @@ console.log("==========================================")
 // @return {number}
 
 var soupServings = function(n) {
-    
+    if (n === 0) return 0.5;
+    // For large n the answer approaches 1 — cutoff commonly used is 4800.
+    if (n >= 4800) return 1.0;
+
+    // Convert to units of 25 mL
+    const units = Math.ceil(n / 25);
+
+    const memo = new Map();
+
+    function key(a, b) { return a + ',' + b; }
+
+    function dfs(a, b) {
+        if (a <= 0 && b <= 0) return 0.5;
+        if (a <= 0) return 1.0;
+        if (b <= 0) return 0.0;
+
+        const k = key(a, b);
+        if (memo.has(k)) return memo.get(k);
+
+        // operations in 25 mL units: (4,0),(3,1),(2,2),(1,3)
+        const res = 0.25 * (
+            dfs(a - 4, b) +
+            dfs(a - 3, b - 1) +
+            dfs(a - 2, b - 2) +
+            dfs(a - 1, b - 3)
+        );
+
+        memo.set(k, res);
+        return res;
+    }
+
+    return dfs(units, units);
 };
 
 console.log("==========================================")
