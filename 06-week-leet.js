@@ -31213,7 +31213,12 @@ Example 3:
 Input: n = 3
 Output: false
 
+@param {number} n
+@return {boolean}
 
+var isPowerOfTwo = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
