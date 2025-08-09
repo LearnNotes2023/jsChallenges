@@ -31217,7 +31217,8 @@ console.log("==========================================")
 // @return {boolean}
 
 var isPowerOfTwo = function(n) {
-    
+    if (n <= 0) return false;         // must be positive
+    return (n & (n - 1)) === 0;       // bitwise trick
 };
 
 console.log("==========================================")
