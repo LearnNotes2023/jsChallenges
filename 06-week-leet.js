@@ -31240,9 +31240,18 @@ console.log("==========================================")
 // @return {boolean}
 
 var reorderedPowerOf2 = function(n) {
-    
-};
+    // helper: sorted digit signature of a number
+    const sig = num => String(num).split('').sort().join('');
 
+    // precompute signatures for powers of two up to 2^30
+    const powSigs = new Set();
+    for (let i = 0; i <= 30; i++) {
+        const p = 1 << i; // 2^i
+        powSigs.add(sig(p));
+    }
+
+    return powSigs.has(sig(n));
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
