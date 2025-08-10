@@ -31236,6 +31236,12 @@ Example 2:
 Input: n = 10
 Output: false
 
+@param {number} n
+@return {boolean}
+
+var reorderedPowerOf2 = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
