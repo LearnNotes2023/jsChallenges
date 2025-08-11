@@ -31285,7 +31285,52 @@ console.log("==========================================")
 // @return {number[]}
 
 var productQueries = function(n, queries) {
-    
+  const MOD = 1000000007n; // BigInt
+
+  // Build powers (ascending) using BigInt
+  let bn = BigInt(n);
+  const powers = [];
+  let cur = 1n;
+  while (bn > 0n) {
+    if ((bn & 1n) === 1n) powers.push(cur);
+    bn >>= 1n;
+    cur <<= 1n;
+  }
+
+  // Prefix products modulo MOD (BigInt)
+  const prefix = [];
+  for (let i = 0; i < powers.length; i++) {
+    if (i === 0) prefix.push(powers[0] % MOD);
+    else prefix.push((prefix[i - 1] * powers[i]) % MOD);
+  }
+
+  // Fast modular exponentiation (BigInt)
+  function modPow(base, exp) {
+    let result = 1n;
+    let b = base % MOD;
+    let e = BigInt(exp);
+    while (e > 0n) {
+      if (e & 1n) result = (result * b) % MOD;
+      b = (b * b) % MOD;
+      e >>= 1n;
+    }
+    return result;
+  }
+
+  // Modular inverse using Fermat (MOD is prime)
+  function modInv(x) {
+    return modPow(x, MOD - 2n);
+  }
+
+  // Answer queries (work in BigInt, convert to Number)
+  const ans = [];
+  for (const [l, r] of queries) {
+    let res;
+    if (l === 0) res = prefix[r];
+    else res = (prefix[r] * modInv(prefix[l - 1])) % MOD;
+    ans.push(Number(res)); // safe: result < MOD
+  }
+  return ans;
 };
 
 console.log("==========================================")
