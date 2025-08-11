@@ -31280,7 +31280,13 @@ Explanation:
 For n = 2, powers = [2].
 The answer to the only query is powers[0] = 2. The answer modulo 109 + 7 is the same, so [2] is returned.
 
+@param {number} n
+@param {number[][]} queries
+@return {number[]}
 
+var productQueries = function(n, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
