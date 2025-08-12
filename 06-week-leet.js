@@ -31356,7 +31356,13 @@ Explanation: We can express n in the following ways:
 - n = 41 = 4.
 - n = 31 + 11 = 4.
  
+@param {number} n
+@param {number} x
+@return {number}
 
+var numberOfWays = function(n, x) {
+    
+};
 
 
 console.log("==========================================")
