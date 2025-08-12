@@ -31361,7 +31361,30 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfWays = function(n, x) {
-    
+    const MOD = 1e9 + 7;
+
+    // Precompute powers
+    const powers = [];
+    let i = 1;
+    while (true) {
+        const p = Math.pow(i, x);
+        if (p > n) break;
+        powers.push(p);
+        i++;
+    }
+
+    // dp[sum] = number of ways to make 'sum'
+    const dp = Array(n + 1).fill(0);
+    dp[0] = 1; // one way to make 0 (choose nothing)
+
+    // For each power, update dp (reverse to avoid reuse)
+    for (let p of powers) {
+        for (let sum = n; sum >= p; sum--) {
+            dp[sum] = (dp[sum] + dp[sum - p]) % MOD;
+        }
+    }
+
+    return dp[n];
 };
 
 
