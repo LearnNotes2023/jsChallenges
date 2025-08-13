@@ -31414,7 +31414,13 @@ console.log("==========================================")
 // @return {boolean}
 
 var isPowerOfThree = function(n) {
+    if (n < 1) return false; // powers of three are positive integers only
     
+    while (n % 3 === 0) {
+        n /= 3; // keep dividing by 3
+    }
+    
+    return n === 1; // if we end up at 1, it's a power of 3
 };
 
 console.log("==========================================")
