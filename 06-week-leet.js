@@ -31410,6 +31410,12 @@ Input: n = -1
 Output: false
 Explanation: There is no x where 3x = (-1).
 
+@param {number} n
+@return {boolean}
+
+var isPowerOfThree = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
