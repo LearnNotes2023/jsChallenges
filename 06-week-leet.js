@@ -31451,7 +31451,12 @@ Input: num = "42352338"
 Output: ""
 Explanation: No substring of length 3 consists of only one unique digit. Therefore, there are no good integers.
  
+@param {string} num
+@return {string}
 
+var largestGoodInteger = function(num) {
+    
+};
 
 
 console.log("==========================================")
