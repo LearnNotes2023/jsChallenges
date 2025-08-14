@@ -31455,9 +31455,17 @@ console.log("==========================================")
 // @return {string}
 
 var largestGoodInteger = function(num) {
+    let max = ""; // store largest good integer found
     
+    for (let i = 0; i <= num.length - 3; i++) {
+        let sub = num.substring(i, i + 3);
+        if (sub[0] === sub[1] && sub[1] === sub[2]) { // all digits same
+            if (sub > max) max = sub; // string comparison works here
+        }
+    }
+    
+    return max;
 };
-
 
 console.log("==========================================")
 // console.log("==========================================")
