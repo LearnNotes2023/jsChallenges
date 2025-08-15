@@ -31485,7 +31485,12 @@ Example 3:
 Input: n = 1
 Output: true
 
+@param {number} n
+@return {boolean}
 
+var isPowerOfFour = function(n) {
+    
+};
 
 
 console.log("==========================================")
