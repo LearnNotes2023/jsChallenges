@@ -31520,7 +31520,12 @@ Input: num = 9999
 Output: 9999
 Explanation: It is better not to apply any change.
 
+@param {number} num
+@return {number}
 
+var maximum69Number  = function(num) {
+    
+};
 
 
 console.log("==========================================")
