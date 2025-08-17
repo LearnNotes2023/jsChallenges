@@ -31566,7 +31566,14 @@ Example 3:
 Input: n = 21, k = 17, maxPts = 10
 Output: 0.73278
  
+@param {number} n
+@param {number} k
+@param {number} maxPts
+@return {number}
 
+var new21Game = function(n, k, maxPts) {
+    
+};
 
 
 console.log("==========================================")
