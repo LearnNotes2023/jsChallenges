@@ -31620,7 +31620,12 @@ Example 2:
 Input: cards = [1,2,1,2]
 Output: false
 
+@param {number[]} cards
+@return {boolean}
 
+var judgePoint24 = function(cards) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
