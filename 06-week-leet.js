@@ -31698,7 +31698,19 @@ console.log("==========================================")
 // @return {number}
 
 var zeroFilledSubarray = function(nums) {
-    
+    let count = 0;  // streak of consecutive zeros
+    let result = 0; // total subarrays
+
+    for (let num of nums) {
+        if (num === 0) {
+            count++;
+            result += count; // add subarrays ending here
+        } else {
+            count = 0; // reset if non-zero
+        }
+    }
+
+    return result;
 };
 
 
