@@ -31740,7 +31740,12 @@ Input: obj = [null, 0, 5, [0], [false, 16]]
 Output: [5, [], [16]]
 Explanation: obj[0], obj[1], obj[3][0], and obj[4][0] were falsy and removed.
  
+@param {Object|Array} obj
+@return {Object|Array}
 
+var compactObject = function(obj) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
