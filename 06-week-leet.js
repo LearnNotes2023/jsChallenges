@@ -31744,7 +31744,24 @@ console.log("==========================================")
 // @return {Object|Array}
 
 var compactObject = function(obj) {
-    
+    if (Array.isArray(obj)) {
+        // Process arrays: filter out falsy values, recursively compact
+        return obj
+            .map(compactObject)   // compact nested elements
+            .filter(Boolean);     // remove falsy values
+    } else if (obj !== null && typeof obj === "object") {
+        // Process objects: keep only truthy values, recursively compact
+        let res = {};
+        for (let key in obj) {
+            let val = compactObject(obj[key]);
+            if (Boolean(val)) {
+                res[key] = val;
+            }
+        }
+        return res;
+    }
+    // Base case: return value itself
+    return obj;
 };
 
 console.log("==========================================")
