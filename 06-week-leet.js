@@ -31794,7 +31794,12 @@ There are 2 rectangles of side 3x1.
 There is 1 rectangle of side 3x2. 
 Total number of rectangles = 8 + 5 + 2 + 4 + 2 + 2 + 1 = 24.
 
+@param {number[][]} mat
+@return {number}
 
+var numSubmat = function(mat) {
+    
+};
 
 
 console.log("==========================================")
