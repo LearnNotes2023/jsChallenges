@@ -31851,7 +31851,12 @@ Output: 1
 Explanation:
 The smallest rectangle has both height and width 1, so its area is 1 * 1 = 1.
 
- 
+@param {number[][]} grid
+@return {number}
+
+var minimumArea = function(grid) {
+    
+};
 
 
 
