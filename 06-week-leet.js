@@ -31855,7 +31855,30 @@ console.log("==========================================")
 // @return {number}
 
 var minimumArea = function(grid) {
-    
+    let rows = grid.length;
+    let cols = grid[0].length;
+
+    let minRow = rows, maxRow = -1;
+    let minCol = cols, maxCol = -1;
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            if (grid[r][c] === 1) {
+                minRow = Math.min(minRow, r);
+                maxRow = Math.max(maxRow, r);
+                minCol = Math.min(minCol, c);
+                maxCol = Math.max(maxCol, c);
+            }
+        }
+    }
+
+    // If no 1's in the grid, return 0 (not explicitly stated but safe)
+    if (maxRow === -1) return 0;
+
+    let height = maxRow - minRow + 1;
+    let width = maxCol - minCol + 1;
+
+    return height * width;
 };
 
 
