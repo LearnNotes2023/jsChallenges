@@ -31991,7 +31991,12 @@ Input: nums = [1,1,1]
 Output: 2
 Explanation: You must delete one element.
 
+@param {number[]} nums
+@return {number}
 
+var longestSubarray = function(nums) {
+    
+};
 
 
 console.log("==========================================")
