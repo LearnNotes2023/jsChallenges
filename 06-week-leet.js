@@ -32034,7 +32034,43 @@ console.log("==========================================")
 // @return {number[]}
 
 var findDiagonalOrder = function(mat) {
-    
+    if (!mat || mat.length === 0) return [];
+
+    let m = mat.length, n = mat[0].length;
+    let result = [];
+    let row = 0, col = 0;
+    let direction = 1; // 1 = up-right, -1 = down-left
+
+    while (result.length < m * n) {
+        result.push(mat[row][col]);
+
+        // Move in the current direction
+        if (direction === 1) { // up-right
+            if (col === n - 1) { // hit right boundary
+                row++;
+                direction = -1;
+            } else if (row === 0) { // hit top boundary
+                col++;
+                direction = -1;
+            } else {
+                row--;
+                col++;
+            }
+        } else { // direction === -1 (down-left)
+            if (row === m - 1) { // hit bottom boundary
+                col++;
+                direction = 1;
+            } else if (col === 0) { // hit left boundary
+                row++;
+                direction = 1;
+            } else {
+                row++;
+                col--;
+            }
+        }
+    }
+
+    return result;
 };
 
 
