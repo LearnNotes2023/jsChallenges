@@ -32030,7 +32030,12 @@ Example 2:
 Input: mat = [[1,2],[3,4]]
 Output: [1,2,3,4]
 
+@param {number[][]} mat
+@return {number[]}
 
+var findDiagonalOrder = function(mat) {
+    
+};
 
 
 console.log("==========================================")
