@@ -32097,7 +32097,12 @@ Input: dimensions = [[3,4],[4,3]]
 Output: 12
 Explanation: Length of diagonal is the same for both which is 5, so maximum area = 12.
 
+@param {number[][]} dimensions
+@return {number}
 
+var areaOfMaxDiagonal = function(dimensions) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
