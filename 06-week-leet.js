@@ -32101,7 +32101,22 @@ console.log("==========================================")
 // @return {number}
 
 var areaOfMaxDiagonal = function(dimensions) {
+    let maxDiagonalSq = 0;
+    let maxArea = 0;
     
+    for (let [l, w] of dimensions) {
+        let diagonalSq = l * l + w * w;
+        let area = l * w;
+        
+        if (diagonalSq > maxDiagonalSq) {
+            maxDiagonalSq = diagonalSq;
+            maxArea = area;
+        } else if (diagonalSq === maxDiagonalSq) {
+            maxArea = Math.max(maxArea, area);
+        }
+    }
+    
+    return maxArea;
 };
 
 console.log("==========================================")
