@@ -32161,7 +32161,12 @@ Output: 1
 Explanation:
 The longest V-shaped diagonal segment has a length of 1 and follows these coordinates: (0,0).
 
+@param {number[][]} grid
+@return {number}
 
+var lenOfVDiagonal = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
