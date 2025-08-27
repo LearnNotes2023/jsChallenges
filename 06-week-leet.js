@@ -32165,7 +32165,93 @@ console.log("==========================================")
 // @return {number}
 
 var lenOfVDiagonal = function(grid) {
-    
+  if (!grid || grid.length === 0) return 0;
+  const m = grid.length, n = grid[0].length;
+  // Clockwise diagonal directions: up-right, down-right, down-left, up-left
+  const DIRS = [[-1, 1], [1, 1], [1, -1], [-1, -1]];
+  const nextDigit = { 1: 2, 2: 0, 0: 2 };
+
+  // helpers to allocate 3D arrays: dir x m x n
+  const make3 = () => Array.from({ length: 4 }, () => Array.from({ length: m }, () => new Array(n).fill(0)));
+
+  const start = make3();      // start[d][i][j] = length starting at (i,j) going in dir d
+  const endFrom1 = make3();  // endFrom1[d][i][j] = length ending at (i,j) (moving in dir d) that started at a 1
+
+  // Compute start[d] (length starting at cell going forward in dir)
+  for (let d = 0; d < 4; d++) {
+    const [di, dj] = DIRS[d];
+    const iStart = di === 1 ? m - 1 : 0;
+    const iEnd = di === 1 ? -1 : m;
+    const iStep = di === 1 ? -1 : 1;
+    const jStart = dj === 1 ? n - 1 : 0;
+    const jEnd = dj === 1 ? -1 : n;
+    const jStep = dj === 1 ? -1 : 1;
+
+    for (let i = iStart; i !== iEnd; i += iStep) {
+      for (let j = jStart; j !== jEnd; j += jStep) {
+        start[d][i][j] = 1;
+        const ni = i + di, nj = j + dj;
+        if (ni >= 0 && ni < m && nj >= 0 && nj < n) {
+          if (grid[ni][nj] === nextDigit[grid[i][j]]) {
+            start[d][i][j] = 1 + start[d][ni][nj];
+          }
+        }
+      }
+    }
+  }
+
+  // Compute endFrom1[d] (lengths ending at cell that started at a 1)
+  for (let d = 0; d < 4; d++) {
+    const [di, dj] = DIRS[d];
+    // we need prev = (i - di, j - dj) computed before current:
+    const iStart = di === 1 ? 0 : m - 1;
+    const iEnd = di === 1 ? m : -1;
+    const iStep = di === 1 ? 1 : -1;
+    const jStart = dj === 1 ? 0 : n - 1;
+    const jEnd = dj === 1 ? n : -1;
+    const jStep = dj === 1 ? 1 : -1;
+
+    for (let i = iStart; i !== iEnd; i += iStep) {
+      for (let j = jStart; j !== jEnd; j += jStep) {
+        if (grid[i][j] === 1) {
+          endFrom1[d][i][j] = 1;
+        } else {
+          const pi = i - di, pj = j - dj;
+          if (pi >= 0 && pi < m && pj >= 0 && pj < n) {
+            // current must be successor of prev AND prev chain must have started from a 1
+            if (grid[i][j] === nextDigit[grid[pi][pj]] && endFrom1[d][pi][pj] > 0) {
+              endFrom1[d][i][j] = endFrom1[d][pi][pj] + 1;
+            } else {
+              endFrom1[d][i][j] = 0;
+            }
+          } else {
+            endFrom1[d][i][j] = 0;
+          }
+        }
+      }
+    }
+  }
+
+  // Combine: consider no-turn paths starting at a 1, and single clockwise-turn paths with turn at (i,j)
+  let ans = 0;
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === 1) {
+        for (let d = 0; d < 4; d++) {
+          ans = Math.max(ans, start[d][i][j]); // no-turn
+        }
+      }
+      for (let d = 0; d < 4; d++) {
+        const a = endFrom1[d][i][j];
+        const b = start[(d + 1) % 4][i][j];
+        if (a > 0 && b > 0) {
+          ans = Math.max(ans, a + b - 1);
+        }
+      }
+    }
+  }
+
+  return ans;
 };
 
 console.log("==========================================")
