@@ -32291,7 +32291,47 @@ console.log("==========================================")
 // @return {number[][]}
 
 var sortMatrix = function(grid) {
-    
+    const n = grid.length;
+    const diagonals = new Map();
+
+    // Step 1: Collect diagonals
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            const key = i - j;
+            if (!diagonals.has(key)) diagonals.set(key, []);
+            diagonals.get(key).push(grid[i][j]);
+        }
+    }
+
+    // Step 2: Sort each diagonal
+    for (let [key, arr] of diagonals.entries()) {
+        if (key >= 0) {
+            // bottom-left → non-increasing
+            arr.sort((a, b) => b - a);
+        } else {
+            // top-right → non-decreasing
+            arr.sort((a, b) => a - b);
+        }
+        diagonals.set(key, arr);
+    }
+
+    // Step 3: Place back into grid
+    const idxMap = new Map(); // track index for each diagonal
+    for (let key of diagonals.keys()) {
+        idxMap.set(key, 0);
+    }
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            const key = i - j;
+            const arr = diagonals.get(key);
+            const idx = idxMap.get(key);
+            grid[i][j] = arr[idx];
+            idxMap.set(key, idx + 1);
+        }
+    }
+
+    return grid;
 };
 
 console.log("==========================================")
