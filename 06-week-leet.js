@@ -32365,7 +32365,12 @@ console.log("==========================================")
 // @return {number}
 
 var flowerGame = function(n, m) {
+    let oddX = Math.ceil(n / 2);
+    let evenX = Math.floor(n / 2);
+    let oddY = Math.ceil(m / 2);
+    let evenY = Math.floor(m / 2);
     
+    return oddX * evenY + evenX * oddY;
 };
 
 console.log("==========================================")
