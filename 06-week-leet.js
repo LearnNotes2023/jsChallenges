@@ -32360,6 +32360,13 @@ Input: n = 1, m = 1
 Output: 0
 Explanation: No pairs satisfy the conditions described in the statement.
 
+@param {number} n
+@param {number} m
+@return {number}
+
+var flowerGame = function(n, m) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
