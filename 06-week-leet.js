@@ -32417,9 +32417,33 @@ console.log("==========================================")
 // @return {boolean}
 
 var isValidSudoku = function(board) {
-    
-};
+    // Use sets to track seen numbers
+    let rows = Array.from({ length: 9 }, () => new Set());
+    let cols = Array.from({ length: 9 }, () => new Set());
+    let boxes = Array.from({ length: 9 }, () => new Set());
 
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            let val = board[r][c];
+
+            if (val === ".") continue; // skip empty cells
+
+            // box index (0 - 8)
+            let boxIndex = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+
+            // Check if number already exists in row, column, or box
+            if (rows[r].has(val) || cols[c].has(val) || boxes[boxIndex].has(val)) {
+                return false;
+            }
+
+            // Mark as seen
+            rows[r].add(val);
+            cols[c].add(val);
+            boxes[boxIndex].add(val);
+        }
+    }
+    return true;
+};
 
 
 console.log("==========================================")
