@@ -32413,7 +32413,12 @@ Output: false
 Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. 
 Since there are two 8's in the top left 3x3 sub-box, it is invalid.
  
+@param {character[][]} board
+@return {boolean}
 
+var isValidSudoku = function(board) {
+    
+};
 
 
 
