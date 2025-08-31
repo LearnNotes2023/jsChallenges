@@ -32480,7 +32480,12 @@ Output: [
     ["3","4","5","2","8","6","1","7","9"]]
 Explanation: The input board is shown above and the only valid solution is shown below:
 
+@param {character[][]} board
+@return {void} Do not return anything, modify board in-place instead.
 
+var solveSudoku = function(board) {
+    
+};
 
 
 console.log("==========================================")
