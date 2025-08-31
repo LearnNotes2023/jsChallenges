@@ -32484,7 +32484,40 @@ console.log("==========================================")
 // @return {void} Do not return anything, modify board in-place instead.
 
 var solveSudoku = function(board) {
-    
+    const isValid = (row, col, char) => {
+        for (let i = 0; i < 9; i++) {
+            // Check row
+            if (board[row][i] === char) return false;
+            // Check column
+            if (board[i][col] === char) return false;
+            // Check 3x3 subgrid
+            const subRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+            const subCol = 3 * Math.floor(col / 3) + i % 3;
+            if (board[subRow][subCol] === char) return false;
+        }
+        return true;
+    };
+
+    const backtrack = () => {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (board[row][col] === ".") {
+                    for (let num = 1; num <= 9; num++) {
+                        let char = num.toString();
+                        if (isValid(row, col, char)) {
+                            board[row][col] = char;
+                            if (backtrack()) return true;
+                            board[row][col] = "."; // backtrack
+                        }
+                    }
+                    return false; // no valid number found
+                }
+            }
+        }
+        return true; // solved
+    };
+
+    backtrack();
 };
 
 
