@@ -32587,42 +32587,57 @@ console.log("==========================================")
 // emitter.emit("firstEvent", [5]); // [7]
 
 class EventEmitter {
+    constructor() {
+        this.events = new Map(); // { eventName: [callbacks] }
+    }
+
+    // @param {string} eventName
+    // @param {Function} callback
+    // @return {Object}
     
-    /**
-     * @param {string} eventName
-     * @param {Function} callback
-     * @return {Object}
-     */
     subscribe(eventName, callback) {
-        
+        if (!this.events.has(eventName)) {
+            this.events.set(eventName, []);
+        }
+
+        const listeners = this.events.get(eventName);
+        listeners.push(callback);
+
         return {
             unsubscribe: () => {
-                
+                const idx = listeners.indexOf(callback);
+                if (idx !== -1) {
+                    listeners.splice(idx, 1);
+                }
+                return undefined;
             }
         };
     }
+
+    // @param {string} eventName
+    // @param {Array} args
+    // @return {Array}
     
-    /**
-     * @param {string} eventName
-     * @param {Array} args
-     * @return {Array}
-     */
     emit(eventName, args = []) {
+        if (!this.events.has(eventName)) return [];
         
+        const listeners = this.events.get(eventName);
+        return listeners.map(fn => fn(...args));
     }
 }
 
-/**
- * const emitter = new EventEmitter();
- *
- * // Subscribe to the onClick event with onClickCallback
- * function onClickCallback() { return 99 }
- * const sub = emitter.subscribe('onClick', onClickCallback);
- *
- * emitter.emit('onClick'); // [99]
- * sub.unsubscribe(); // undefined
- * emitter.emit('onClick'); // []
- */
+// Example usage:
+// const emitter = new EventEmitter();
+
+// function cb1() { return 5; }
+// const sub1 = emitter.subscribe("event", cb1);
+// function cb2() { return 6; }
+// const sub2 = emitter.subscribe("event", cb2);
+
+// console.log(emitter.emit("event")); // [5, 6]
+// sub1.unsubscribe();
+// console.log(emitter.emit("event")); // [6]
+
 
 console.log("==========================================")
 // console.log("==========================================")
