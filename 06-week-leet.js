@@ -32673,7 +32673,12 @@ and there are no other points on the line they form. Note that it is a valid sta
 The middle one is the pair (points[1], points[2]), it is a valid pair same as the left one.
 The right one is the pair (points[1], points[0]), it is not a valid pair as points[2] is on the border of the rectangle.
 
+@param {number[][]} points
+@return {number}
 
+var numberOfPairs = function(points) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
