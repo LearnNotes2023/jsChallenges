@@ -32677,7 +32677,31 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfPairs = function(points) {
+    let n = points.length;
+    let count = 0;
     
+    for (let i = 0; i < n; i++) {
+        let [x1, y1] = points[i];
+        for (let j = 0; j < n; j++) {
+            if (i === j) continue;
+            let [x2, y2] = points[j];
+            
+            // Condition: A upper-left of B
+            if (x1 <= x2 && y1 >= y2 && (x1 < x2 || y1 > y2)) {
+                let valid = true;
+                for (let k = 0; k < n; k++) {
+                    if (k === i || k === j) continue;
+                    let [px, py] = points[k];
+                    if (x1 <= px && px <= x2 && y2 <= py && py <= y1) {
+                        valid = false;
+                        break;
+                    }
+                }
+                if (valid) count++;
+            }
+        }
+    }
+    return count;
 };
 
 console.log("==========================================")
