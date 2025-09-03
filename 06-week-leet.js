@@ -32745,7 +32745,12 @@ Explanation: There are two ways to place Alice and Bob such that Alice will not 
 You cannot place Alice at (1, 3) and Bob at (3, 1) because the person at (1, 1) will be on the fence.
 Note that it does not matter if the fence encloses any area, the first and second fences in the image are valid.
 
+@param {number[][]} points
+@return {number}
 
+var numberOfPairs = function(points) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
