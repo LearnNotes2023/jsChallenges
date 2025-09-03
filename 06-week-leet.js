@@ -32748,9 +32748,32 @@ console.log("==========================================")
 // @param {number[][]} points
 // @return {number}
 
-var numberOfPairs = function(points) {
-    
-};
+function numberOfPairs(points) {
+    // Sort the points array. First by x-coordinate and then by y-coordinate in descending order if x is the same
+    points.sort((pointA, pointB) => pointA[0] === pointB[0] ? pointB[1] - pointA[1] : pointA[0] - pointB[0]);
+
+    const totalPoints = points.length; // Total number of points
+    let pairCount = 0; // Initialize pairs count
+
+    // Iterate over each point
+    for (let i = 0; i < totalPoints; ++i) {
+        const y1 = points[i][1]; // Get the y-coordinate of the current point
+        let maxY = -Infinity; // Initialize the max Y seen so far for the pairs
+
+        // Iterate over the points after the current one to find pairs
+        for (let j = i + 1; j < totalPoints; ++j) {
+            const y2 = points[j][1]; // Get the y-coordinate of the next point
+
+            // Check if the current y-coordinate is within the required range and update maxY
+            if (maxY < y2 && y2 <= y1) {
+                maxY = y2;
+                ++pairCount; // Increment the count of valid pairs
+            }
+        }
+    }
+
+    return pairCount; // Return the total number of valid pairs found
+}
 
 console.log("==========================================")
 // console.log("==========================================")
