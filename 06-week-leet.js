@@ -32814,7 +32814,14 @@ Person 1 is at position 1 and can reach Person 3 (at position 3) in 2 steps.
 Person 2 is at position 5 and can reach Person 3 in 2 steps.
 Since both Person 1 and Person 2 reach Person 3 at the same time, the output is 0.
 
+@param {number} x
+@param {number} y
+@param {number} z
+@return {number}
 
+var findClosest = function(x, y, z) {
+    
+};
 
 
 console.log("==========================================")
