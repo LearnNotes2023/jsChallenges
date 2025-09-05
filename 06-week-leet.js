@@ -32851,7 +32851,13 @@ Input: num1 = 5, num2 = 7
 Output: -1
 Explanation: It can be proven, that it is impossible to make 5 equal to 0 with the given operation.
 
+@param {number} num1
+@param {number} num2
+@return {number}
 
+var makeTheIntegerZero = function(num1, num2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
