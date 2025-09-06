@@ -32911,7 +32911,28 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(queries) {
-    
+    function stepsSum(n) {
+        if (n <= 0) return 0;
+        let total = 0;
+        let k = 0;
+        let base = 1; // 4^k
+        while (base <= n) {
+            let next = base * 4 - 1;
+            let high = Math.min(n, next);
+            let count = high - base + 1;
+            total += count * (k + 1);
+            base *= 4;
+            k++;
+        }
+        return total;
+    }
+
+    let result = 0;
+    for (let [l, r] of queries) {
+        let sumSteps = stepsSum(r) - stepsSum(l - 1);
+        result += Math.ceil(sumSteps / 2);
+    }
+    return result;
 };
 
 console.log("==========================================")
