@@ -32907,6 +32907,13 @@ In the fourth operation, select nums[3] and nums[4]. The array becomes [0, 0, 0,
 The minimum number of operations required is 4.
 The output is 4.
 
+@param {number[][]} queries
+@return {number}
+
+var minOperations = function(queries) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
