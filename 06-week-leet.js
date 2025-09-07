@@ -32954,7 +32954,12 @@ Example 3:
 Input: n = 1
 Output: [0]
 
+@param {number} n
+@return {number[]}
 
+var sumZero = function(n) {
+    
+};
 
 
 
