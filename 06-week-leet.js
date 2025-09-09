@@ -33047,7 +33047,28 @@ console.log("==========================================")
 // @return {number}
 
 var peopleAwareOfSecret = function(n, delay, forget) {
-    
+    const MOD = 1e9 + 7;
+    let dp = new Array(n + 1).fill(0);
+    dp[1] = 1;
+
+    for (let day = 1; day <= n; day++) {
+        let shareStart = day + delay;
+        let forgetDay = day + forget;
+        if (dp[day] > 0) {
+            for (let j = shareStart; j < forgetDay && j <= n; j++) {
+                dp[j] = (dp[j] + dp[day]) % MOD;
+            }
+        }
+    }
+
+    // Sum people who still remember at day n
+    let ans = 0;
+    for (let day = n - forget + 1; day <= n; day++) {
+        if (day > 0) {
+            ans = (ans + dp[day]) % MOD;
+        }
+    }
+    return ans;
 };
 
 
