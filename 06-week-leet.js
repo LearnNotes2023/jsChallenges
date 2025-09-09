@@ -33041,7 +33041,14 @@ Day 2: A shares the secret with B. (2 people)
 Day 3: A and B share the secret with 2 new people, C and D. (4 people)
 Day 4: A forgets the secret. B, C, and D share the secret with 3 new people. (6 people)
  
+@param {number} n
+@param {number} delay
+@param {number} forget
+@return {number}
 
+var peopleAwareOfSecret = function(n, delay, forget) {
+    
+};
 
 
 console.log("==========================================")
