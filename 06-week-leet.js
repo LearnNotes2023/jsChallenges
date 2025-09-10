@@ -33102,7 +33102,45 @@ console.log("==========================================")
 // @return {number}
 
 var minimumTeachings = function(n, languages, friendships) {
+    // Step 1: Find problematic users
+    let problemUsers = new Set();
     
+    for (let [u, v] of friendships) {
+        let setU = new Set(languages[u - 1]);  // users are 1-indexed
+        let setV = new Set(languages[v - 1]);
+        
+        // check if they share a language
+        let canCommunicate = false;
+        for (let lang of setU) {
+            if (setV.has(lang)) {
+                canCommunicate = true;
+                break;
+            }
+        }
+        
+        if (!canCommunicate) {
+            problemUsers.add(u);
+            problemUsers.add(v);
+        }
+    }
+    
+    // If no problematic friendships, no one to teach
+    if (problemUsers.size === 0) return 0;
+    
+    // Step 2: For each language, count how many problemUsers already know it
+    let maxShared = 0;
+    for (let lang = 1; lang <= n; lang++) {
+        let count = 0;
+        for (let user of problemUsers) {
+            if (languages[user - 1].includes(lang)) {
+                count++;
+            }
+        }
+        maxShared = Math.max(maxShared, count);
+    }
+    
+    // Step 3: Answer = problemUsers.size - maxShared
+    return problemUsers.size - maxShared;
 };
 
 console.log("==========================================")
