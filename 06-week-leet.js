@@ -33076,10 +33076,6 @@ console.log("==========================================")
 
 1733. Minimum Number of People to Teach
 Medium
-Topics
-premium lock icon
-Companies
-Hint
 On a social network consisting of m users and some friendships between users, 
 two users can communicate with each other if they know a common language.
 You are given an integer n, an array languages, and an array friendships where:
@@ -33100,7 +33096,14 @@ Input: n = 3, languages = [[2],[1,3],[1,2],[3]], friendships = [[1,4],[1,2],[3,4
 Output: 2
 Explanation: Teach the third language to users 1 and 3, yielding two users to teach.
 
+@param {number} n
+@param {number[][]} languages
+@param {number[][]} friendships
+@return {number}
 
+var minimumTeachings = function(n, languages, friendships) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
