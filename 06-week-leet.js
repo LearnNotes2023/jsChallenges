@@ -33168,7 +33168,12 @@ Input: s = "lYmpH"
 Output: "lYmpH"
 Explanation: There are no vowels in s (all characters in s are consonants), so we return "lYmpH".
  
+@param {string} s
+@return {string}
 
+var sortVowels = function(s) {
+    
+};
 
 
 console.log("==========================================")
