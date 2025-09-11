@@ -33172,7 +33172,29 @@ console.log("==========================================")
 // @return {string}
 
 var sortVowels = function(s) {
+    const vowels = new Set(['a','e','i','o','u','A','E','I','O','U']);
     
+    // collect vowels
+    let vowelChars = [];
+    for (let ch of s) {
+        if (vowels.has(ch)) vowelChars.push(ch);
+    }
+    
+    // sort by ASCII
+    vowelChars.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0));
+    
+    // rebuild string
+    let result = [];
+    let idx = 0; // pointer for sorted vowels
+    for (let ch of s) {
+        if (vowels.has(ch)) {
+            result.push(vowelChars[idx++]);
+        } else {
+            result.push(ch);
+        }
+    }
+    
+    return result.join('');
 };
 
 
