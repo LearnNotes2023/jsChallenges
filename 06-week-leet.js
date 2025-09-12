@@ -33220,7 +33220,12 @@ Bob plays second, he can delete the underlined substring in s = "der" which cont
 Alice plays third, she can delete the whole string s = "er" which contains 1 vowel.
 Bob plays fourth, since the string is empty, there is no valid play for Bob. So Alice wins the game.
 
+@param {string} s
+@return {boolean}
 
+var doesAliceWin = function(s) {
+    
+};
 
 
 console.log("==========================================")
