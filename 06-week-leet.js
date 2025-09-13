@@ -33260,6 +33260,12 @@ The vowels are: 'a' (frequency 3), 'e' ( frequency 2), 'i' (frequency 2). The ma
 There are no consonants in s. Hence, maximum consonant frequency = 0.
 The output is 3 + 0 = 3.
 
+@param {string} s
+@return {number}
+
+var maxFreqSum = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
