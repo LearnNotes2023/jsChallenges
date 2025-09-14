@@ -33322,7 +33322,52 @@ console.log("==========================================")
 // @return {string[]}
 
 var spellchecker = function(wordlist, queries) {
+    const vowels = new Set(['a','e','i','o','u']);
     
+    // Helper: replace vowels with "*"
+    const devowel = (word) => {
+        return word.toLowerCase().replace(/[aeiou]/g, '*');
+    };
+    
+    const exactWords = new Set(wordlist);
+    const caseInsensitive = {};
+    const vowelInsensitive = {};
+    
+    for (let word of wordlist) {
+        let lower = word.toLowerCase();
+        let dev = devowel(lower);
+        
+        // Case insensitive: store first occurrence
+        if (!(lower in caseInsensitive)) {
+            caseInsensitive[lower] = word;
+        }
+        
+        // Vowel insensitive: store first occurrence
+        if (!(dev in vowelInsensitive)) {
+            vowelInsensitive[dev] = word;
+        }
+    }
+    
+    const results = [];
+    
+    for (let query of queries) {
+        if (exactWords.has(query)) {
+            results.push(query);
+        } else {
+            let lower = query.toLowerCase();
+            let dev = devowel(lower);
+            
+            if (lower in caseInsensitive) {
+                results.push(caseInsensitive[lower]);
+            } else if (dev in vowelInsensitive) {
+                results.push(vowelInsensitive[dev]);
+            } else {
+                results.push("");
+            }
+        }
+    }
+    
+    return results;
 };
 
 
