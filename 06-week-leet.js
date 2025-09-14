@@ -33317,7 +33317,13 @@ Example 2:
 Input: wordlist = ["yellow"], queries = ["YellOw"]
 Output: ["yellow"]
 
+@param {string[]} wordlist
+@param {string[]} queries
+@return {string[]}
 
+var spellchecker = function(wordlist, queries) {
+    
+};
 
 
 console.log("==========================================")
