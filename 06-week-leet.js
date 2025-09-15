@@ -33395,11 +33395,13 @@ Input: text = "leet code", brokenLetters = "e"
 Output: 0
 Explanation: We cannot type either word because the 'e' key is broken.
 
+@param {string} text
+@param {string} brokenLetters
+@return {number}
 
-
-
-
-
+var canBeTypedWords = function(text, brokenLetters) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
