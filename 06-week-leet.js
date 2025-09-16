@@ -33458,7 +33458,27 @@ console.log("==========================================")
 // @return {number[]}
 
 var replaceNonCoprimes = function(nums) {
-    
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+    const lcm = (a, b) => (a / gcd(a, b)) * b;
+
+    const stack = [];
+
+    for (let num of nums) {
+        let curr = num;
+
+        // merge while stack top is non-coprime with current
+        while (stack.length > 0) {
+            const top = stack[stack.length - 1];
+            const g = gcd(top, curr);
+            if (g === 1) break; // coprime, stop
+            stack.pop();
+            curr = lcm(top, curr); // replace with LCM
+        }
+
+        stack.push(curr);
+    }
+
+    return stack;
 };
 
 console.log("==========================================")
