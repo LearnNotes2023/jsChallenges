@@ -33454,7 +33454,12 @@ There are no more adjacent non-coprime numbers in nums.
 Thus, the final modified array is [2,1,1,3].
 Note that there are other ways to obtain the same resultant array.
 
+@param {number[]} nums
+@return {number[]}
 
+var replaceNonCoprimes = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
