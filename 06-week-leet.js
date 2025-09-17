@@ -33521,8 +33521,99 @@ foodRatings.highestRated("japanese"); // return "ramen"
                                       // Both "sushi" and "ramen" have a rating of 16.
                                       // However, "ramen" is lexicographically smaller than "sushi".
 
+/**
+ * @param {string[]} foods
+ * @param {string[]} cuisines
+ * @param {number[]} ratings
+ */
+var FoodRatings = function(foods, cuisines, ratings) {
+    
+};
 
+/** 
+ * @param {string} food 
+ * @param {number} newRating
+ * @return {void}
+ */
+FoodRatings.prototype.changeRating = function(food, newRating) {
+    
+};
 
+/** 
+ * @param {string} cuisine
+ * @return {string}
+ */
+FoodRatings.prototype.highestRated = function(cuisine) {
+    
+};
+
+/** 
+ * Your FoodRatings object will be instantiated and called as such:
+ * var obj = new FoodRatings(foods, cuisines, ratings)
+ * obj.changeRating(food,newRating)
+ * var param_2 = obj.highestRated(cuisine)
+ */
+
+class FoodRatings {
+    /**
+     * @param {string[]} foods
+     * @param {string[]} cuisines
+     * @param {number[]} ratings
+     */
+    constructor(foods, cuisines, ratings) {
+        this.foodToData = new Map(); // food -> {cuisine, rating}
+        this.cuisineToHeap = new Map(); // cuisine -> MaxHeap [ -rating, food ]
+        
+        for (let i = 0; i < foods.length; i++) {
+            let food = foods[i];
+            let cuisine = cuisines[i];
+            let rating = ratings[i];
+            
+            this.foodToData.set(food, { cuisine, rating });
+            
+            if (!this.cuisineToHeap.has(cuisine)) {
+                this.cuisineToHeap.set(cuisine, new MinPriorityQueue({ 
+                    compare: (a, b) => {
+                        if (a[0] !== b[0]) return a[0] - b[0]; // higher rating first
+                        return a[1].localeCompare(b[1]); // lexicographically smaller first
+                    }
+                }));
+            }
+            
+            this.cuisineToHeap.get(cuisine).enqueue([-rating, food]);
+        }
+    }
+
+    /** 
+     * @param {string} food 
+     * @param {number} newRating
+     * @return {void}
+     */
+    changeRating(food, newRating) {
+        let { cuisine } = this.foodToData.get(food);
+        this.foodToData.set(food, { cuisine, rating: newRating });
+        this.cuisineToHeap.get(cuisine).enqueue([-newRating, food]);
+    }
+
+    /** 
+     * @param {string} cuisine
+     * @return {string}
+     */
+    highestRated(cuisine) {
+        let heap = this.cuisineToHeap.get(cuisine);
+        
+        while (heap.size()) {
+            let [negRating, food] = heap.front();
+            let { rating } = this.foodToData.get(food);
+            
+            if (-negRating === rating) {
+                return food;
+            }
+            heap.dequeue(); // discard outdated entry
+        }
+        return null;
+    }
+}
 
 
 console.log("==========================================")
