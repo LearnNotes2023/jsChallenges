@@ -33590,44 +33590,44 @@ class FoodRatings {
 
 console.log("==========================================")
 
-3408. Design Task Manager
-Medium
-There is a task management system that allows users to manage their tasks, each associated with a priority. 
-The system should efficiently handle adding, modifying, executing, and removing tasks.
-Implement the TaskManager class:
-TaskManager(vector<vector<int>>& tasks) initializes the task manager with a list of user-task-priority triples. 
-Each element in the input list is of the form [userId, taskId, priority], which adds a task to the specified user with the given priority.
-void add(int userId, int taskId, int priority) adds a task with the specified taskId and priority to the user with userId. 
-It is guaranteed that taskId does not exist in the system.
-void edit(int taskId, int newPriority) updates the priority of the existing taskId to newPriority. 
-It is guaranteed that taskId exists in the system.
-void rmv(int taskId) removes the task identified by taskId from the system.
-It is guaranteed that taskId exists in the system.
-int execTop() executes the task with the highest priority across all users. 
-If there are multiple tasks with the same highest priority, execute the one with the highest taskId. 
-After executing, the taskId is removed from the system. 
-Return the userId associated with the executed task. 
-If no tasks are available, return -1.
-Note that a user may be assigned multiple tasks.
+// 3408. Design Task Manager
+// Medium
+// There is a task management system that allows users to manage their tasks, each associated with a priority. 
+// The system should efficiently handle adding, modifying, executing, and removing tasks.
+// Implement the TaskManager class:
+// TaskManager(vector<vector<int>>& tasks) initializes the task manager with a list of user-task-priority triples. 
+// Each element in the input list is of the form [userId, taskId, priority], which adds a task to the specified user with the given priority.
+// void add(int userId, int taskId, int priority) adds a task with the specified taskId and priority to the user with userId. 
+// It is guaranteed that taskId does not exist in the system.
+// void edit(int taskId, int newPriority) updates the priority of the existing taskId to newPriority. 
+// It is guaranteed that taskId exists in the system.
+// void rmv(int taskId) removes the task identified by taskId from the system.
+// It is guaranteed that taskId exists in the system.
+// int execTop() executes the task with the highest priority across all users. 
+// If there are multiple tasks with the same highest priority, execute the one with the highest taskId. 
+// After executing, the taskId is removed from the system. 
+// Return the userId associated with the executed task. 
+// If no tasks are available, return -1.
+// Note that a user may be assigned multiple tasks.
 
-Example 1:
-Input: ["TaskManager", "add", "edit", "execTop", "rmv", "add", "execTop"]
-[[[[1, 101, 10], [2, 102, 20], [3, 103, 15]]], [4, 104, 5], [102, 8], [], [101], [5, 105, 15], []]
-Output:n[null, null, null, 3, null, null, 5]
-Explanation
-TaskManager taskManager = new TaskManager([[1, 101, 10], [2, 102, 20], [3, 103, 15]]); 
-// Initializes with three tasks for Users 1, 2, and 3.
-taskManager.add(4, 104, 5); 
-// Adds task 104 with priority 5 for User 4.
-taskManager.edit(102, 8); 
-// Updates priority of task 102 to 8.
-taskManager.execTop(); 
-// return 3. Executes task 103 for User 3.
-taskManager.rmv(101); 
-// Removes task 101 from the system.
-taskManager.add(5, 105, 15); // Adds task 105 with priority 15 for User 5.
-taskManager.execTop(); 
-// return 5. Executes task 105 for User 5.
+// Example 1:
+// Input: ["TaskManager", "add", "edit", "execTop", "rmv", "add", "execTop"]
+// [[[[1, 101, 10], [2, 102, 20], [3, 103, 15]]], [4, 104, 5], [102, 8], [], [101], [5, 105, 15], []]
+// Output:n[null, null, null, 3, null, null, 5]
+// Explanation
+// TaskManager taskManager = new TaskManager([[1, 101, 10], [2, 102, 20], [3, 103, 15]]); 
+// // Initializes with three tasks for Users 1, 2, and 3.
+// taskManager.add(4, 104, 5); 
+// // Adds task 104 with priority 5 for User 4.
+// taskManager.edit(102, 8); 
+// // Updates priority of task 102 to 8.
+// taskManager.execTop(); 
+// // return 3. Executes task 103 for User 3.
+// taskManager.rmv(101); 
+// // Removes task 101 from the system.
+// taskManager.add(5, 105, 15); // Adds task 105 with priority 15 for User 5.
+// taskManager.execTop(); 
+// // return 5. Executes task 105 for User 5.
 
 // @param {number[][]} tasks
 
@@ -33672,7 +33672,89 @@ TaskManager.prototype.execTop = function() {
 // obj.rmv(taskId)
 // var param_4 = obj.execTop()
 
+class TaskManager {
+    constructor(tasks) {
+        this.heap = []; // max-heap: [priority, taskId, userId]
+        this.taskMap = new Map(); // taskId -> {userId, priority}
 
+        for (let [userId, taskId, priority] of tasks) {
+            this.add(userId, taskId, priority);
+        }
+    }
+
+    add(userId, taskId, priority) {
+        this.taskMap.set(taskId, { userId, priority });
+        this._pushHeap(priority, taskId, userId);
+    }
+
+    edit(taskId, newPriority) {
+        if (!this.taskMap.has(taskId)) return;
+        let { userId } = this.taskMap.get(taskId);
+        this.taskMap.set(taskId, { userId, priority: newPriority });
+        this._pushHeap(newPriority, taskId, userId);
+    }
+
+    rmv(taskId) {
+        this.taskMap.delete(taskId); // Lazy removal (heap cleanup on execTop)
+    }
+
+    execTop() {
+        while (this.heap.length > 0) {
+            let [negPriority, negTaskId, taskId] = this._popHeap();
+            if (!this.taskMap.has(taskId)) continue;
+
+            let { userId, priority } = this.taskMap.get(taskId);
+            if (-negPriority !== priority) continue; // outdated entry
+
+            this.taskMap.delete(taskId);
+            return userId;
+        }
+        return -1;
+    }
+
+    // ---- Heap Helpers ----
+    _pushHeap(priority, taskId, userId) {
+        this.heap.push([-priority, -taskId, taskId, userId]);
+        this._heapifyUp(this.heap.length - 1);
+    }
+
+    _popHeap() {
+        if (this.heap.length === 1) return this.heap.pop();
+        const top = this.heap[0];
+        this.heap[0] = this.heap.pop();
+        this._heapifyDown(0);
+        return top;
+    }
+
+    _heapifyUp(idx) {
+        while (idx > 0) {
+            let parent = Math.floor((idx - 1) / 2);
+            if (this._compare(this.heap[idx], this.heap[parent]) < 0) {
+                [this.heap[idx], this.heap[parent]] = [this.heap[parent], this.heap[idx]];
+                idx = parent;
+            } else break;
+        }
+    }
+
+    _heapifyDown(idx) {
+        let n = this.heap.length;
+        while (true) {
+            let left = idx * 2 + 1, right = idx * 2 + 2, largest = idx;
+            if (left < n && this._compare(this.heap[left], this.heap[largest]) < 0) largest = left;
+            if (right < n && this._compare(this.heap[right], this.heap[largest]) < 0) largest = right;
+            if (largest !== idx) {
+                [this.heap[idx], this.heap[largest]] = [this.heap[largest], this.heap[idx]];
+                idx = largest;
+            } else break;
+        }
+    }
+
+    _compare(a, b) {
+        // Min-heap based on [-priority, -taskId]
+        if (a[0] !== b[0]) return a[0] - b[0];
+        return a[1] - b[1];
+    }
+}
 
 console.log("==========================================")
 // console.log("==========================================")
