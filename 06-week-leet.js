@@ -33628,51 +33628,13 @@ console.log("==========================================")
 // taskManager.add(5, 105, 15); // Adds task 105 with priority 15 for User 5.
 // taskManager.execTop(); 
 // // return 5. Executes task 105 for User 5.
-
-// @param {number[][]} tasks
-
-var TaskManager = function(tasks) {
-    
-};
-
-// @param {number} userId 
-// @param {number} taskId 
-// @param {number} priority
-// @return {void}
-
-TaskManager.prototype.add = function(userId, taskId, priority) {
-    
-};
-
-// @param {number} taskId 
-// @param {number} newPriority
-// @return {void}
-
-TaskManager.prototype.edit = function(taskId, newPriority) {
-    
-};
-
-// @param {number} taskId
-// @return {void}
-
-TaskManager.prototype.rmv = function(taskId) {
-    
-};
-
-// @return {number}
-
-TaskManager.prototype.execTop = function() {
-    
-};
-
-// Your TaskManager object will be instantiated and called as such:
-// var obj = new TaskManager(tasks)
-// obj.add(userId,taskId,priority)
-// obj.edit(taskId,newPriority)
-// obj.rmv(taskId)
-// var param_4 = obj.execTop()
-
 class TaskManager {
+
+    // @param {number} userId 
+    // @param {number} taskId 
+    // @param {number} priority
+    // @return {void}
+
     constructor(tasks) {
         this.heap = []; // max-heap: [priority, taskId, userId]
         this.taskMap = new Map(); // taskId -> {userId, priority}
