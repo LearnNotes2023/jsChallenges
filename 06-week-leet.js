@@ -33752,45 +33752,71 @@ console.log("==========================================")
 // spreadsheet.resetCell("A1"); // resets A1 to 0
 // spreadsheet.getValue("=A1+B2"); // returns 15 (0+15)
  
-/**
- * @param {number} rows
- */
+// @param {number} rows
 var Spreadsheet = function(rows) {
-    
+    // store values as a 2D array (rows x 26 cols)
+    this.rows = rows;
+    this.cols = 26; // 'A' to 'Z'
+    this.grid = Array.from({ length: rows }, () => Array(this.cols).fill(0));
 };
 
-/** 
- * @param {string} cell 
- * @param {number} value
- * @return {void}
- */
+// Helper: convert "A1" -> [row, col]
+
+Spreadsheet.prototype.parseCell = function(cell) {
+    let col = cell.charCodeAt(0) - 'A'.charCodeAt(0); // 'A' -> 0, 'B' -> 1, ...
+    let row = parseInt(cell.slice(1), 10) - 1; // 1-indexed rows
+    return [row, col];
+};
+
+// @param {string} cell 
+// @param {number} value
+// @return {void}
+
 Spreadsheet.prototype.setCell = function(cell, value) {
-    
+    let [r, c] = this.parseCell(cell);
+    if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+        this.grid[r][c] = value;
+    }
 };
 
-/** 
- * @param {string} cell
- * @return {void}
- */
+// @param {string} cell
+// @return {void}
+
 Spreadsheet.prototype.resetCell = function(cell) {
-    
+    let [r, c] = this.parseCell(cell);
+    if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+        this.grid[r][c] = 0;
+    }
 };
 
-/** 
- * @param {string} formula
- * @return {number}
- */
+// @param {string} formula
+// @return {number}
+
 Spreadsheet.prototype.getValue = function(formula) {
-    
+    // remove "="
+    formula = formula.slice(1);
+
+    // split into operands
+    let parts = formula.split("+");
+    let sum = 0;
+
+    for (let part of parts) {
+        if (/^[A-Z]\d+$/.test(part)) { 
+            // It's a cell reference
+            let [r, c] = this.parseCell(part);
+            if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+                sum += this.grid[r][c];
+            } else {
+                sum += 0; // out-of-bound = 0
+            }
+        } else {
+            // It's a number
+            sum += parseInt(part, 10);
+        }
+    }
+    return sum;
 };
 
-/** 
- * Your Spreadsheet object will be instantiated and called as such:
- * var obj = new Spreadsheet(rows)
- * obj.setCell(cell,value)
- * obj.resetCell(cell)
- * var param_3 = obj.getValue(formula)
- */
 
 console.log("==========================================")
 // console.log("==========================================")
