@@ -33875,7 +33875,10 @@ router.forwardPacket(); // There are no packets left, return [].
  * @param {number} memoryLimit
  */
 var Router = function(memoryLimit) {
-    
+    this.memoryLimit = memoryLimit;
+    this.queue = []; // store packets in FIFO order: [source, destination, timestamp]
+    this.packetSet = new Set(); // to check duplicates
+    this.destMap = new Map(); // destination -> array of timestamps
 };
 
 /** 
@@ -33885,14 +33888,55 @@ var Router = function(memoryLimit) {
  * @return {boolean}
  */
 Router.prototype.addPacket = function(source, destination, timestamp) {
-    
+    let key = `${source}-${destination}-${timestamp}`;
+    if (this.packetSet.has(key)) return false; // duplicate check
+
+    // If memory is full, remove oldest packet
+    if (this.queue.length >= this.memoryLimit) {
+        let oldest = this.queue.shift();
+        let oldKey = `${oldest[0]}-${oldest[1]}-${oldest[2]}`;
+        this.packetSet.delete(oldKey);
+
+        // also remove timestamp from destMap
+        let arr = this.destMap.get(oldest[1]);
+        if (arr) {
+            arr.shift(); // since timestamps are in increasing order
+            if (arr.length === 0) this.destMap.delete(oldest[1]);
+        }
+    }
+
+    // add new packet
+    this.queue.push([source, destination, timestamp]);
+    this.packetSet.add(key);
+
+    // update destMap
+    if (!this.destMap.has(destination)) this.destMap.set(destination, []);
+    this.destMap.get(destination).push(timestamp);
+
+    return true;
 };
 
 /**
  * @return {number[]}
  */
 Router.prototype.forwardPacket = function() {
-    
+    if (this.queue.length === 0) return [];
+
+    let packet = this.queue.shift();
+    let [source, destination, timestamp] = packet;
+
+    // remove from set
+    let key = `${source}-${destination}-${timestamp}`;
+    this.packetSet.delete(key);
+
+    // update destMap
+    let arr = this.destMap.get(destination);
+    if (arr) {
+        arr.shift();
+        if (arr.length === 0) this.destMap.delete(destination);
+    }
+
+    return packet;
 };
 
 /** 
@@ -33902,16 +33946,30 @@ Router.prototype.forwardPacket = function() {
  * @return {number}
  */
 Router.prototype.getCount = function(destination, startTime, endTime) {
-    
-};
+    if (!this.destMap.has(destination)) return 0;
 
-/** 
- * Your Router object will be instantiated and called as such:
- * var obj = new Router(memoryLimit)
- * var param_1 = obj.addPacket(source,destination,timestamp)
- * var param_2 = obj.forwardPacket()
- * var param_3 = obj.getCount(destination,startTime,endTime)
- */
+    let timestamps = this.destMap.get(destination);
+
+    // binary search lower bound for startTime
+    let left = 0, right = timestamps.length;
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        if (timestamps[mid] < startTime) left = mid + 1;
+        else right = mid;
+    }
+    let startIdx = left;
+
+    // binary search upper bound for endTime
+    left = 0, right = timestamps.length;
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        if (timestamps[mid] <= endTime) left = mid + 1;
+        else right = mid;
+    }
+    let endIdx = left;
+
+    return endIdx - startIdx;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
