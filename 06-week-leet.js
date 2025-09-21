@@ -34016,7 +34016,55 @@ movieRentingSystem.report();   // return [[0, 1], [1, 2]]. Movie 1 from shop 0 i
 movieRentingSystem.drop(1, 2); // Drop off movie 2 at shop 1. Unrented movies at shop 1 are now [1,2].
 movieRentingSystem.search(2);  // return [0, 1]. Movies of ID 2 are unrented at shops 0 and 1. Shop 0 is cheapest, followed by shop 1.
 
+/**
+ * @param {number} n
+ * @param {number[][]} entries
+ */
+var MovieRentingSystem = function(n, entries) {
+    
+};
 
+/** 
+ * @param {number} movie
+ * @return {number[]}
+ */
+MovieRentingSystem.prototype.search = function(movie) {
+    
+};
+
+/** 
+ * @param {number} shop 
+ * @param {number} movie
+ * @return {void}
+ */
+MovieRentingSystem.prototype.rent = function(shop, movie) {
+    
+};
+
+/** 
+ * @param {number} shop 
+ * @param {number} movie
+ * @return {void}
+ */
+MovieRentingSystem.prototype.drop = function(shop, movie) {
+    
+};
+
+/**
+ * @return {number[][]}
+ */
+MovieRentingSystem.prototype.report = function() {
+    
+};
+
+/** 
+ * Your MovieRentingSystem object will be instantiated and called as such:
+ * var obj = new MovieRentingSystem(n, entries)
+ * var param_1 = obj.search(movie)
+ * obj.rent(shop,movie)
+ * obj.drop(shop,movie)
+ * var param_4 = obj.report()
+ */
 
 
 console.log("==========================================")
