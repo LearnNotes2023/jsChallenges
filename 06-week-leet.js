@@ -34306,12 +34306,48 @@ console.log("==========================================")
 // @return {string}
 
 var fractionToDecimal = function(numerator, denominator) {
-    
+    if (numerator === 0) return "0";
+
+    let result = "";
+
+    // handle negative numbers
+    if ((numerator < 0) ^ (denominator < 0)) {
+        result += "-";
+    }
+
+    // work with absolute values
+    let num = Math.abs(numerator);
+    let den = Math.abs(denominator);
+
+    // integer part
+    result += Math.floor(num / den);
+    let remainder = num % den;
+
+    if (remainder === 0) {
+        return result; // no fractional part
+    }
+
+    result += ".";
+
+    // map to store seen remainders and their index in the result string
+    let map = new Map();
+
+    while (remainder !== 0) {
+        if (map.has(remainder)) {
+            // insert parentheses
+            let idx = map.get(remainder);
+            result = result.slice(0, idx) + "(" + result.slice(idx) + ")";
+            return result;
+        }
+
+        map.set(remainder, result.length);
+        remainder *= 10;
+        result += Math.floor(remainder / den);
+        remainder %= den;
+    }
+
+    return result;
 };
-
-
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
