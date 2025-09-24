@@ -34301,7 +34301,13 @@ Example 3:
 Input: numerator = 4, denominator = 333
 Output: "0.(012)"
 
+@param {number} numerator
+@param {number} denominator
+@return {string}
 
+var fractionToDecimal = function(numerator, denominator) {
+    
+};
 
 
 
