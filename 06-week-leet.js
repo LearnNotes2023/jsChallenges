@@ -34371,10 +34371,9 @@ Example 2:
 Input: triangle = [[-10]]
 Output: -10
  
-/**
- * @param {number[][]} triangle
- * @return {number}
- */
+@param {number[][]} triangle
+@return {number}
+
 var minimumTotal = function(triangle) {
     
 };
