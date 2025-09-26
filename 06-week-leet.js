@@ -34405,6 +34405,12 @@ Example 2:
 Input: nums = [4,2,3,4]
 Output: 4
 
+@param {number[]} nums
+@return {number}
+
+var triangleNumber = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
