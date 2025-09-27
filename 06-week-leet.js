@@ -34444,7 +34444,12 @@ Example 2:
 Input: points = [[1,0],[0,0],[0,1]]
 Output: 0.50000
 
+@param {number[][]} points
+@return {number}
 
+var largestTriangleArea = function(points) {
+    
+};
 
 
 
