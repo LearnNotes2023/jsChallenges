@@ -34536,6 +34536,13 @@ Input: values = [1,3,1,4,1,5]
 Output: 13
 Explanation: The minimum score triangulation is 1*1*3 + 1*1*4 + 1*1*5 + 1*1*1 = 13.
 
+/**
+ * @param {number[]} values
+ * @return {number}
+ */
+var minScoreTriangulation = function(values) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
