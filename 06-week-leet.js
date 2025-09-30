@@ -34584,7 +34584,12 @@ Output: 5
 Explanation:
 Since there is only one element in nums, the triangular sum is the value of that element itself.
 
+@param {number[]} nums
+@return {number}
 
+var triangularSum = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
