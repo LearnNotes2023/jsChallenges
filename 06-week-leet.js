@@ -34670,7 +34670,26 @@ console.log("==========================================")
 // @return {number}
 
 var maxBottlesDrunk = function(numBottles, numExchange) {
-    
+    let totalDrunk = 0;
+    let empty = 0;
+
+    while (numBottles > 0) {
+        // Drink all full bottles
+        totalDrunk += numBottles;
+        empty += numBottles;
+        numBottles = 0;
+
+        // Exchange if possible
+        if (empty >= numExchange) {
+            empty -= numExchange;
+            numBottles += 1;    // gain 1 full bottle
+            numExchange += 1;   // cost increases
+        } else {
+            break; // can't exchange anymore
+        }
+    }
+
+    return totalDrunk;
 };
 
 console.log("==========================================")
