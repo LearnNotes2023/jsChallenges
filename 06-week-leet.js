@@ -34665,7 +34665,14 @@ Output: 13
 Explanation: The table above shows the number of full water bottles, 
 empty water bottles, the value of numExchange, and the number of bottles drunk.
 
-
+/**
+ * @param {number} numBottles
+ * @param {number} numExchange
+ * @return {number}
+ */
+var maxBottlesDrunk = function(numBottles, numExchange) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
