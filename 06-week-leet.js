@@ -18724,14 +18724,60 @@ var trapRainWater = function(heightMap) {
     const cols = heightMap[0].length;
     const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
 
-    const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
-    const heap = new MinPriorityQueue();
+    // Custom MinHeap
+    class MinHeap {
+        constructor() {
+            this.data = [];
+        }
+        push(item) {
+            this.data.push(item);
+            this._bubbleUp(this.data.length - 1);
+        }
+        pop() {
+            if (this.data.length === 1) return this.data.pop();
+            const min = this.data[0];
+            this.data[0] = this.data.pop();
+            this._bubbleDown(0);
+            return min;
+        }
+        isEmpty() {
+            return this.data.length === 0;
+        }
+        _bubbleUp(index) {
+            while (index > 0) {
+                const parent = Math.floor((index - 1) / 2);
+                if (this.data[parent][2] <= this.data[index][2]) break;
+                [this.data[parent], this.data[index]] = [this.data[index], this.data[parent]];
+                index = parent;
+            }
+        }
+        _bubbleDown(index) {
+            const length = this.data.length;
+            while (true) {
+                let smallest = index;
+                const left = index * 2 + 1;
+                const right = index * 2 + 2;
+
+                if (left < length && this.data[left][2] < this.data[smallest][2]) {
+                    smallest = left;
+                }
+                if (right < length && this.data[right][2] < this.data[smallest][2]) {
+                    smallest = right;
+                }
+                if (smallest === index) break;
+                [this.data[smallest], this.data[index]] = [this.data[index], this.data[smallest]];
+                index = smallest;
+            }
+        }
+    }
+
+    const heap = new MinHeap();
 
     // Push all boundary cells into the heap
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
             if (r === 0 || r === rows - 1 || c === 0 || c === cols - 1) {
-                heap.enqueue([r, c, heightMap[r][c]], heightMap[r][c]);
+                heap.push([r, c, heightMap[r][c]]);
                 visited[r][c] = true;
             }
         }
@@ -18742,7 +18788,7 @@ var trapRainWater = function(heightMap) {
 
     // Process the heap
     while (!heap.isEmpty()) {
-        const [row, col, height] = heap.dequeue().element;
+        const [row, col, height] = heap.pop();
 
         for (const [dr, dc] of directions) {
             const newRow = row + dr;
@@ -18757,16 +18803,18 @@ var trapRainWater = function(heightMap) {
             ) {
                 visited[newRow][newCol] = true;
                 waterTrapped += Math.max(0, height - heightMap[newRow][newCol]);
-                heap.enqueue(
-                    [newRow, newCol, Math.max(height, heightMap[newRow][newCol])],
-                    Math.max(height, heightMap[newRow][newCol])
-                );
+                heap.push([
+                    newRow,
+                    newCol,
+                    Math.max(height, heightMap[newRow][newCol]),
+                ]);
             }
         }
     }
 
     return waterTrapped;
 };
+
 console.log("==========================================")
 
 // 2661. First Completely Painted Row or Column
