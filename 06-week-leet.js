@@ -34825,7 +34825,42 @@ console.log("==========================================")
 // @return {number[][]}
 
 var pacificAtlantic = function(heights) {
+    const m = heights.length;
+    const n = heights[0].length;
+    const pacific = Array.from({ length: m }, () => Array(n).fill(false));
+    const atlantic = Array.from({ length: m }, () => Array(n).fill(false));
     
+    const directions = [[1,0], [-1,0], [0,1], [0,-1]];
+    
+    // DFS helper
+    const dfs = (r, c, visited, prevHeight) => {
+        // Out of bounds or already visited or lower than previous height → stop
+        if (r < 0 || c < 0 || r >= m || c >= n || visited[r][c] || heights[r][c] < prevHeight) return;
+        visited[r][c] = true;
+        for (const [dr, dc] of directions) {
+            dfs(r + dr, c + dc, visited, heights[r][c]);
+        }
+    };
+    
+    // Pacific borders: top row + left column
+    for (let c = 0; c < n; c++) dfs(0, c, pacific, heights[0][c]);
+    for (let r = 0; r < m; r++) dfs(r, 0, pacific, heights[r][0]);
+    
+    // Atlantic borders: bottom row + right column
+    for (let c = 0; c < n; c++) dfs(m - 1, c, atlantic, heights[m - 1][c]);
+    for (let r = 0; r < m; r++) dfs(r, n - 1, atlantic, heights[r][n - 1]);
+    
+    // Collect cells reachable by both oceans
+    const result = [];
+    for (let r = 0; r < m; r++) {
+        for (let c = 0; c < n; c++) {
+            if (pacific[r][c] && atlantic[r][c]) {
+                result.push([r, c]);
+            }
+        }
+    }
+    
+    return result;
 };
 
 console.log("==========================================")
