@@ -34895,9 +34895,34 @@ console.log("==========================================")
 // @return {number}
 
 var swimInWater = function(grid) {
-    
-};
+  const n = grid.length;
+  const visited = Array.from({ length: n }, () => Array(n).fill(false));
+  const directions = [[1,0], [-1,0], [0,1], [0,-1]];
 
+  // Custom min-heap
+  const heap = [];
+  const push = (time, r, c) => {
+    heap.push([time, r, c]);
+    heap.sort((a, b) => a[0] - b[0]); // small n² size, acceptable
+  };
+  const pop = () => heap.shift();
+
+  push(grid[0][0], 0, 0);
+  visited[0][0] = true;
+
+  while (heap.length) {
+    const [time, r, c] = pop();
+    if (r === n - 1 && c === n - 1) return time;
+
+    for (const [dr, dc] of directions) {
+      const nr = r + dr, nc = c + dc;
+      if (nr >= 0 && nr < n && nc >= 0 && nc < n && !visited[nr][nc]) {
+        visited[nr][nc] = true;
+        push(Math.max(time, grid[nr][nc]), nr, nc);
+      }
+    }
+  }
+};
 
 console.log("==========================================")
 // console.log("==========================================")
