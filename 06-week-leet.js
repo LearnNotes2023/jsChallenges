@@ -34968,7 +34968,12 @@ Explanation: After the second day, full lakes are  [1,2]. We have to dry one lak
 After that, it will rain over lakes [1,2]. 
 It's easy to prove that no matter which lake you choose to dry in the 3rd day, the other one will flood.
 
+@param {number[]} rains
+@return {number[]}
 
+var avoidFlood = function(rains) {
+    
+};
 
 
 console.log("==========================================")
