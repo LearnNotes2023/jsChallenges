@@ -34972,9 +34972,53 @@ console.log("==========================================")
 // @return {number[]}
 
 var avoidFlood = function(rains) {
-    
-};
+    const n = rains.length;
+    const ans = new Array(n).fill(1);  // Default to 1 for dry days
+    const fullLakes = new Map();       // lake -> last rained day
+    const dryDays = [];                // indices of days we can dry a lake
 
+    for (let i = 0; i < n; i++) {
+        const lake = rains[i];
+
+        if (lake === 0) {
+            // Mark day as a potential dry day
+            dryDays.push(i);
+        } else {
+            // It rains on lake
+            ans[i] = -1;
+            if (fullLakes.has(lake)) {
+                // The lake is already full, need to dry it before this rain
+                const lastRainDay = fullLakes.get(lake);
+
+                // Find a dry day after lastRainDay
+                let dryIndex = -1;
+                for (let j = 0; j < dryDays.length; j++) {
+                    if (dryDays[j] > lastRainDay) {
+                        dryIndex = dryDays[j];
+                        dryDays.splice(j, 1); // use that dry day
+                        break;
+                    }
+                }
+
+                if (dryIndex === -1) {
+                    // No dry day available — flood unavoidable
+                    return [];
+                }
+
+                ans[dryIndex] = lake; // Dry that lake on the chosen day
+            }
+            // Mark lake as full
+            fullLakes.set(lake, i);
+        }
+    }
+
+    // Remaining dry days can dry any lake (e.g., 1)
+    for (const day of dryDays) {
+        ans[day] = 1;
+    }
+
+    return ans;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
