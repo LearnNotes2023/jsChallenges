@@ -35049,6 +35049,14 @@ Explanation:
 - 2nd spell: 2 * [8,5,8] = [16,10,16]. 2 pairs are successful. 
 Thus, [2,0,2] is returned.
 
+@param {number[]} spells
+@param {number[]} potions
+@param {number} success
+@return {number[]}
+
+var successfulPairs = function(spells, potions, success) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
