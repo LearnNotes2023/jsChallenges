@@ -35122,7 +35122,43 @@ console.log("==========================================")
 // @return {number}
 
 var minTime = function(skill, mana) {
-    
+    const n = skill.length;
+    const m = mana.length;
+    if (n === 0 || m === 0) return 0;
+
+    // Pprev[i] = cumulative time for potion j-1 up to wizard i
+    let Pprev = new Array(n);
+    let cum = 0;
+    for (let i = 0; i < n; i++) {
+        cum += skill[i] * mana[0];
+        Pprev[i] = cum;
+    }
+
+    let start = 0; // s_0 = 0
+    for (let j = 1; j < m; j++) {
+        // compute cumulative times for current potion j
+        const Pcurr = new Array(n);
+        cum = 0;
+        for (let i = 0; i < n; i++) {
+            cum += skill[i] * mana[j];
+            Pcurr[i] = cum;
+        }
+
+        // compute the required increment for start time: max_i (Pprev[i] - (i>0 ? Pcurr[i-1] : 0))
+        let maxDelta = -Infinity;
+        for (let i = 0; i < n; i++) {
+            const prevP = Pprev[i];
+            const prevPim1 = (i > 0 ? Pcurr[i - 1] : 0);
+            const delta = prevP - prevPim1;
+            if (delta > maxDelta) maxDelta = delta;
+        }
+
+        start += maxDelta;
+        Pprev = Pcurr; // move to next column
+    }
+
+    // makespan = start of last potion + total time of last potion across all wizards
+    return start + Pprev[n - 1];
 };
 
 console.log("==========================================")
