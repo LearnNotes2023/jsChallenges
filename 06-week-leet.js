@@ -35117,7 +35117,13 @@ Example 3:
 Input: skill = [1,2,3,4], mana = [1,2]
 Output: 21
 
+@param {number[]} skill
+@param {number[]} mana
+@return {number}
 
+var minTime = function(skill, mana) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
