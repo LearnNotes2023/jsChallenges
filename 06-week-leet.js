@@ -35185,7 +35185,13 @@ Input: energy = [-2,-3,-1], k = 2
 Output: -1
 Explanation: We can gain a total energy of -1 by starting from magician 2.
 
- 
+@param {number[]} energy
+@param {number} k
+@return {number}
+
+var maximumEnergy = function(energy, k) {
+    
+};
 
 
 console.log("==========================================")
