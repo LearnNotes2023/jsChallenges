@@ -35232,7 +35232,37 @@ console.log("==========================================")
 // @return {number}
 
 var maximumTotalDamage = function(power) {
-    
+    const map = new Map();
+    for (const p of power) map.set(p, (map.get(p) || 0) + p);
+
+    const unique = Array.from(map.keys()).sort((a, b) => a - b);
+    const n = unique.length;
+    if (n === 0) return 0;
+
+    const dp = new Array(n).fill(0);
+
+    for (let i = 0; i < n; i++) {
+        const curr = unique[i];
+        const val = map.get(curr);
+
+        // binary search for largest j < i such that unique[j] <= curr - 3
+        let lo = 0, hi = i - 1, j = -1;
+        while (lo <= hi) {
+            const mid = Math.floor((lo + hi) / 2);
+            if (unique[mid] <= curr - 3) {
+                j = mid;
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+
+        const include = val + (j >= 0 ? dp[j] : 0);
+        const exclude = i > 0 ? dp[i - 1] : 0;
+        dp[i] = Math.max(include, exclude);
+    }
+
+    return dp[n - 1];
 };
 
 console.log("==========================================")
