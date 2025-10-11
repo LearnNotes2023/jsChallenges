@@ -35228,7 +35228,12 @@ Output: 13
 Explanation:
 The maximum possible damage of 13 is produced by casting spells 1, 2, 3 with damage 1, 6, 6.
 
+@param {number[]} power
+@return {number}
 
+var maximumTotalDamage = function(power) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
