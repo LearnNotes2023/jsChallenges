@@ -35309,7 +35309,80 @@ console.log("==========================================")
 // @return {number}
 
 var magicalSum = function(m, k, nums) {
-    
+  const MOD = 1000000007n;
+  const n = nums.length;
+
+  // convert nums to BigInt once
+  const numsB = nums.map(x => BigInt(x));
+
+  // precompute combinations C(rem, count) as BigInt modulo MOD
+  const comb = Array.from({ length: m + 1 }, () => Array(m + 1).fill(0n));
+  for (let i = 0; i <= m; ++i) {
+    comb[i][0] = 1n;
+    for (let j = 1; j <= i; ++j) {
+      comb[i][j] = (comb[i - 1][j] + comb[i - 1][j - 1]) % MOD;
+    }
+  }
+
+  // fast modular exponent with BigInt
+  function modPow(base, exp) {
+    let b = ((base % MOD) + MOD) % MOD;
+    let e = BigInt(exp);
+    let res = 1n;
+    while (e > 0n) {
+      if (e & 1n) res = (res * b) % MOD;
+      b = (b * b) % MOD;
+      e >>= 1n;
+    }
+    return res;
+  }
+
+  function bitCount(x) {
+    // x will be a non-negative integer (regular Number); use builtin
+    let cnt = 0;
+    while (x > 0) { cnt += (x & 1); x >>= 1; }
+    return cnt;
+  }
+
+  const memo = new Map();
+
+  // dp returns BigInt (mod MOD)
+  function dp(rem, remK, i, carry) {
+    if (rem < 0 || remK < 0) return 0n;
+    if (rem + bitCount(carry) < remK) return 0n;
+    if (rem === 0) {
+      return (remK === bitCount(carry)) ? 1n : 0n;
+    }
+    if (i === n) return 0n;
+
+    const key = `${rem},${remK},${i},${carry}`;
+    if (memo.has(key)) return memo.get(key);
+
+    let res = 0n;
+    for (let count = 0; count <= rem; ++count) {
+      // comb[rem][count] and pow are BigInt
+      const pow = modPow(numsB[i], count);
+      const contribution = (comb[rem][count] * pow) % MOD;
+
+      const newCarry = carry + count;
+      const bitHere = newCarry & 1;
+      const nextK = remK - bitHere;
+      const nextCarry = newCarry >>> 1;
+
+      if (nextK < 0) continue;
+      const sub = dp(rem - count, nextK, i + 1, nextCarry);
+      if (sub !== 0n) {
+        res = (res + (sub * contribution) % MOD) % MOD;
+      }
+    }
+
+    memo.set(key, res);
+    return res;
+  }
+
+  const ansBig = dp(m, k, 0, 0);
+  // result fits into Number since it's modulo 1e9+7
+  return Number(ansBig % MOD);
 };
 
 
