@@ -35303,7 +35303,15 @@ Output: 28
 Explanation:
 The only magical sequence is [0].
 
- 
+/**
+ * @param {number} m
+ * @param {number} k
+ * @param {number[]} nums
+ * @return {number}
+ */
+var magicalSum = function(m, k, nums) {
+    
+};
 
 
 console.log("==========================================")
