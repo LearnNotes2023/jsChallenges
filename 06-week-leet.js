@@ -35422,7 +35422,20 @@ console.log("==========================================")
 // @return {string[]}
 
 var removeAnagrams = function(words) {
-    
+    const result = [];
+    let prev = "";
+
+    for (const word of words) {
+        // Sort letters to get the canonical form
+        const sorted = word.split('').sort().join('');
+
+        if (sorted !== prev) {
+            result.push(word);
+            prev = sorted; // Update previous pattern
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
