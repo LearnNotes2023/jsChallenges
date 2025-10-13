@@ -35418,7 +35418,12 @@ Output: ["a","b","c","d","e"]
 Explanation:
 No two adjacent strings in words are anagrams of each other, so no operations are performed.
 
+@param {string[]} words
+@return {string[]}
 
+var removeAnagrams = function(words) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
