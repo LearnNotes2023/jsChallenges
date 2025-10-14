@@ -35461,7 +35461,13 @@ Example 2:
 Input: nums = [1,2,3,4,4,4,4,5,6,7], k = 5
 Output: false
 
+@param {number[]} nums
+@param {number} k
+@return {boolean}
 
+var hasIncreasingSubarrays = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
