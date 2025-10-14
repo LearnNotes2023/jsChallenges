@@ -35466,7 +35466,24 @@ console.log("==========================================")
 // @return {boolean}
 
 var hasIncreasingSubarrays = function(nums, k) {
-    
+    const n = nums.length;
+    if (n < 2 * k) return false; // need at least 2 subarrays of length k
+
+    // helper to check if subarray [start, start + k) is strictly increasing
+    const isIncreasing = (start) => {
+        for (let i = start; i < start + k - 1; i++) {
+            if (nums[i] >= nums[i + 1]) return false;
+        }
+        return true;
+    };
+
+    for (let i = 0; i + 2 * k <= n; i++) {
+        if (isIncreasing(i) && isIncreasing(i + k)) {
+            return true;
+        }
+    }
+
+    return false;
 };
 
 console.log("==========================================")
