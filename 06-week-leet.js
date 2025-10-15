@@ -35519,9 +35519,27 @@ console.log("==========================================")
 // @return {number}
 
 var maxIncreasingSubarrays = function(nums) {
-    
-};
+    const n = nums.length;
+    const inc = Array(n).fill(1);
+    const dec = Array(n).fill(1);
 
+    // Calculate lengths of increasing sequences ending at i
+    for (let i = 1; i < n; i++) {
+        if (nums[i] > nums[i - 1]) inc[i] = inc[i - 1] + 1;
+    }
+
+    // Calculate lengths of increasing sequences starting at i
+    for (let i = n - 2; i >= 0; i--) {
+        if (nums[i + 1] > nums[i]) dec[i] = dec[i + 1] + 1;
+    }
+
+    let ans = 0;
+    for (let i = 0; i < n - 1; i++) {
+        ans = Math.max(ans, Math.min(inc[i], dec[i + 1]));
+    }
+
+    return ans;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
