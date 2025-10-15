@@ -35515,7 +35515,12 @@ The subarray starting at index 0 is [1, 2], which is strictly increasing.
 The subarray starting at index 2 is [3, 4], which is also strictly increasing.
 These two subarrays are adjacent, and 2 is the maximum possible value of k for which two such adjacent strictly increasing subarrays exist.
 
+@param {number[]} nums
+@return {number}
 
+var maxIncreasingSubarrays = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
