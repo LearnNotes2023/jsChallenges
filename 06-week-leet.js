@@ -35540,6 +35540,7 @@ var maxIncreasingSubarrays = function(nums) {
 
     return ans;
 };
+
 console.log("==========================================")
 
 2598. Smallest Missing Non-negative Integer After Operations
@@ -35567,7 +35568,14 @@ Explanation: One can achieve this result by applying the following operation:
 - subtract value from nums[2] once to make nums = [1,-10,0,13,6,8]
 The MEX of nums is 2. It can be shown that 2 is the maximum MEX we can achieve.
 
-
+/**
+ * @param {number[]} nums
+ * @param {number} value
+ * @return {number}
+ */
+var findSmallestInteger = function(nums, value) {
+    
+};
 
 
 console.log("==========================================")
