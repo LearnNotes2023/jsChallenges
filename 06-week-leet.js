@@ -35573,7 +35573,26 @@ console.log("==========================================")
 // @return {number}
 
 var findSmallestInteger = function(nums, value) {
-    
+    const freq = new Map();
+
+    // Count occurrences by remainder
+    for (let num of nums) {
+        const mod = ((num % value) + value) % value; // normalize negative mods
+        freq.set(mod, (freq.get(mod) || 0) + 1);
+    }
+
+    let mex = 0;
+
+    // Try to build 0, 1, 2, 3, ...
+    while (true) {
+        const remainder = mex % value;
+        if (!freq.has(remainder) || freq.get(remainder) === 0) {
+            return mex;
+        }
+        // Use one occurrence for this remainder
+        freq.set(remainder, freq.get(remainder) - 1);
+        mex++;
+    }
 };
 
 
