@@ -35637,7 +35637,67 @@ console.log("==========================================")
 // @return {number}
 
 var maxPartitionsAfterOperations = function(s, k) {
-    
+  const n = s.length;
+  // Quick shortcuts
+  if (n === 0) return 0;
+  if (k >= 26) return 1; // at most one partition when all letters allowed
+
+  // popcount (Brian Kernighan)
+  const popcount = (x) => {
+    let cnt = 0;
+    while (x) {
+      x &= x - 1;
+      cnt++;
+    }
+    return cnt;
+  };
+
+  // memoization map: key as string "i|canChange|mask"
+  const memo = new Map();
+
+  // dp(i, canChange, mask) -> max partitions for s[i..end)
+  // mask: bit j set means letter 'a'+j is present in the current prefix (not yet cut)
+  const dp = (i, canChange, mask) => {
+    if (i === n) return 0;
+    const key = i + '|' + (canChange ? 1 : 0) + '|' + mask;
+    if (memo.has(key)) return memo.get(key);
+
+    // helper: consider using bit newBit at position i (either original char or changed char)
+    const getRes = (newBit, nextCanChange) => {
+      const newMask = mask | newBit;
+      if (popcount(newMask) > k) {
+        // must cut here: start a new partition with the current char as first of new partition
+        // we count 1 for this cut, and continue from i+1 with mask = newBit (the current char begins new partition)
+        return 1 + dp(i + 1, nextCanChange, newBit);
+      } else {
+        // still within same partition
+        return dp(i + 1, nextCanChange, newMask);
+      }
+    };
+
+    // Option 1: keep s[i]
+    const origBit = 1 << (s.charCodeAt(i) - 97);
+    let res = getRes(origBit, canChange);
+
+    // Option 2: change s[i] to any other letter (if allowed)
+    if (canChange) {
+      // try all 26 letters (including ones equal to original is harmless but wasteful;
+      // skip if same as original for a small micro-optimization)
+      for (let j = 0; j < 26; j++) {
+        const bit = 1 << j;
+        if (bit === origBit) continue; // same letter, no point
+        const candidate = getRes(bit, false);
+        if (candidate > res) res = candidate;
+      }
+    }
+
+    memo.set(key, res);
+    return res;
+  };
+
+  // result is dp(0, true, 0) + 1 because dp counts extra partitions when popping due to >k,
+  // but we want total partitions (the recursion counts cuts, and there is one final partition).
+  return dp(0, true, 0) + 1;
 };
 
 console.log("==========================================")
