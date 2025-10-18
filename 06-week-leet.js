@@ -35721,7 +35721,13 @@ Output: 3
 Explanation:
 By adding -1 to nums[0] and 1 to nums[1], nums changes to [3, 5, 4, 4].
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var maxDistinctElements = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
