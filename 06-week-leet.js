@@ -35726,7 +35726,22 @@ console.log("==========================================")
 // @return {number}
 
 var maxDistinctElements = function(nums, k) {
-    
+    nums.sort((a, b) => a - b);
+    let used = -Infinity;
+    let count = 0;
+
+    for (let num of nums) {
+        let start = num - k;
+        let end = num + k;
+        let assign = Math.max(used, start);
+
+        if (assign <= end) {
+            count++;
+            used = assign + 1; // move to next available number
+        }
+    }
+
+    return count;
 };
 
 console.log("==========================================")
