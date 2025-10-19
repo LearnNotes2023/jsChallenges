@@ -35787,7 +35787,14 @@ Input: s = "0011", a = 4, b = 2
 Output: "0011"
 Explanation: There are no sequence of operations that will give us a lexicographically smaller string than "0011".
 
+@param {string} s
+@param {number} a
+@param {number} b
+@return {string}
 
+var findLexSmallestString = function(s, a, b) {
+    
+};
 
 
 console.log("==========================================")
