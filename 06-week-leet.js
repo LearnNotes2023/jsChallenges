@@ -35793,9 +35793,39 @@ console.log("==========================================")
 // @return {string}
 
 var findLexSmallestString = function(s, a, b) {
+    const seen = new Set();       // To avoid revisiting the same string
+    const queue = [s];
+    let smallest = s;
     
+    const addOperation = (str) => {
+        const arr = str.split('');
+        for (let i = 1; i < arr.length; i += 2) {
+            arr[i] = String((+arr[i] + a) % 10);
+        }
+        return arr.join('');
+    };
+    
+    const rotateOperation = (str) => {
+        const n = str.length;
+        return str.slice(n - b) + str.slice(0, n - b);
+    };
+    
+    while (queue.length > 0) {
+        const curr = queue.shift();
+        if (seen.has(curr)) continue;
+        seen.add(curr);
+        
+        if (curr < smallest) smallest = curr;
+        
+        const added = addOperation(curr);
+        const rotated = rotateOperation(curr);
+        
+        if (!seen.has(added)) queue.push(added);
+        if (!seen.has(rotated)) queue.push(rotated);
+    }
+    
+    return smallest;
 };
-
 
 console.log("==========================================")
 // console.log("==========================================")
