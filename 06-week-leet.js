@@ -35865,7 +35865,12 @@ X++: X is incremented by 1, X = 0 + 1 = 1.
 --X: X is decremented by 1, X = 2 - 1 = 1.
 X--: X is decremented by 1, X = 1 - 1 = 0.
 
+@param {string[]} operations
+@return {number}
 
+var finalValueAfterOperations = function(operations) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
