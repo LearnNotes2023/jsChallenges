@@ -35911,9 +35911,56 @@ console.log("==========================================")
 // @param {number} numOperations
 // @return {number}
 
-var maxFrequency = function(nums, k, numOperations) {
-    
-};
+function maxFrequency(nums, k, numOperations) {
+    // Count frequency of each number in the original array
+    const frequencyMap = {};
+  
+    // Difference array to track range updates for possible target values
+    const differenceArray = {};
+  
+    // Process each number in the input array
+    for (const num of nums) {
+        // Update frequency count for current number
+        frequencyMap[num] = (frequencyMap[num] || 0) + 1;
+      
+        // Initialize difference array entry if needed
+        differenceArray[num] = differenceArray[num] || 0;
+      
+        // Mark the range [num - k, num + k] where this number can contribute
+        // Increment at start of range
+        differenceArray[num - k] = (differenceArray[num - k] || 0) + 1;
+        // Decrement after end of range
+        differenceArray[num + k + 1] = (differenceArray[num + k + 1] || 0) - 1;
+    }
+  
+    // Track maximum frequency found and running sum for sweep line
+    let maxFrequency = 0;
+    let runningSum = 0;
+  
+    // Get all keys from difference array and sort them
+    const sortedKeys = Object.keys(differenceArray)
+        .map(Number)
+        .sort((a, b) => a - b);
+  
+    // Sweep through all possible target values
+    for (const targetValue of sortedKeys) {
+        // Update running sum (number of elements that can reach this target)
+        runningSum += differenceArray[targetValue];
+      
+        // Calculate maximum frequency at this target:
+        // - Elements already at this value (frequencyMap[targetValue])
+        // - Plus operations to convert other elements (limited by numOperations)
+        // - Total cannot exceed elements in range (runningSum)
+        const currentFrequency = Math.min(
+            runningSum, 
+            (frequencyMap[targetValue] || 0) + numOperations
+        );
+      
+        maxFrequency = Math.max(maxFrequency, currentFrequency);
+    }
+  
+    return maxFrequency;
+}
 
 console.log("==========================================")
 // console.log("==========================================")
