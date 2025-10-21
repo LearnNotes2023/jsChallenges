@@ -35906,6 +35906,15 @@ Explanation:
 We can achieve a maximum frequency of two by:
 Adding 0 to nums[1].
 
+@param {number[]} nums
+@param {number} k
+@param {number} numOperations
+@return {number}
+
+var maxFrequency = function(nums, k, numOperations) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
