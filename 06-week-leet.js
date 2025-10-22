@@ -35993,7 +35993,54 @@ console.log("==========================================")
 // @return {number}
 
 var maxFrequency = function(nums, k, numOperations) {
-    
+    nums.sort((a, b) => a - b);
+    const n = nums.length;
+
+    // binary search helpers
+    const lowerBound = (arr, target) => {
+        let l = 0, r = arr.length;
+        while (l < r) {
+            const m = (l + r) >> 1;
+            if (arr[m] < target) l = m + 1;
+            else r = m;
+        }
+        return l;
+    };
+    const upperBound = (arr, target) => {
+        let l = 0, r = arr.length;
+        while (l < r) {
+            const m = (l + r) >> 1;
+            if (arr[m] <= target) l = m + 1;
+            else r = m;
+        }
+        return l;
+    };
+
+    let ans = 1;
+
+    // use a Set of candidates so we don't repeat work for duplicates
+    const candSet = new Set();
+    for (let x of nums) {
+        candSet.add(x);
+        candSet.add(x - k);
+        candSet.add(x + k);
+    }
+
+    for (let T of candSet) {
+        // how many nums are in [T-k, T+k] -> these intervals can be moved to T
+        const lb = lowerBound(nums, T - k);
+        const ub = upperBound(nums, T + k);
+        const covering = ub - lb;
+
+        // how many are already equal to T (cost 0 ops)
+        const eq = upperBound(nums, T) - lowerBound(nums, T);
+
+        // we can add at most numOperations moved elements
+        const possible = Math.min(covering, eq + numOperations);
+        if (possible > ans) ans = possible;
+    }
+
+    return Math.min(ans, n);
 };
 
 console.log("==========================================")
