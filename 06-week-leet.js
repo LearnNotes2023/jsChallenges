@@ -36082,7 +36082,20 @@ console.log("==========================================")
 // @return {boolean}
 
 var hasSameDigits = function(s) {
-    
+    // Convert the string to an array of numbers
+    let arr = s.split('').map(Number);
+
+    // Repeat the operation until only two digits remain
+    while (arr.length > 2) {
+        let next = [];
+        for (let i = 0; i < arr.length - 1; i++) {
+            next.push((arr[i] + arr[i + 1]) % 10);
+        }
+        arr = next;
+    }
+
+    // Return true if the two digits are equal
+    return arr[0] === arr[1];
 };
 
 console.log("==========================================")
