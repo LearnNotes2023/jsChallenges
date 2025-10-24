@@ -36132,7 +36132,12 @@ Explanation:
 - The digit 3 occurs 3 times.
 It is also the smallest numerically balanced number strictly greater than 3000.
 
+@param {number} n
+@return {number}
 
+var nextBeautifulNumber = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
