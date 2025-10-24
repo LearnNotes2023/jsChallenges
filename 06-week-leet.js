@@ -36136,7 +36136,23 @@ console.log("==========================================")
 // @return {number}
 
 var nextBeautifulNumber = function(n) {
-    
+    // Helper function to check if a number is numerically balanced
+    const isBalanced = (num) => {
+        const count = {};
+        for (const ch of num.toString()) {
+            count[ch] = (count[ch] || 0) + 1;
+        }
+        for (const [digit, freq] of Object.entries(count)) {
+            if (+digit !== freq) return false;
+        }
+        return true;
+    };
+
+    let x = n + 1;
+    while (true) {
+        if (isBalanced(x)) return x;
+        x++;
+    }
 };
 
 console.log("==========================================")
