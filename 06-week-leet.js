@@ -36184,7 +36184,21 @@ console.log("==========================================")
 // @return {number}
 
 var totalMoney = function(n) {
+    const weeks = Math.floor(n / 7);  // full weeks
+    const days = n % 7;               // remaining days after full weeks
     
+    // Sum of all complete weeks
+    // Each week starts 1 higher than the previous: 
+    // 1st week = 28, 2nd = 35, 3rd = 42, etc.
+    // Formula: 28 * weeks + 7 * (0 + 1 + 2 + ... + (weeks-1))
+    const totalWeeks = 28 * weeks + (7 * weeks * (weeks - 1)) / 2;
+
+    // Remaining days in the next week
+    // Start amount for that week is (weeks + 1)
+    // Sum of arithmetic sequence: (start + end) * count / 2
+    const totalDays = ((2 * (weeks + 1) + (days - 1)) * days) / 2;
+
+    return totalWeeks + totalDays;
 };
 
 
