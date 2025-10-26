@@ -36239,7 +36239,48 @@ bank.transfer(3, 4, 15); // return false, the current balance of account 3 is $1
                          // so it is invalid to transfer $15 from it.
 bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not exist.
 
+/**
+ * @param {number[]} balance
+ */
+var Bank = function(balance) {
+    
+};
 
+/** 
+ * @param {number} account1 
+ * @param {number} account2 
+ * @param {number} money
+ * @return {boolean}
+ */
+Bank.prototype.transfer = function(account1, account2, money) {
+    
+};
+
+/** 
+ * @param {number} account 
+ * @param {number} money
+ * @return {boolean}
+ */
+Bank.prototype.deposit = function(account, money) {
+    
+};
+
+/** 
+ * @param {number} account 
+ * @param {number} money
+ * @return {boolean}
+ */
+Bank.prototype.withdraw = function(account, money) {
+    
+};
+
+/** 
+ * Your Bank object will be instantiated and called as such:
+ * var obj = new Bank(balance)
+ * var param_1 = obj.transfer(account1,account2,money)
+ * var param_2 = obj.deposit(account,money)
+ * var param_3 = obj.withdraw(account,money)
+ */
 
 console.log("==========================================")
 // console.log("==========================================")
