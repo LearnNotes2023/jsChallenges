@@ -36239,48 +36239,67 @@ bank.transfer(3, 4, 15); // return false, the current balance of account 3 is $1
                          // so it is invalid to transfer $15 from it.
 bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not exist.
 
-/**
- * @param {number[]} balance
- */
+@param {number[]} balance
 var Bank = function(balance) {
-    
+    this.balance = balance;  // store balances
 };
 
-/** 
- * @param {number} account1 
- * @param {number} account2 
- * @param {number} money
- * @return {boolean}
- */
+@param {number} account1 
+@param {number} account2 
+@param {number} money
+@return {boolean}
+
 Bank.prototype.transfer = function(account1, account2, money) {
-    
+    // check if both accounts exist
+    if (!this.isValidAccount(account1) || !this.isValidAccount(account2)) return false;
+
+    // check if account1 has enough balance
+    if (this.balance[account1 - 1] < money) return false;
+
+    // perform transfer
+    this.balance[account1 - 1] -= money;
+    this.balance[account2 - 1] += money;
+    return true;
 };
 
-/** 
- * @param {number} account 
- * @param {number} money
- * @return {boolean}
- */
+@param {number} account 
+@param {number} money
+@return {boolean}
+
 Bank.prototype.deposit = function(account, money) {
-    
+    if (!this.isValidAccount(account)) return false;
+
+    this.balance[account - 1] += money;
+    return true;
 };
 
-/** 
- * @param {number} account 
- * @param {number} money
- * @return {boolean}
- */
+@param {number} account 
+@param {number} money
+@return {boolean}
+ 
 Bank.prototype.withdraw = function(account, money) {
-    
+    if (!this.isValidAccount(account)) return false;
+
+    if (this.balance[account - 1] < money) return false;
+
+    this.balance[account - 1] -= money;
+    return true;
 };
 
-/** 
- * Your Bank object will be instantiated and called as such:
- * var obj = new Bank(balance)
- * var param_1 = obj.transfer(account1,account2,money)
- * var param_2 = obj.deposit(account,money)
- * var param_3 = obj.withdraw(account,money)
- */
+Helper function: check if account number is valid
+
+Bank.prototype.isValidAccount = function(account) {
+    return account >= 1 && account <= this.balance.length;
+};
+
+Example:
+var bank = new Bank([10, 100, 20, 50, 30]);
+console.log(bank.withdraw(3, 10)); // true
+console.log(bank.transfer(5, 1, 20)); // true
+console.log(bank.deposit(5, 20)); // true
+console.log(bank.transfer(3, 4, 15)); // false
+console.log(bank.withdraw(10, 50)); // false
+
 
 console.log("==========================================")
 // console.log("==========================================")
