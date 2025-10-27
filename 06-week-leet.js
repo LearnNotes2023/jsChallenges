@@ -36339,7 +36339,19 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfBeams = function(bank) {
-    
+    let prev = 0;  // number of devices in the previous non-empty row
+    let total = 0;
+
+    for (let row of bank) {
+        let curr = row.split('').filter(c => c === '1').length; // count devices in this row
+
+        if (curr > 0) {
+            total += prev * curr;  // number of beams between prev and current row
+            prev = curr;           // update previous
+        }
+    }
+
+    return total;
 };
 
 console.log("==========================================")
