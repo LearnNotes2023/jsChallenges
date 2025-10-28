@@ -36386,19 +36386,43 @@ console.log("==========================================")
 // [1,0,0,0,1] -> [1,0,0,0,1] -> [1,0,0,0,0] -> [1,0,0,0,0] -> 
 // [1,0,0,0,0] -> [1,0,0,0,0] -> [0,0,0,0,0].
 
-Example 2:
-Input: nums = [2,3,4,0,4,1,0]
-Output: 0
-Explanation:
-There are no possible valid selections.
+// Example 2:
+// Input: nums = [2,3,4,0,4,1,0]
+// Output: 0
+// Explanation:
+// There are no possible valid selections.
 
-@param {number[]} nums
-@return {number}
+// @param {number[]} nums
+// @return {number}
 
 var countValidSelections = function(nums) {
-    
-};
+    const n = nums.length;
+    let count = 0;
 
+    function simulate(start, dir) {
+        const arr = nums.slice();
+        let curr = start;
+        while (curr >= 0 && curr < arr.length) {
+            if (arr[curr] === 0) {
+                curr += dir;
+            } else {
+                arr[curr]--;
+                dir *= -1;
+                curr += dir;
+            }
+        }
+        return arr.every(x => x === 0);
+    }
+
+    for (let i = 0; i < n; i++) {
+        if (nums[i] === 0) {
+            if (simulate(i, -1)) count++;
+            if (simulate(i, 1)) count++;
+        }
+    }
+
+    return count;
+};
 
 
 console.log("==========================================")
