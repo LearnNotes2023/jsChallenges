@@ -36392,7 +36392,13 @@ Output: 0
 Explanation:
 There are no possible valid selections.
 
-
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var countValidSelections = function(nums) {
+    
+};
 
 
 
