@@ -36454,7 +36454,11 @@ console.log("==========================================")
 // @return {number}
 
 var smallestNumber = function(n) {
-    
+    let k = 1;
+    while ((1 << k) - 1 < n) {
+        k++;
+    }
+    return (1 << k) - 1;
 };
 
 console.log("==========================================")
