@@ -36450,6 +36450,12 @@ Output: 3
 Explanation:
 The binary representation of 3 is "11".
 
+@param {number} n
+@return {number}
+
+var smallestNumber = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
