@@ -36535,7 +36535,16 @@ console.log("==========================================")
 // @return {number[]}
 
 var getSneakyNumbers = function(nums) {
-    
+    const count = {};
+    const result = [];
+
+    for (let num of nums) {
+        count[num] = (count[num] || 0) + 1;
+        if (count[num] === 2) result.push(num);
+        if (result.length === 2) break; // both found, stop early
+    }
+
+    return result;
 };
 
 console.log("==========================================")
