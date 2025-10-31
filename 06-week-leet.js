@@ -36531,7 +36531,12 @@ Output: [4,5]
 Explanation:
 The numbers 4 and 5 each appear twice in the array.
 
+@param {number[]} nums
+@return {number[]}
 
+var getSneakyNumbers = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
