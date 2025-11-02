@@ -36609,7 +36609,25 @@ var findMedianSortedArrays = function(nums1, nums2) {
 
 
 console.log("==========================================")
-// console.log("==========================================")
+
+5. Longest Palindromic Substring
+Medium
+Given a string s, return the longest palindromic substring in s.
+
+Example 1:
+Input: s = "babad"
+Output: "bab"
+Explanation: "aba" is also a valid answer.
+
+Example 2:
+Input: s = "cbbd"
+Output: "bb"
+
+
+
+
+
+console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
