@@ -36623,7 +36623,12 @@ Example 2:
 Input: s = "cbbd"
 Output: "bb"
 
+@param {string} s
+@return {string}
 
+var longestPalindrome = function(s) {
+    
+};
 
 
 
