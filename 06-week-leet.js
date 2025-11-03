@@ -36689,9 +36689,20 @@ console.log("==========================================")
 // @return {number}
 
 var minCost = function(colors, neededTime) {
-    
-};
+    let totalTime = 0;
 
+    for (let i = 1; i < colors.length; i++) {
+        if (colors[i] === colors[i - 1]) {
+            // Remove the one with smaller removal time
+            totalTime += Math.min(neededTime[i], neededTime[i - 1]);
+            
+            // Keep the balloon with larger removal time
+            neededTime[i] = Math.max(neededTime[i], neededTime[i - 1]);
+        }
+    }
+
+    return totalTime;
+};
 
 
 console.log("==========================================")
