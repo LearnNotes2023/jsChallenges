@@ -36684,7 +36684,13 @@ Output: 2
 Explanation: Bob will remove the balloons at indices 0 and 4. Each balloons takes 1 second to remove.
 There are no longer two consecutive balloons of the same color. Total time = 1 + 1 = 2.
  
+@param {string} colors
+@param {number[]} neededTime
+@return {number}
 
+var minCost = function(colors, neededTime) {
+    
+};
 
 
 
