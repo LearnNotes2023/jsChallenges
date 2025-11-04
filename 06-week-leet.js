@@ -36733,7 +36733,14 @@ Output: [11,15,15,15,12]
 Explanation:
 Since k == x, answer[i] is equal to the sum of the subarray nums[i..i + k - 1].
 
+@param {number[]} nums
+@param {number} k
+@param {number} x
+@return {number[]}
  
+var findXSum = function(nums, k, x) {
+    
+};
 
 
 console.log("==========================================")
