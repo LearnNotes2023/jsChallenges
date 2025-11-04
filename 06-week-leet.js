@@ -36739,7 +36739,36 @@ console.log("==========================================")
 // @return {number[]}
  
 var findXSum = function(nums, k, x) {
-    
+    const n = nums.length;
+    const result = [];
+
+    for (let i = 0; i <= n - k; i++) {
+        const freq = new Map();
+
+        // Count frequencies in current window
+        for (let j = i; j < i + k; j++) {
+            freq.set(nums[j], (freq.get(nums[j]) || 0) + 1);
+        }
+
+        // Convert to array and sort by (freq desc, value desc)
+        const sorted = Array.from(freq.entries()).sort((a, b) => {
+            if (b[1] === a[1]) return b[0] - a[0];
+            return b[1] - a[1];
+        });
+
+        // Take top x elements
+        let sum = 0;
+        let count = 0;
+        for (const [num, times] of sorted) {
+            if (count >= x) break;
+            sum += num * times;
+            count++;
+        }
+
+        result.push(sum);
+    }
+
+    return result;
 };
 
 
