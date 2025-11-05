@@ -36806,7 +36806,60 @@ console.log("==========================================")
 // @return {number[]}
 
 var findXSum = function(nums, k, x) {
-    
+    const ans = [];
+    const freq = new Map();
+    let sorted = []; // [freq, num] sorted descending by freq, then num
+
+    const insertSorted = ([f, n]) => {
+        // Insert into sorted array descending by freq, then num
+        let left=0, right=sorted.length;
+        while(left<right){
+            let mid = (left+right)>>1;
+            let [mf, mn] = sorted[mid];
+            if(f>mf || (f===mf && n>mn)) right=mid;
+            else left=mid+1;
+        }
+        sorted.splice(left,0,[f,n]);
+    };
+
+    const removeSorted = ([f,n]) => {
+        // Remove the exact [f,n] from sorted array
+        for(let i=0;i<sorted.length;i++){
+            if(sorted[i][0]===f && sorted[i][1]===n){
+                sorted.splice(i,1);
+                break;
+            }
+        }
+    };
+
+    for(let i=0;i<nums.length;i++){
+        let num = nums[i];
+        let old = freq.get(num)||0;
+        if(old>0) removeSorted([old,num]);
+        freq.set(num, old+1);
+        insertSorted([old+1,num]);
+
+        if(i>=k){
+            let out = nums[i-k];
+            let oldOut = freq.get(out);
+            removeSorted([oldOut,out]);
+            if(oldOut===1) freq.delete(out);
+            else {
+                freq.set(out,oldOut-1);
+                insertSorted([oldOut-1,out]);
+            }
+        }
+
+        if(i>=k-1){
+            let sum=0;
+            for(let j=0;j<Math.min(x,sorted.length);j++){
+                sum += sorted[j][0]*sorted[j][1];
+            }
+            ans.push(sum);
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
