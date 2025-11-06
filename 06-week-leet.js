@@ -36906,7 +36906,106 @@ console.log("==========================================")
 // @return {number[]}
 
 var processQueries = function(c, connections, queries) {
+    // ---------- Simple MinHeap Implementation ----------
+    class MinHeap {
+        constructor() { this.data = []; }
+        size() { return this.data.length; }
+        peek() { return this.data[0]; }
+        push(val) {
+            this.data.push(val);
+            this._up(this.size() - 1);
+        }
+        pop() {
+            if (this.size() === 0) return null;
+            const top = this.data[0];
+            const last = this.data.pop();
+            if (this.size() > 0) {
+                this.data[0] = last;
+                this._down(0);
+            }
+            return top;
+        }
+        _up(i) {
+            while (i > 0) {
+                const p = (i - 1) >> 1;
+                if (this.data[p] <= this.data[i]) break;
+                [this.data[p], this.data[i]] = [this.data[i], this.data[p]];
+                i = p;
+            }
+        }
+        _down(i) {
+            const n = this.size();
+            while (true) {
+                let smallest = i;
+                const l = i * 2 + 1;
+                const r = i * 2 + 2;
+                if (l < n && this.data[l] < this.data[smallest]) smallest = l;
+                if (r < n && this.data[r] < this.data[smallest]) smallest = r;
+                if (smallest === i) break;
+                [this.data[i], this.data[smallest]] = [this.data[smallest], this.data[i]];
+                i = smallest;
+            }
+        }
+    }
+
+    // ---------- Union-Find (Disjoint Set Union) ----------
+    const parent = Array.from({ length: c + 1 }, (_, i) => i);
+    const rank = Array(c + 1).fill(1);
     
+    const find = (x) => {
+        if (parent[x] !== x) parent[x] = find(parent[x]);
+        return parent[x];
+    };
+    
+    const union = (a, b) => {
+        const pa = find(a), pb = find(b);
+        if (pa === pb) return;
+        if (rank[pa] < rank[pb]) parent[pa] = pb;
+        else if (rank[pa] > rank[pb]) parent[pb] = pa;
+        else { parent[pb] = pa; rank[pa]++; }
+    };
+
+    // Build DSU connections
+    for (const [u, v] of connections) union(u, v);
+
+    // ---------- Component Setup ----------
+    const heaps = new Map(); // root -> MinHeap
+    const online = Array(c + 1).fill(true);
+
+    for (let i = 1; i <= c; i++) {
+        const root = find(i);
+        if (!heaps.has(root)) heaps.set(root, new MinHeap());
+        heaps.get(root).push(i);
+    }
+
+    // ---------- Process Queries ----------
+    const res = [];
+    for (const [type, x] of queries) {
+        const root = find(x);
+
+        if (type === 2) {
+            // Station x goes offline
+            online[x] = false;
+        } else if (type === 1) {
+            if (online[x]) {
+                res.push(x);
+                continue;
+            }
+
+            const heap = heaps.get(root);
+            if (!heap) {
+                res.push(-1);
+                continue;
+            }
+
+            // Lazy deletion: pop offline nodes
+            while (heap.size() && !online[heap.peek()]) heap.pop();
+            if (!heap.size()) res.push(-1);
+            else res.push(heap.peek());
+        }
+    }
+
+    return res;
 };
 
 console.log("==========================================")
