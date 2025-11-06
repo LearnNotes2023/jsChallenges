@@ -36900,7 +36900,14 @@ Query [1,1]: Station 1 is online in its isolated grid, so the maintenance check 
 Query [2,1]: Station 1 goes offline.
 Query [1,1]: Station 1 is offline and there are no other stations in its grid, so the result is -1.
 
+@param {number} c
+@param {number[][]} connections
+@param {number[][]} queries
+@return {number[]}
 
+var processQueries = function(c, connections, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
