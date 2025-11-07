@@ -37052,7 +37052,53 @@ console.log("==========================================")
 // @return {number}
 
 var maxPower = function(stations, r, k) {
-    
+    const n = stations.length;
+
+    // --- Step 1: prefix sums for fast range queries ---
+    const prefix = new Array(n + 1).fill(0);
+    for (let i = 0; i < n; i++) prefix[i + 1] = prefix[i] + stations[i];
+
+    // initial power[i] = sum(stations[i - r ... i + r])
+    const power = new Array(n).fill(0);
+    for (let i = 0; i < n; i++) {
+        const left = Math.max(0, i - r);
+        const right = Math.min(n - 1, i + r);
+        power[i] = prefix[right + 1] - prefix[left];
+    }
+
+    // --- helper: check if we can achieve min power "mid" ---
+    const can = (mid) => {
+        const added = new Array(n).fill(0);
+        let used = 0, extra = 0;  // extra = active window sum of additions
+
+        for (let i = 0; i < n; i++) {
+            if (i - (2 * r + 1) >= 0) extra -= added[i - (2 * r + 1)];
+
+            const total = power[i] + extra;
+            if (total < mid) {
+                const need = mid - total;
+                used += need;
+                if (used > k) return false;
+                added[i] = need;  // add at the rightmost effective index
+                extra += need;
+            }
+        }
+        return true;
+    };
+
+    // --- Step 3: Binary search the answer ---
+    let low = 0, high = 1e18, ans = 0;
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        if (can(mid)) {
+            ans = mid;
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
