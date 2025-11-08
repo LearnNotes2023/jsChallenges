@@ -37131,7 +37131,12 @@ console.log("==========================================")
 // @return {number}
 
 var minimumOneBitOperations = function(n) {
-    
+  if (n === 0) return 0;
+  
+  let b = 1;
+  while ((b << 1) <= n) b <<= 1; // find the highest set bit
+  
+  return (b << 1) - 1 - minimumOneBitOperations(n ^ b);
 };
 
 console.log("==========================================")
