@@ -37127,6 +37127,12 @@ Explanation: The binary representation of 6 is "110".
 "011" -> "001" with the 2nd operation since the 0th bit is 1.
 "001" -> "000" with the 1st operation.
 
+@param {number} n
+@return {number}
+
+var minimumOneBitOperations = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
