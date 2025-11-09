@@ -37167,7 +37167,13 @@ Explanation:
 Now num1 = 0 and num2 = 10. Since num1 == 0, we are done.
 So the total number of operations required is 1.
 
+@param {number} num1
+@param {number} num2
+@return {number}
 
+var countOperations = function(num1, num2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
