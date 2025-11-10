@@ -37234,9 +37234,29 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(nums) {
-    
-};
+    let res = 0;
+    const stack = []; // increasing stack of positive values
 
+    for (let num of nums) {
+        if (num === 0) {
+            // zeros break segments — clear stack
+            stack.length = 0;
+            continue;
+        }
+        // Remove any values greater than current num
+        while (stack.length && stack[stack.length - 1] > num) {
+            stack.pop();
+        }
+        // If stack empty or top < num, we need a new operation level
+        if (stack.length === 0 || stack[stack.length - 1] < num) {
+            stack.push(num);
+            res++;
+        }
+        // if top == num, do nothing (it's already accounted)
+    }
+
+    return res;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
