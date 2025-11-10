@@ -37230,7 +37230,12 @@ Select subarray [5,5] (which is [2]), where the minimum non-negative integer is 
 Setting all occurrences of 2 to 0 results in [0,0,0,0,0,0].
 Thus, the minimum number of operations required is 4.
 
+@param {number[]} nums
+@return {number}
 
+var minOperations = function(nums) {
+    
+};
 
 
 console.log("==========================================")
