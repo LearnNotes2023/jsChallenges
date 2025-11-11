@@ -37284,7 +37284,23 @@ console.log("==========================================")
 // @return {number}
 
 var findMaxForm = function(strs, m, n) {
-    
+    // Initialize 2D DP array
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+    for (const str of strs) {
+        // Count zeros and ones in the current string
+        const zeros = str.split('').filter(ch => ch === '0').length;
+        const ones = str.length - zeros;
+
+        // Iterate backwards to avoid overwriting states we still need
+        for (let i = m; i >= zeros; i--) {
+            for (let j = n; j >= ones; j--) {
+                dp[i][j] = Math.max(dp[i][j], dp[i - zeros][j - ones] + 1);
+            }
+        }
+    }
+
+    return dp[m][n];
 };
 
 console.log("==========================================")
