@@ -37331,8 +37331,42 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(nums) {
+    const n = nums.length;
     
+    // Step 1: Count existing 1s
+    let ones = nums.filter(x => x === 1).length;
+    if (ones > 0) return n - ones; 
+    // If there are any 1s, each non-1 element needs one operation with a 1.
+
+    // Step 2: Find the shortest subarray with gcd == 1
+    let minLen = Infinity;
+    for (let i = 0; i < n; i++) {
+        let g = nums[i];
+        for (let j = i + 1; j < n; j++) {
+            g = gcd(g, nums[j]);
+            if (g === 1) {
+                minLen = Math.min(minLen, j - i + 1);
+                break; // No need to extend further
+            }
+        }
+    }
+
+    // If no subarray has gcd == 1 → impossible
+    if (minLen === Infinity) return -1;
+
+    // Step 3: Once we have a subarray with gcd == 1,
+    // we can make one 1 in (minLen - 1) operations,
+    // then turn the rest to 1s in (n - 1) more.
+    return (minLen - 1) + (n - 1);
 };
+
+// Helper function: Euclidean algorithm for gcd
+function gcd(a, b) {
+    while (b !== 0) {
+        [a, b] = [b, a % b];
+    }
+    return a;
+}
 
 console.log("==========================================")
 // console.log("==========================================")
