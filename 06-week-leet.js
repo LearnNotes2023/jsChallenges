@@ -37327,6 +37327,12 @@ Input: nums = [2,10,6,14]
 Output: -1
 Explanation: It can be shown that it is impossible to make all the elements equal to 1.
 
+@param {number[]} nums
+@return {number}
+
+var minOperations = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
