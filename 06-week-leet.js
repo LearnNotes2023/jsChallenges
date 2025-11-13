@@ -37393,7 +37393,12 @@ Example 2:
 Input: s = "00111"
 Output: 0
 
+@param {string} s
+@return {number}
 
+var maxOperations = function(s) {
+    
+};
 
 
 
