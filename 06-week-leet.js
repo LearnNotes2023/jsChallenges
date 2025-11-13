@@ -37397,7 +37397,19 @@ console.log("==========================================")
 // @return {number}
 
 var maxOperations = function(s) {
-    
+    let ans = 0;
+    let ones = 0;
+    const n = s.length;
+    for (let i = 0; i < n; i++) {
+        if (s[i] === '1') {
+            ones++;
+        } else { // s[i] === '0'
+            // if this zero is the last char or the next char is '1',
+            // it is a "terminal zero" contributing `ones` operations.
+            if (i === n - 1 || s[i + 1] === '1') ans += ones;
+        }
+    }
+    return ans;
 };
 
 
