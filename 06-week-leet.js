@@ -37438,6 +37438,13 @@ Output: [[1,1],[1,1]]
 Explanation: The diagram above shows the initial matrix and the matrix after the first query.
 - In the first query we add 1 to every element in the matrix.
 
+@param {number} n
+@param {number[][]} queries
+@return {number[][]}
+
+var rangeAddQueries = function(n, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
