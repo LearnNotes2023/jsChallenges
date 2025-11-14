@@ -37443,7 +37443,36 @@ console.log("==========================================")
 // @return {number[][]}
 
 var rangeAddQueries = function(n, queries) {
-    
+    const diff = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0));
+
+    for (const [r1, c1, r2, c2] of queries) {
+        diff[r1][c1] += 1;
+        diff[r1][c2 + 1] -= 1;
+        diff[r2 + 1][c1] -= 1;
+        diff[r2 + 1][c2 + 1] += 1;
+    }
+
+    const res = Array.from({ length: n }, () => Array(n).fill(0));
+
+    // Prefix sum horizontally
+    for (let i = 0; i < n; i++) {
+        let cur = 0;
+        for (let j = 0; j < n; j++) {
+            cur += diff[i][j];
+            diff[i][j] = cur;
+        }
+    }
+
+    // Prefix sum vertically and copy to result
+    for (let j = 0; j < n; j++) {
+        let cur = 0;
+        for (let i = 0; i < n; i++) {
+            cur += diff[i][j];
+            res[i][j] = cur;
+        }
+    }
+
+    return res;
 };
 
 console.log("==========================================")
