@@ -37512,9 +37512,12 @@ i	j	s[i..j]	Number of Zeros	Number of Ones
 0	4	10110	2	3
 1	5	01101	2	3
  
+@param {string} s
+@return {number}
 
-Constraints:
-
+var numberOfSubstrings = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
