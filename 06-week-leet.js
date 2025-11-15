@@ -37516,7 +37516,79 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfSubstrings = function(s) {
-    
+    const n = s.length;
+    // collect zero positions
+    const Z = [];
+    for (let i = 0; i < n; i++) if (s[i] === '0') Z.push(i);
+    const m = Z.length;
+    let ans = 0;
+
+    // z = 0: count substrings that contain no zeros (all ones)
+    let run = 0;
+    for (let i = 0; i < n; i++) {
+        if (s[i] === '1') run++;
+        else {
+            ans += run * (run + 1) / 2;
+            run = 0;
+        }
+    }
+    ans += run * (run + 1) / 2;
+
+    if (m === 0) return ans; // no zeros => done
+
+    const K = Math.floor(Math.sqrt(n)) + 1;
+
+    // helper: number of pairs (a in [0, Lmax], b in [0, Rmax]) with a + b <= S
+    function pairs_leq(Lc, Rc, S) {
+        // Lc, Rc are counts of choices, ranges are 0..Lmax and 0..Rmax
+        const Lmax = Lc - 1;
+        const Rmax = Rc - 1;
+        if (S < 0) return 0;
+        const totalPairs = (Lmax + 1) * (Rmax + 1);
+        if (S >= Lmax + Rmax) return totalPairs;
+
+        const a0 = Math.max(0, S - Rmax); // a <= S - Rmax gives b_max = Rmax
+        const t = Math.min(Lmax, S); // upper bound for a
+        // part1: a = 0 .. a0-1 -> each contributes (Rmax+1)
+        const part1 = a0 * (Rmax + 1);
+        // part2: a = a0 .. t -> b_max = S - a, sum of (S - a + 1)
+        const cnt = (t >= a0) ? (t - a0 + 1) : 0;
+        let part2 = 0;
+        if (cnt > 0) {
+            // arithmetic series: first = S - a0 + 1, last = S - t + 1
+            part2 = ( (S - a0 + 1) + (S - t + 1) ) * cnt / 2;
+        }
+        return part1 + part2;
+    }
+
+    // iterate zeros count z = 1..K (but no more than m)
+    for (let z = 1; z <= K && z <= m; z++) {
+        const requiredLen = z + z * z; // L >= z + z^2
+        // slide window of z zeros: indices t .. t+z-1 in Z
+        for (let t = 0; t + z - 1 < m; t++) {
+            const leftZeroPos = (t === 0) ? -1 : Z[t - 1];
+            const rightZeroPos = (t + z === m) ? n : Z[t + z];
+
+            const leftChoices = Z[t] - leftZeroPos; // choices for left start
+            const rightChoices = rightZeroPos - Z[t + z - 1]; // choices for right end
+
+            const baseLen = Z[t + z - 1] - Z[t] + 1; // minimal length that contains those zeros
+            const needExtra = requiredLen - baseLen;
+
+            const totalPairs = leftChoices * rightChoices;
+            if (needExtra <= 0) {
+                ans += totalPairs;
+            } else {
+                // count pairs (lExtra in [0,leftChoices-1], rExtra in [0,rightChoices-1])
+                // with lExtra + rExtra >= needExtra
+                // equals totalPairs - pairs_with_sum <= needExtra-1
+                const leq = pairs_leq(leftChoices, rightChoices, needExtra - 1);
+                ans += (totalPairs - leq);
+            }
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
