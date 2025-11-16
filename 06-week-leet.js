@@ -37616,7 +37616,12 @@ Input: s = "111111"
 Output: 21
 Explanation: Each substring contains only 1's characters.
 
+@param {string} s
+@return {number}
 
+var numSub = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
