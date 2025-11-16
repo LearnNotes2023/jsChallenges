@@ -37620,7 +37620,20 @@ console.log("==========================================")
 // @return {number}
 
 var numSub = function(s) {
-    
+    let MOD = 1_000_000_007;
+    let count = 0;   // current streak of 1s
+    let result = 0;
+
+    for (let char of s) {
+        if (char === '1') {
+            count++;              // extend current block
+            result = (result + count) % MOD;   // add substrings ending here
+        } else {
+            count = 0;            // reset when seeing 0
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
