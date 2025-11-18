@@ -37694,7 +37694,12 @@ Output: false
 Explanation: The only way to decode it is two-bit character and two-bit character.
 So the last character is not one-bit character.
 
+@param {number[]} bits
+@return {boolean}
 
+var isOneBitCharacter = function(bits) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
