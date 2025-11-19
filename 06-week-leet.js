@@ -37736,7 +37736,13 @@ Output: 4
 Explanation:
 - 4 is not found in nums. Thus, 4 is returned.
  
+@param {number[]} nums
+@param {number} original
+@return {number}
 
+var findFinalValue = function(nums, original) {
+    
+};
 
 
 console.log("==========================================")
