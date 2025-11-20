@@ -37783,9 +37783,41 @@ console.log("==========================================")
 // @return {number}
 
 var intersectionSizeTwo = function(intervals) {
-    
-};
+    // Sort by end ascending; if tie, by start descending
+    intervals.sort((a, b) => {
+        if (a[1] === b[1]) return b[0] - a[0];
+        return a[1] - b[1];
+    });
 
+    let res = 0;
+    // These track the last two chosen numbers
+    let a = -1, b = -1;
+
+    for (let [start, end] of intervals) {
+        let count = 0;
+        if (a >= start && a <= end) count++;
+        if (b >= start && b <= end) count++;
+
+        if (count === 2) {
+            // interval already covered
+            continue;
+        }
+
+        if (count === 1) {
+            // add one more number: choose end
+            res++;
+            if (a < b) a = b; // ensure a is the larger
+            b = end;
+        } else {
+            // add two numbers: end-1 and end
+            res += 2;
+            a = end - 1;
+            b = end;
+        }
+    }
+
+    return res;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
