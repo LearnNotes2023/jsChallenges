@@ -37779,7 +37779,12 @@ Output: 5
 Explanation: let nums = [1, 2, 3, 4, 5].
 It can be shown that there cannot be any containing array of size 4.
 
+@param {number[][]} intervals
+@return {number}
 
+var intersectionSizeTwo = function(intervals) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
