@@ -37848,7 +37848,13 @@ Example 3:
 Input: s = "A", numRows = 1
 Output: "A"
  
- 
+@param {string} s
+@param {number} numRows
+@return {string}
+
+var convert = function(s, numRows) {
+    
+}; 
 
 
 
