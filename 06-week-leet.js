@@ -37895,7 +37895,12 @@ Example 2:
 Input: nums = [3,6,9]
 Output: 0
 
+@param {number[]} nums
+@return {number}
 
+var minimumOperations = function(nums) {
+    
+};
 
 
 console.log("==========================================")
