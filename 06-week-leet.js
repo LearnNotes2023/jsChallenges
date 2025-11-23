@@ -37927,6 +37927,12 @@ Input: nums = [1,2,3,4,4]
 Output: 12
 Explanation: Pick numbers 1, 3, 4 and 4 their sum is 12 (maximum sum divisible by 3).
 
+@param {number[]} nums
+@return {number}
+
+var maxSumDivThree = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
