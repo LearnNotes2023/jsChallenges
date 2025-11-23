@@ -37931,7 +37931,34 @@ console.log("==========================================")
 // @return {number}
 
 var maxSumDivThree = function(nums) {
-    
+    let sum = 0;
+
+    let r1 = [], r2 = [];
+
+    for (let num of nums) {
+        sum += num;
+        if (num % 3 === 1) r1.push(num);
+        else if (num % 3 === 2) r2.push(num);
+    }
+
+    if (sum % 3 === 0) return sum;
+
+    r1.sort((a, b) => a - b);
+    r2.sort((a, b) => a - b);
+
+    let res = 0;
+
+    if (sum % 3 === 1) {
+        let option1 = r1.length > 0 ? sum - r1[0] : 0;
+        let option2 = r2.length > 1 ? sum - r2[0] - r2[1] : 0;
+        res = Math.max(option1, option2);
+    } else { // sum % 3 === 2
+        let option1 = r2.length > 0 ? sum - r2[0] : 0;
+        let option2 = r1.length > 1 ? sum - r1[0] - r1[1] : 0;
+        res = Math.max(option1, option2);
+    }
+
+    return res;
 };
 
 console.log("==========================================")
