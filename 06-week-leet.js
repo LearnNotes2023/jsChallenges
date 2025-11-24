@@ -37982,9 +37982,12 @@ Example 2:
 Input: nums = [1,1,1]
 Output: [false,false,false]
 
+@param {number[]} nums
+@return {boolean[]}
 
-
-
+var prefixesDivBy5 = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
