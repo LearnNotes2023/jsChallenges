@@ -37986,7 +37986,15 @@ console.log("==========================================")
 // @return {boolean[]}
 
 var prefixesDivBy5 = function(nums) {
-    
+    let res = [];
+    let cur = 0;
+
+    for (let bit of nums) {
+        cur = (cur * 2 + bit) % 5;
+        res.push(cur === 0);
+    }
+
+    return res;
 };
 
 console.log("==========================================")
