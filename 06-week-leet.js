@@ -38068,7 +38068,40 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfPaths = function(grid, k) {
-    
+    const mod = 1_000_000_007;
+    const m = grid.length, n = grid[0].length;
+
+    // dp[i][j][r] = ways
+    const dp = Array.from({ length: m }, () =>
+        Array.from({ length: n }, () => Array(k).fill(0))
+    );
+
+    dp[0][0][grid[0][0] % k] = 1;
+
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            const val = grid[i][j];
+
+            for (let r = 0; r < k; r++) {
+                const ways = dp[i][j][r];
+                if (ways === 0) continue;
+
+                // move down
+                if (i + 1 < m) {
+                    const nr = (r + grid[i + 1][j]) % k;
+                    dp[i + 1][j][nr] = (dp[i + 1][j][nr] + ways) % mod;
+                }
+
+                // move right
+                if (j + 1 < n) {
+                    const nr = (r + grid[i][j + 1]) % k;
+                    dp[i][j + 1][nr] = (dp[i][j + 1][nr] + ways) % mod;
+                }
+            }
+        }
+    }
+
+    return dp[m - 1][n - 1][0];
 };
 
 console.log("==========================================")
