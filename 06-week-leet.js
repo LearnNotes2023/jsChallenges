@@ -38063,6 +38063,14 @@ Input: grid = [[7,3,4,9],[2,3,6,2],[2,3,7,0]], k = 1
 Output: 10
 Explanation: Every integer is divisible by 1 so the sum of the elements on every possible path is divisible by k.
 
+@param {number[][]} grid
+@param {number} k
+@return {number}
+
+var numberOfPaths = function(grid, k) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
