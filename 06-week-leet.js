@@ -38134,7 +38134,33 @@ console.log("==========================================")
 // @return {number}
 
 var maxSubarraySum = function(nums, k) {
-    
+    let n = nums.length;
+
+    // prefix sums: pref[0] = 0
+    let pref = new Array(n + 1).fill(0);
+    for (let i = 0; i < n; i++) {
+        pref[i + 1] = pref[i] + nums[i];
+    }
+
+    // For each remainder group (0..k-1), store smallest prefix sum seen
+    let minPref = new Array(k).fill(Infinity);
+    minPref[0] = 0; // prefix index 0 has remainder 0
+
+    let result = -Infinity;
+
+    for (let j = 1; j <= n; j++) {
+        let r = j % k;
+
+        // Candidate subarray sum ending at j-1 with valid length
+        if (minPref[r] !== Infinity) {
+            result = Math.max(result, pref[j] - minPref[r]);
+        }
+
+        // Update smallest prefix sum for this remainder
+        minPref[r] = Math.min(minPref[r], pref[j]);
+    }
+
+    return result;
 };
 
 console.log("==========================================")
