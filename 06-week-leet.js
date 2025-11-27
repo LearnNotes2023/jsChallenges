@@ -38129,6 +38129,13 @@ Output: 4
 Explanation:
 The maximum sum subarray is [1, 2, -3, 4] which has length equal to 4 which is divisible by 2.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
+
+var maxSubarraySum = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
