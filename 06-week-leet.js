@@ -38187,7 +38187,27 @@ console.log("==========================================")
 // @return {number}
 
 var reverse = function(x) {
-    
+    let res = 0;
+    let sign = x < 0 ? -1 : 1;
+    x = Math.abs(x);
+
+    while (x > 0) {
+        let digit = x % 10;
+        x = Math.floor(x / 10);
+
+        // check for overflow before adding digit
+        if (res > Math.floor((2**31 - 1) / 10)) return 0;
+        if (res === Math.floor((2**31 - 1) / 10) && digit > 7) return 0;
+
+        res = res * 10 + digit;
+    }
+
+    res *= sign;
+
+    // final safety check (optional)
+    if (res < -(2**31) || res > 2**31 - 1) return 0;
+
+    return res;
 };
 
 console.log("==========================================")
