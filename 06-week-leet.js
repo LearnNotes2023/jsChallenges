@@ -38183,7 +38183,12 @@ Example 3:
 Input: x = 120
 Output: 21
 
+@param {number} x
+@return {number}
 
+var reverse = function(x) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
