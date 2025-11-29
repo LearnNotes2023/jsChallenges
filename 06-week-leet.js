@@ -38238,6 +38238,13 @@ Explanation:
 Perform 3 operations on nums[0] = 3 and 2 operations on nums[1] = 2. Now, nums = [0, 0].
 The sum is 0, which is divisible by 6.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
+
+var minOperations = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
