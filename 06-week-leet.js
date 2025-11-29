@@ -38243,7 +38243,24 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(nums, k) {
+    // Calculate the remainder of the sum modulo k
+    let total = nums.reduce((acc, num) => acc + num, 0);
+    let remainder = total % k;
     
+    // If the sum is already divisible by k, no operations needed
+    if (remainder === 0) return 0;
+    
+    // We need to reduce the sum by 'remainder' to make it divisible by k
+    let maxModulo = 0;
+    for (let num of nums) {
+        let mod = num % k;
+        // track the largest modulo we can use to reduce remainder
+        if (mod > maxModulo) maxModulo = mod;
+    }
+    
+    // minimum operations = remainder if we can directly decrement elements
+    // otherwise, we can perform operations sum-mode-wise
+    return remainder <= total ? remainder : total;
 };
 
 console.log("==========================================")
