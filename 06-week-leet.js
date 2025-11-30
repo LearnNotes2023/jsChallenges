@@ -38321,7 +38321,39 @@ console.log("==========================================")
 // @return {number}
 
 var myAtoi = function(s) {
+    let i = 0;
+    const n = s.length;
+    const INT_MIN = -2147483648;
+    const INT_MAX = 2147483647;
     
+    // 1. Skip leading whitespace
+    while (i < n && s[i] === ' ') i++;
+    
+    // 2. Check sign
+    let sign = 1;
+    if (i < n && (s[i] === '+' || s[i] === '-')) {
+        sign = s[i] === '-' ? -1 : 1;
+        i++;
+    }
+    
+    // 3. Read digits
+    let num = 0;
+    while (i < n && s[i] >= '0' && s[i] <= '9') {
+        num = num * 10 + (s[i] - '0');
+        i++;
+        
+        // Handle overflow early
+        if (sign === 1 && num > INT_MAX) return INT_MAX;
+        if (sign === -1 && -num < INT_MIN) return INT_MIN;
+    }
+    
+    num *= sign;
+    
+    // 4. Clamp to 32-bit range
+    if (num < INT_MIN) return INT_MIN;
+    if (num > INT_MAX) return INT_MAX;
+    
+    return num;
 };
 
 
