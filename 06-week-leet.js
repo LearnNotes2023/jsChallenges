@@ -38317,7 +38317,12 @@ Output: 0
 Explanation:
 Reading stops at the first non-digit character 'w'.
 
+@param {string} s
+@return {number}
 
+var myAtoi = function(s) {
+    
+};
 
 
 console.log("==========================================")
