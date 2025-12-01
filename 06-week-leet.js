@@ -38361,23 +38361,17 @@ console.log("==========================================")
 
 2141. Maximum Running Time of N Computers
 Hard
-Topics
-premium lock icon
-Companies
-Hint
-You have n computers. You are given the integer n and a 0-indexed integer array batteries where the ith battery can run a computer for batteries[i] minutes. You are interested in running all n computers simultaneously using the given batteries.
-
-Initially, you can insert at most one battery into each computer. After that and at any integer time moment, you can remove a battery from a computer and insert another battery any number of times. The inserted battery can be a totally new battery or a battery from another computer. You may assume that the removing and inserting processes take no time.
-
+You have n computers. You are given the integer n and a 0-indexed integer array batteries 
+where the ith battery can run a computer for batteries[i] minutes. 
+You are interested in running all n computers simultaneously using the given batteries.
+Initially, you can insert at most one battery into each computer. 
+After that and at any integer time moment, you can remove a battery from a computer and insert another battery any number of times. 
+The inserted battery can be a totally new battery or a battery from another computer. 
+You may assume that the removing and inserting processes take no time.
 Note that the batteries cannot be recharged.
-
 Return the maximum number of minutes you can run all the n computers simultaneously.
 
- 
-
 Example 1:
-
-
 Input: n = 2, batteries = [3,3,3]
 Output: 4
 Explanation: 
@@ -38388,8 +38382,6 @@ By the end of the fourth minute, battery 1 is also drained, and the first comput
 We can run the two computers simultaneously for at most 4 minutes, so we return 4.
 
 Example 2:
-
-
 Input: n = 2, batteries = [1,1,1,1]
 Output: 2
 Explanation: 
@@ -38398,7 +38390,13 @@ After one minute, battery 0 and battery 2 are drained so you need to remove them
 After another minute, battery 1 and battery 3 are also drained so the first and second computers are no longer running.
 We can run the two computers simultaneously for at most 2 minutes, so we return 2.
  
+@param {number} n
+@param {number[]} batteries
+@return {number}
 
+var maxRunTime = function(n, batteries) {
+    
+};
 
 
 console.log("==========================================")
