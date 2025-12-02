@@ -38448,7 +38448,35 @@ console.log("==========================================")
 // @return {number}
 
 var countTrapezoids = function(points) {
-    
+    const MOD = 1000000007n;
+    const byY = new Map();
+
+    // Group by y -> count points on that y
+    for (const [x, y] of points) {
+        byY.set(y, (byY.get(y) || 0) + 1);
+    }
+
+    // compute number of horizontal segments per y as BigInt
+    const segs = [];
+    for (const m of byY.values()) {
+        if (m >= 2) {
+            const mm = BigInt(m);
+            const seg = (mm * (mm - 1n) / 2n) % MOD;
+            segs.push(seg);
+        }
+    }
+
+    if (segs.length < 2) return 0;
+
+    // pairwise product sum using BigInt to avoid precision loss
+    let total = 0n;   // sum of previous segments
+    let result = 0n;
+    for (const c of segs) {
+        result = (result + (total * c) % MOD) % MOD;
+        total = (total + c) % MOD;
+    }
+
+    return Number(result); // result < MOD, safe to convert
 };
 
 console.log("==========================================")
