@@ -38506,7 +38506,99 @@ console.log("==========================================")
 // @return {number}
 
 var countTrapezoids = function(points) {
-    
+    const n = points.length;
+    const gcd = (a, b) => b === 0 ? Math.abs(a) : gcd(b, a % b);
+
+    // normalized slope between two points as string
+    const slopeKey = (x1, y1, x2, y2) => {
+        let dy = y2 - y1;
+        let dx = x2 - x1;
+        if (dx === 0) return "v";
+        if (dy === 0) return "h";
+        let g = gcd(dy, dx);
+        dy /= g; dx /= g;
+        if (dx < 0) { dx = -dx; dy = -dy; }
+        return dy + "/" + dx;
+    };
+
+    // Build slope -> lineId -> set of point indices on that line
+    // lineId uses normalized dy/dx and the line constant y*dx - x*dy
+    const slopeMap = new Map();
+    for (let i = 0; i < n; i++) {
+        const [x1, y1] = points[i];
+        for (let j = i + 1; j < n; j++) {
+            const [x2, y2] = points[j];
+            const sk = slopeKey(x1, y1, x2, y2);
+
+            let dy, dx;
+            if (sk === "v") { dy = 1; dx = 0; }
+            else if (sk === "h") { dy = 0; dx = 1; }
+            else {
+                const parts = sk.split('/').map(Number);
+                dy = parts[0]; dx = parts[1];
+            }
+
+            // line constant = y*dx - x*dy (integer)
+            const lineConst = dx === 0 ? `x=${x1}` : (dy === 0 ? `y=${y1}` : `${y1*dx - x1*dy}`);
+
+            if (!slopeMap.has(sk)) slopeMap.set(sk, new Map());
+            const lineMap = slopeMap.get(sk);
+            if (!lineMap.has(lineConst)) lineMap.set(lineConst, new Set());
+            const s = lineMap.get(lineConst);
+            s.add(i);
+            s.add(j);
+        }
+    }
+
+    // For each slope: sum over unordered pairs of distinct lines of C(cnt_i,2)*C(cnt_j,2)
+    let slopeSum = 0;
+    for (const lineMap of slopeMap.values()) {
+        const counts = [];
+        for (const pts of lineMap.values()) {
+            if (pts.size >= 2) counts.push(pts.size);
+        }
+        if (counts.length < 2) continue;
+        const comb = counts.map(c => (c * (c - 1)) / 2);
+        for (let a = 0; a < comb.length; a++) {
+            for (let b = a + 1; b < comb.length; b++) {
+                slopeSum += comb[a] * comb[b];
+            }
+        }
+    }
+
+    // Count parallelograms via doubled-midpoint, but **exclude degenerate (collinear) ones**
+    // midMap: midpointKey -> { total: K, slopeCounts: Map(slope -> c) }
+    const midMap = new Map();
+    for (let i = 0; i < n; i++) {
+        const [x1, y1] = points[i];
+        for (let j = i + 1; j < n; j++) {
+            const [x2, y2] = points[j];
+            const midKey = `${x1 + x2},${y1 + y2}`; // doubled-midpoint
+            const sk = slopeKey(x1, y1, x2, y2);
+            if (!midMap.has(midKey)) midMap.set(midKey, { total: 0, slopes: new Map() });
+            const entry = midMap.get(midKey);
+            entry.total++;
+            entry.slopes.set(sk, (entry.slopes.get(sk) || 0) + 1);
+        }
+    }
+
+    let parallelograms = 0;
+    for (const { total, slopes } of midMap.values()) {
+        if (total < 2) continue;
+        // total raw pairs choose 2
+        let totalPairs = (total * (total - 1)) / 2;
+        // subtract degenerate (both pairs on same line) counted by slope groups inside this midpoint
+        let degenerate = 0;
+        for (const c of slopes.values()) {
+            if (c >= 2) degenerate += (c * (c - 1)) / 2;
+        }
+        parallelograms += totalPairs - degenerate;
+    }
+
+    // trapezoids = slopeSum (counts every 4-set once per slope of its parallel sides)
+    // parallelograms were counted twice in slopeSum (once per slope). They should be counted once total,
+    // so we subtract parallelograms once.
+    return slopeSum - parallelograms;
 };
 
 console.log("==========================================")
