@@ -38502,6 +38502,12 @@ Output: 1
 Explanation:
 There is only one trapezoid which can be formed.
 
+@param {number[][]} points
+@return {number}
+
+var countTrapezoids = function(points) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
