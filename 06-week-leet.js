@@ -38635,7 +38635,12 @@ Output: 0
 Explanation:
 No cars will collide with each other. Thus, the total number of collisions that will happen on the road is 0.
 
+@param {string} directions
+@return {number}
 
+var countCollisions = function(directions) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
