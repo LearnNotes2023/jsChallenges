@@ -38639,7 +38639,24 @@ console.log("==========================================")
 // @return {number}
 
 var countCollisions = function(directions) {
+    let chars = directions.split('');
     
+    // Skip L's on the far left
+    let i = 0;
+    while (i < chars.length && chars[i] === 'L') i++;
+    
+    // Skip R's on the far right
+    let j = chars.length - 1;
+    while (j >= 0 && chars[j] === 'R') j--;
+    
+    let collisions = 0;
+    
+    // Count moving cars inside the bounded region
+    for (let k = i; k <= j; k++) {
+        if (chars[k] !== 'S') collisions++;
+    }
+    
+    return collisions;
 };
 
 console.log("==========================================")
