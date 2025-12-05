@@ -38695,7 +38695,14 @@ console.log("==========================================")
 // @return {number}
 
 var countPartitions = function(nums) {
-    
+    const total = nums.reduce((a, b) => a + b, 0);
+
+    // If total sum S is even, every index 0..n-2 is a valid partition.
+    // If S is odd, no partition is valid.
+    if (total % 2 === 0) {
+        return nums.length - 1;
+    }
+    return 0;
 };
 
 console.log("==========================================")
