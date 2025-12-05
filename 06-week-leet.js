@@ -38691,6 +38691,12 @@ Output: 3
 Explanation:
 All partitions result in an even sum difference.
 
+@param {number[]} nums
+@return {number}
+
+var countPartitions = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
