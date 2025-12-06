@@ -38735,7 +38735,13 @@ There are 2 valid partitions that satisfy the given conditions:
 [[3], [3], [4]]
 [[3, 3], [4]]
  
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var countPartitions = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
