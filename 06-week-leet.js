@@ -38740,7 +38740,48 @@ console.log("==========================================")
 // @return {number}
 
 var countPartitions = function(nums, k) {
-    
+    const MOD = 1_000_000_007;
+    const n = nums.length;
+
+    const dp = Array(n + 1).fill(0);
+    dp[0] = 1;
+
+    const ps = Array(n + 1).fill(0); // prefix sum of dp
+    ps[0] = 1;
+
+    let maxQ = []; // decreasing
+    let minQ = []; // increasing
+
+    let l = 0;
+
+    for (let r = 0; r < n; r++) {
+        let x = nums[r];
+
+        // push to maxQ
+        while (maxQ.length && maxQ[maxQ.length - 1].val < x)
+            maxQ.pop();
+        maxQ.push({ val: x, idx: r });
+
+        // push to minQ
+        while (minQ.length && minQ[minQ.length - 1].val > x)
+            minQ.pop();
+        minQ.push({ val: x, idx: r });
+
+        // shrink window until valid
+        while (maxQ[0].val - minQ[0].val > k) {
+            if (maxQ[0].idx === l) maxQ.shift();
+            if (minQ[0].idx === l) minQ.shift();
+            l++;
+        }
+
+        // dp[r+1] = sum(dp[l]..dp[r])
+        dp[r + 1] = (ps[r] - (l > 0 ? ps[l - 1] : 0) + MOD) % MOD;
+
+        // update prefix sum
+        ps[r + 1] = (ps[r] + dp[r + 1]) % MOD;
+    }
+
+    return dp[n];
 };
 
 console.log("==========================================")
