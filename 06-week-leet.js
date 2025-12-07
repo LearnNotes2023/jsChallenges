@@ -38799,7 +38799,13 @@ Input: low = 8, high = 10
 Output: 1
 Explanation: The odd numbers between 8 and 10 are [9].
 
+@param {number} low
+@param {number} high
+@return {number}
 
+var countOdds = function(low, high) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
