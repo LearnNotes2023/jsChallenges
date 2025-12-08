@@ -38824,7 +38824,12 @@ Input: n = 10
 Output: 4
 Explanation: The square triples are (3,4,5), (4,3,5), (6,8,10), and (8,6,10).
 
+@param {number} n
+@return {number}
 
+var countTriples = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
