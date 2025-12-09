@@ -38887,7 +38887,12 @@ nums[1] = 4, nums[2] = 2, nums[4] = 4
 nums[1] = nums[2] * 2 = 2 * 2 = 4
 nums[4] = nums[2] * 2 = 2 * 2 = 4
  
+@param {number[]} nums
+@return {number}
 
+var specialTriplets = function(nums) {
+    
+};
 
 
 
