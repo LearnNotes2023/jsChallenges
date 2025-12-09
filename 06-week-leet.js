@@ -38891,10 +38891,33 @@ console.log("==========================================")
 // @return {number}
 
 var specialTriplets = function(nums) {
-    
+    const MOD = 1_000_000_007;
+    const n = nums.length;
+
+    const rightCount = new Map();
+    for (let x of nums) {
+        rightCount.set(x, (rightCount.get(x) || 0) + 1);
+    }
+
+    const leftCount = new Map();
+    let result = 0;
+
+    for (let j = 0; j < n; j++) {
+        const mid = nums[j];
+        rightCount.set(mid, rightCount.get(mid) - 1);
+
+        const target = mid * 2;
+
+        const leftMatches = leftCount.get(target) || 0;
+        const rightMatches = rightCount.get(target) || 0;
+
+        result = (result + leftMatches * rightMatches) % MOD;
+
+        leftCount.set(mid, (leftCount.get(mid) || 0) + 1);
+    }
+
+    return result;
 };
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
