@@ -38957,6 +38957,12 @@ Output: 0
 Explanation:
 There are no possible permutations which can unlock all computers.
 
+@param {number[]} complexity
+@return {number}
+
+var countPermutations = function(complexity) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
