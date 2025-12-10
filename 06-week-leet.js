@@ -38961,7 +38961,18 @@ console.log("==========================================")
 // @return {number}
 
 var countPermutations = function(complexity) {
-    
+    const MOD = 1_000_000_007;
+    const n = complexity.length;
+    // If any complexity[i] <= complexity[0] for i>0, impossible.
+    for (let i = 1; i < n; ++i) {
+        if (complexity[i] <= complexity[0]) return 0;
+    }
+    // answer = (n-1)! % MOD
+    let ans = 1;
+    for (let i = 1; i <= n - 1; ++i) {
+        ans = (ans * i) % MOD;
+    }
+    return ans;
 };
 
 console.log("==========================================")
