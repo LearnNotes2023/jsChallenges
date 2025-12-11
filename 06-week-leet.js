@@ -39017,7 +39017,52 @@ console.log("==========================================")
 // @return {number}
 
 var countCoveredBuildings = function(n, buildings) {
-    
+    const rows = new Map();
+    const cols = new Map();
+
+    for (const [x, y] of buildings) {
+        if (!rows.has(x)) rows.set(x, []);
+        if (!cols.has(y)) cols.set(y, []);
+        rows.get(x).push(y);
+        cols.get(y).push(x);
+    }
+
+    // Sort for binary search
+    for (const [_, arr] of rows) arr.sort((a, b) => a - b);
+    for (const [_, arr] of cols) arr.sort((a, b) => a - b);
+
+    let result = 0;
+
+    // Helper: binary search to find y in sorted arr
+    const findIndex = (arr, val) => {
+        let l = 0, r = arr.length - 1;
+        while (l <= r) {
+            let m = (l + r) >> 1;
+            if (arr[m] === val) return m;
+            if (arr[m] < val) l = m + 1;
+            else r = m - 1;
+        }
+        return -1;
+    };
+
+    for (const [x, y] of buildings) {
+        const row = rows.get(x);
+        const col = cols.get(y);
+
+        const yi = findIndex(row, y);
+        const xi = findIndex(col, x);
+
+        const hasLeft = yi > 0;
+        const hasRight = yi < row.length - 1;
+        const hasAbove = xi > 0;
+        const hasBelow = xi < col.length - 1;
+
+        if (hasLeft && hasRight && hasAbove && hasBelow) {
+            result++;
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
