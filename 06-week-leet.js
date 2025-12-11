@@ -39012,7 +39012,13 @@ left ([3,2])
 right ([3,5])
 Thus, the count of covered buildings is 1.
 
+@param {number} n
+@param {number[][]} buildings
+@return {number}
 
+var countCoveredBuildings = function(n, buildings) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
