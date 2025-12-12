@@ -39117,11 +39117,69 @@ console.log("==========================================")
 // @return {number[]}
 
 var countMentions = function(numberOfUsers, events) {
-    
+    const mentions = Array(numberOfUsers).fill(0);
+    // offlineUntil[id] === null => online; otherwise the timestamp when they become online again
+    const offlineUntil = Array(numberOfUsers).fill(null);
+
+    // Build map from timestamp -> list of events (preserving input order within same timestamp)
+    const byTime = new Map();
+    for (const ev of events) {
+        const time = Number(ev[1]);
+        if (!byTime.has(time)) byTime.set(time, []);
+        byTime.get(time).push(ev);
+    }
+
+    // Process timestamps in ascending order
+    const times = Array.from(byTime.keys()).sort((a,b)=>a-b);
+
+    function updateReturns(currentTime) {
+        for (let i = 0; i < numberOfUsers; i++) {
+            if (offlineUntil[i] !== null && offlineUntil[i] <= currentTime) {
+                offlineUntil[i] = null;
+            }
+        }
+    }
+
+    for (const t of times) {
+        const list = byTime.get(t);
+
+        // 1) First update users who return online at this timestamp
+        updateReturns(t);
+
+        // 2) Apply all OFFLINE events at this timestamp (they take effect before any MESSAGE)
+        for (const ev of list) {
+            if (ev[0] === "OFFLINE") {
+                const id = Number(ev[2]);
+                // user goes offline starting now, returns at t + 60
+                offlineUntil[id] = t + 60;
+            }
+        }
+
+        // 3) Process all MESSAGE events at this timestamp (using the updated online/offline state)
+        for (const ev of list) {
+            if (ev[0] === "MESSAGE") {
+                const payload = ev[2];
+                const tokens = payload.split(" ").filter(Boolean);
+
+                for (const token of tokens) {
+                    if (token === "ALL") {
+                        for (let i = 0; i < numberOfUsers; i++) mentions[i]++;
+                    } else if (token === "HERE") {
+                        for (let i = 0; i < numberOfUsers; i++) {
+                            if (offlineUntil[i] === null) mentions[i]++;
+                        }
+                    } else if (token.startsWith("id")) {
+                        const id = Number(token.slice(2));
+                        // Count even if the user is offline
+                        mentions[id]++;
+                    }
+                }
+            }
+        }
+    }
+
+    return mentions;
 };
-
-
-
 
 console.log("==========================================")
 
