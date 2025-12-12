@@ -39112,7 +39112,13 @@ Initially, all users are online.
 At timestamp 10, id0 goes offline.
 At timestamp 12, "HERE" is mentioned. Because id0 is still offline, they will not be mentioned. mentions = [0,1]
 
- 
+@param {number} numberOfUsers
+@param {string[][]} events
+@return {number[]}
+
+var countMentions = function(numberOfUsers, events) {
+    
+};
 
 
 
