@@ -39221,7 +39221,38 @@ console.log("==========================================")
 // @return {string[]}
 
 var validateCoupons = function(code, businessLine, isActive) {
-    
+    const validBusinessLines = ["electronics", "grocery", "pharmacy", "restaurant"];
+    const businessOrder = new Map(validBusinessLines.map((b, i) => [b, i]));
+    const codeRegex = /^[A-Za-z0-9_]+$/;
+
+    const validCoupons = [];
+
+    for (let i = 0; i < code.length; i++) {
+        if (
+            isActive[i] &&
+            code[i].length > 0 &&
+            codeRegex.test(code[i]) &&
+            businessOrder.has(businessLine[i])
+        ) {
+            validCoupons.push({
+                code: code[i],
+                businessLine: businessLine[i]
+            });
+        }
+    }
+
+    validCoupons.sort((a, b) => {
+        const lineDiff =
+            businessOrder.get(a.businessLine) - businessOrder.get(b.businessLine);
+        if (lineDiff !== 0) return lineDiff;
+
+        // ASCII lexicographical comparison
+        if (a.code < b.code) return -1;
+        if (a.code > b.code) return 1;
+        return 0;
+    });
+
+    return validCoupons.map(c => c.code);
 };
 
 // console.log("==========================================")
