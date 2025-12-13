@@ -39215,6 +39215,14 @@ First coupon is inactive (invalid).
 Second coupon is valid.
 Third coupon has invalid business line (invalid).
 
+@param {string[]} code
+@param {string[]} businessLine
+@param {boolean[]} isActive
+@return {string[]}
+
+var validateCoupons = function(code, businessLine, isActive) {
+    
+};
 
 // console.log("==========================================")
 // console.log("==========================================")
