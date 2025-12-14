@@ -39293,7 +39293,26 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfWays = function(corridor) {
-    
+    const MOD = 1_000_000_007;
+    let seats = [];
+
+    // collect seat positions
+    for (let i = 0; i < corridor.length; i++) {
+        if (corridor[i] === 'S') seats.push(i);
+    }
+
+    // invalid cases
+    if (seats.length === 0 || seats.length % 2 !== 0) return 0;
+
+    let ways = 1;
+
+    // process each section boundary
+    for (let i = 2; i < seats.length; i += 2) {
+        const plantsBetween = seats[i] - seats[i - 1] - 1;
+        ways = (ways * (plantsBetween + 1)) % MOD;
+    }
+
+    return ways;
 };
 
 console.log("==========================================")
