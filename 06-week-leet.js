@@ -39289,7 +39289,12 @@ Input: corridor = "S"
 Output: 0
 Explanation: There is no way to divide the corridor because there will always be a section that does not have exactly two seats.
 
+@param {string} corridor
+@return {number}
 
+var numberOfWays = function(corridor) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
