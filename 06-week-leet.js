@@ -39346,7 +39346,19 @@ console.log("==========================================")
 // @return {number}
 
 var getDescentPeriods = function(prices) {
-    
+    let res = 1;      // first day
+    let streak = 1;
+
+    for (let i = 1; i < prices.length; i++) {
+        if (prices[i] === prices[i - 1] - 1) {
+            streak++;
+        } else {
+            streak = 1;
+        }
+        res += streak;
+    }
+
+    return res;
 };
 
 
