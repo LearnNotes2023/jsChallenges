@@ -39342,7 +39342,12 @@ Input: prices = [1]
 Output: 1
 Explanation: There is 1 smooth descent period: [1]
 
+@param {number[]} prices
+@return {number}
 
+var getDescentPeriods = function(prices) {
+    
+};
 
 
 console.log("==========================================")
