@@ -39422,7 +39422,63 @@ console.log("==========================================")
 // @return {number}
 
 var maxProfit = function(n, present, future, hierarchy, budget) {
-    
+    const children = Array.from({ length: n }, () => []);
+    for (const [u, v] of hierarchy) {
+        children[u - 1].push(v - 1);
+    }
+
+    function dfs(u) {
+        let dp0 = Array(budget + 1).fill(-Infinity); // u not bought
+        let dp1 = Array(budget + 1).fill(-Infinity); // u bought
+        dp0[0] = 0;
+        dp1[0] = 0;
+
+        for (const v of children[u]) {
+            const [c0, c1] = dfs(v);
+
+            const new0 = Array(budget + 1).fill(-Infinity);
+            const new1 = Array(budget + 1).fill(-Infinity);
+
+            for (let i = 0; i <= budget; i++) {
+                if (dp0[i] < 0) continue;
+                for (let j = 0; i + j <= budget; j++) {
+                    if (c0[j] < 0) continue;
+                    new0[i + j] = Math.max(new0[i + j], dp0[i] + c0[j]);
+                }
+            }
+
+            for (let i = 0; i <= budget; i++) {
+                if (dp1[i] < 0) continue;
+                for (let j = 0; i + j <= budget; j++) {
+                    if (c1[j] < 0) continue;
+                    new1[i + j] = Math.max(new1[i + j], dp1[i] + c1[j]);
+                }
+            }
+
+            dp0 = new0;
+            dp1 = new1;
+        }
+
+        // Buy u at full price
+        const costFull = present[u];
+        const profitFull = future[u] - costFull;
+        if (costFull <= budget) dp1[costFull] = Math.max(dp1[costFull], profitFull);
+
+        // Buy u at discounted price if parent bought
+        const costDiscount = Math.floor(present[u] / 2);
+        const profitDiscount = future[u] - costDiscount;
+        if (costDiscount <= budget) dp1[costDiscount] = Math.max(dp1[costDiscount], profitDiscount);
+
+        // Merge dp1 into dp0 to allow choosing whether to buy u
+        for (let i = 0; i <= budget; i++) {
+            dp0[i] = Math.max(dp0[i], dp1[i]);
+        }
+
+        return [dp0, dp1];
+    }
+
+    const [dp0] = dfs(0);
+    return Math.max(...dp0);
 };
 
 console.log("==========================================")
