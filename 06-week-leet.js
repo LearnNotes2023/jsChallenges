@@ -39414,7 +39414,16 @@ Employee 2 would get a discounted price of floor(2 / 2) = 1 and earns a profit o
 Employee 3 would get a discounted price of floor(3 / 2) = 1 and earns a profit of 6 - 1 = 5.
 The total cost becomes 5 + 1 + 1 = 7 <= budget. Thus, the maximum total profit achieved is 3 + 4 + 5 = 12.
 
+@param {number} n
+@param {number[]} present
+@param {number[]} future
+@param {number[][]} hierarchy
+@param {number} budget
+@return {number}
 
+var maxProfit = function(n, present, future, hierarchy, budget) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
