@@ -39515,7 +39515,30 @@ console.log("==========================================")
 // @return {number}
 
 var maximumProfit = function(prices, k) {
-    
+    const n = prices.length;
+    if (n < 2 || k === 0) return 0;
+
+    const dp = Array.from({ length: k + 1 }, () =>
+        new Array(n).fill(0)
+    );
+
+    for (let t = 1; t <= k; t++) {
+        let maxLong = -prices[0];   // dp[t-1][-1] - prices[0]
+        let maxShort = prices[0];   // dp[t-1][-1] + prices[0]
+
+        for (let i = 1; i < n; i++) {
+            dp[t][i] = Math.max(
+                dp[t][i - 1],
+                prices[i] + maxLong,
+                -prices[i] + maxShort
+            );
+
+            maxLong = Math.max(maxLong, dp[t - 1][i - 1] - prices[i]);
+            maxShort = Math.max(maxShort, dp[t - 1][i - 1] + prices[i]);
+        }
+    }
+
+    return dp[k][n - 1];
 };
 
 console.log("==========================================")
