@@ -39510,7 +39510,13 @@ A normal transaction: buy the stock on day 0 for $12 then sell it on day 2 for $
 A short selling transaction: sell the stock on day 3 for $19 then buy back on day 4 for $8.
 A normal transaction: buy the stock on day 5 for $1 then sell it on day 6 for $19.
 
+@param {number[]} prices
+@param {number} k
+@return {number}
 
+var maximumProfit = function(prices, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
