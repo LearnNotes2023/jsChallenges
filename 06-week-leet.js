@@ -39579,7 +39579,14 @@ Modify [0, 1]	[0, 1, 0]	(0 × 5) + (1 × 4) + (0 × 3) = 0 + 4 + 0	4
 Modify [1, 2]	[1, 0, 1]	(1 × 5) + (0 × 4) + (1 × 3) = 5 + 0 + 3	8
 Thus, the maximum possible profit is 9, which is achieved without any modification.
 
+@param {number[]} prices
+@param {number[]} strategy
+@param {number} k
+@return {number}
 
+var maxProfit = function(prices, strategy, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
