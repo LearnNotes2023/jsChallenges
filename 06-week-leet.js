@@ -39585,7 +39585,49 @@ console.log("==========================================")
 // @return {number}
 
 var maxProfit = function(prices, strategy, k) {
-    
+    const n = prices.length;
+
+    // 1. Base profit
+    let baseProfit = 0;
+    for (let i = 0; i < n; i++) {
+        baseProfit += strategy[i] * prices[i];
+    }
+
+    // 2. Gain arrays
+    const gainZero = new Array(n).fill(0);
+    const gainSell = new Array(n).fill(0);
+
+    for (let i = 0; i < n; i++) {
+        gainZero[i] = -strategy[i] * prices[i];
+        gainSell[i] = (1 - strategy[i]) * prices[i];
+    }
+
+    // 3. Prefix sums
+    const prefZero = new Array(n + 1).fill(0);
+    const prefSell = new Array(n + 1).fill(0);
+
+    for (let i = 0; i < n; i++) {
+        prefZero[i + 1] = prefZero[i] + gainZero[i];
+        prefSell[i + 1] = prefSell[i] + gainSell[i];
+    }
+
+    // 4. Sliding window
+    let bestGain = 0;
+    const half = k / 2;
+
+    for (let l = 0; l + k <= n; l++) {
+        const mid = l + half;
+        const r = l + k;
+
+        const gain =
+            (prefZero[mid] - prefZero[l]) +
+            (prefSell[r] - prefSell[mid]);
+
+        bestGain = Math.max(bestGain, gain);
+    }
+
+    // 5. Result
+    return baseProfit + bestGain;
 };
 
 console.log("==========================================")
