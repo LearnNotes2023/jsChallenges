@@ -39678,6 +39678,14 @@ Note that person 2 can share the secret at the same time as receiving it.
 At time 2, person 3 shares the secret with person 4.
 Thus, people 0, 1, 2, 3, and 4 know the secret after all the meetings.
 
+@param {number} n
+@param {number[][]} meetings
+@param {number} firstPerson
+@return {number[]}
+
+var findAllPeople = function(n, meetings, firstPerson) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
