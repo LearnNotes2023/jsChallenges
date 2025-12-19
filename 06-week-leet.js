@@ -39684,7 +39684,57 @@ console.log("==========================================")
 // @return {number[]}
 
 var findAllPeople = function(n, meetings, firstPerson) {
-    
+    // Sort meetings by time
+    meetings.sort((a, b) => a[2] - b[2]);
+
+    // Union-Find helpers
+    const parent = Array.from({ length: n }, (_, i) => i);
+
+    const find = (x) => {
+        if (parent[x] !== x) parent[x] = find(parent[x]);
+        return parent[x];
+    };
+
+    const union = (a, b) => {
+        const pa = find(a);
+        const pb = find(b);
+        if (pa !== pb) parent[pb] = pa;
+    };
+
+    // Person 0 and firstPerson know the secret initially
+    union(0, firstPerson);
+
+    let i = 0;
+    while (i < meetings.length) {
+        let time = meetings[i][2];
+        let temp = [];
+
+        // Collect all meetings at the same time
+        while (i < meetings.length && meetings[i][2] === time) {
+            const [x, y] = meetings[i];
+            union(x, y);
+            temp.push(x, y);
+            i++;
+        }
+
+        // Find who is connected to person 0 (has the secret)
+        const secretRoot = find(0);
+
+        // Reset connections for people not connected to the secret
+        for (const p of temp) {
+            if (find(p) !== secretRoot) {
+                parent[p] = p;
+            }
+        }
+    }
+
+    // Collect result
+    const res = [];
+    for (let i = 0; i < n; i++) {
+        if (find(i) === find(0)) res.push(i);
+    }
+
+    return res;
 };
 
 console.log("==========================================")
