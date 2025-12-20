@@ -39782,7 +39782,20 @@ console.log("==========================================")
 // @return {number}
 
 var minDeletionSize = function(strs) {
-    
+    let rows = strs.length;
+    let cols = strs[0].length;
+    let deletions = 0;
+
+    for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows - 1; r++) {
+            if (strs[r][c] > strs[r + 1][c]) {
+                deletions++;
+                break; // no need to check further rows for this column
+            }
+        }
+    }
+
+    return deletions;
 };
 
 console.log("==========================================")
