@@ -39778,6 +39778,12 @@ Explanation: The grid looks as follows:
   tsr
 All 3 columns are not sorted, so you will delete all 3.
 
+@param {string[]} strs
+@return {number}
+
+var minDeletionSize = function(strs) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
