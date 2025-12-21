@@ -39829,7 +39829,12 @@ Input: strs = ["zyx","wvu","tsr"]
 Output: 3
 Explanation: We have to delete every column.
 
+@param {string[]} strs
+@return {number}
 
+var minDeletionSize = function(strs) {
+    
+};
 
 
 console.log("==========================================")
