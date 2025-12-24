@@ -39988,7 +39988,13 @@ Input: apple = [5,5,5], capacity = [2,4,2,7]
 Output: 4
 Explanation: We will need to use all the boxes.
 
+@param {number[]} apple
+@param {number[]} capacity
+@return {number}
 
+var minimumBoxes = function(apple, capacity) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
