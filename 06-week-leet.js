@@ -39993,7 +39993,22 @@ console.log("==========================================")
 // @return {number}
 
 var minimumBoxes = function(apple, capacity) {
+    const totalApples = apple.reduce((sum, a) => sum + a, 0);
     
+    capacity.sort((a, b) => b - a); // largest first
+    
+    let currentCapacity = 0;
+    let boxesUsed = 0;
+    
+    for (let cap of capacity) {
+        currentCapacity += cap;
+        boxesUsed++;
+        if (currentCapacity >= totalApples) {
+            return boxesUsed;
+        }
+    }
+    
+    return boxesUsed; // fallback (problem guarantees enough capacity)
 };
 
 console.log("==========================================")
