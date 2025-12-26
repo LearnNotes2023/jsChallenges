@@ -40114,7 +40114,32 @@ console.log("==========================================")
 // @return {number}
 
 var bestClosingTime = function(customers) {
+    let penalty = 0;
     
+    // Initial penalty if shop closes at hour 0:
+    // All 'Y' hours are closed
+    for (let c of customers) {
+        if (c === 'Y') penalty++;
+    }
+    
+    let minPenalty = penalty;
+    let bestHour = 0;
+    
+    // Try closing at hours 1..n
+    for (let i = 0; i < customers.length; i++) {
+        if (customers[i] === 'Y') {
+            penalty--; // now open, so no penalty
+        } else {
+            penalty++; // open but no customers
+        }
+        
+        if (penalty < minPenalty) {
+            minPenalty = penalty;
+            bestHour = i + 1;
+        }
+    }
+    
+    return bestHour;
 };
 
 console.log("==========================================")
