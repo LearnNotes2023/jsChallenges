@@ -40110,7 +40110,12 @@ Input: customers = "YYYY"
 Output: 4
 Explanation: It is best to close the shop at the 4th hour as customers arrive at each hour.
  
+@param {string} customers
+@return {number}
 
+var bestClosingTime = function(customers) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
