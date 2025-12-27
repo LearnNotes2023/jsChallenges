@@ -40192,6 +40192,12 @@ Explanation:
   90 = XC
    4 = IV
 
+@param {number} num
+@return {string}
+
+var intToRoman = function(num) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
