@@ -40240,7 +40240,21 @@ console.log("==========================================")
 // @return {number}
 
 var countNegatives = function(grid) {
-    
+    let rows = grid.length;
+    let cols = grid[0].length;
+    let r = rows - 1;
+    let c = 0;
+    let count = 0;
+
+    while (r >= 0 && c < cols) {
+        if (grid[r][c] < 0) {
+            count += (cols - c);
+            r--;
+        } else {
+            c++;
+        }
+    }
+    return count;
 };
 
 console.log("==========================================")
