@@ -40236,6 +40236,13 @@ Example 2:
 Input: grid = [[3,2],[1,0]]
 Output: 0
 
+@param {number[][]} grid
+@return {number}
+
+var countNegatives = function(grid) {
+    
+};
+
 console.log("==========================================")
 
 
