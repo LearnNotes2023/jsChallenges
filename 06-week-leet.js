@@ -40287,6 +40287,13 @@ Output: false
 Explanation: The allowed triangular patterns are shown on the right.
 Starting from the bottom (level 4), there are multiple ways to build level 3, but trying all the possibilites, you will get always stuck before building level 1.
  
+@param {string} bottom
+@param {string[]} allowed
+@return {boolean}
+
+var pyramidTransition = function(bottom, allowed) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
