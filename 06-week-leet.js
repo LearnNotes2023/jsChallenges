@@ -40292,7 +40292,54 @@ console.log("==========================================")
 // @return {boolean}
 
 var pyramidTransition = function(bottom, allowed) {
-    
+    const map = new Map();
+
+    // Build mapping: "AB" -> ["C", "D"]
+    for (const pattern of allowed) {
+        const key = pattern.slice(0, 2);
+        const val = pattern[2];
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+        map.get(key).push(val);
+    }
+
+    const memo = new Map();
+
+    const dfs = (row) => {
+        if (row.length === 1) return true;
+        if (memo.has(row)) return memo.get(row);
+
+        const nextRows = [];
+
+        const buildNext = (index, current) => {
+            if (index === row.length - 1) {
+                nextRows.push(current);
+                return;
+            }
+
+            const key = row[index] + row[index + 1];
+            if (!map.has(key)) return;
+
+            for (const ch of map.get(key)) {
+                buildNext(index + 1, current + ch);
+            }
+        };
+
+        buildNext(0, "");
+
+        for (const next of nextRows) {
+            if (dfs(next)) {
+                memo.set(row, true);
+                return true;
+            }
+        }
+
+        memo.set(row, false);
+        return false;
+    };
+
+    return dfs(bottom);
 };
 
 console.log("==========================================")
