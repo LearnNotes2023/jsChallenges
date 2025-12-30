@@ -40363,6 +40363,12 @@ Example 2:
 Input: grid = [[8]]
 Output: 0
 
+@param {number[][]} grid
+@return {number}
+
+var numMagicSquaresInside = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
