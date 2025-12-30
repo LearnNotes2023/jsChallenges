@@ -40367,7 +40367,57 @@ console.log("==========================================")
 // @return {number}
 
 var numMagicSquaresInside = function(grid) {
-    
+    const rows = grid.length;
+    const cols = grid[0].length;
+    let count = 0;
+
+    // Helper function to check if 3x3 starting at (r, c) is magic
+    const isMagic = (r, c) => {
+        // Center must be 5
+        if (grid[r + 1][c + 1] !== 5) return false;
+
+        const seen = new Set();
+
+        // Check numbers are 1–9 and unique
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                const val = grid[r + i][c + j];
+                if (val < 1 || val > 9 || seen.has(val)) return false;
+                seen.add(val);
+            }
+        }
+
+        // Check sums
+        const sum = 15;
+
+        for (let i = 0; i < 3; i++) {
+            if (
+                grid[r + i][c] + grid[r + i][c + 1] + grid[r + i][c + 2] !== sum ||
+                grid[r][c + i] + grid[r + 1][c + i] + grid[r + 2][c + i] !== sum
+            ) {
+                return false;
+            }
+        }
+
+        // Diagonals
+        if (
+            grid[r][c] + grid[r + 1][c + 1] + grid[r + 2][c + 2] !== sum ||
+            grid[r][c + 2] + grid[r + 1][c + 1] + grid[r + 2][c] !== sum
+        ) {
+            return false;
+        }
+
+        return true;
+    };
+
+    // Slide 3x3 window
+    for (let r = 0; r <= rows - 3; r++) {
+        for (let c = 0; c <= cols - 3; c++) {
+            if (isMagic(r, c)) count++;
+        }
+    }
+
+    return count;
 };
 
 console.log("==========================================")
