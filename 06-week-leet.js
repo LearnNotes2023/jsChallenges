@@ -40458,7 +40458,70 @@ console.log("==========================================")
 // @return {number}
 
 var latestDayToCross = function(row, col, cells) {
-    
+    const dirs = [[1,0], [-1,0], [0,1], [0,-1]];
+
+    // Check if we can cross on day = mid
+    function canCross(day) {
+        // 0 = land, 1 = water
+        const grid = Array.from({ length: row }, () => Array(col).fill(0));
+
+        // Flood first `day` cells
+        for (let i = 0; i < day; i++) {
+            const [r, c] = cells[i];
+            grid[r - 1][c - 1] = 1;
+        }
+
+        const queue = [];
+        const visited = Array.from({ length: row }, () => Array(col).fill(false));
+
+        // Start from top row
+        for (let c = 0; c < col; c++) {
+            if (grid[0][c] === 0) {
+                queue.push([0, c]);
+                visited[0][c] = true;
+            }
+        }
+
+        while (queue.length) {
+            const [r, c] = queue.shift();
+
+            // Reached bottom
+            if (r === row - 1) return true;
+
+            for (const [dr, dc] of dirs) {
+                const nr = r + dr;
+                const nc = c + dc;
+
+                if (
+                    nr >= 0 && nr < row &&
+                    nc >= 0 && nc < col &&
+                    !visited[nr][nc] &&
+                    grid[nr][nc] === 0
+                ) {
+                    visited[nr][nc] = true;
+                    queue.push([nr, nc]);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // Binary search on days
+    let left = 1, right = cells.length, answer = 0;
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+
+        if (canCross(mid)) {
+            answer = mid;
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return answer;
 };
 
 console.log("==========================================")
