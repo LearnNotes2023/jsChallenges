@@ -40452,6 +40452,14 @@ Output: 3
 Explanation: The above image depicts how the matrix changes each day starting from day 0.
 The last day where it is possible to cross from top to bottom is on day 3.
 
+@param {number} row
+@param {number} col
+@param {number[][]} cells
+@return {number}
+
+var latestDayToCross = function(row, col, cells) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
