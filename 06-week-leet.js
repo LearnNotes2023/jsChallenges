@@ -40554,6 +40554,12 @@ Explanation: The array represents the integer 9.
 Incrementing by one gives 9 + 1 = 10.
 Thus, the result should be [1,0].
 
+@param {number[]} digits
+@return {number[]}
+
+var plusOne = function(digits) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
