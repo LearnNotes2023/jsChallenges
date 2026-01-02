@@ -40592,7 +40592,12 @@ Output: 2
 Example 3:
 Input: nums
 
+@param {number[]} nums
+@return {number}
 
+var repeatedNTimes = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
