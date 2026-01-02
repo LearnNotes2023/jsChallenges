@@ -40573,27 +40573,27 @@ var plusOne = function(digits) {
 
 console.log("==========================================")
 
-961. N-Repeated Element in Size 2N Array
-Easy
-You are given an integer array nums with the following properties:
-nums.length == 2 * n.
-nums contains n + 1 unique elements.
-Exactly one element of nums is repeated n times.
-Return the element that is repeated n times.
+// 961. N-Repeated Element in Size 2N Array
+// Easy
+// You are given an integer array nums with the following properties:
+// nums.length == 2 * n.
+// nums contains n + 1 unique elements.
+// Exactly one element of nums is repeated n times.
+// Return the element that is repeated n times.
 
-Example 1:
-Input: nums = [1,2,3,3]
-Output: 3
+// Example 1:
+// Input: nums = [1,2,3,3]
+// Output: 3
 
-Example 2:
-Input: nums = [2,1,2,5,3,2]
-Output: 2
+// Example 2:
+// Input: nums = [2,1,2,5,3,2]
+// Output: 2
 
-Example 3:
-Input: nums
+// Example 3:
+// Input: nums
 
-@param {number[]} nums
-@return {number}
+// @param {number[]} nums
+// @return {number}
 
 var repeatedNTimes = function(nums) {
     
