@@ -40623,6 +40623,12 @@ Example 2:
 Input: n = 5000
 Output: 30228214
 
+@param {number} n
+@return {number}
+
+var numOfWays = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
