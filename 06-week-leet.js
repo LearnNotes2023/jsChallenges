@@ -40666,7 +40666,12 @@ Example 3:
 Input: nums = [1,2,3,4,5]
 Output: 0
  
+@param {number[]} nums
+@return {number}
 
+var sumFourDivisors = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
