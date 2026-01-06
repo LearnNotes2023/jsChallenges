@@ -40789,8 +40789,19 @@ Example 2:
 Input: root = [989,null,10250,98693,-89388,null,null,null,-32127]
 Output: 2
 
+Definition for a binary tree node.
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
 
+@param {TreeNode} root
+@return {number}
 
+var maxLevelSum = function(root) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
