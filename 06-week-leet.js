@@ -40859,7 +40859,36 @@ console.log("==========================================")
 // @return {number}
 
 var maxProduct = function(root) {
-    
+    const MOD = 1_000_000_007;
+    let totalSum = 0;
+    let maxProd = 0;
+
+    // First DFS: compute total sum
+    const getTotalSum = (node) => {
+        if (!node) return 0;
+        return node.val + getTotalSum(node.left) + getTotalSum(node.right);
+    };
+
+    totalSum = getTotalSum(root);
+
+    // Second DFS: compute subtree sums and maximize product
+    const dfs = (node) => {
+        if (!node) return 0;
+
+        const leftSum = dfs(node.left);
+        const rightSum = dfs(node.right);
+
+        const subSum = node.val + leftSum + rightSum;
+
+        const product = subSum * (totalSum - subSum);
+        maxProd = Math.max(maxProd, product);
+
+        return subSum;
+    };
+
+    dfs(root);
+
+    return maxProd % MOD;
 };
 
 console.log("==========================================")
