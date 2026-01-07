@@ -40848,7 +40848,19 @@ Input: root = [1,null,2,3,4,null,null,5,6]
 Output: 90
 Explanation: Remove the red edge and get 2 binary trees with sum 15 and 6.Their product is 90 (15*6)
  
+Definition for a binary tree node.
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
 
+@param {TreeNode} root
+@return {number}
+
+var maxProduct = function(root) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
