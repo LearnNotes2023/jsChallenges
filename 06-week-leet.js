@@ -40924,7 +40924,28 @@ console.log("==========================================")
 // @return {number}
 
 var maxDotProduct = function(nums1, nums2) {
-    
+    const n = nums1.length;
+    const m = nums2.length;
+
+    // dp[i][j] = max dot product using nums1[0..i-1], nums2[0..j-1]
+    const dp = Array.from({ length: n + 1 }, () =>
+        Array(m + 1).fill(-Infinity)
+    );
+
+    for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= m; j++) {
+            const product = nums1[i - 1] * nums2[j - 1];
+
+            dp[i][j] = Math.max(
+                product,                    // start new subsequence
+                dp[i - 1][j - 1] + product, // extend subsequence
+                dp[i - 1][j],               // skip nums1[i-1]
+                dp[i][j - 1]                // skip nums2[j-1]
+            );
+        }
+    }
+
+    return dp[n][m];
 };
 
 
