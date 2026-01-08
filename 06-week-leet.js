@@ -40919,7 +40919,13 @@ Output: -1
 Explanation: Take subsequence [-1] from nums1 and subsequence [1] from nums2.
 Their dot product is -1.
 
+@param {number[]} nums1
+@param {number[]} nums2
+@return {number}
 
+var maxDotProduct = function(nums1, nums2) {
+    
+};
 
 
 console.log("==========================================")
