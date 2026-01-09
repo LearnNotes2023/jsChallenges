@@ -40976,6 +40976,19 @@ Output: [2]
 Explanation: The deepest node in the tree is 2, 
 the valid subtrees are the subtrees of nodes 2, 1 and 0 but the subtree of node 2 is the smallest.
 
+Definition for a binary tree node.
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+
+@param {TreeNode} root
+@return {TreeNode}
+
+var subtreeWithAllDeepest = function(root) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
