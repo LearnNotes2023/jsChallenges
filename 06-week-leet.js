@@ -41028,6 +41028,13 @@ Deleting "e" from "leet" adds 101[e] to the sum.
 At the end, both strings are equal to "let", and the answer is 100+101+101+101 = 403.
 If instead we turned both strings into "lee" or "eet", we would get answers of 433 or 417, which are higher.
 
+@param {string} s1
+@param {string} s2
+@return {number}
+
+var minimumDeleteSum = function(s1, s2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
