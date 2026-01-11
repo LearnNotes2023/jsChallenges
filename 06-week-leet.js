@@ -41074,7 +41074,12 @@ Input: strs = ["dog","racecar","car"]
 Output: ""
 Explanation: There is no common prefix among the input strings.
 
+@param {string[]} strs
+@return {string}
 
+var longestCommonPrefix = function(strs) {
+    
+};
 
 
 console.log("==========================================")
