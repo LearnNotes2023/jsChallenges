@@ -41120,7 +41120,12 @@ Example 2:
 Input: points = [[3,2],[-2,2]]
 Output: 5
 
+@param {number[][]} points
+@return {number}
 
+var minTimeToVisitAllPoints = function(points) {
+    
+};
 
 
 
