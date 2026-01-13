@@ -41164,6 +41164,12 @@ Below the line: 7/6 * 2 (Red) + 1/6 (Blue) = 15/6 = 2.5.
 Above the line: 5/6 * 2 (Red) + 5/6 (Blue) = 15/6 = 2.5.
 Since the areas above and below the line are equal, the output is 7/6 = 1.16667.
 
+@param {number[][]} squares
+@return {number}
+
+var separateSquares = function(squares) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
