@@ -41168,7 +41168,41 @@ console.log("==========================================")
 // @return {number}
 
 var separateSquares = function(squares) {
-    
+    let totalArea = 0;
+    let low = Infinity, high = -Infinity;
+
+    for (const [x, y, l] of squares) {
+        totalArea += l * l;
+        low = Math.min(low, y);
+        high = Math.max(high, y + l);
+    }
+
+    const target = totalArea / 2;
+
+    const areaBelow = (yLine) => {
+        let area = 0;
+        for (const [x, y, l] of squares) {
+            if (yLine <= y) continue;
+            if (yLine >= y + l) {
+                area += l * l;
+            } else {
+                area += l * (yLine - y);
+            }
+        }
+        return area;
+    };
+
+    // Binary search
+    for (let i = 0; i < 60; i++) { // enough iterations for precision
+        const mid = (low + high) / 2;
+        if (areaBelow(mid) < target) {
+            low = mid;
+        } else {
+            high = mid;
+        }
+    }
+
+    return low;
 };
 
 console.log("==========================================")
