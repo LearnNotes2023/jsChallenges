@@ -41233,8 +41233,84 @@ console.log("==========================================")
 // @param {number[][]} squares
 // @return {number}
 
-var separateSquares = function(squares) {
-    
+var separateSquares = function (squares) {
+    const events = [];
+    const xs = new Set();
+
+    for (const [x, y, l] of squares) {
+        events.push({ y, x1: x, x2: x + l, type: 1 });
+        events.push({ y: y + l, x1: x, x2: x + l, type: -1 });
+        xs.add(x);
+        xs.add(x + l);
+    }
+
+    const xArr = Array.from(xs).sort((a, b) => a - b);
+    const xIndex = new Map();
+    for (let i = 0; i < xArr.length; i++) {
+        xIndex.set(xArr[i], i);
+    }
+
+    const n = xArr.length - 1;
+    const count = new Array(n * 4).fill(0);
+    const length = new Array(n * 4).fill(0);
+
+    function update(node, l, r, ql, qr, val) {
+        if (qr <= l || r <= ql) return;
+        if (ql <= l && r <= qr) {
+            count[node] += val;
+        } else {
+            const mid = (l + r) >> 1;
+            update(node * 2, l, mid, ql, qr, val);
+            update(node * 2 + 1, mid, r, ql, qr, val);
+        }
+
+        if (count[node] > 0) {
+            length[node] = xArr[r] - xArr[l];
+        } else if (l + 1 === r) {
+            length[node] = 0;
+        } else {
+            length[node] = length[node * 2] + length[node * 2 + 1];
+        }
+    }
+
+    events.sort((a, b) => a.y - b.y);
+
+    let prevY = events[0].y;
+    let totalArea = 0;
+    const slabs = [];
+
+    for (const e of events) {
+        const dy = e.y - prevY;
+        if (dy > 0) {
+            const w = length[1];
+            if (w > 0) {
+                slabs.push([prevY, e.y, w]);
+                totalArea += w * dy;
+            }
+        }
+        update(
+            1,
+            0,
+            n,
+            xIndex.get(e.x1),
+            xIndex.get(e.x2),
+            e.type
+        );
+        prevY = e.y;
+    }
+
+    const half = totalArea / 2;
+    let acc = 0;
+
+    for (const [y1, y2, w] of slabs) {
+        const area = w * (y2 - y1);
+        if (acc + area >= half) {
+            return y1 + (half - acc) / w;
+        }
+        acc += area;
+    }
+
+    return prevY;
 };
 
 console.log("==========================================")
