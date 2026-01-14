@@ -41230,6 +41230,12 @@ Explanation:
 Since the blue square overlaps with the red square, it will not be counted again. 
 Thus, the line y = 1 splits the squares into two equal parts.
 
+@param {number[][]} squares
+@return {number}
+
+var separateSquares = function(squares) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
