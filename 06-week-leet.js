@@ -41352,9 +41352,30 @@ console.log("==========================================")
 // @return {number}
 
 var maximizeSquareHoleArea = function(n, m, hBars, vBars) {
-    
-};
+    const maxConsecutive = (arr) => {
+        arr.sort((a, b) => a - b);
 
+        let maxLen = 0;
+        let current = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (i === 0 || arr[i] === arr[i - 1] + 1) {
+                current++;
+            } else {
+                current = 1;
+            }
+            maxLen = Math.max(maxLen, current);
+        }
+
+        return maxLen + 1; // k bars removed → k+1 cells
+    };
+
+    const maxH = maxConsecutive(hBars);
+    const maxV = maxConsecutive(vBars);
+
+    const side = Math.min(maxH, maxV);
+    return side * side;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
