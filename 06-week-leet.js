@@ -41345,7 +41345,15 @@ Output: 4
 Explanation:
 One way to get the maximum square-shaped hole is by removing horizontal bar 3, and vertical bar 4.
 
+@param {number} n
+@param {number} m
+@param {number[]} hBars
+@param {number[]} vBars
+@return {number}
 
+var maximizeSquareHoleArea = function(n, m, hBars, vBars) {
+    
+};
 
 
 console.log("==========================================")
