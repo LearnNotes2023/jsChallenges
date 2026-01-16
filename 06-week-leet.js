@@ -41402,7 +41402,15 @@ Input: m = 6, n = 7, hFences = [2], vFences = [4]
 Output: -1
 Explanation: It can be proved that there is no way to create a square field by removing fences.
  
+@param {number} m
+@param {number} n
+@param {number[]} hFences
+@param {number[]} vFences
+@return {number}
 
+var maximizeSquareArea = function(m, n, hFences, vFences) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
