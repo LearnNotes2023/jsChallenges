@@ -41409,7 +41409,36 @@ console.log("==========================================")
 // @return {number}
 
 var maximizeSquareArea = function(m, n, hFences, vFences) {
-    
+    const MOD = 1000000007n;
+
+    hFences = [1, ...hFences, m].sort((a, b) => a - b);
+    vFences = [1, ...vFences, n].sort((a, b) => a - b);
+
+    // All possible horizontal distances
+    const hDiffs = new Set();
+    for (let i = 0; i < hFences.length; i++) {
+        for (let j = i + 1; j < hFences.length; j++) {
+            hDiffs.add(hFences[j] - hFences[i]);
+        }
+    }
+
+    let maxSide = -1;
+
+    // Check vertical distances
+    for (let i = 0; i < vFences.length; i++) {
+        for (let j = i + 1; j < vFences.length; j++) {
+            const diff = vFences[j] - vFences[i];
+            if (hDiffs.has(diff)) {
+                maxSide = Math.max(maxSide, diff);
+            }
+        }
+    }
+
+    if (maxSide === -1) return -1;
+
+    // BigInt-safe area computation
+    const side = BigInt(maxSide);
+    return Number((side * side) % MOD);
 };
 
 console.log("==========================================")
