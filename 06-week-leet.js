@@ -41484,7 +41484,13 @@ Output: 0
 Explanation:
 No pair of rectangles intersect, hence, the answer is 0.
 
+@param {number[][]} bottomLeft
+@param {number[][]} topRight
+@return {number}
 
+var largestSquareArea = function(bottomLeft, topRight) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
