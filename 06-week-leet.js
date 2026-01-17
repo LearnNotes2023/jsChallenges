@@ -41489,7 +41489,28 @@ console.log("==========================================")
 // @return {number}
 
 var largestSquareArea = function(bottomLeft, topRight) {
-    
+    const n = bottomLeft.length;
+    let maxArea = 0;
+
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            // Intersection coordinates
+            const left   = Math.max(bottomLeft[i][0], bottomLeft[j][0]);
+            const bottom = Math.max(bottomLeft[i][1], bottomLeft[j][1]);
+            const right  = Math.min(topRight[i][0], topRight[j][0]);
+            const top    = Math.min(topRight[i][1], topRight[j][1]);
+
+            const width = right - left;
+            const height = top - bottom;
+
+            if (width > 0 && height > 0) {
+                const side = Math.min(width, height);
+                maxArea = Math.max(maxArea, side * side);
+            }
+        }
+    }
+
+    return maxArea;
 };
 
 console.log("==========================================")
