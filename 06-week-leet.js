@@ -41536,7 +41536,12 @@ Example 2:
 Input: grid = [[5,1,3,1],[9,3,3,1],[1,3,3,8]]
 Output: 2
 
+@param {number[][]} grid
+@return {number}
 
+var largestMagicSquare = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
