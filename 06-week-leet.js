@@ -41540,7 +41540,67 @@ console.log("==========================================")
 // @return {number}
 
 var largestMagicSquare = function(grid) {
-    
+    const m = grid.length;
+    const n = grid[0].length;
+
+    // Prefix sums
+    const rowSum = Array.from({ length: m }, () => Array(n + 1).fill(0));
+    const colSum = Array.from({ length: m + 1 }, () => Array(n).fill(0));
+    const diag1 = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+    const diag2 = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            rowSum[i][j + 1] = rowSum[i][j] + grid[i][j];
+            colSum[i + 1][j] = colSum[i][j] + grid[i][j];
+            diag1[i + 1][j + 1] = diag1[i][j] + grid[i][j];
+            diag2[i + 1][j] = diag2[i][j + 1] + grid[i][j];
+        }
+    }
+
+    const maxK = Math.min(m, n);
+
+    for (let k = maxK; k >= 2; k--) {
+        for (let r = 0; r + k <= m; r++) {
+            for (let c = 0; c + k <= n; c++) {
+                const target =
+                    rowSum[r][c + k] - rowSum[r][c];
+
+                let valid = true;
+
+                // Check rows
+                for (let i = 0; i < k; i++) {
+                    if (rowSum[r + i][c + k] - rowSum[r + i][c] !== target) {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                // Check columns
+                for (let j = 0; j < k && valid; j++) {
+                    if (colSum[r + k][c + j] - colSum[r][c + j] !== target) {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                // Check diagonals
+                if (valid) {
+                    const d1 =
+                        diag1[r + k][c + k] - diag1[r][c];
+                    const d2 =
+                        diag2[r + k][c] - diag2[r][c + k];
+                    if (d1 !== target || d2 !== target) {
+                        valid = false;
+                    }
+                }
+
+                if (valid) return k;
+            }
+        }
+    }
+
+    return 1;
 };
 
 console.log("==========================================")
