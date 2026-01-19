@@ -41620,7 +41620,13 @@ Example 2:
 Input: mat = [[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]], threshold = 1
 Output: 0
  
+@param {number[][]} mat
+@param {number} threshold
+@return {number}
 
+var maxSideLength = function(mat, threshold) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
