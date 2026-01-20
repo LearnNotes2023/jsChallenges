@@ -41707,7 +41707,25 @@ console.log("==========================================")
 // @return {number[]}
 
 var minBitwiseArray = function(nums) {
-    
+    return nums.map(n => {
+        if ((n & 1) === 0) return -1;
+
+        let best = Infinity;
+
+        for (let k = 0; k < 31; k++) {
+            if (((n >> k) & 1) === 1) {
+                let higher = (n >> (k + 1)) << (k + 1);
+                let lower = (1 << k) - 1;
+                let x = higher | lower;
+
+                if ((x | (x + 1)) === n) {
+                    best = Math.min(best, x);
+                }
+            }
+        }
+
+        return best === Infinity ? -1 : best;
+    });
 };
 
 console.log("==========================================")
