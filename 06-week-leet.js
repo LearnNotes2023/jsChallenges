@@ -41703,7 +41703,12 @@ For i = 0, the smallest ans[0] that satisfies ans[0] OR (ans[0] + 1) = 11 is 9, 
 For i = 1, the smallest ans[1] that satisfies ans[1] OR (ans[1] + 1) = 13 is 12, because 12 OR (12 + 1) = 13.
 For i = 2, the smallest ans[2] that satisfies ans[2] OR (ans[2] + 1) = 31 is 15, because 15 OR (15 + 1) = 31.
 
+@param {number[]} nums
+@return {number[]}
 
+var minBitwiseArray = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
