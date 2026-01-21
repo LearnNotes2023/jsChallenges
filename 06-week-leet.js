@@ -41759,7 +41759,21 @@ console.log("==========================================")
 // @return {number[]}
 
 var minBitwiseArray = function(nums) {
-    
+    return nums.map(n => {
+        // Even numbers are impossible
+        if ((n & 1) === 0) return -1;
+
+        // Count trailing 1s
+        let k = 0;
+        let temp = n;
+        while ((temp & 1) === 1) {
+            k++;
+            temp >>= 1;
+        }
+
+        // Minimum valid ans
+        return n - (1 << (k - 1));
+    });
 };
 
 console.log("==========================================")
