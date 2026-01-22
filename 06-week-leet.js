@@ -41805,9 +41805,35 @@ console.log("==========================================")
 // @return {number}
 
 var minimumPairRemoval = function(nums) {
-    
-};
+    let ops = 0;
 
+    const isNonDecreasing = (arr) => {
+        for (let i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[i - 1]) return false;
+        }
+        return true;
+    };
+
+    while (!isNonDecreasing(nums)) {
+        let minSum = Infinity;
+        let index = 0;
+
+        // find leftmost adjacent pair with minimum sum
+        for (let i = 0; i < nums.length - 1; i++) {
+            let sum = nums[i] + nums[i + 1];
+            if (sum < minSum) {
+                minSum = sum;
+                index = i;
+            }
+        }
+
+        // replace the pair with their sum
+        nums.splice(index, 2, minSum);
+        ops++;
+    }
+
+    return ops;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
