@@ -41859,6 +41859,12 @@ Output: 0
 Explanation:
 The array nums is already sorted.
 
+@param {number[]} nums
+@return {number}
+
+var minimumPairRemoval = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
