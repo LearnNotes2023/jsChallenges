@@ -41863,7 +41863,32 @@ console.log("==========================================")
 // @return {number}
 
 var minimumPairRemoval = function(nums) {
-    
+    let ops = 0;
+
+    const isNonDecreasing = () => {
+        for (let i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) return false;
+        }
+        return true;
+    };
+
+    while (!isNonDecreasing()) {
+        let minSum = Infinity;
+        let idx = 0;
+
+        for (let i = 0; i < nums.length - 1; i++) {
+            const s = nums[i] + nums[i + 1];
+            if (s < minSum) {
+                minSum = s;
+                idx = i;
+            }
+        }
+
+        nums.splice(idx, 2, minSum);
+        ops++;
+    }
+
+    return ops;
 };
 
 console.log("==========================================")
