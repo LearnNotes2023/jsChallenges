@@ -42050,7 +42050,13 @@ Explanation: There are six ways to pick score(s) of two students:
 - [9,4,1,7]. The difference between the highest and lowest score is 7 - 1 = 6.
 The minimum possible difference is 2.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var minimumDifference = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
