@@ -42096,6 +42096,12 @@ Example 3:
 Input: arr = [3,8,-10,23,19,-4,-14,27]
 Output: [[-14,-10],[19,23],[23,27]]
 
+@param {number[]} arr
+@return {number[][]}
+
+var minimumAbsDifference = function(arr) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
