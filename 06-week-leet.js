@@ -42152,9 +42152,139 @@ console.log("==========================================")
 // @param {number[][]} edges
 // @return {number}
 
-var minCost = function(n, edges) {
+class pair
+{
+    constructor(a, b)
+    {
+        this.first = a;
+        this.second = b;
+    }
+}
+
+// Method to dfs in tree and populates
+// disRev values
+function dfs(g, disRev, visit, u)
+{
     
-};
+    // Visit current node
+    visit[u] = true;
+    let totalRev = 0;
+ 
+    // Looping over all neighbors
+    for(let i = 0; i < g[u].length; i++)
+    {
+        let v = g[u][i].first;
+        if (!visit[v])
+        {
+            
+            // Distance of v will be one more
+            // than distance of u
+            disRev[v].first = disRev[u].first + 1;
+ 
+            // Initialize back edge count same as
+            // parent node's count
+            disRev[v].second = disRev[u].second;
+ 
+            // If there is a reverse edge from u to i,
+            // then only update
+            if (g[u][i].second != 0)
+            {
+                disRev[v].second = disRev[u].second + 1;
+                totalRev++;
+            }
+            totalRev += dfs(g, disRev, visit, v);
+        }
+    }
+ 
+    // Return total reversal in subtree 
+    // rooted at u
+    return totalRev;
+}
+
+// Method prints root and minimum number
+// of edge reversal
+function printMinEdgeReverseForRootNode(edges, e)
+{
+    
+    // Number of nodes are one more 
+    // than number of edges
+    let V = e + 1;
+ 
+    // Data structure to store directed tree
+    let g = [];
+     
+    for(let i = 0; i < V + 1; i++)
+        g.push([]);
+ 
+    // disRev stores two values - distance and 
+    // back edge count from root node
+    let disRev = new Array(V);
+ 
+    for(let i = 0; i < V; i++)
+        disRev[i] = new pair(0, 0);
+     
+    let visit = new Array(V);
+    let u, v;
+    
+    for(let i = 0; i < e; i++)
+    {
+        u = edges[i][0];
+        v = edges[i][1];
+ 
+        // Add 0 weight in direction of u to v
+        g[u].push(new pair(v, 0));
+ 
+        // Add 1 weight in reverse direction
+        g[v].push(new pair(u, 1));
+    }
+ 
+    // Initialize all variables
+    for(let i = 0; i < V; i++)
+    {
+        visit[i] = false;
+        disRev[i].first = disRev[i].second = 0;
+    }
+ 
+    let root = 0;
+ 
+    // dfs populates disRev data structure and
+    // store total reverse edge counts
+    let totalRev = dfs(g, disRev, visit, root);
+ 
+    // UnComment below lines to print each node's
+    // distance and edge reversal count from root node
+    /*
+    for (int i = 0; i < V; i++)
+    {
+        cout << i << " : " << disRev[i].first
+            << " " << disRev[i].second << endl;
+    }
+    */
+    let res = Number.MAX_VALUE;
+ 
+    // Loop over all nodes to choose 
+    // minimum edge reversal
+    for(let i = 0; i < V; i++)
+    {
+        
+        // (reversal in path to i) + (reversal
+        // in all other tree parts)
+        let edgesToRev = (totalRev - disRev[i].second) +
+                         (disRev[i].first - disRev[i].second);
+ 
+        // Choose minimum among all values
+        if (edgesToRev < res)
+        {
+            res = edgesToRev;
+            root = i;
+        }
+    }
+ 
+    // Print the designated root and total
+    // edge reversal made
+    document.write(root + " " + res );
+}
+
 
 console.log("==========================================")
 // console.log("==========================================")
