@@ -42148,6 +42148,13 @@ Explanation:
 No reversal is needed. Take the path 0 → 2 (cost 1), then 2 → 1 (cost 1), then 1 → 3 (cost 1).
 Total cost is 1 + 1 + 1 = 3.
 
+@param {number} n
+@param {number[][]} edges
+@return {number}
+
+var minCost = function(n, edges) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
