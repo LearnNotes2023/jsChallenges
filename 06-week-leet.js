@@ -42235,6 +42235,13 @@ Current Position	Move	New Position	Total Cost
 (1, 1)	Move Down	(2, 1)	5 + 4 = 9
 The minimum cost to reach bottom-right cell is 9.
 
+@param {number[][]} grid
+@param {number} k
+@return {number}
+
+var minCost = function(grid, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
