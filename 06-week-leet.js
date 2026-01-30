@@ -42442,9 +42442,78 @@ console.log("==========================================")
 // @param {number[]} cost
 // @return {number}
 
-var minimumCost = function(source, target, original, changed, cost) {
-    
+var minimumCost = function (source, target, original, changed, cost) {
+    const n = source.length;
+    const INF = 1e18;
+
+    // Step 1: Build graph for string transformations
+    const allStrings = new Set();
+    for (let s of original) allStrings.add(s);
+    for (let s of changed) allStrings.add(s);
+
+    const id = new Map();
+    let idx = 0;
+    for (let s of allStrings) id.set(s, idx++);
+
+    const m = idx;
+    const dist = Array.from({ length: m }, () => Array(m).fill(INF));
+
+    for (let i = 0; i < m; i++) dist[i][i] = 0;
+
+    for (let i = 0; i < original.length; i++) {
+        const u = id.get(original[i]);
+        const v = id.get(changed[i]);
+        dist[u][v] = Math.min(dist[u][v], cost[i]);
+    }
+
+    // Step 2: Floyd–Warshall
+    for (let k = 0; k < m; k++) {
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < m; j++) {
+                if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    // Step 3: Group possible conversions by length
+    const byLength = new Map();
+    for (let s of allStrings) {
+        const len = s.length;
+        if (!byLength.has(len)) byLength.set(len, []);
+        byLength.get(len).push(s);
+    }
+
+    // Step 4: DP
+    const dp = Array(n + 1).fill(INF);
+    dp[n] = 0;
+
+    for (let i = n - 1; i >= 0; i--) {
+        // Option 1: characters already match
+        if (source[i] === target[i]) {
+            dp[i] = dp[i + 1];
+        }
+
+        // Option 2: try all substring replacements
+        for (let [len, strings] of byLength.entries()) {
+            if (i + len > n) continue;
+
+            const sSub = source.slice(i, i + len);
+            const tSub = target.slice(i, i + len);
+
+            if (!id.has(sSub) || !id.has(tSub)) continue;
+
+            const c = dist[id.get(sSub)][id.get(tSub)];
+            if (c < INF) {
+                dp[i] = Math.min(dp[i], c + dp[i + len]);
+            }
+        }
+    }
+
+    return dp[0] >= INF ? -1 : dp[0];
 };
+
 
 console.log("==========================================")
 // console.log("==========================================")
