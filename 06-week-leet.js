@@ -42544,7 +42544,22 @@ console.log("==========================================")
 // @return {character}
 
 var nextGreatestLetter = function(letters, target) {
-    
+    let left = 0;
+    let right = letters.length - 1;
+    let result = letters[0]; // default for wrap-around
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+
+        if (letters[mid] > target) {
+            result = letters[mid];
+            right = mid - 1; // try to find a smaller valid letter
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
