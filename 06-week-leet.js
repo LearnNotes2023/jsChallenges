@@ -42592,6 +42592,12 @@ Output: 12
 Explanation: The best possible way to form 3 subarrays is: [10,3], [1], and [1] at a total cost of 10 + 1 + 1 = 12.
 It can be shown that 12 is the minimum cost achievable.
 
+@param {number[]} nums
+@return {number}
+
+var minimumCost = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
