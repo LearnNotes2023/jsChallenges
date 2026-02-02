@@ -42625,7 +42625,6 @@ such that the difference between the starting index of the second subarray
 and the starting index of the kth subarray should be less than or equal to dist. 
 In other words, if you divide nums into the 
 subarrays nums[0..(i1 - 1)], nums[i1..(i2 - 1)], ..., nums[ik-1..(n - 1)], then ik-1 - i1 <= dist.
-
 Return the minimum possible sum of the cost of these subarrays.
 
 Example 1:
@@ -42654,7 +42653,14 @@ The division [10], [8,18], and [9] is not valid, because the difference between 
 which is greater than dist.
 It can be shown that there is no possible way to divide nums into 3 subarrays at a cost lower than 36.
 
+@param {number[]} nums
+@param {number} k
+@param {number} dist
+@return {number}
 
+var minimumCost = function(nums, k, dist) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
