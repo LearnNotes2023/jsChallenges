@@ -42796,7 +42796,33 @@ console.log("==========================================")
 // @return {boolean}
 
 var isTrionic = function(nums) {
-    
+    const n = nums.length;
+    if (n < 4) return false;
+
+    let i = 0;
+
+    // 1. strictly increasing
+    while (i + 1 < n && nums[i] < nums[i + 1]) {
+        i++;
+    }
+    if (i === 0) return false; // no increasing part
+
+    // 2. strictly decreasing
+    let p = i;
+    while (i + 1 < n && nums[i] > nums[i + 1]) {
+        i++;
+    }
+    if (i === p) return false; // no decreasing part
+
+    // 3. strictly increasing again
+    let q = i;
+    while (i + 1 < n && nums[i] < nums[i + 1]) {
+        i++;
+    }
+    if (i === q) return false; // no final increasing part
+
+    // must reach the end
+    return i === n - 1;
 };
 
 console.log("==========================================")
