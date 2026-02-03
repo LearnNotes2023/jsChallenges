@@ -42792,6 +42792,12 @@ Output: false
 Explanation:
 There is no way to pick p and q to form the required three segments.
 
+@param {number[]} nums
+@return {boolean}
+
+var isTrionic = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
