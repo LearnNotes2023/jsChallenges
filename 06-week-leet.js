@@ -42858,6 +42858,12 @@ nums[q...r] = nums[2...3] = [2, 7] is strictly increasing (2 < 7).
 Sum = 1 + 4 + 2 + 7 = 14.
 
 
+@param {number[]} nums
+@return {number}
+
+var maxSumTrionic = function(nums) {
+    
+};
 
 
 console.log("==========================================")
