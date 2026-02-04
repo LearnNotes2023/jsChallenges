@@ -42862,7 +42862,53 @@ console.log("==========================================")
 // @return {number}
 
 var maxSumTrionic = function(nums) {
-    
+    const n = nums.length;
+    if (n < 4) return -Infinity;
+
+    const NEG = -1e18;
+
+    // 1. Increasing subarray ending at i
+    const incEnd = Array(n).fill(NEG);
+    for (let i = 1; i < n; i++) {
+        if (nums[i - 1] < nums[i]) {
+            incEnd[i] = Math.max(
+                incEnd[i - 1] + nums[i],
+                nums[i - 1] + nums[i]
+            );
+        }
+    }
+
+    // 2. Increasing then decreasing ending at i
+    const incDecEnd = Array(n).fill(NEG);
+    for (let i = 1; i < n; i++) {
+        if (nums[i - 1] > nums[i]) {
+            incDecEnd[i] = Math.max(
+                incDecEnd[i - 1] + nums[i], // extend decreasing
+                incEnd[i - 1] + nums[i]     // start decreasing after inc
+            );
+        }
+    }
+
+    // 3. Increasing subarray starting at i
+    const incStart = Array(n).fill(NEG);
+    for (let i = n - 2; i >= 0; i--) {
+        if (nums[i] < nums[i + 1]) {
+            incStart[i] = Math.max(
+                incStart[i + 1] + nums[i],
+                nums[i] + nums[i + 1]
+            );
+        }
+    }
+
+    // Combine all three phases
+    let ans = NEG;
+    for (let q = 0; q < n; q++) {
+        if (incDecEnd[q] > NEG && incStart[q] > NEG) {
+            ans = Math.max(ans, incDecEnd[q] + incStart[q] - nums[q]);
+        }
+    }
+
+    return ans;
 };
 
 
