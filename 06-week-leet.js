@@ -42949,9 +42949,21 @@ console.log("==========================================")
 // @return {number[]}
 
 var constructTransformedArray = function(nums) {
-    
-};
+    const n = nums.length;
+    const result = new Array(n);
 
+    for (let i = 0; i < n; i++) {
+        if (nums[i] === 0) {
+            result[i] = 0;
+        } else {
+            // move right for positive, left for negative
+            const newIndex = ((i + nums[i]) % n + n) % n;
+            result[i] = nums[newIndex];
+        }
+    }
+
+    return result;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
