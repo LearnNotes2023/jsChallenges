@@ -42995,9 +42995,13 @@ Output: 0
 Explanation:
 Since nums is already balanced as 6 <= 4 * 2, no elements need to be removed.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
-
-
+var minRemoval = function(nums, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
