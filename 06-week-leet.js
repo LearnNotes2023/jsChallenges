@@ -43132,6 +43132,12 @@ Example 2:
 Input: digits = "2"
 Output: ["a","b","c"]
 
+@param {string} digits
+@return {string[]}
+
+var letterCombinations = function(digits) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
