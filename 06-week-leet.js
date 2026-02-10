@@ -43200,9 +43200,28 @@ console.log("==========================================")
 // @return {number}
 
 var longestBalanced = function(nums) {
-    
-};
+    const n = nums.length;
+    let ans = 0;
 
+    for (let i = 0; i < n; i++) {
+        let evens = new Set();
+        let odds = new Set();
+
+        for (let j = i; j < n; j++) {
+            if (nums[j] % 2 === 0) {
+                evens.add(nums[j]);
+            } else {
+                odds.add(nums[j]);
+            }
+
+            if (evens.size === odds.size) {
+                ans = Math.max(ans, j - i + 1);
+            }
+        }
+    }
+
+    return ans;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
