@@ -43196,8 +43196,12 @@ Explanation:
 The longest balanced subarray is [2, 3, 2].
 It has 1 distinct even number [2] and 1 distinct odd number [3]. Thus, the answer is 3.
  
+@param {number[]} nums
+@return {number}
 
-
+var longestBalanced = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
