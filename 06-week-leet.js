@@ -43068,21 +43068,21 @@ var threeSumClosest = function(nums, target) {
 };
 console.log("==========================================")
 
-110. Balanced Binary Tree
-Easy
-Given a binary tree, determine if it is height-balanced.
+// 110. Balanced Binary Tree
+// Easy
+// Given a binary tree, determine if it is height-balanced.
 
-Example 1:
-Input: root = [3,9,20,null,null,15,7]
-Output: true
+// Example 1:
+// Input: root = [3,9,20,null,null,15,7]
+// Output: true
 
-Example 2:
-Input: root = [1,2,2,3,3,null,null,4,4]
-Output: false
+// Example 2:
+// Input: root = [1,2,2,3,3,null,null,4,4]
+// Output: false
 
-Example 3:
-Input: root = []
-Output: true
+// Example 3:
+// Input: root = []
+// Output: true
 
 // Definition for a binary tree node.
 // function TreeNode(val, left, right) {
@@ -43223,7 +43223,38 @@ var longestBalanced = function(nums) {
     return ans;
 };
 console.log("==========================================")
-// console.log("==========================================")
+
+3721. Longest Balanced Subarray II
+Hard
+You are given an integer array nums.
+A subarray is called balanced if the number of distinct even numbers in the subarray is equal 
+to the number of distinct odd numbers.
+Return the length of the longest balanced subarray.
+
+Example 1:
+Input: nums = [2,5,4,3]
+Output: 4
+Explanation:
+The longest balanced subarray is [2, 5, 4, 3].
+It has 2 distinct even numbers [2, 4] and 2 distinct odd numbers [5, 3]. Thus, the answer is 4.
+
+Example 2:
+Input: nums = [3,2,2,5,4]
+Output: 5
+Explanation:
+The longest balanced subarray is [3, 2, 2, 5, 4].
+It has 2 distinct even numbers [2, 4] and 2 distinct odd numbers [3, 5]. Thus, the answer is 5.
+
+Example 3:
+Input: nums = [1,2,3,2]
+Output: 3
+Explanation:
+The longest balanced subarray is [2, 3, 2].
+It has 1 distinct even number [2] and 1 distinct odd number [3]. Thus, the answer is 3.
+
+
+
+console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
