@@ -43457,7 +43457,12 @@ Output: 2
 Explanation:
 ​​​​​​​One of the longest balanced substrings is "ab" because both distinct characters 'a' and 'b' each appear exactly 1 time. Another longest balanced substring is "ba".
 
+@param {string} s
+@return {number}
 
+var longestBalanced = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
