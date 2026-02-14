@@ -43610,7 +43610,25 @@ console.log("==========================================")
 // @return {number}
 
 var champagneTower = function(poured, query_row, query_glass) {
+    // Create triangle structure
+    const dp = Array.from({ length: query_row + 1 }, 
+        () => new Array(query_row + 1).fill(0)
+    );
     
+    dp[0][0] = poured;
+    
+    for (let i = 0; i < query_row; i++) {
+        for (let j = 0; j <= i; j++) {
+            if (dp[i][j] > 1) {
+                let overflow = (dp[i][j] - 1) / 2;
+                dp[i + 1][j] += overflow;
+                dp[i + 1][j + 1] += overflow;
+                dp[i][j] = 1; // cap current glass
+            }
+        }
+    }
+    
+    return Math.min(1, dp[query_row][query_glass]);
 };
 
 console.log("==========================================")
