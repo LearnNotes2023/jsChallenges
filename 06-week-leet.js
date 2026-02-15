@@ -43645,7 +43645,13 @@ Example 2:
 Input: a = "1010", b = "1011"
 Output: "10101"
  
+@param {string} a
+@param {string} b
+@return {string}
 
+var addBinary = function(a, b) {
+    
+};
 
 
 console.log("==========================================")
