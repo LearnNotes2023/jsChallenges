@@ -43697,7 +43697,12 @@ Integer	Binary
 2147483644	01111111111111111111111111111100
 1073741822	00111111111111111111111111111110
  
+@param {number} n
+@return {number}
 
+var reverseBits = function(n) {
+    
+};
 
 
 
