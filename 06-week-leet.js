@@ -43734,7 +43734,12 @@ Example 2:
 Input: turnedOn = 9
 Output: []
 
+@param {number} turnedOn
+@return {string[]}
 
+var readBinaryWatch = function(turnedOn) {
+    
+};
 
 
 console.log("==========================================")
