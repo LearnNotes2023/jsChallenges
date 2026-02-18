@@ -43777,6 +43777,12 @@ Input: n = 11
 Output: false
 Explanation: The binary representation of 11 is: 1011.
 
+@param {number} n
+@return {boolean}
+
+var hasAlternatingBits = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
