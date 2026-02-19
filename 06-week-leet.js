@@ -43806,7 +43806,12 @@ Input: s = "10101"
 Output: 4
 Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal number of consecutive 1's and 0's.
 
+@param {string} s
+@return {number}
 
+var countBinarySubstrings = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
