@@ -43810,7 +43810,24 @@ console.log("==========================================")
 // @return {number} 
 
 var countBinarySubstrings = function(s) {
-    
+    let prev = 0;     // previous group length
+    let curr = 1;     // current group length
+    let count = 0;
+
+    for (let i = 1; i < s.length; i++) {
+        if (s[i] === s[i - 1]) {
+            curr++;
+        } else {
+            count += Math.min(prev, curr);
+            prev = curr;
+            curr = 1;
+        }
+    }
+
+    // Add the last group comparison
+    count += Math.min(prev, curr);
+
+    return count;
 };
 
 console.log("==========================================")
