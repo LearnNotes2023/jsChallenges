@@ -43857,9 +43857,28 @@ console.log("==========================================")
 // @return {string}
 
 var makeLargestSpecial = function(s) {
+    let count = 0;
+    let start = 0;
+    let subs = [];
     
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === '1') count++;
+        else count--;
+        
+        // When balanced, we found one special substring
+        if (count === 0) {
+            // Recursively optimize inner part
+            let inner = makeLargestSpecial(s.substring(start + 1, i));
+            subs.push("1" + inner + "0");
+            start = i + 1;
+        }
+    }
+    
+    // Sort in descending order
+    subs.sort((a, b) => b.localeCompare(a));
+    
+    return subs.join("");
 };
-
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
