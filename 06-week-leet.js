@@ -43853,6 +43853,12 @@ Example 2:
 Input: s = "10"
 Output: "10"
 
+@param {string} s
+@return {string}
+
+var makeLargestSpecial = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
