@@ -43911,7 +43911,13 @@ Explanation:
 15 -> 1111 (4 set bits, 4 is not prime)
 5 numbers have a prime number of set bits.
 
+@param {number} left
+@param {number} right
+@return {number}
 
+var countPrimeSetBits = function(left, right) {
+    
+};
 
 
 console.log("==========================================")
