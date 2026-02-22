@@ -43969,7 +43969,20 @@ console.log("==========================================")
 // @return {number}
 
 var binaryGap = function(n) {
-    
+    let binary = n.toString(2);
+    let maxDistance = 0;
+    let lastIndex = -1;
+
+    for (let i = 0; i < binary.length; i++) {
+        if (binary[i] === '1') {
+            if (lastIndex !== -1) {
+                maxDistance = Math.max(maxDistance, i - lastIndex);
+            }
+            lastIndex = i;
+        }
+    }
+
+    return maxDistance;
 };
 
 console.log("==========================================")
