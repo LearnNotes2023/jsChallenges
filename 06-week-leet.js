@@ -43965,6 +43965,13 @@ Input: n = 5
 Output: 2
 Explanation: 5 in binary is "101".
 
+@param {number} n
+@return {number}
+
+var binaryGap = function(n) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
