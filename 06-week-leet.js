@@ -44013,7 +44013,21 @@ console.log("==========================================")
 // @return {boolean}
 
 var hasAllCodes = function(s, k) {
+    // If string is too short, impossible
+    if (s.length < k) return false;
     
+    const needed = 1 << k; // 2^k
+    const seen = new Set();
+    
+    for (let i = 0; i <= s.length - k; i++) {
+        const substring = s.substring(i, i + k);
+        seen.add(substring);
+        
+        // Early stop if all found
+        if (seen.size === needed) return true;
+    }
+    
+    return seen.size === needed;
 };
 
 console.log("==========================================")
