@@ -44008,7 +44008,13 @@ Input: s = "0110", k = 2
 Output: false
 Explanation: The binary code "00" is of length 2 and does not exist in the array.
 
+@param {string} s
+@param {number} k
+@return {boolean}
 
+var hasAllCodes = function(s, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
