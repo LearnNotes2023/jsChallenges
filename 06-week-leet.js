@@ -44061,7 +44061,22 @@ console.log("==========================================")
 // @return {number}
 
 var sumRootToLeaf = function(root) {
-    
+    function dfs(node, current) {
+        if (!node) return 0;
+
+        // Build the binary number
+        current = current * 2 + node.val;
+
+        // If it's a leaf, return the number
+        if (!node.left && !node.right) {
+            return current;
+        }
+
+        // Otherwise, continue DFS
+        return dfs(node.left, current) + dfs(node.right, current);
+    }
+
+    return dfs(root, 0);
 };
 
 console.log("==========================================")
