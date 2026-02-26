@@ -44142,7 +44142,13 @@ Example 2:
 Input: nums = [2,2,2,2,2], target = 8
 Output: [[2,2,2,2]]
 
+@param {number[]} nums
+@param {number} target
+@return {number[][]}
 
+var fourSum = function(nums, target) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
