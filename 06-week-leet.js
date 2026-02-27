@@ -44226,7 +44226,39 @@ console.log("==========================================")
 // @return {number}
 
 var minOperations = function(s, k) {
-    
+    const n = s.length;
+    const zeroCount = s.split('').filter(ch => ch === '0').length;
+    const oneCount = n - zeroCount;
+
+    if (n === k) {
+        if (zeroCount === 0) return 0;
+        if (zeroCount === n) return 1;
+        return -1;
+    }
+
+    const ceilDiv = (x, y) => Math.floor((x + y - 1) / y);
+
+    let minOps = Infinity;
+
+    if (zeroCount % 2 === 0) {
+        let opsNeeded = Math.max(
+            ceilDiv(zeroCount, k),
+            ceilDiv(zeroCount, n - k)
+        );
+        if (opsNeeded % 2 === 1) opsNeeded++;
+        minOps = Math.min(minOps, opsNeeded);
+    }
+
+    if (zeroCount % 2 === k % 2) {
+        let opsNeeded = Math.max(
+            ceilDiv(zeroCount, k),
+            ceilDiv(oneCount, n - k)
+        );
+        if (opsNeeded % 2 === 0) opsNeeded++;
+        minOps = Math.min(minOps, opsNeeded);
+    }
+
+    return minOps < Infinity ? minOps : -1;
 };
 
 console.log("==========================================")
