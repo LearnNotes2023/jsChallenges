@@ -44286,6 +44286,12 @@ Explanation: The concatenation results in "1101110010111011110001001101010111100
 The decimal value of that is 118505380540.
 After modulo 109 + 7, the result is 505379714.
 
+@param {number} n
+@return {number}
+
+var concatenatedBinary = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
