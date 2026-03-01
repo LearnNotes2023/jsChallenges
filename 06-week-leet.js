@@ -44324,7 +44324,12 @@ Example 3:
 Input: n = "27346209830709182346"
 Output: 9
 
+@param {string} n
+@return {number}
 
+var minPartitions = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
