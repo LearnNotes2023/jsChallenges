@@ -44363,7 +44363,42 @@ console.log("==========================================")
 // @return {number}
 
 var minSwaps = function(grid) {
-    
+    const n = grid.length;
+    let trailingZeros = [];
+
+    // Step 1: Count trailing zeros for each row
+    for (let row of grid) {
+        let count = 0;
+        for (let i = n - 1; i >= 0 && row[i] === 0; i--) {
+            count++;
+        }
+        trailingZeros.push(count);
+    }
+
+    let swaps = 0;
+
+    // Step 2: Try to place rows greedily
+    for (let i = 0; i < n; i++) {
+        let required = n - 1 - i;
+        let j = i;
+
+        // Find row with enough trailing zeros
+        while (j < n && trailingZeros[j] < required) {
+            j++;
+        }
+
+        if (j === n) return -1;
+
+        // Move row up with adjacent swaps
+        while (j > i) {
+            [trailingZeros[j], trailingZeros[j - 1]] =
+            [trailingZeros[j - 1], trailingZeros[j]];
+            swaps++;
+            j--;
+        }
+    }
+
+    return swaps;
 };
 
 console.log("==========================================")
