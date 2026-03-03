@@ -44435,7 +44435,27 @@ console.log("==========================================")
 // @return {boolean}
 
 var isValid = function(s) {
+    const stack = [];
+    const map = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
     
+    for (let char of s) {
+        // If it's a closing bracket
+        if (map[char]) {
+            const top = stack.pop();
+            if (top !== map[char]) {
+                return false;
+            }
+        } else {
+            // Opening bracket
+            stack.push(char);
+        }
+    }
+    
+    return stack.length === 0;
 };
 
 console.log("==========================================")
