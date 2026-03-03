@@ -44431,6 +44431,12 @@ Example 5:
 Input: s = "([)]"
 Output: false
 
+@param {string} s
+@return {boolean}
+
+var isValid = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
