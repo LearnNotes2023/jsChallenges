@@ -44476,7 +44476,12 @@ Input: mat = [[1,0,0],[0,1,0],[0,0,1]]
 Output: 3
 Explanation: (0, 0), (1, 1) and (2, 2) are special positions.
 
+@param {number[][]} mat
+@return {number}
 
+var numSpecial = function(mat) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
