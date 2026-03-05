@@ -44534,7 +44534,12 @@ Input: s = "1111"
 Output: 2
 Explanation: You need two operations to reach "0101" or "1010".
 
+@param {string} s
+@return {number}
 
+var minOperations = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
