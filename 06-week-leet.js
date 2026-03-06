@@ -44570,6 +44570,13 @@ Example 2:
 Input: s = "110"
 Output: true
 
+@param {string} s
+@return {boolean}
+
+var checkOnesSegment = function(s) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
