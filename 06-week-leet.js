@@ -44608,7 +44608,38 @@ console.log("==========================================")
 // @return {number}
 
 var minFlips = function(s) {
-    
+    let n = s.length;
+    let ss = s + s;
+
+    let alt1 = "";
+    let alt2 = "";
+
+    for (let i = 0; i < 2 * n; i++) {
+        alt1 += i % 2 === 0 ? "0" : "1";
+        alt2 += i % 2 === 0 ? "1" : "0";
+    }
+
+    let diff1 = 0;
+    let diff2 = 0;
+    let res = Infinity;
+    let left = 0;
+
+    for (let right = 0; right < 2 * n; right++) {
+        if (ss[right] !== alt1[right]) diff1++;
+        if (ss[right] !== alt2[right]) diff2++;
+
+        if (right - left + 1 > n) {
+            if (ss[left] !== alt1[left]) diff1--;
+            if (ss[left] !== alt2[left]) diff2--;
+            left++;
+        }
+
+        if (right - left + 1 === n) {
+            res = Math.min(res, diff1, diff2);
+        }
+    }
+
+    return res;
 };
 
 console.log("==========================================")
