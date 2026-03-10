@@ -44798,8 +44798,14 @@ Example 3:
 Input: zero = 3, one = 3, limit = 2
 Output: 14
 
+@param {number} zero
+@param {number} one
+@param {number} limit
+@return {number}
 
-
+var numberOfStableArrays = function(zero, one, limit) {
+    
+};
 
 
 console.log("==========================================")
