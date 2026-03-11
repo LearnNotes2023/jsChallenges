@@ -44866,7 +44866,14 @@ console.log("==========================================")
 // @return {number}
 
 var bitwiseComplement = function(n) {
-    
+    let binary = n.toString(2);        // convert to binary
+    let flipped = "";
+
+    for (let bit of binary) {
+        flipped += bit === "0" ? "1" : "0";
+    }
+
+    return parseInt(flipped, 2);       // convert back to decimal
 };
 
 console.log("==========================================")
