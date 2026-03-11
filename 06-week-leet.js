@@ -44862,7 +44862,12 @@ Input: n = 10
 Output: 5
 Explanation: 10 is "1010" in binary, with complement "0101" in binary, which is 5 in base-10.
 
+@param {number} n
+@return {number}
 
+var bitwiseComplement = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
