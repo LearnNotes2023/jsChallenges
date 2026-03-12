@@ -44878,53 +44878,149 @@ var bitwiseComplement = function(n) {
 
 console.log("==========================================")
 
-3600. Maximize Spanning Tree Stability with Upgrades
-Hard
-You are given an integer n, representing n nodes numbered from 0 to n - 1 and a list of edges, 
-where edges[i] = [ui, vi, si, musti]
-    ui and vi indicates an undirected edge between nodes ui and vi.
-    si is the strength of the edge.
-    musti is an integer (0 or 1). If musti == 1, the edge must be included in the spanning tree. 
-    These edges cannot be upgraded.
-You are also given an integer k, the maximum number of upgrades you can perform. 
-Each upgrade doubles the strength of an edge, and each eligible edge (with musti == 0) can be upgraded at most once.
-The stability of a spanning tree is defined as the minimum strength score among all edges included in it.
-Return the maximum possible stability of any valid spanning tree. If it is impossible to connect all nodes, return -1.
-Note: A spanning tree of a graph with n nodes is a subset of the edges that connects all nodes together 
-(i.e. the graph is connected) without forming any cycles, and uses exactly n - 1 edges.
+// 3600. Maximize Spanning Tree Stability with Upgrades
+// Hard
+// You are given an integer n, representing n nodes numbered from 0 to n - 1 and a list of edges, 
+// where edges[i] = [ui, vi, si, musti]
+//     ui and vi indicates an undirected edge between nodes ui and vi.
+//     si is the strength of the edge.
+//     musti is an integer (0 or 1). If musti == 1, the edge must be included in the spanning tree. 
+//     These edges cannot be upgraded.
+// You are also given an integer k, the maximum number of upgrades you can perform. 
+// Each upgrade doubles the strength of an edge, and each eligible edge (with musti == 0) can be upgraded at most once.
+// The stability of a spanning tree is defined as the minimum strength score among all edges included in it.
+// Return the maximum possible stability of any valid spanning tree. If it is impossible to connect all nodes, return -1.
+// Note: A spanning tree of a graph with n nodes is a subset of the edges that connects all nodes together 
+// (i.e. the graph is connected) without forming any cycles, and uses exactly n - 1 edges.
 
-Example 1:
-Input: n = 3, edges = [[0,1,2,1],[1,2,3,0]], k = 1
-Output: 2
-Explanation:
-Edge [0,1] with strength = 2 must be included in the spanning tree.
-Edge [1,2] is optional and can be upgraded from 3 to 6 using one upgrade.
-The resulting spanning tree includes these two edges with strengths 2 and 6.
-The minimum strength in the spanning tree is 2, which is the maximum possible stability.
+// Example 1:
+// Input: n = 3, edges = [[0,1,2,1],[1,2,3,0]], k = 1
+// Output: 2
+// Explanation:
+// Edge [0,1] with strength = 2 must be included in the spanning tree.
+// Edge [1,2] is optional and can be upgraded from 3 to 6 using one upgrade.
+// The resulting spanning tree includes these two edges with strengths 2 and 6.
+// The minimum strength in the spanning tree is 2, which is the maximum possible stability.
 
-Example 2:
-Input: n = 3, edges = [[0,1,4,0],[1,2,3,0],[0,2,1,0]], k = 2
-Output: 6
-Explanation:
-Since all edges are optional and up to k = 2 upgrades are allowed.
-Upgrade edges [0,1] from 4 to 8 and [1,2] from 3 to 6.
-The resulting spanning tree includes these two edges with strengths 8 and 6.
-The minimum strength in the tree is 6, which is the maximum possible stability.
+// Example 2:
+// Input: n = 3, edges = [[0,1,4,0],[1,2,3,0],[0,2,1,0]], k = 2
+// Output: 6
+// Explanation:
+// Since all edges are optional and up to k = 2 upgrades are allowed.
+// Upgrade edges [0,1] from 4 to 8 and [1,2] from 3 to 6.
+// The resulting spanning tree includes these two edges with strengths 8 and 6.
+// The minimum strength in the tree is 6, which is the maximum possible stability.
 
-Example 3:
-Input: n = 3, edges = [[0,1,1,1],[1,2,1,1],[2,0,1,1]], k = 0
-Output: -1
-Explanation:
-All edges are mandatory and form a cycle, which violates the spanning tree property of acyclicity. 
-Thus, the answer is -1.
+// Example 3:
+// Input: n = 3, edges = [[0,1,1,1],[1,2,1,1],[2,0,1,1]], k = 0
+// Output: -1
+// Explanation:
+// All edges are mandatory and form a cycle, which violates the spanning tree property of acyclicity. 
+// Thus, the answer is -1.
  
-@param {number} n
-@param {number[][]} edges
-@param {number} k
-@return {number}
+// @param {number} n
+// @param {number[][]} edges
+// @param {number} k
+// @return {number}
 
 var maxStability = function(n, edges, k) {
-    
+
+    class DSU {
+        constructor(n){
+            this.p = Array.from({length:n}, (_,i)=>i);
+            this.r = Array(n).fill(0);
+        }
+        find(x){
+            if(this.p[x]!==x) this.p[x]=this.find(this.p[x]);
+            return this.p[x];
+        }
+        union(a,b){
+            a=this.find(a);
+            b=this.find(b);
+            if(a===b) return false;
+            if(this.r[a]<this.r[b]) [a,b]=[b,a];
+            this.p[b]=a;
+            if(this.r[a]===this.r[b]) this.r[a]++;
+            return true;
+        }
+    }
+
+    // check mandatory structure first
+    let dsuCheck = new DSU(n);
+    let mandatory = 0;
+    let minMandatory = Infinity;
+
+    for (let [u,v,s,m] of edges){
+        if(m===1){
+            if(!dsuCheck.union(u,v)) return -1;
+            mandatory++;
+            minMandatory = Math.min(minMandatory, s);
+        }
+    }
+
+    if(mandatory === n-1) return minMandatory;
+
+    const can = (x) => {
+        const dsu = new DSU(n);
+        let used = 0;
+
+        for (let [u,v,s,m] of edges){
+            if(m===1){
+                if(s < x) return false;
+                if(!dsu.union(u,v)) return false;
+                used++;
+            }
+        }
+
+        const normal = [];
+        const upgrade = [];
+
+        for (let [u,v,s,m] of edges){
+            if(m===0){
+                if(s >= x) normal.push([u,v]);
+                else if(s*2 >= x) upgrade.push([u,v]);
+            }
+        }
+
+        for(let [u,v] of normal){
+            if(dsu.union(u,v)){
+                used++;
+                if(used === n-1) return true;
+            }
+        }
+
+        let upgrades = 0;
+
+        for(let [u,v] of upgrade){
+            if(dsu.union(u,v)){
+                upgrades++;
+                used++;
+                if(upgrades > k) return false;
+                if(used === n-1) return true;
+            }
+        }
+
+        return false;
+    };
+
+    let left = 0, right = 0;
+
+    for (let e of edges) right = Math.max(right, e[2]*2);
+
+    let ans = -1;
+
+    while(left <= right){
+        let mid = Math.floor((left+right)/2);
+
+        if(can(mid)){
+            ans = mid;
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
