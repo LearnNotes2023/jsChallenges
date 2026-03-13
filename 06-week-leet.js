@@ -45067,7 +45067,13 @@ Explanation:
 There is only one worker in this example, so the answer is 
 workerTimes[0] + workerTimes[0] * 2 + workerTimes[0] * 3 + workerTimes[0] * 4 + workerTimes[0] * 5 = 15.
 
- 
+@param {number} mountainHeight
+@param {number[]} workerTimes
+@return {number}
+
+var minNumberOfSeconds = function(mountainHeight, workerTimes) {
+    
+};
 
 
 
