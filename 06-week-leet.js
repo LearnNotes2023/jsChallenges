@@ -45104,20 +45104,20 @@ var minNumberOfSeconds = function (mountainHeight, workerTimes) {
 
 console.log("==========================================")
 
-22. Generate Parentheses
-Medium
-Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+// 22. Generate Parentheses
+// Medium
+// Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
-Example 1:
-Input: n = 3
-Output: ["((()))","(()())","(())()","()(())","()()()"]
+// Example 1:
+// Input: n = 3
+// Output: ["((()))","(()())","(())()","()(())","()()()"]
 
-Example 2:
-Input: n = 1
-Output: ["()"]
+// Example 2:
+// Input: n = 1
+// Output: ["()"]
 
-@param {number} n
-@return {string[]}
+// @param {number} n
+// @return {string[]}
 
 var generateParenthesis = function(n) {
     
