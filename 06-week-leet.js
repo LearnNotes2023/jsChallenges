@@ -45120,7 +45120,28 @@ console.log("==========================================")
 // @return {string[]}
 
 var generateParenthesis = function(n) {
-    
+    const result = [];
+
+    function backtrack(current, open, close) {
+        // If the string is complete
+        if (current.length === 2 * n) {
+            result.push(current);
+            return;
+        }
+
+        // Add '(' if we still can
+        if (open < n) {
+            backtrack(current + "(", open + 1, close);
+        }
+
+        // Add ')' if it won't break validity
+        if (close < open) {
+            backtrack(current + ")", open, close + 1);
+        }
+    }
+
+    backtrack("", 0, 0);
+    return result;
 };
 
 console.log("==========================================")
