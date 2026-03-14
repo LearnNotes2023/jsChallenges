@@ -45116,6 +45116,12 @@ Example 2:
 Input: n = 1
 Output: ["()"]
 
+@param {number} n
+@return {string[]}
+
+var generateParenthesis = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
