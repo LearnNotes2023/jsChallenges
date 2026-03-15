@@ -45175,49 +45175,49 @@ console.log("==========================================")
 
 
 var Fancy = function() {
-    
+    this.MOD = 1000000007n;
+    this.arr = [];
+    this.mul = 1n;
+    this.add = 0n;
 };
 
-/** 
- * @param {number} val
- * @return {void}
- */
+Fancy.prototype.modPow = function(a, b) {
+    let res = 1n;
+    a %= this.MOD;
+    while (b > 0n) {
+        if (b & 1n) res = (res * a) % this.MOD;
+        a = (a * a) % this.MOD;
+        b >>= 1n;
+    }
+    return res;
+};
+
+Fancy.prototype.modInv = function(x) {
+    return this.modPow(x, this.MOD - 2n);
+};
+
 Fancy.prototype.append = function(val) {
-    
+    val = BigInt(val);
+    let v = (val - this.add + this.MOD) % this.MOD;
+    v = (v * this.modInv(this.mul)) % this.MOD;
+    this.arr.push(v);
 };
 
-/** 
- * @param {number} inc
- * @return {void}
- */
 Fancy.prototype.addAll = function(inc) {
-    
+    this.add = (this.add + BigInt(inc)) % this.MOD;
 };
 
-/** 
- * @param {number} m
- * @return {void}
- */
 Fancy.prototype.multAll = function(m) {
-    
+    m = BigInt(m);
+    this.mul = (this.mul * m) % this.MOD;
+    this.add = (this.add * m) % this.MOD;
 };
 
-/** 
- * @param {number} idx
- * @return {number}
- */
 Fancy.prototype.getIndex = function(idx) {
-    
+    if (idx >= this.arr.length) return -1;
+    let val = this.arr[idx];
+    return Number((val * this.mul + this.add) % this.MOD);
 };
-
-/** 
- * Your Fancy object will be instantiated and called as such:
- * var obj = new Fancy()
- * obj.append(val)
- * obj.addAll(inc)
- * obj.multAll(m)
- * var param_4 = obj.getIndex(idx)
- */
 
 console.log("==========================================")
 // console.log("==========================================")
