@@ -45252,6 +45252,12 @@ Input: grid = [[7,7,7]]
 Output: [7]
 Explanation: All three possible rhombus sums are the same, so return [7].
 
+@param {number[][]} grid
+@return {number[]}
+
+var getBiggestThree = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
