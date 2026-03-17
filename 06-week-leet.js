@@ -45322,7 +45322,12 @@ Output: 2
 Explanation: Notice that you must rearrange entire columns, 
 and there is no way to make a submatrix of 1s larger than an area of 2.
  
+@param {number[][]} matrix
+@return {number}
 
+var largestSubmatrix = function(matrix) {
+    
+};
 
 
 console.log("==========================================")
