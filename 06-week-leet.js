@@ -45326,7 +45326,63 @@ console.log("==========================================")
 // @return {number}
 
 var largestSubmatrix = function(matrix) {
-    
+    const m = matrix.length;
+    const n = matrix[0].length;
+
+    // Step 1: build heights
+    for (let i = 1; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (matrix[i][j] === 1) {
+                matrix[i][j] += matrix[i - 1][j];
+            }
+        }
+    }
+
+    let maxArea = 0;
+
+    // Step 2: process each row
+    for (let i = 0; i < m; i++) {
+        // sort descending
+        let row = [...matrix[i]].sort((a, b) => b - a);
+
+        // compute max area
+        for (let j = 0; j < n; j++) {
+            let height = row[j];
+            let width = j + 1;
+            maxArea = Math.max(maxArea, height * width);
+        }
+    }
+
+    return maxArea;
+};var largestSubmatrix = function(matrix) {
+    const m = matrix.length;
+    const n = matrix[0].length;
+
+    // Step 1: build heights
+    for (let i = 1; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (matrix[i][j] === 1) {
+                matrix[i][j] += matrix[i - 1][j];
+            }
+        }
+    }
+
+    let maxArea = 0;
+
+    // Step 2: process each row
+    for (let i = 0; i < m; i++) {
+        // sort descending
+        let row = [...matrix[i]].sort((a, b) => b - a);
+
+        // compute max area
+        for (let j = 0; j < n; j++) {
+            let height = row[j];
+            let width = j + 1;
+            maxArea = Math.max(maxArea, height * width);
+        }
+    }
+
+    return maxArea;
 };
 
 
