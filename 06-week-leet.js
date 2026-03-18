@@ -45404,7 +45404,13 @@ Output: 6
 Explanation: There are only 6 submatrices, shown in the image above, 
 that contain the top-left element of grid, and have a sum less than or equal to 20.
 
+@param {number[][]} grid
+@param {number} k
+@return {number}
 
+var countSubmatrices = function(grid, k) {
+    
+};
 
 
 console.log("==========================================")
