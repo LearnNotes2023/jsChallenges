@@ -45455,6 +45455,12 @@ Output: 0
 Explanation:
 No submatrix has at least one 'X'.
 
+@param {character[][]} grid
+@return {number}
+
+var numberOfSubmatrices = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
