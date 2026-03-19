@@ -45431,35 +45431,59 @@ var countSubmatrices = function(grid, k) {
 
 console.log("==========================================")
 
-3212. Count Submatrices With Equal Frequency of X and Y
-Medium
-Given a 2D character matrix grid, where grid[i][j] is either 'X', 'Y', or '.', return the number of submatrices that contain:
-grid[0][0]
-an equal frequency of 'X' and 'Y'.
-at least one 'X'.
+// 3212. Count Submatrices With Equal Frequency of X and Y
+// Medium
+// Given a 2D character matrix grid, where grid[i][j] is either 'X', 'Y', or '.', return the number of submatrices that contain:
+// grid[0][0]
+// an equal frequency of 'X' and 'Y'.
+// at least one 'X'.
  
-Example 1:
-Input: grid = [["X","Y","."],["Y",".","."]]
-Output: 3
-Explanation:
+// Example 1:
+// Input: grid = [["X","Y","."],["Y",".","."]]
+// Output: 3
+// Explanation:
 
-Example 2:
-Input: grid = [["X","X"],["X","Y"]]
-Output: 0
-Explanation:
-No submatrix has an equal frequency of 'X' and 'Y'.
+// Example 2:
+// Input: grid = [["X","X"],["X","Y"]]
+// Output: 0
+// Explanation:
+// No submatrix has an equal frequency of 'X' and 'Y'.
 
-Example 3:
-Input: grid = [[".","."],[".","."]]
-Output: 0
-Explanation:
-No submatrix has at least one 'X'.
+// Example 3:
+// Input: grid = [[".","."],[".","."]]
+// Output: 0
+// Explanation:
+// No submatrix has at least one 'X'.
 
-@param {character[][]} grid
-@return {number}
+// @param {character[][]} grid
+// @return {number}
 
-var numberOfSubmatrices = function(grid) {
-    
+const numberOfSubmatrices = grid => {
+    const rows = grid.length;
+    const cols = grid[0].length;
+    const sumX = new Int32Array(cols);
+    const sumY = new Int32Array(cols);
+    let res = 0;
+
+    for (let i = 0; i < rows; i++) {
+        let rx = 0;
+        let ry = 0;
+
+        for (let j = 0; j < cols; j++) {
+            if (grid[i][j] === 'X')
+                rx++;
+            else if (grid[i][j] === 'Y')
+                ry++;
+
+            sumX[j] += rx;
+            sumY[j] += ry;
+
+            if (sumX[j] > 0 && sumX[j] === sumY[j])
+                res++;
+        }
+    }
+
+    return res;
 };
 
 console.log("==========================================")
