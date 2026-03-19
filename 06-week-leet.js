@@ -45458,52 +45458,33 @@ console.log("==========================================")
 // @param {character[][]} grid
 // @return {number}
 
-var numberOfSubmatrices = function(grid) {
-    const m = grid.length;
-    const n = grid[0].length;
+const numberOfSubmatrices = grid => {
+    const rows = grid.length;
+    const cols = grid[0].length;
+    const sumX = new Int32Array(cols);
+    const sumY = new Int32Array(cols);
+    let res = 0;
 
-    let result = 0;
+    for (let i = 0; i < rows; i++) {
+        let rx = 0;
+        let ry = 0;
 
-    for (let top = 0; top < m; top++) {
-        const colSum = Array(n).fill(0);
-        const colSumNoX = Array(n).fill(0);
+        for (let j = 0; j < cols; j++) {
+            if (grid[i][j] === 'X')
+                rx++;
+            else if (grid[i][j] === 'Y')
+                ry++;
 
-        for (let bottom = top; bottom < m; bottom++) {
-            for (let j = 0; j < n; j++) {
-                // Main transform
-                if (grid[bottom][j] === 'X') colSum[j] += 1;
-                else if (grid[bottom][j] === 'Y') colSum[j] -= 1;
+            sumX[j] += rx;
+            sumY[j] += ry;
 
-                // No-X version
-                if (grid[bottom][j] === 'Y') colSumNoX[j] -= 1;
-                // X contributes 0 here
-            }
-
-            result += countZeroSubarrays(colSum) 
-                    - countZeroSubarrays(colSumNoX);
+            if (sumX[j] > 0 && sumX[j] === sumY[j])
+                res++;
         }
     }
 
-    return result;
+    return res;
 };
-
-function countZeroSubarrays(arr) {
-    let map = new Map();
-    map.set(0, 1);
-
-    let prefix = 0;
-    let count = 0;
-
-    for (let num of arr) {
-        prefix += num;
-        if (map.has(prefix)) {
-            count += map.get(prefix);
-        }
-        map.set(prefix, (map.get(prefix) || 0) + 1);
-    }
-
-    return count;
-}
 
 console.log("==========================================")
 // console.log("==========================================")
