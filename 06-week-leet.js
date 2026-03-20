@@ -45531,7 +45531,35 @@ console.log("==========================================")
 // @return {number[][]}
 
 var minAbsDiff = function(grid, k) {
-    
+    const m = grid.length;
+    const n = grid[0].length;
+    const res = Array.from({ length: m - k + 1 }, () => Array(n - k + 1).fill(0));
+
+    for (let i = 0; i <= m - k; i++) {
+        for (let j = 0; j <= n - k; j++) {
+            let arr = [];
+
+            // collect k x k submatrix
+            for (let x = i; x < i + k; x++) {
+                for (let y = j; y < j + k; y++) {
+                    arr.push(grid[x][y]);
+                }
+            }
+
+            arr.sort((a, b) => a - b);
+
+            let minDiff = Infinity;
+
+            for (let t = 1; t < arr.length; t++) {
+                if (arr[t] === arr[t - 1]) continue; // ✅ skip duplicates
+                minDiff = Math.min(minDiff, arr[t] - arr[t - 1]);
+            }
+
+            res[i][j] = minDiff === Infinity ? 0 : minDiff;
+        }
+    }
+
+    return res;
 };
 
 console.log("==========================================")
