@@ -45526,7 +45526,13 @@ Distinct values in the submatrix are [-2, 3, 5].
 The minimum absolute difference in the submatrix is |3 - 5| = 2.
 Thus, the answer is [[1, 2]].
 
+@param {number[][]} grid
+@param {number} k
+@return {number[][]}
 
+var minAbsDiff = function(grid, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
