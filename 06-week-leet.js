@@ -45584,7 +45584,15 @@ Output: [[3,4,4,2],[2,3,2,3]]
 Explanation:
 The diagram above shows the grid before and after the transformation.
 
+@param {number[][]} grid
+@param {number} x
+@param {number} y
+@param {number} k
+@return {number[][]}
 
+var reverseSubmatrix = function(grid, x, y, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
