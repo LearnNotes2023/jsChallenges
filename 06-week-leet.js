@@ -45591,7 +45591,21 @@ console.log("==========================================")
 // @return {number[][]}
 
 var reverseSubmatrix = function(grid, x, y, k) {
+    for (let i = 0; i < Math.floor(k / 2); i++) {
+        let topRow = x + i;
+        let bottomRow = x + k - 1 - i;
+        
+        for (let j = 0; j < k; j++) {
+            let col = y + j;
+            
+            // swap elements
+            let temp = grid[topRow][col];
+            grid[topRow][col] = grid[bottomRow][col];
+            grid[bottomRow][col] = temp;
+        }
+    }
     
+    return grid;
 };
 
 console.log("==========================================")
