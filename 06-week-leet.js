@@ -45635,9 +45635,35 @@ console.log("==========================================")
 // @return {boolean}
 
 var findRotation = function(mat, target) {
-    
-};
+    const n = mat.length;
 
+    const rotate = (matrix) => {
+        const res = Array.from({ length: n }, () => Array(n).fill(0));
+
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                res[j][n - 1 - i] = matrix[i][j];
+            }
+        }
+        return res;
+    };
+
+    const isEqual = (a, b) => {
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                if (a[i][j] !== b[i][j]) return false;
+            }
+        }
+        return true;
+    };
+
+    for (let k = 0; k < 4; k++) {
+        if (isEqual(mat, target)) return true;
+        mat = rotate(mat);
+    }
+
+    return false;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
