@@ -45692,10 +45692,9 @@ Input: grid = [[1,3],[0,-4]]
 Output: 0
 Explanation: Maximum non-negative product is shown (1 * 0 * -4 = 0).
  
-/**
- * @param {number[][]} grid
- * @return {number}
- */
+@param {number[][]} grid
+@return {number}
+
 var maxProductPath = function(grid) {
     
 };
