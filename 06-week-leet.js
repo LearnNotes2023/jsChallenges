@@ -45769,6 +45769,12 @@ p[0][1] = grid[0][0] * grid[0][2] = 12345 * 1 = 12345. 12345 % 12345 = 0. So p[0
 p[0][2] = grid[0][0] * grid[0][1] = 12345 * 2 = 24690. 24690 % 12345 = 0. So p[0][2] = 0.
 So the answer is [[2],[0],[0]].
 
+@param {number[][]} grid
+@return {number[][]}
+
+var constructProductMatrix = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
