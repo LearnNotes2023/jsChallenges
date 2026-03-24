@@ -45773,7 +45773,50 @@ console.log("==========================================")
 // @return {number[][]}
 
 var constructProductMatrix = function(grid) {
+    const MOD = 12345;
+    const n = grid.length;
+    const m = grid[0].length;
     
+    // Step 1: Flatten grid
+    const arr = [];
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            arr.push(grid[i][j]);
+        }
+    }
+    
+    const size = arr.length;
+    
+    // Step 2: Prefix products
+    const prefix = new Array(size).fill(1);
+    for (let i = 1; i < size; i++) {
+        prefix[i] = (prefix[i - 1] * arr[i - 1]) % MOD;
+    }
+    
+    // Step 3: Suffix products
+    const suffix = new Array(size).fill(1);
+    for (let i = size - 2; i >= 0; i--) {
+        suffix[i] = (suffix[i + 1] * arr[i + 1]) % MOD;
+    }
+    
+    // Step 4: Build result
+    const result = new Array(size);
+    for (let i = 0; i < size; i++) {
+        result[i] = (prefix[i] * suffix[i]) % MOD;
+    }
+    
+    // Step 5: Convert back to 2D
+    const resGrid = [];
+    let idx = 0;
+    for (let i = 0; i < n; i++) {
+        const row = [];
+        for (let j = 0; j < m; j++) {
+            row.push(result[idx++]);
+        }
+        resGrid.push(row);
+    }
+    
+    return resGrid;
 };
 
 console.log("==========================================")
