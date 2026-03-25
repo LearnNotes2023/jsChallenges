@@ -45841,8 +45841,12 @@ Output: false
 Explanation:
 No horizontal or vertical cut results in two non-empty sections with equal sums. Thus, the answer is false.
 
- 
+@param {number[][]} grid
+@return {boolean}
 
+var canPartitionGrid = function(grid) {
+    
+};
 
 
 console.log("==========================================")
