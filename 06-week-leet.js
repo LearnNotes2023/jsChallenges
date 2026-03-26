@@ -45930,6 +45930,12 @@ Output: false
 Explanation:
 No valid cut exists, so the answer is false.
 
+@param {number[][]} grid
+@return {boolean}
+
+var canPartitionGrid = function(grid) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
