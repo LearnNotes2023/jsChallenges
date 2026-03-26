@@ -45934,7 +45934,128 @@ console.log("==========================================")
 // @return {boolean}
 
 var canPartitionGrid = function(grid) {
-    
+    const m = grid.length, n = grid[0].length;
+
+    let total = 0;
+    for (let row of grid) {
+        for (let val of row) total += val;
+    }
+
+    // Count all values
+    let right = new Map();
+    for (let row of grid) {
+        for (let val of row) {
+            right.set(val, (right.get(val) || 0) + 1);
+        }
+    }
+
+    let left = new Map();
+
+    function add(map, v) {
+        map.set(v, (map.get(v) || 0) + 1);
+    }
+
+    function remove(map, v) {
+        map.set(v, map.get(v) - 1);
+        if (map.get(v) === 0) map.delete(v);
+    }
+
+    // ---------- Horizontal ----------
+    let topSum = 0;
+
+    for (let i = 0; i < m - 1; i++) {
+        for (let j = 0; j < n; j++) {
+            let v = grid[i][j];
+            topSum += v;
+
+            add(left, v);
+            remove(right, v);
+        }
+
+        let bottomSum = total - topSum;
+
+        if (topSum === bottomSum) return true;
+
+        let diff = Math.abs(topSum - bottomSum);
+
+        if (topSum > bottomSum) {
+            if (left.has(diff)) {
+                // connectivity check
+                if (i > 0 && n > 1) return true;
+                if (i === 0) {
+                    // single row
+                    if (grid[0][0] === diff || grid[0][n-1] === diff) return true;
+                }
+                if (n === 1) {
+                    if (grid[0][0] === diff || grid[i][0] === diff) return true;
+                }
+            }
+        } else {
+            if (right.has(diff)) {
+                if (m - i - 1 > 1 && n > 1) return true;
+                if (m - i - 1 === 1) {
+                    let r = i + 1;
+                    if (grid[r][0] === diff || grid[r][n-1] === diff) return true;
+                }
+                if (n === 1) {
+                    if (grid[i+1][0] === diff || grid[m-1][0] === diff) return true;
+                }
+            }
+        }
+    }
+
+    // ---------- Vertical ----------
+    let leftSum = 0;
+    left.clear();
+    right.clear();
+
+    // rebuild right map
+    for (let row of grid) {
+        for (let val of row) {
+            right.set(val, (right.get(val) || 0) + 1);
+        }
+    }
+
+    for (let j = 0; j < n - 1; j++) {
+        for (let i = 0; i < m; i++) {
+            let v = grid[i][j];
+            leftSum += v;
+
+            add(left, v);
+            remove(right, v);
+        }
+
+        let rightSum = total - leftSum;
+
+        if (leftSum === rightSum) return true;
+
+        let diff = Math.abs(leftSum - rightSum);
+
+        if (leftSum > rightSum) {
+            if (left.has(diff)) {
+                if (j > 0 && m > 1) return true;
+                if (j === 0) {
+                    if (grid[0][0] === diff || grid[m-1][0] === diff) return true;
+                }
+                if (m === 1) {
+                    if (grid[0][0] === diff || grid[0][j] === diff) return true;
+                }
+            }
+        } else {
+            if (right.has(diff)) {
+                if (n - j - 1 > 1 && m > 1) return true;
+                if (n - j - 1 === 1) {
+                    let c = j + 1;
+                    if (grid[0][c] === diff || grid[m-1][c] === diff) return true;
+                }
+                if (m === 1) {
+                    if (grid[0][j+1] === diff || grid[0][n-1] === diff) return true;
+                }
+            }
+        }
+    }
+
+    return false;
 };
 
 console.log("==========================================")
