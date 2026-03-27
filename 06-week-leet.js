@@ -46090,7 +46090,31 @@ console.log("==========================================")
 // @return {boolean}
 
 var areSimilar = function(mat, k) {
+    const m = mat.length;
+    const n = mat[0].length;
     
+    k = k % n; // only effective shifts matter
+    
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            
+            let newIndex;
+            
+            if (i % 2 === 0) {
+                // even row → left shift
+                newIndex = (j + k) % n;
+            } else {
+                // odd row → right shift
+                newIndex = (j - k + n) % n;
+            }
+            
+            if (mat[i][j] !== mat[i][newIndex]) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
 };
 
 console.log("==========================================")
