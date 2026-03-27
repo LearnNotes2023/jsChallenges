@@ -46085,6 +46085,13 @@ Output: true
 Explanation:
 As all the values are equal in the matrix, even after performing cyclic shifts the matrix will remain the same.
 
+@param {number[][]} mat
+@param {number} k
+@return {boolean}
+
+var areSimilar = function(mat, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
