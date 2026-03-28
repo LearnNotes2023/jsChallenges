@@ -46146,7 +46146,12 @@ Input: lcp = [[4,3,2,1],[3,3,2,1],[2,2,2,1],[1,1,1,3]]
 Output: ""
 Explanation: lcp[3][3] cannot be equal to 3 since word[3,...,3] consists of only a single letter; Thus, no answer exists.
 
+@param {number[][]} lcp
+@return {string}
 
+var findTheString = function(lcp) {
+    
+};
 
 
 console.log("==========================================")
