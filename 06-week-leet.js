@@ -46151,7 +46151,47 @@ console.log("==========================================")
 // @return {string}
 
 var findTheString = function(lcp) {
+    const n = lcp.length;
+    const word = new Array(n).fill('');
     
+    let charCode = 'a'.charCodeAt(0);
+
+    // Step 1: Construct the string
+    for (let i = 0; i < n; i++) {
+        if (word[i] !== '') continue;
+
+        if (charCode > 'z'.charCodeAt(0)) return "";
+
+        const ch = String.fromCharCode(charCode++);
+
+        for (let j = i; j < n; j++) {
+            if (lcp[i][j] > 0) {
+                word[j] = ch;
+            }
+        }
+    }
+
+    // Step 2: Validate LCP
+    const dp = Array.from({ length: n + 1 }, () => Array(n + 1).fill(0));
+
+    for (let i = n - 1; i >= 0; i--) {
+        for (let j = n - 1; j >= 0; j--) {
+            if (word[i] === word[j]) {
+                dp[i][j] = 1 + dp[i + 1][j + 1];
+            }
+        }
+    }
+
+    // Step 3: Compare matrices
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (dp[i][j] !== lcp[i][j]) {
+                return "";
+            }
+        }
+    }
+
+    return word.join('');
 };
 
 
