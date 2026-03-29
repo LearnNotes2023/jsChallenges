@@ -46216,7 +46216,13 @@ Input: s1 = "abcd", s2 = "dacb"
 Output: false
 Explanation: It is not possible to make the two strings equal.
 
+@param {string} s1
+@param {string} s2
+@return {boolean}
 
+var canBeEqual = function(s1, s2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
