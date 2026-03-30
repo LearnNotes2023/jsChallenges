@@ -46253,6 +46253,13 @@ Input: s1 = "abe", s2 = "bea"
 Output: false
 Explanation: It is not possible to make the two strings equal.
 
+@param {string} s1
+@param {string} s2
+@return {boolean}
+
+var checkStrings = function(s1, s2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
