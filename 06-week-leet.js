@@ -46368,39 +46368,39 @@ var generateString = function (str1, str2) {
 
 console.log("==========================================")
 
-23. Merge k Sorted Lists
-Hard
-You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
-Merge all the linked-lists into one sorted linked-list and return it.
+// 23. Merge k Sorted Lists
+// Hard
+// You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+// Merge all the linked-lists into one sorted linked-list and return it.
 
-Example 1:
-Input: lists = [[1,4,5],[1,3,4],[2,6]]
-Output: [1,1,2,3,4,4,5,6]
-Explanation: The linked-lists are:
-[
-  1->4->5,
-  1->3->4,
-  2->6
-]
-merging them into one sorted linked list:
-1->1->2->3->4->4->5->6
+// Example 1:
+// Input: lists = [[1,4,5],[1,3,4],[2,6]]
+// Output: [1,1,2,3,4,4,5,6]
+// Explanation: The linked-lists are:
+// [
+//   1->4->5,
+//   1->3->4,
+//   2->6
+// ]
+// merging them into one sorted linked list:
+// 1->1->2->3->4->4->5->6
 
-Example 2:
-Input: lists = []
-Output: []
-Example 3:
+// Example 2:
+// Input: lists = []
+// Output: []
+// Example 3:
 
-Input: lists = [[]]
-Output: []
+// Input: lists = [[]]
+// Output: []
  
-Definition for singly-linked list.
-function ListNode(val, next) {
-    this.val = (val===undefined ? 0 : val)
-    this.next = (next===undefined ? null : next)
-}
+// Definition for singly-linked list.
+// function ListNode(val, next) {
+//     this.val = (val===undefined ? 0 : val)
+//     this.next = (next===undefined ? null : next)
+// }
 
-@param {ListNode[]} lists
-@return {ListNode}
+// @param {ListNode[]} lists
+// @return {ListNode}
 
 var mergeKLists = function(lists) {
     
