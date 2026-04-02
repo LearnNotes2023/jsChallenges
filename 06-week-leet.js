@@ -46521,7 +46521,60 @@ console.log("==========================================")
 // @return {number}
 
 var maximumAmount = function(coins) {
-    
+    const m = coins.length;
+    const n = coins[0].length;
+
+    // dp[i][j][k] = max coins at (i,j) with k neutralizations used
+    const dp = Array.from({ length: m }, () =>
+        Array.from({ length: n }, () => Array(3).fill(-Infinity))
+    );
+
+    // start cell
+    for (let k = 0; k < 3; k++) {
+        if (coins[0][0] >= 0) {
+            dp[0][0][k] = coins[0][0];
+        } else {
+            // either take loss or neutralize (if k > 0)
+            dp[0][0][k] = Math.max(
+                coins[0][0],
+                k > 0 ? 0 : -Infinity
+            );
+        }
+    }
+
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (i === 0 && j === 0) continue;
+
+            for (let k = 0; k < 3; k++) {
+                let best = -Infinity;
+
+                // from top
+                if (i > 0) best = Math.max(best, dp[i - 1][j][k]);
+                // from left
+                if (j > 0) best = Math.max(best, dp[i][j - 1][k]);
+
+                // take normally
+                dp[i][j][k] = best + coins[i][j];
+
+                // neutralize if negative
+                if (coins[i][j] < 0 && k > 0) {
+                    let bestPrev = -Infinity;
+
+                    if (i > 0) bestPrev = Math.max(bestPrev, dp[i - 1][j][k - 1]);
+                    if (j > 0) bestPrev = Math.max(bestPrev, dp[i][j - 1][k - 1]);
+
+                    dp[i][j][k] = Math.max(dp[i][j][k], bestPrev);
+                }
+            }
+        }
+    }
+
+    return Math.max(
+        dp[m - 1][n - 1][0],
+        dp[m - 1][n - 1][1],
+        dp[m - 1][n - 1][2]
+    );
 };
 
 console.log("==========================================")
