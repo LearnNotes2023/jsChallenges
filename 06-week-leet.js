@@ -46517,7 +46517,12 @@ Move to (0, 1), gaining 10 coins (total coins = 10 + 10 = 20).
 Move to (0, 2), gaining another 10 coins (total coins = 20 + 10 = 30).
 Move to (1, 2), gaining the final 10 coins (total coins = 30 + 10 = 40).
  
+@param {number[][]} coins
+@return {number}
 
+var maximumAmount = function(coins) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
