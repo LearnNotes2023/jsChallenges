@@ -46617,7 +46617,14 @@ Explanation:
 In this example, only robots[0] can reach the wall, 
 but its shot to the right is blocked by robots[1]; thus the answer is 0.
 
+@param {number[]} robots
+@param {number[]} distance
+@param {number[]} walls
+@return {number}
 
+var maxWalls = function(robots, distance, walls) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
