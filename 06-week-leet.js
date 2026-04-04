@@ -46762,7 +46762,36 @@ console.log("==========================================")
 // @return {string}
 
 var decodeCiphertext = function(encodedText, rows) {
-    
+    if (rows === 1) return encodedText;
+
+    const cols = encodedText.length / rows;
+    let matrix = [];
+    let index = 0;
+
+    // Step 1: Build matrix
+    for (let r = 0; r < rows; r++) {
+        matrix[r] = [];
+        for (let c = 0; c < cols; c++) {
+            matrix[r][c] = encodedText[index++];
+        }
+    }
+
+    // Step 2: Read diagonals
+    let result = '';
+
+    for (let startCol = 0; startCol < cols; startCol++) {
+        let r = 0;
+        let c = startCol;
+
+        while (r < rows && c < cols) {
+            result += matrix[r][c];
+            r++;
+            c++;
+        }
+    }
+
+    // Step 3: Remove trailing spaces
+    return result.replace(/\s+$/, '');
 };
 
 console.log("==========================================")
