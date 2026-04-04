@@ -46757,7 +46757,13 @@ Input: encodedText = "coding", rows = 1
 Output: "coding"
 Explanation: Since there is only 1 row, both originalText and encodedText are the same.
 
+@param {string} encodedText
+@param {number} rows
+@return {string}
 
+var decodeCiphertext = function(encodedText, rows) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
