@@ -46822,7 +46822,17 @@ console.log("==========================================")
 // @return {boolean}
 
 var judgeCircle = function(moves) {
-    
+    let x = 0; // left/right
+    let y = 0; // up/down
+
+    for (let move of moves) {
+        if (move === 'U') y++;
+        if (move === 'D') y--;
+        if (move === 'R') x++;
+        if (move === 'L') x--;
+    }
+
+    return x === 0 && y === 0;
 };
 
 console.log("==========================================")
