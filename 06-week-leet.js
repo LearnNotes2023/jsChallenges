@@ -47009,8 +47009,21 @@ console.log("==========================================")
 // @param {number[][]} queries
 // @return {number}
 
-var xorAfterQueries = function(nums, queries) {
-    
+var xorAfterQueries = function (nums, queries) {
+    const MOD = 1e9 + 7;
+
+    for (const q of queries) {
+        const [l, r, k, v] = q;
+        for (let i = l; i <= r; i += k) {
+            nums[i] = Number((BigInt(nums[i]) * BigInt(v)) % BigInt(MOD));
+        }
+    }
+
+    let res = 0;
+    for (const x of nums) {
+        res ^= x;
+    }
+    return res;
 };
 
 console.log("==========================================")
