@@ -47055,7 +47055,13 @@ The first query [1, 4, 2, 3] multiplies the elements at indices 1 and 3 by 3, tr
 The second query [0, 2, 1, 2] multiplies the elements at indices 0, 1, and 2 by 2, resulting in [4, 18, 2, 15, 4].
 Finally, the XOR of all elements is 4 ^ 18 ^ 2 ^ 15 ^ 4 = 31.​​​​​​​
 
+@param {number[]} nums
+@param {number[][]} queries
+@return {number}
 
+var xorAfterQueries = function(nums, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
