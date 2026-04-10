@@ -47149,7 +47149,28 @@ console.log("==========================================")
 // @return {number}
 
 var minimumDistance = function(nums) {
-    
+    const map = new Map();
+
+    // Step 1: collect indices
+    for (let i = 0; i < nums.length; i++) {
+        if (!map.has(nums[i])) map.set(nums[i], []);
+        map.get(nums[i]).push(i);
+    }
+
+    let res = Infinity;
+
+    // Step 2: check each value
+    for (const indices of map.values()) {
+        if (indices.length < 3) continue;
+
+        // Step 3: sliding window of size 3
+        for (let i = 0; i <= indices.length - 3; i++) {
+            const dist = 2 * (indices[i + 2] - indices[i]);
+            res = Math.min(res, dist);
+        }
+    }
+
+    return res === Infinity ? -1 : res;
 };
 
 
