@@ -47205,7 +47205,12 @@ Output: -1
 Explanation:
 There are no good tuples. Therefore, the answer is -1.
 
+@param {number[]} nums
+@return {number}
 
+var minimumDistance = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
