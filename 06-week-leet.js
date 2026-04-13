@@ -47274,7 +47274,44 @@ console.log("==========================================")
 // @return {number}
 
 var minimumDistance = function(word) {
-    
+    const n = word.length;
+
+    // Convert char to index 0–25
+    const idx = c => c.charCodeAt(0) - 65;
+
+    // Distance between two letters
+    const dist = (a, b) => {
+        if (a === -1) return 0;
+        const x1 = Math.floor(a / 6), y1 = a % 6;
+        const x2 = Math.floor(b / 6), y2 = b % 6;
+        return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+    };
+
+    // dp[j] = max saved distance when second finger is at j
+    let dp = new Array(26).fill(0);
+    let res = 0;
+
+    for (let i = 0; i < n - 1; i++) {
+        let a = idx(word[i]);
+        let b = idx(word[i + 1]);
+
+        let next = [...dp];
+
+        for (let j = 0; j < 26; j++) {
+            // Move first finger (normal typing)
+            next[j] = Math.max(next[j], dp[j]);
+
+            // Move second finger instead of first
+            let gain = dist(a, b) - dist(j, b);
+            next[a] = Math.max(next[a], dp[j] + gain);
+        }
+
+        dp = next;
+        res += dist(a, b);
+    }
+
+    // subtract best saved distance
+    return res - Math.max(...dp);
 };
 
 console.log("==========================================")
