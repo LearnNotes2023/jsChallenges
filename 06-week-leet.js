@@ -47323,7 +47323,8 @@ Topics
 premium lock icon
 Companies
 Hint
-Given an integer array nums (0-indexed) and two integers target and start, find an index i such that nums[i] == target and abs(i - start) is minimized. Note that abs(x) is the absolute value of x.
+Given an integer array nums (0-indexed) and two integers target and start, 
+find an index i such that nums[i] == target and abs(i - start) is minimized. Note that abs(x) is the absolute value of x.
 
 Return abs(i - start).
 
@@ -47347,7 +47348,12 @@ Input: nums = [1,1,1,1,1,1,1,1,1,1], target = 1, start = 0
 Output: 0
 Explanation: Every value of nums is 1, but nums[0] minimizes abs(i - start), which is abs(0 - 0) = 0.
 
-
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @param {number} start
+ * @return {number}
+ */
 
 console.log("==========================================")
 // console.log("==========================================")
