@@ -47383,8 +47383,47 @@ console.log("==========================================")
 // @return {ListNode}
 
 var reverseKGroup = function(head, k) {
-    
+    if (!head || k === 1) return head;
+
+    let dummy = new ListNode(0);
+    dummy.next = head;
+
+    let prevGroup = dummy;
+
+    while (true) {
+        let kth = getKth(prevGroup, k);
+        if (!kth) break;
+
+        let nextGroup = kth.next;
+
+        // reverse group
+        let prev = nextGroup;
+        let curr = prevGroup.next;
+
+        while (curr !== nextGroup) {
+            let temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+
+        // reconnect
+        let temp = prevGroup.next;
+        prevGroup.next = kth;
+        prevGroup = temp;
+    }
+
+    return dummy.next;
 };
+
+// helper to find kth node
+function getKth(curr, k) {
+    while (curr && k > 0) {
+        curr = curr.next;
+        k--;
+    }
+    return curr;
+}
 
 
 console.log("==========================================")
