@@ -47372,7 +47372,19 @@ Example 2:
 Input: head = [1,2,3,4,5], k = 3
 Output: [3,2,1,4,5]
 
+Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
 
+@param {ListNode} head
+@param {number} k
+@return {ListNode}
+
+var reverseKGroup = function(head, k) {
+    
+};
 
 
 console.log("==========================================")
