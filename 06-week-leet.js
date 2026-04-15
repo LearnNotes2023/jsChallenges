@@ -47466,7 +47466,18 @@ console.log("==========================================")
 // @return {number}
 
 var closestTarget = function(words, target, startIndex) {
-    
+    let n = words.length;
+    let minDist = Infinity;
+
+    for (let i = 0; i < n; i++) {
+        if (words[i] === target) {
+            let diff = Math.abs(i - startIndex);
+            let circularDist = Math.min(diff, n - diff);
+            minDist = Math.min(minDist, circularDist);
+        }
+    }
+
+    return minDist === Infinity ? -1 : minDist;
 };
 
 
