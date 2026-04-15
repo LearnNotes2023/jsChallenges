@@ -47460,7 +47460,14 @@ Input: words = ["i","eat","leetcode"], target = "ate", startIndex = 0
 Output: -1
 Explanation: Since "ate" does not exist in words, we return -1.
 
+@param {string[]} words
+@param {string} target
+@param {number} startIndex
+@return {number}
 
+var closestTarget = function(words, target, startIndex) {
+    
+};
 
 
 console.log("==========================================")
