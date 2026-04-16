@@ -47513,9 +47513,58 @@ console.log("==========================================")
 // @return {number[]}
 
 var solveQueries = function(nums, queries) {
-    
-};
+    const n = nums.length;
 
+    // Step 1: map value -> indices
+    const map = new Map();
+    for (let i = 0; i < n; i++) {
+        if (!map.has(nums[i])) map.set(nums[i], []);
+        map.get(nums[i]).push(i);
+    }
+
+    // Binary search helper
+    const lowerBound = (arr, target) => {
+        let left = 0, right = arr.length;
+        while (left < right) {
+            let mid = Math.floor((left + right) / 2);
+            if (arr[mid] < target) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    };
+
+    const res = [];
+
+    for (let q of queries) {
+        const val = nums[q];
+        const arr = map.get(val);
+
+        // Only one occurrence
+        if (arr.length === 1) {
+            res.push(-1);
+            continue;
+        }
+
+        // Find position of q in arr
+        const idx = lowerBound(arr, q);
+
+        let minDist = Infinity;
+
+        // Check previous
+        let prev = arr[(idx - 1 + arr.length) % arr.length];
+        let d1 = Math.abs(q - prev);
+        minDist = Math.min(minDist, Math.min(d1, n - d1));
+
+        // Check next
+        let next = arr[(idx + 1) % arr.length];
+        let d2 = Math.abs(q - next);
+        minDist = Math.min(minDist, Math.min(d2, n - d2));
+
+        res.push(minDist);
+    }
+
+    return res;
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
