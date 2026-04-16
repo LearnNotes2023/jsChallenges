@@ -47508,7 +47508,13 @@ Output: [-1,-1,-1,-1]
 Explanation:
 Each value in nums is unique, so no index shares the same value as the queried element. This results in -1 for all queries.
 
+@param {number[]} nums
+@param {number[]} queries
+@return {number[]}
 
+var solveQueries = function(nums, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
