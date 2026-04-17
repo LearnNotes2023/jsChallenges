@@ -47601,7 +47601,12 @@ Output: -1
 Explanation:
 There are no mirror pairs in the array.
 
+@param {number[]} nums
+@return {number}
 
+var minMirrorPairDistance = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
