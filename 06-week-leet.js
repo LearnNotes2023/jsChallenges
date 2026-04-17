@@ -47605,7 +47605,32 @@ console.log("==========================================")
 // @return {number}
 
 var minMirrorPairDistance = function(nums) {
-    
+    const map = new Map(); // reversed value -> last index
+    let minDist = Infinity;
+
+    const reverseNum = (num) => {
+        let rev = 0;
+        while (num > 0) {
+            rev = rev * 10 + (num % 10);
+            num = Math.floor(num / 10);
+        }
+        return rev;
+    };
+
+    for (let j = 0; j < nums.length; j++) {
+        const num = nums[j];
+
+        // if current number matches a previously reversed number
+        if (map.has(num)) {
+            minDist = Math.min(minDist, j - map.get(num));
+        }
+
+        // store reversed version of current number
+        const rev = reverseNum(num);
+        map.set(rev, j);
+    }
+
+    return minDist === Infinity ? -1 : minDist;
 };
 
 console.log("==========================================")
