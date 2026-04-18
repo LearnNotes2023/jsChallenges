@@ -47666,8 +47666,16 @@ console.log("==========================================")
 // @param {number} n
 // @return {number}
 
+/**
+ * @param {number} n
+ * @return {number}
+ */
 var mirrorDistance = function(n) {
+    // Step 1: reverse the number
+    let reversed = parseInt(n.toString().split('').reverse().join(''));
     
+    // Step 2: return absolute difference
+    return Math.abs(n - reversed);
 };
 
 console.log("==========================================")
