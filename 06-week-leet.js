@@ -47663,6 +47663,12 @@ Explanation:
 reverse(7) = 7.
 Thus, the answer is abs(7 - 7) = 0.
 
+@param {number} n
+@return {number}
+
+var mirrorDistance = function(n) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
