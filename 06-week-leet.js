@@ -47706,6 +47706,13 @@ Output: 2
 Explanation: The valid pairs are (2,2), (2,3), (2,4), (3,3), and (3,4).
 The maximum distance is 2 with pair (2,4).
 
+@param {number[]} nums1
+@param {number[]} nums2
+@return {number}
+
+var maxDistance = function(nums1, nums2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
