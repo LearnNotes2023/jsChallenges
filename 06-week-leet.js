@@ -47756,7 +47756,12 @@ Output: 1
 Explanation: The furthest two houses with different colors are house 0 and house 1.
 House 0 has color 0, and house 1 has color 1. The distance between them is abs(0 - 1) = 1.
  
+@param {number[]} colors
+@return {number}
 
+var maxDistance = function(colors) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
