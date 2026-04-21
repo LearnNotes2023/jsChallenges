@@ -47820,7 +47820,58 @@ console.log("==========================================")
 // @return {number}
 
 var minimumHammingDistance = function(source, target, allowedSwaps) {
-    
+    const n = source.length;
+
+    // Union-Find
+    const parent = Array.from({ length: n }, (_, i) => i);
+
+    function find(x) {
+        if (parent[x] !== x) {
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+
+    function union(a, b) {
+        const rootA = find(a);
+        const rootB = find(b);
+        if (rootA !== rootB) {
+            parent[rootB] = rootA;
+        }
+    }
+
+    // Build groups
+    for (const [a, b] of allowedSwaps) {
+        union(a, b);
+    }
+
+    // Map: root -> frequency map of values in source
+    const map = new Map();
+
+    for (let i = 0; i < n; i++) {
+        const root = find(i);
+        if (!map.has(root)) {
+            map.set(root, new Map());
+        }
+        const freq = map.get(root);
+        freq.set(source[i], (freq.get(source[i]) || 0) + 1);
+    }
+
+    // Count mismatches
+    let distance = 0;
+
+    for (let i = 0; i < n; i++) {
+        const root = find(i);
+        const freq = map.get(root);
+
+        if (freq.get(target[i]) > 0) {
+            freq.set(target[i], freq.get(target[i]) - 1);
+        } else {
+            distance++;
+        }
+    }
+
+    return distance;
 };
 
 console.log("==========================================")
