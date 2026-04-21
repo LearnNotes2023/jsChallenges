@@ -47814,7 +47814,14 @@ Example 3:
 Input: source = [5,1,2,4,3], target = [1,5,4,2,3], allowedSwaps = [[0,4],[4,2],[1,3],[1,4]]
 Output: 0
 
+@param {number[]} source
+@param {number[]} target
+@param {number[][]} allowedSwaps
+@return {number}
 
+var minimumHammingDistance = function(source, target, allowedSwaps) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
