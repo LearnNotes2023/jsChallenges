@@ -47901,7 +47901,13 @@ Output: []
 Explanation:
 Applying any two edits to "yes" cannot make it equal to "not". Thus, we return an empty array.
 
+@param {string[]} queries
+@param {string[]} dictionary
+@return {string[]}
 
+var twoEditWords = function(queries, dictionary) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
