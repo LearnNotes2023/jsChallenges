@@ -47957,9 +47957,39 @@ console.log("==========================================")
 // @return {number[]}
 
 var distance = function(nums) {
+    const map = new Map();
     
+    // Step 1: group indices by value
+    for (let i = 0; i < nums.length; i++) {
+        if (!map.has(nums[i])) map.set(nums[i], []);
+        map.get(nums[i]).push(i);
+    }
+    
+    const res = new Array(nums.length).fill(0);
+    
+    // Step 2: process each group
+    for (let positions of map.values()) {
+        const n = positions.length;
+        const prefix = new Array(n + 1).fill(0);
+        
+        // build prefix sum
+        for (let i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + positions[i];
+        }
+        
+        // compute distances
+        for (let i = 0; i < n; i++) {
+            const pos = positions[i];
+            
+            const left = i * pos - prefix[i];
+            const right = (prefix[n] - prefix[i + 1]) - (n - i - 1) * pos;
+            
+            res[pos] = left + right;
+        }
+    }
+    
+    return res;
 };
-
 
 console.log("==========================================")
 // console.log("==========================================")
