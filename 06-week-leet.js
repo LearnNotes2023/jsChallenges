@@ -47953,7 +47953,12 @@ Input: nums = [0,5,3]
 Output: [0,0,0]
 Explanation: Since each element in nums is distinct, arr[i] = 0 for all i.
 
+@param {number[]} nums
+@return {number[]}
 
+var distance = function(nums) {
+    
+};
 
 
 console.log("==========================================")
