@@ -48017,6 +48017,12 @@ Input: moves = "_______"
 Output: 7
 Explanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves "RRRRRRR".
 
+@param {string} moves
+@return {number}
+
+var furthestDistanceFromOrigin = function(moves) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
