@@ -48062,7 +48062,14 @@ Output: 1
 Explanation:
 Select the points (0, 0), (0, 1), (0, 2), (1, 2), and (2, 2).
 
+@param {number} side
+@param {number[][]} points
+@param {number} k
+@return {number}
 
+var maxDistance = function(side, points, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
