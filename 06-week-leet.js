@@ -48248,7 +48248,54 @@ console.log("==========================================")
 // @return {boolean}
 
 var hasValidPath = function(grid) {
-    
+    const m = grid.length;
+    const n = grid[0].length;
+
+    // directions: [dx, dy]
+    const dirs = {
+        1: [[0, -1], [0, 1]],     // left, right
+        2: [[-1, 0], [1, 0]],     // up, down
+        3: [[0, -1], [1, 0]],     // left, down
+        4: [[0, 1], [1, 0]],      // right, down
+        5: [[0, -1], [-1, 0]],    // left, up
+        6: [[0, 1], [-1, 0]]      // right, up
+    };
+
+    // check if neighbor connects back
+    const isValid = (x, y, nx, ny) => {
+        for (let [dx, dy] of dirs[grid[nx][ny]]) {
+            if (nx + dx === x && ny + dy === y) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    const queue = [[0, 0]];
+    const visited = new Set(["0,0"]);
+
+    while (queue.length) {
+        const [x, y] = queue.shift();
+
+        if (x === m - 1 && y === n - 1) return true;
+
+        for (let [dx, dy] of dirs[grid[x][y]]) {
+            const nx = x + dx;
+            const ny = y + dy;
+
+            if (
+                nx >= 0 && ny >= 0 &&
+                nx < m && ny < n &&
+                !visited.has(`${nx},${ny}`) &&
+                isValid(x, y, nx, ny)
+            ) {
+                visited.add(`${nx},${ny}`);
+                queue.push([nx, ny]);
+            }
+        }
+    }
+
+    return false;
 };
 
 console.log("==========================================")
