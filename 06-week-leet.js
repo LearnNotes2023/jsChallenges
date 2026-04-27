@@ -48244,6 +48244,13 @@ Input: grid = [[1,1,2]]
 Output: false
 Explanation: You will get stuck at cell (0, 1) and you cannot reach cell (0, 2).
 
+@param {number[][]} grid
+@return {boolean}
+
+var hasValidPath = function(grid) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
