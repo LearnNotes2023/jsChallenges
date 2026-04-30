@@ -48492,10 +48492,64 @@ console.log("==========================================")
 // @return {number}
 
 var maxPathScore = function(grid, k) {
-    
+    const m = grid.length;
+    const n = grid[0].length;
+
+    // dp[i][j][c] = max score at (i,j) with cost c
+    const dp = Array.from({ length: m }, () =>
+        Array.from({ length: n }, () =>
+            Array(k + 1).fill(-Infinity)
+        )
+    );
+
+    // helper to get score & cost
+    const get = (val) => {
+        if (val === 0) return [0, 0];
+        if (val === 1) return [1, 1];
+        return [2, 1];
+    };
+
+    let [startScore, startCost] = get(grid[0][0]);
+    if (startCost <= k) {
+        dp[0][0][startCost] = startScore;
+    }
+
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            for (let c = 0; c <= k; c++) {
+                if (dp[i][j][c] === -Infinity) continue;
+
+                // move right
+                if (j + 1 < n) {
+                    let [score, cost] = get(grid[i][j + 1]);
+                    let newCost = c + cost;
+                    if (newCost <= k) {
+                        dp[i][j + 1][newCost] = Math.max(
+                            dp[i][j + 1][newCost],
+                            dp[i][j][c] + score
+                        );
+                    }
+                }
+
+                // move down
+                if (i + 1 < m) {
+                    let [score, cost] = get(grid[i + 1][j]);
+                    let newCost = c + cost;
+                    if (newCost <= k) {
+                        dp[i + 1][j][newCost] = Math.max(
+                            dp[i + 1][j][newCost],
+                            dp[i][j][c] + score
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    // get best answer at bottom-right
+    let res = Math.max(...dp[m - 1][n - 1]);
+    return res === -Infinity ? -1 : res;
 };
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
