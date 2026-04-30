@@ -48487,7 +48487,13 @@ Output: -1
 Explanation:
 There is no path that reaches cell (1, 1)​​​​​​​ without exceeding cost k. Thus, the answer is -1.
 
- 
+@param {number[][]} grid
+@param {number} k
+@return {number}
+
+var maxPathScore = function(grid, k) {
+    
+};
 
 
 
