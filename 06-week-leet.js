@@ -48584,6 +48584,13 @@ Example 2:
 Input: nums = [100]
 Output: 0
 
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxRotateFunction = function(nums) {
+    
+};
 
 // console.log("==========================================")
 // console.log("==========================================")
