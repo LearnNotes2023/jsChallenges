@@ -48555,22 +48555,13 @@ console.log("==========================================")
 
 // 396. Rotate Function
 // Medium
-// Topics
-// premium lock icon
-// Companies
 // You are given an integer array nums of length n.
-
 // Assume arrk to be an array obtained by rotating nums by k positions clock-wise. We define the rotation function F on nums as follow:
-
 // F(k) = 0 * arrk[0] + 1 * arrk[1] + ... + (n - 1) * arrk[n - 1].
 // Return the maximum value of F(0), F(1), ..., F(n-1).
-
 // The test cases are generated so that the answer fits in a 32-bit integer.
 
- 
-
 // Example 1:
-
 // Input: nums = [4,3,2,6]
 // Output: 26
 // Explanation:
@@ -48580,14 +48571,11 @@ console.log("==========================================")
 // F(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26
 // So the maximum value of F(0), F(1), F(2), F(3) is F(3) = 26.
 // Example 2:
-
 // Input: nums = [100]
 // Output: 0
 
-/**
- * @param {number[]} nums
- * @return {number}
- */
+// @param {number[]} nums
+// @return {number}
 
 var maxRotateFunction = function(nums) {
     let n = nums.length;
@@ -48610,8 +48598,38 @@ var maxRotateFunction = function(nums) {
     return max;
 };
 
-// console.log("==========================================")
-// console.log("==========================================")
+console.log("==========================================")
+
+788. Rotated Digits
+Medium
+An integer x is a good if after rotating each digit individually by 180 degrees, we get a valid number that is different from x. 
+Each digit must be rotated - we cannot choose to leave it alone.
+A number is valid if each digit remains a digit after rotation. For example:
+0, 1, and 8 rotate to themselves,
+2 and 5 rotate to each other (in this case they are rotated in a different direction, in other words, 2 or 5 gets mirrored),
+6 and 9 rotate to each other, and
+the rest of the numbers do not rotate to any other number and become invalid.
+Given an integer n, return the number of good integers in the range [1, n].
+
+Example 1:
+Input: n = 10
+Output: 4
+Explanation: There are four good numbers in the range [1, 10] : 2, 5, 6, 9.
+Note that 1 and 10 are not good numbers, since they remain unchanged after rotating.
+
+Example 2:
+Input: n = 1
+Output: 0
+
+Example 3:
+Input: n = 2
+Output: 1
+
+
+
+
+
+console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
