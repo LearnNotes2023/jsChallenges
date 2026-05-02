@@ -48629,10 +48629,38 @@ console.log("==========================================")
 // @return {number}
 
 var rotatedDigits = function(n) {
-    
+    let count = 0;
+
+    const valid = new Set([0,1,2,5,6,8,9]);
+    const change = new Set([2,5,6,9]);
+
+    for (let i = 1; i <= n; i++) {
+        let num = i;
+        let isValid = true;
+        let hasChanged = false;
+
+        while (num > 0) {
+            let digit = num % 10;
+
+            if (!valid.has(digit)) {
+                isValid = false;
+                break;
+            }
+
+            if (change.has(digit)) {
+                hasChanged = true;
+            }
+
+            num = Math.floor(num / 10);
+        }
+
+        if (isValid && hasChanged) {
+            count++;
+        }
+    }
+
+    return count;
 };
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
