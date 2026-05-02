@@ -48625,7 +48625,12 @@ Example 3:
 Input: n = 2
 Output: 1
 
+@param {number} n
+@return {number}
 
+var rotatedDigits = function(n) {
+    
+};
 
 
 
