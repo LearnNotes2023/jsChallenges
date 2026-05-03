@@ -48703,7 +48703,13 @@ Explanation: Your function should return k = 5, with the first five elements of 
 Note that the five elements can be returned in any order.
 It does not matter what you leave beyond the returned k (hence they are underscores).
 
+@param {number[]} nums
+@param {number} val
+@return {number}
 
+var removeElement = function(nums, val) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
