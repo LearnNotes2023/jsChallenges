@@ -48769,8 +48769,19 @@ Example 2:
 Input: head = [0,1,2], k = 4
 Output: [2,0,1]
 
+Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
 
+@param {ListNode} head
+@param {number} k
+@return {ListNode}
 
+var rotateRight = function(head, k) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
