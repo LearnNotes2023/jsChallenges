@@ -48831,7 +48831,13 @@ Input: haystack = "leetcode", needle = "leeto"
 Output: -1
 Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
+@param {string} haystack
+@param {string} needle
+@return {number}
 
+var strStr = function(haystack, needle) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
