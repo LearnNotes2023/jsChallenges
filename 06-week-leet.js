@@ -48882,7 +48882,12 @@ For i = 1: Since nums[1] = 3 is the maximum value in nums, no jump increases the
 For i = 2: Jump to j = 1 as nums[j] = 3 is greater than nums[2] = 1.
 Thus, ans = [3, 3, 3].
 
+@param {number[]} nums
+@return {number[]}
 
+var maxValue = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
