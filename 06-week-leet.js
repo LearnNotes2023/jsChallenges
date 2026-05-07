@@ -48886,7 +48886,51 @@ console.log("==========================================")
 // @return {number[]}
 
 var maxValue = function(nums) {
-    
+    const n = nums.length;
+
+    // prefix maximums
+    const prefixMax = Array(n);
+    prefixMax[0] = nums[0];
+
+    for (let i = 1; i < n; i++) {
+        prefixMax[i] = Math.max(prefixMax[i - 1], nums[i]);
+    }
+
+    // suffix minimums
+    const suffixMin = Array(n);
+    suffixMin[n - 1] = nums[n - 1];
+
+    for (let i = n - 2; i >= 0; i--) {
+        suffixMin[i] = Math.min(suffixMin[i + 1], nums[i]);
+    }
+
+    const ans = Array(n);
+
+    let start = 0;
+
+    // Components are separated where:
+    // max(left part) <= min(right part)
+    for (let i = 0; i < n - 1; i++) {
+        if (prefixMax[i] <= suffixMin[i + 1]) {
+            // component = [start ... i]
+            const mx = prefixMax[i];
+
+            for (let j = start; j <= i; j++) {
+                ans[j] = mx;
+            }
+
+            start = i + 1;
+        }
+    }
+
+    // last component
+    const mx = prefixMax[n - 1];
+
+    for (let j = start; j < n; j++) {
+        ans[j] = mx;
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
