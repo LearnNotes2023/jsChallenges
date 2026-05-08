@@ -48968,7 +48968,12 @@ Output: 3
 Explanation:
 Since no teleportation is possible, we move through 0 → 1 → 2 → 3. Thus, the answer is 3.
 
+@param {number[]} nums
+@return {number}
 
+var minJumps = function(nums) {
+    
+};
 
 
 console.log("==========================================")
