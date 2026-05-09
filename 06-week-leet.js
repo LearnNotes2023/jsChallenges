@@ -49052,9 +49052,65 @@ console.log("==========================================")
 // @return {number[][]}
 
 var rotateGrid = function(grid, k) {
-    
-};
+    const m = grid.length;
+    const n = grid[0].length;
+    const layers = Math.min(m, n) / 2;
 
+    for (let layer = 0; layer < layers; layer++) {
+        let vals = [];
+
+        // 1. Extract layer
+        // top row
+        for (let c = layer; c < n - layer; c++) {
+            vals.push(grid[layer][c]);
+        }
+
+        // right column
+        for (let r = layer + 1; r < m - layer - 1; r++) {
+            vals.push(grid[r][n - layer - 1]);
+        }
+
+        // bottom row
+        for (let c = n - layer - 1; c >= layer; c--) {
+            vals.push(grid[m - layer - 1][c]);
+        }
+
+        // left column
+        for (let r = m - layer - 2; r > layer; r--) {
+            vals.push(grid[r][layer]);
+        }
+
+        // 2. Rotate left by k
+        let shift = k % vals.length;
+        let rotated = vals.slice(shift).concat(vals.slice(0, shift));
+
+        let idx = 0;
+
+        // 3. Put rotated values back
+
+        // top row
+        for (let c = layer; c < n - layer; c++) {
+            grid[layer][c] = rotated[idx++];
+        }
+
+        // right column
+        for (let r = layer + 1; r < m - layer - 1; r++) {
+            grid[r][n - layer - 1] = rotated[idx++];
+        }
+
+        // bottom row
+        for (let c = n - layer - 1; c >= layer; c--) {
+            grid[m - layer - 1][c] = rotated[idx++];
+        }
+
+        // left column
+        for (let r = m - layer - 2; r > layer; r--) {
+            grid[r][layer] = rotated[idx++];
+        }
+    }
+
+    return grid;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
