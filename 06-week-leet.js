@@ -49047,7 +49047,13 @@ Input: grid = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]], k = 2
 Output: [[3,4,8,12],[2,11,10,16],[1,7,6,15],[5,9,13,14]]
 Explanation: The figures above represent the grid at every state.
 
+@param {number[][]} grid
+@param {number} k
+@return {number[][]}
 
+var rotateGrid = function(grid, k) {
+    
+};
 
 
 console.log("==========================================")
