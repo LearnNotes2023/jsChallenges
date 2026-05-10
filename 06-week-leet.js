@@ -49152,7 +49152,13 @@ Input: nums = [1,3,6,4,1,2], target = 0
 Output: -1
 Explanation: It can be proven that there is no jumping sequence that goes from 0 to n - 1. Hence, the answer is -1. 
  
+@param {number[]} nums
+@param {number} target
+@return {number}
 
+var maximumJumps = function(nums, target) {
+    
+};
 
 
 console.log("==========================================")
