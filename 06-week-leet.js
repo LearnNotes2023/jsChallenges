@@ -49203,7 +49203,12 @@ Output: [7,1,3,9]
 Explanation: The separation of each integer in nums is itself.
 answer = [7,1,3,9].
  
+@param {number[]} nums
+@return {number[]}
 
+var separateDigits = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
