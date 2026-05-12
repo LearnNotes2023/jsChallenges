@@ -47,7 +47,18 @@ console.log("==========================================")
 // @return {number}
 
 var minimumEffort = function(tasks) {
-    
+    // Sort by (minimum - actual) descending
+    tasks.sort((a, b) => (b[1] - b[0]) - (a[1] - a[0]));
+
+    let totalSpent = 0;
+    let ans = 0;
+
+    for (let [actual, minimum] of tasks) {
+        ans = Math.max(ans, totalSpent + minimum);
+        totalSpent += actual;
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
