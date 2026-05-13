@@ -91,7 +91,13 @@ Input: nums = [1,2,1,2], limit = 2
 Output: 0
 Explanation: nums is already complementary.
 
+@param {number[]} nums
+@param {number} limit
+@return {number}
 
+var minMoves = function(nums, limit) {
+    
+};
 
 
 
