@@ -96,7 +96,38 @@ console.log("==========================================")
 // @return {number}
 
 var minMoves = function(nums, limit) {
-    
+    const n = nums.length;
+    const diff = new Array(2 * limit + 2).fill(0);
+
+    for (let i = 0; i < n / 2; i++) {
+        let a = nums[i];
+        let b = nums[n - 1 - i];
+
+        let low = Math.min(a, b) + 1;
+        let high = Math.max(a, b) + limit;
+        let sum = a + b;
+
+        // Default: +2 moves everywhere
+        diff[2] += 2;
+
+        // Reduce to 1 move in [low, high]
+        diff[low] -= 1;
+        diff[high + 1] += 1;
+
+        // Reduce to 0 moves at exact sum
+        diff[sum] -= 1;
+        diff[sum + 1] += 1;
+    }
+
+    let ans = Infinity;
+    let current = 0;
+
+    for (let s = 2; s <= 2 * limit; s++) {
+        current += diff[s];
+        ans = Math.min(ans, current);
+    }
+
+    return ans;
 };
 
 
