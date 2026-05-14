@@ -163,6 +163,12 @@ Input: nums = [3, 4, 4, 1, 2, 1]
 Output: false
 Explanation: Since the maximum element of the array is 4, the only candidate n for which this array could be a permutation of base[n], is n = 4. However, base[4] has five elements but array nums has six. Therefore, it can not be a permutation of base[4] = [1, 2, 3, 4, 4]. So the answer is false.
 
+@param {number[]} nums
+@return {boolean}
+
+var isGood = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
