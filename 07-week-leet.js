@@ -252,6 +252,12 @@ Example 2:
 Input: nums = [2,2,2,0,1]
 Output: 0
 
+@param {number[]} nums
+@return {number}
+
+var findMin = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
