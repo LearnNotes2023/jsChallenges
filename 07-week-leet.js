@@ -256,7 +256,27 @@ console.log("==========================================")
 // @return {number}
 
 var findMin = function(nums) {
-    
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+
+        if (nums[mid] < nums[right]) {
+            // minimum is at mid or to the left
+            right = mid;
+        } 
+        else if (nums[mid] > nums[right]) {
+            // minimum is to the right
+            left = mid + 1;
+        } 
+        else {
+            // duplicates, can't tell
+            right--;
+        }
+    }
+
+    return nums[left];
 };
 
 console.log("==========================================")
