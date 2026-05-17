@@ -312,9 +312,26 @@ console.log("==========================================")
 // @return {boolean}
 
 var canReach = function(arr, start) {
-    
-};
+    const visited = new Set();
 
+    function dfs(i) {
+        // Out of bounds
+        if (i < 0 || i >= arr.length) return false;
+
+        // Already visited
+        if (visited.has(i)) return false;
+
+        // Found zero
+        if (arr[i] === 0) return true;
+
+        visited.add(i);
+
+        // Try both directions
+        return dfs(i + arr[i]) || dfs(i - arr[i]);
+    }
+
+    return dfs(start);
+};
 
 console.log("==========================================")
 // console.log("==========================================")
