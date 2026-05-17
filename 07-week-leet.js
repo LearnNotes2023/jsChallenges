@@ -307,7 +307,13 @@ Input: arr = [3,0,2,1,2], start = 2
 Output: false
 Explanation: There is no way to reach at index 1 with value 0.
  
+@param {number[]} arr
+@param {number} start
+@return {boolean}
 
+var canReach = function(arr, start) {
+    
+};
 
 
 console.log("==========================================")
