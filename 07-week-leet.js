@@ -364,7 +364,55 @@ console.log("==========================================")
 // @return {number}
 
 var minJumps = function(arr) {
-    
+    const n = arr.length;
+    if (n === 1) return 0;
+
+    // value -> indices
+    const map = new Map();
+
+    for (let i = 0; i < n; i++) {
+        if (!map.has(arr[i])) {
+            map.set(arr[i], []);
+        }
+        map.get(arr[i]).push(i);
+    }
+
+    const visited = new Set([0]);
+    const queue = [[0, 0]];
+    let head = 0;   // queue pointer
+
+    while (head < queue.length) {
+        const [i, steps] = queue[head++];
+
+        if (i === n - 1) return steps;
+
+        // same-value jumps
+        if (map.has(arr[i])) {
+            for (const next of map.get(arr[i])) {
+                if (!visited.has(next)) {
+                    visited.add(next);
+                    queue.push([next, steps + 1]);
+                }
+            }
+
+            // critical: remove so we don't process again
+            map.delete(arr[i]);
+        }
+
+        // i - 1
+        if (i - 1 >= 0 && !visited.has(i - 1)) {
+            visited.add(i - 1);
+            queue.push([i - 1, steps + 1]);
+        }
+
+        // i + 1
+        if (i + 1 < n && !visited.has(i + 1)) {
+            visited.add(i + 1);
+            queue.push([i + 1, steps + 1]);
+        }
+    }
+
+    return -1;
 };
 
 console.log("==========================================")
