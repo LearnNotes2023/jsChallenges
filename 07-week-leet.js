@@ -508,8 +508,64 @@ console.log("==========================================")
 // @return {number[]}
 
 var findSubstring = function(s, words) {
-    
+    if (!s || !words.length) return [];
+
+    const wordLen = words[0].length;
+    const totalWords = words.length;
+    const totalLen = wordLen * totalWords;
+    const result = [];
+
+    // Count target words
+    const target = new Map();
+    for (let word of words) {
+        target.set(word, (target.get(word) || 0) + 1);
+    }
+
+    // Try each possible offset
+    for (let offset = 0; offset < wordLen; offset++) {
+        let left = offset;
+        let count = 0;
+        let window = new Map();
+
+        for (let right = offset; right + wordLen <= s.length; right += wordLen) {
+            const word = s.slice(right, right + wordLen);
+
+            // Valid word
+            if (target.has(word)) {
+                window.set(word, (window.get(word) || 0) + 1);
+                count++;
+
+                // Too many occurrences → shrink window
+                while (window.get(word) > target.get(word)) {
+                    const leftWord = s.slice(left, left + wordLen);
+                    window.set(leftWord, window.get(leftWord) - 1);
+                    left += wordLen;
+                    count--;
+                }
+
+                // Found valid concatenation
+                if (count === totalWords) {
+                    result.push(left);
+
+                    // Move left to continue searching
+                    const leftWord = s.slice(left, left + wordLen);
+                    window.set(leftWord, window.get(leftWord) - 1);
+                    left += wordLen;
+                    count--;
+                }
+
+            } else {
+                // Reset if invalid word
+                window.clear();
+                count = 0;
+                left = right + wordLen;
+            }
+        }
+    }
+
+    return result;
 };
+
 
 console.log("==========================================")
 // console.log("==========================================")
