@@ -601,7 +601,33 @@ console.log("==========================================")
 // @return {number}
 
 var longestCommonPrefix = function(arr1, arr2) {
-    
+    const prefixes = new Set();
+
+    // Store all prefixes from arr1
+    for (let num of arr1) {
+        const str = num.toString();
+
+        for (let i = 1; i <= str.length; i++) {
+            prefixes.add(str.slice(0, i));
+        }
+    }
+
+    let maxLen = 0;
+
+    // Check prefixes from arr2
+    for (let num of arr2) {
+        const str = num.toString();
+
+        for (let i = 1; i <= str.length; i++) {
+            const prefix = str.slice(0, i);
+
+            if (prefixes.has(prefix)) {
+                maxLen = Math.max(maxLen, i);
+            }
+        }
+    }
+
+    return maxLen;
 };
 
 console.log("==========================================")
