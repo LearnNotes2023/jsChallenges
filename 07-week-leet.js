@@ -596,6 +596,13 @@ Output: 0
 Explanation: There exists no common prefix for any pair (arr1[i], arr2[j]), hence we return 0.
 Note that common prefixes between elements of the same array do not count.
 
+@param {number[]} arr1
+@param {number[]} arr2
+@return {number}
+
+var longestCommonPrefix = function(arr1, arr2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
