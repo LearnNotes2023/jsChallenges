@@ -727,9 +727,32 @@ console.log("==========================================")
 // @return {void} Do not return anything, modify nums in-place instead.
 
 var nextPermutation = function(nums) {
-    
-};
+    let i = nums.length - 2;
 
+    // Step 1: find first decreasing element
+    while (i >= 0 && nums[i] >= nums[i + 1]) {
+        i--;
+    }
+
+    // Step 2: if found, swap with next bigger element
+    if (i >= 0) {
+        let j = nums.length - 1;
+        while (nums[j] <= nums[i]) {
+            j--;
+        }
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+    }
+
+    // Step 3: reverse suffix
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+        [nums[left], nums[right]] = [nums[right], nums[left]];
+        left++;
+        right--;
+    }
+};
 
 console.log("==========================================")
 // console.log("==========================================")
