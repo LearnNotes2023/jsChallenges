@@ -786,6 +786,13 @@ Input: arr = [7,6,5,4,3,2,1], d = 1
 Output: 7
 Explanation: Start at index 0. You can visit all the indicies. 
 
+@param {number[]} arr
+@param {number} d
+@return {number}
+
+var maxJumps = function(arr, d) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
