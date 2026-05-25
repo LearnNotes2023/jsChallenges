@@ -852,7 +852,32 @@ console.log("==========================================")
 // @return {boolean}
 
 var canReach = function(s, minJump, maxJump) {
+    const n = s.length;
+    const dp = new Array(n).fill(false);
     
+    dp[0] = true;
+    let reachable = 0; // how many reachable positions in current window
+    
+    for (let i = 1; i < n; i++) {
+        // add left side of window
+        if (i - minJump >= 0 && dp[i - minJump]) {
+            reachable++;
+        }
+        
+        // remove right side of window
+        if (i - maxJump - 1 >= 0 && dp[i - maxJump - 1]) {
+            reachable--;
+        }
+        
+        // can land here if:
+        // 1. current char is '0'
+        // 2. at least one reachable index in window
+        if (s[i] === '0' && reachable > 0) {
+            dp[i] = true;
+        }
+    }
+    
+    return dp[n - 1];
 };
 
 console.log("==========================================")
