@@ -846,7 +846,14 @@ Example 2:
 Input: s = "01101110", minJump = 2, maxJump = 3
 Output: false
 
+@param {string} s
+@param {number} minJump
+@param {number} maxJump
+@return {boolean}
 
+var canReach = function(s, minJump, maxJump) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
