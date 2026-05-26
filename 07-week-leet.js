@@ -909,7 +909,26 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfSpecialChars = function(word) {
-    
+    let lower = new Set();
+    let upper = new Set();
+
+    for (let char of word) {
+        if (char >= 'a' && char <= 'z') {
+            lower.add(char);
+        } else {
+            upper.add(char.toLowerCase());
+        }
+    }
+
+    let count = 0;
+
+    for (let char of lower) {
+        if (upper.has(char)) {
+            count++;
+        }
+    }
+
+    return count;
 };
 
 console.log("==========================================")
