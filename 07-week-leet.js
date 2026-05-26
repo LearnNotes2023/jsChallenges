@@ -905,7 +905,12 @@ Output: 1
 Explanation:
 The only special character in word is 'b'.
 
+@param {string} word
+@return {number}
 
+var numberOfSpecialChars = function(word) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
