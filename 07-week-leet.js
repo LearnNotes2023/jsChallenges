@@ -961,10 +961,36 @@ console.log("==========================================")
 // @return {number}
 
 var numberOfSpecialChars = function(word) {
-    
+    let lastLower = new Array(26).fill(-1);
+    let firstUpper = new Array(26).fill(Infinity);
+
+    for (let i = 0; i < word.length; i++) {
+        let ch = word[i];
+
+        if (ch >= 'a' && ch <= 'z') {
+            lastLower[ch.charCodeAt(0) - 97] = i;
+        } else {
+            firstUpper[ch.charCodeAt(0) - 65] = Math.min(
+                firstUpper[ch.charCodeAt(0) - 65],
+                i
+            );
+        }
+    }
+
+    let count = 0;
+
+    for (let i = 0; i < 26; i++) {
+        if (
+            lastLower[i] !== -1 &&
+            firstUpper[i] !== Infinity &&
+            lastLower[i] < firstUpper[i]
+        ) {
+            count++;
+        }
+    }
+
+    return count;
 };
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
