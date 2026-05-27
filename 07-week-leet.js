@@ -957,7 +957,12 @@ Output: 0
 Explanation:
 There are no special characters in word.
  
+@param {string} word
+@return {number}
 
+var numberOfSpecialChars = function(word) {
+    
+};
 
 
 
