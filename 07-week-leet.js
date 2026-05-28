@@ -1028,7 +1028,13 @@ Hence it is the answer, even though the string at index 2 is shorter.
 For wordsQuery[2] = "acbfegh", strings from wordsContainer that share the longest common suffix "gh" are at indices 0, 1, and 2. 
 Among these, the answer is the string at index 2 because it has the shortest length of 6.
 
+@param {string[]} wordsContainer
+@param {string[]} wordsQuery
+@return {number[]}
 
+var stringIndices = function(wordsContainer, wordsQuery) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
