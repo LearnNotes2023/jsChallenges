@@ -1033,7 +1033,64 @@ console.log("==========================================")
 // @return {number[]}
 
 var stringIndices = function(wordsContainer, wordsQuery) {
-    
+    class TrieNode {
+        constructor() {
+            this.children = {};
+            this.bestIndex = -1;
+            this.bestLength = Infinity;
+        }
+
+        update(index, length) {
+            if (
+                length < this.bestLength ||
+                (length === this.bestLength && index < this.bestIndex)
+            ) {
+                this.bestLength = length;
+                this.bestIndex = index;
+            }
+        }
+    }
+
+    const root = new TrieNode();
+
+    // Build reversed trie
+    for (let i = 0; i < wordsContainer.length; i++) {
+        const word = wordsContainer[i];
+        const len = word.length;
+
+        let node = root;
+        node.update(i, len);
+
+        for (let j = len - 1; j >= 0; j--) {
+            const ch = word[j];
+
+            if (!node.children[ch]) {
+                node.children[ch] = new TrieNode();
+            }
+
+            node = node.children[ch];
+            node.update(i, len);
+        }
+    }
+
+    const ans = [];
+
+    // Query
+    for (const query of wordsQuery) {
+        let node = root;
+
+        for (let j = query.length - 1; j >= 0; j--) {
+            const ch = query[j];
+
+            if (!node.children[ch]) break;
+
+            node = node.children[ch];
+        }
+
+        ans.push(node.bestIndex);
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
