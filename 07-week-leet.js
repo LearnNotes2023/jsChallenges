@@ -1119,7 +1119,12 @@ Output: 10
 Explanation:
 nums becomes [27, 10, 19] after all replacements, with minimum element 10.
 
+@param {number[]} nums
+@return {number}
 
+var minElement = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
