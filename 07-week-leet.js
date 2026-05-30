@@ -1172,7 +1172,60 @@ console.log("==========================================")
 // @return {boolean[]}
 
 var getResults = function(queries) {
-    
+    const ans = [];
+
+    // sorted obstacles
+    const obstacles = [0];
+
+    function lowerBound(arr, target) {
+        let l = 0, r = arr.length;
+
+        while (l < r) {
+            const m = (l + r) >> 1;
+
+            if (arr[m] < target) l = m + 1;
+            else r = m;
+        }
+
+        return l;
+    }
+
+    for (const q of queries) {
+        if (q[0] === 1) {
+            const x = q[1];
+
+            const idx = lowerBound(obstacles, x);
+            obstacles.splice(idx, 0, x);
+
+        } else {
+            const [, x, sz] = q;
+
+            let idx = lowerBound(obstacles, x + 1);
+
+            let prev = 0;
+            let ok = false;
+
+            for (let i = 1; i < idx; i++) {
+                const cur = obstacles[i];
+
+                if (cur - prev >= sz) {
+                    ok = true;
+                    break;
+                }
+
+                prev = cur;
+            }
+
+            // last segment
+            if (!ok && x - prev >= sz) {
+                ok = true;
+            }
+
+            ans.push(ok);
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
