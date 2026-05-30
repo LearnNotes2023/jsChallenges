@@ -1172,9 +1172,57 @@ console.log("==========================================")
 // @return {boolean[]}
 
 var getResults = function(queries) {
-    const ans = [];
+    // Collect all coordinates
+    const coords = new Set([0]);
 
-    // sorted obstacles
+    for (const q of queries) {
+        coords.add(q[1]);
+    }
+
+    const sorted = [...coords].sort((a, b) => a - b);
+
+    const index = new Map();
+
+    for (let i = 0; i < sorted.length; i++) {
+        index.set(sorted[i], i);
+    }
+
+    const n = sorted.length;
+
+    // segment tree for maximum free gap
+    const seg = new Array(4 * n).fill(0);
+
+    function update(node, l, r, idx, val) {
+        if (l === r) {
+            seg[node] = val;
+            return;
+        }
+
+        const mid = (l + r) >> 1;
+
+        if (idx <= mid) {
+            update(node * 2, l, mid, idx, val);
+        } else {
+            update(node * 2 + 1, mid + 1, r, idx, val);
+        }
+
+        seg[node] = Math.max(seg[node * 2], seg[node * 2 + 1]);
+    }
+
+    function query(node, l, r, ql, qr) {
+        if (ql > r || qr < l) return 0;
+
+        if (ql <= l && r <= qr) return seg[node];
+
+        const mid = (l + r) >> 1;
+
+        return Math.max(
+            query(node * 2, l, mid, ql, qr),
+            query(node * 2 + 1, mid + 1, r, ql, qr)
+        );
+    }
+
+    // ordered obstacles
     const obstacles = [0];
 
     function lowerBound(arr, target) {
@@ -1190,38 +1238,51 @@ var getResults = function(queries) {
         return l;
     }
 
+    const ans = [];
+
     for (const q of queries) {
+
+        // add obstacle
         if (q[0] === 1) {
             const x = q[1];
 
-            const idx = lowerBound(obstacles, x);
-            obstacles.splice(idx, 0, x);
+            const pos = lowerBound(obstacles, x);
+
+            const left = obstacles[pos - 1];
+            const right = pos < obstacles.length ? obstacles[pos] : null;
+
+            obstacles.splice(pos, 0, x);
+
+            // gap left -> x
+            update(1, 0, n - 1, index.get(x), x - left);
+
+            // gap x -> right
+            if (right !== null) {
+                update(1, 0, n - 1, index.get(right), right - x);
+            }
 
         } else {
+
             const [, x, sz] = q;
 
-            let idx = lowerBound(obstacles, x + 1);
+            const pos = lowerBound(obstacles, x + 1);
 
-            let prev = 0;
-            let ok = false;
+            let best = x;
 
-            for (let i = 1; i < idx; i++) {
-                const cur = obstacles[i];
+            if (pos > 0) {
+                const lastObstacle = obstacles[pos - 1];
 
-                if (cur - prev >= sz) {
-                    ok = true;
-                    break;
-                }
+                best = x - lastObstacle;
 
-                prev = cur;
+                const idx = index.get(lastObstacle);
+
+                best = Math.max(
+                    best,
+                    query(1, 0, n - 1, 0, idx)
+                );
             }
 
-            // last segment
-            if (!ok && x - prev >= sz) {
-                ok = true;
-            }
-
-            ans.push(ok);
+            ans.push(best >= sz);
         }
     }
 
