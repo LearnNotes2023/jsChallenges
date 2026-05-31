@@ -1284,7 +1284,14 @@ The planet cannot ever gain enough mass to destroy the asteroid with a mass of 2
 After the planet destroys the other asteroids, it will have a mass of 5 + 4 + 9 + 4 = 22.
 This is less than 23, so a collision would not destroy the last asteroid.
 
-
+/**
+ * @param {number} mass
+ * @param {number[]} asteroids
+ * @return {boolean}
+ */
+var asteroidsDestroyed = function(mass, asteroids) {
+    
+};
 
 
 console.log("==========================================")
