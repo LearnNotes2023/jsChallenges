@@ -1174,108 +1174,73 @@ console.log("==========================================")
 var getResults = function(queries) {
     // Collect all coordinates
     const coords = new Set([0]);
-
     for (const q of queries) {
         coords.add(q[1]);
     }
-
     const sorted = [...coords].sort((a, b) => a - b);
-
     const index = new Map();
-
     for (let i = 0; i < sorted.length; i++) {
         index.set(sorted[i], i);
     }
-
     const n = sorted.length;
-
     // segment tree for maximum free gap
     const seg = new Array(4 * n).fill(0);
-
     function update(node, l, r, idx, val) {
         if (l === r) {
             seg[node] = val;
             return;
         }
-
         const mid = (l + r) >> 1;
-
         if (idx <= mid) {
             update(node * 2, l, mid, idx, val);
         } else {
             update(node * 2 + 1, mid + 1, r, idx, val);
         }
-
         seg[node] = Math.max(seg[node * 2], seg[node * 2 + 1]);
     }
-
     function query(node, l, r, ql, qr) {
         if (ql > r || qr < l) return 0;
-
         if (ql <= l && r <= qr) return seg[node];
-
         const mid = (l + r) >> 1;
-
         return Math.max(
             query(node * 2, l, mid, ql, qr),
             query(node * 2 + 1, mid + 1, r, ql, qr)
         );
     }
-
-    // ordered obstacles
+    // ordered obstacle
     const obstacles = [0];
-
     function lowerBound(arr, target) {
         let l = 0, r = arr.length;
-
         while (l < r) {
             const m = (l + r) >> 1;
-
             if (arr[m] < target) l = m + 1;
             else r = m;
         }
-
         return l;
     }
-
     const ans = [];
-
     for (const q of queries) {
-
         // add obstacle
         if (q[0] === 1) {
             const x = q[1];
-
             const pos = lowerBound(obstacles, x);
-
             const left = obstacles[pos - 1];
             const right = pos < obstacles.length ? obstacles[pos] : null;
-
             obstacles.splice(pos, 0, x);
-
             // gap left -> x
             update(1, 0, n - 1, index.get(x), x - left);
-
             // gap x -> right
             if (right !== null) {
                 update(1, 0, n - 1, index.get(right), right - x);
             }
-
         } else {
-
             const [, x, sz] = q;
-
             const pos = lowerBound(obstacles, x + 1);
-
             let best = x;
-
             if (pos > 0) {
                 const lastObstacle = obstacles[pos - 1];
-
                 best = x - lastObstacle;
-
                 const idx = index.get(lastObstacle);
-
                 best = Math.max(
                     best,
                     query(1, 0, n - 1, 0, idx)
@@ -1290,7 +1255,39 @@ var getResults = function(queries) {
 };
 
 console.log("==========================================")
-// console.log("==========================================")
+
+2126. Destroying Asteroids
+Medium
+You are given an integer mass, which represents the original mass of a planet. 
+You are further given an integer array asteroids, where asteroids[i] is the mass of the ith asteroid.
+You can arrange for the planet to collide with the asteroids in any arbitrary order. 
+If the mass of the planet is greater than or equal to the mass of the asteroid, 
+the asteroid is destroyed and the planet gains the mass of the asteroid. Otherwise, the planet is destroyed.
+Return true if all asteroids can be destroyed. Otherwise, return false.
+
+Example 1:
+Input: mass = 10, asteroids = [3,9,19,5,21]
+Output: true
+Explanation: One way to order the asteroids is [9,19,5,3,21]:
+- The planet collides with the asteroid with a mass of 9. New planet mass: 10 + 9 = 19
+- The planet collides with the asteroid with a mass of 19. New planet mass: 19 + 19 = 38
+- The planet collides with the asteroid with a mass of 5. New planet mass: 38 + 5 = 43
+- The planet collides with the asteroid with a mass of 3. New planet mass: 43 + 3 = 46
+- The planet collides with the asteroid with a mass of 21. New planet mass: 46 + 21 = 67
+All asteroids are destroyed.
+
+Example 2:
+Input: mass = 5, asteroids = [4,9,23,4]
+Output: false
+Explanation: 
+The planet cannot ever gain enough mass to destroy the asteroid with a mass of 23.
+After the planet destroys the other asteroids, it will have a mass of 5 + 4 + 9 + 4 = 22.
+This is less than 23, so a collision would not destroy the last asteroid.
+
+
+
+
+console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
