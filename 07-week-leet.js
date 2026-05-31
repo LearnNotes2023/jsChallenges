@@ -1289,7 +1289,19 @@ console.log("==========================================")
 // @return {boolean}
 
 var asteroidsDestroyed = function(mass, asteroids) {
-    
+    asteroids.sort((a, b) => a - b);
+
+    let currentMass = BigInt(mass);
+
+    for (let asteroid of asteroids) {
+        if (currentMass < BigInt(asteroid)) {
+            return false;
+        }
+
+        currentMass += BigInt(asteroid);
+    }
+
+    return true;
 };
 
 
