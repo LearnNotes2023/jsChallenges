@@ -1341,7 +1341,12 @@ Output: 10
 Explanation: Since there are only 2 candies, we buy both of them. There is not a third candy we can take for free.
 Hence, the minimum cost to buy all candies is 5 + 5 = 10.
  
+@param {number[]} cost
+@return {number}
 
+var minimumCost = function(cost) {
+    
+};
 
 
 console.log("==========================================")
