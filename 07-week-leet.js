@@ -1406,6 +1406,15 @@ Start land ride 0 at time landStartTime[0] = 5. Finish at 5 + landDuration[0] = 
 Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and finish at 8 + waterDuration[0] = 18.
 Plan A provides the earliest finish time of 14.
 
+@param {number[]} landStartTime
+@param {number[]} landDuration
+@param {number[]} waterStartTime
+@param {number[]} waterDuration
+@return {number}
+
+var earliestFinishTime = function(landStartTime, landDuration, waterStartTime, waterDuration) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
