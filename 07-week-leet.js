@@ -1413,7 +1413,24 @@ console.log("==========================================")
 // @return {number}
 
 var earliestFinishTime = function(landStartTime, landDuration, waterStartTime, waterDuration) {
-    
+    let ans = Infinity;
+
+    for (let i = 0; i < landStartTime.length; i++) {
+        for (let j = 0; j < waterStartTime.length; j++) {
+
+            // Land -> Water
+            let landFinish = landStartTime[i] + landDuration[i];
+            let waterStart = Math.max(landFinish, waterStartTime[j]);
+            ans = Math.min(ans, waterStart + waterDuration[j]);
+
+            // Water -> Land
+            let waterFinish = waterStartTime[j] + waterDuration[j];
+            let landStart = Math.max(waterFinish, landStartTime[i]);
+            ans = Math.min(ans, landStart + landDuration[i]);
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
