@@ -1486,8 +1486,86 @@ console.log("==========================================")
 // @param {number[]} waterDuration
 // @return {number}
 
-var earliestFinishTime = function(landStartTime, landDuration, waterStartTime, waterDuration) {
-    
+var earliestFinishTime = function (
+    landStartTime,
+    landDuration,
+    waterStartTime,
+    waterDuration
+) {
+
+    function solve(firstStart, firstDur, secondStart, secondDur) {
+
+        const second = [];
+
+        for (let i = 0; i < secondStart.length; i++) {
+            second.push([secondStart[i], secondDur[i]]);
+        }
+
+        second.sort((a, b) => a[0] - b[0]);
+
+        const m = second.length;
+
+        // suffix minimum of (start + duration)
+        const suffix = Array(m);
+
+        suffix[m - 1] = second[m - 1][0] + second[m - 1][1];
+
+        for (let i = m - 2; i >= 0; i--) {
+            suffix[i] = Math.min(
+                suffix[i + 1],
+                second[i][0] + second[i][1]
+            );
+        }
+
+        // sort first rides by finish time
+        const first = [];
+
+        for (let i = 0; i < firstStart.length; i++) {
+            first.push(firstStart[i] + firstDur[i]);
+        }
+
+        first.sort((a, b) => a - b);
+
+        let ans = Infinity;
+
+        let ptr = 0;
+        let bestDur = Infinity;
+
+        for (const finish of first) {
+
+            while (ptr < m && second[ptr][0] <= finish) {
+                bestDur = Math.min(bestDur, second[ptr][1]);
+                ptr++;
+            }
+
+            // already opened rides
+            if (bestDur !== Infinity) {
+                ans = Math.min(ans, finish + bestDur);
+            }
+
+            // future rides
+            if (ptr < m) {
+                ans = Math.min(ans, suffix[ptr]);
+            }
+        }
+
+        return ans;
+    }
+
+    return Math.min(
+        solve(
+            landStartTime,
+            landDuration,
+            waterStartTime,
+            waterDuration
+        ),
+        solve(
+            waterStartTime,
+            waterDuration,
+            landStartTime,
+            landDuration
+        )
+    );
 };
 
 console.log("==========================================")
