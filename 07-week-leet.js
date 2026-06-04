@@ -1608,6 +1608,13 @@ Output: 2
 Explanation:
 Number 4848: the second digit 8 is a peak, and the third digit 4 is a valley, giving a waviness of 2.
 
+@param {number} num1
+@param {number} num2
+@return {number}
+
+var totalWaviness = function(num1, num2) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
