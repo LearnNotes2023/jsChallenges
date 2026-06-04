@@ -1613,9 +1613,87 @@ console.log("==========================================")
 // @return {number}
 
 var totalWaviness = function(num1, num2) {
-    
-};
 
+    function solve(n) {
+        if (n < 0) return 0;
+
+        const s = String(n);
+        const memo = new Map();
+
+        function dfs(pos, prev2, prev1, len, tight, started) {
+            if (pos === s.length) {
+                return [1, 0]; // one valid number, waviness sum = 0
+            }
+
+            const key = `${pos},${prev2},${prev1},${len},${tight},${started}`;
+
+            if (!tight && memo.has(key)) {
+                return memo.get(key);
+            }
+
+            let ways = 0;
+            let total = 0;
+
+            const limit = tight ? Number(s[pos]) : 9;
+
+            for (let d = 0; d <= limit; d++) {
+                const nextTight = tight && (d === limit);
+
+                // still skipping leading zeros
+                if (!started && d === 0) {
+                    const [cnt, wav] = dfs(
+                        pos + 1,
+                        -1,
+                        -1,
+                        0,
+                        nextTight,
+                        false
+                    );
+
+                    ways += cnt;
+                    total += wav;
+                    continue;
+                }
+
+                let add = 0;
+
+                // check whether prev1 becomes a peak or valley
+                if (len >= 2) {
+                    if (
+                        (prev1 > prev2 && prev1 > d) ||
+                        (prev1 < prev2 && prev1 < d)
+                    ) {
+                        add = 1;
+                    }
+                }
+
+                const [cnt, wav] = dfs(
+                    pos + 1,
+                    prev1,
+                    d,
+                    len + 1,
+                    nextTight,
+                    true
+                );
+
+                ways += cnt;
+                total += wav + add * cnt;
+            }
+
+            const res = [ways, total];
+
+            if (!tight) {
+                memo.set(key, res);
+            }
+
+            return res;
+        }
+
+        return dfs(0, -1, -1, 0, true, false)[1];
+    }
+
+    return solve(num2) - solve(num1 - 1);
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
