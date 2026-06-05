@@ -1740,7 +1740,88 @@ console.log("==========================================")
 // @return {number}
 
 var totalWaviness = function(num1, num2) {
-    
+
+    function solve(n) {
+        if (n < 100) return 0;
+
+        const s = String(n);
+        const len = s.length;
+
+        // pos, prev1, prev2, tight, started
+        // returns [countNumbers, totalWaviness]
+        const memo = new Map();
+
+        function dfs(pos, prev1, prev2, tight, started) {
+            if (pos === len) {
+                return [started ? 1 : 0, 0];
+            }
+
+            const key = `${pos},${prev1},${prev2},${tight},${started}`;
+            if (!tight && memo.has(key)) {
+                return memo.get(key);
+            }
+
+            const limit = tight ? Number(s[pos]) : 9;
+
+            let totalCount = 0;
+            let totalWave = 0;
+
+            for (let d = 0; d <= limit; d++) {
+                const nextTight = tight && d === limit;
+
+                // still leading zeros
+                if (!started && d === 0) {
+                    const [cnt, wav] = dfs(
+                        pos + 1,
+                        -1,
+                        -1,
+                        nextTight,
+                        false
+                    );
+
+                    totalCount += cnt;
+                    totalWave += wav;
+                    continue;
+                }
+
+                let add = 0;
+
+                // We can determine whether prev1 is peak/valley
+                // once we know prev2, prev1, d
+                if (started && prev2 !== -1) {
+                    if (
+                        (prev1 > prev2 && prev1 > d) ||
+                        (prev1 < prev2 && prev1 < d)
+                    ) {
+                        add = 1;
+                    }
+                }
+
+                const [cnt, wav] = dfs(
+                    pos + 1,
+                    d,
+                    started ? prev1 : -1,
+                    nextTight,
+                    true
+                );
+
+                totalCount += cnt;
+                totalWave += wav + add * cnt;
+            }
+
+            const res = [totalCount, totalWave];
+
+            if (!tight) {
+                memo.set(key, res);
+            }
+
+            return res;
+        }
+
+        return dfs(0, -1, -1, true, false)[1];
+    }
+
+    return solve(num2) - solve(num1 - 1);
 };
 
 console.log("==========================================")
