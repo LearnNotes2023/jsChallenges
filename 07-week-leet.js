@@ -1852,10 +1852,21 @@ console.log("==========================================")
 // @return {number[]}
 
 var leftRightDifference = function(nums) {
+    let total = nums.reduce((sum, num) => sum + num, 0);
     
+    let leftSum = 0;
+    let result = [];
+    
+    for (let i = 0; i < nums.length; i++) {
+        total -= nums[i]; // now total becomes rightSum
+        
+        result.push(Math.abs(leftSum - total));
+        
+        leftSum += nums[i];
+    }
+    
+    return result;
 };
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
