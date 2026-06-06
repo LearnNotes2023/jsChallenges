@@ -1848,7 +1848,12 @@ Output: [0]
 Explanation: The array leftSum is [0] and the array rightSum is [0].
 The array answer is [|0 - 0|] = [0].
 
+@param {number[]} nums
+@return {number[]}
 
+var leftRightDifference = function(nums) {
+    
+};
 
 
 
