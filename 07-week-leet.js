@@ -1889,6 +1889,14 @@ Example 3:
 Input: s = ""
 Output: 0
 
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var longestValidParentheses = function(s) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
