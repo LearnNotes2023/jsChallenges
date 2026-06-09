@@ -2020,9 +2020,16 @@ console.log("==========================================")
 // @return {number}
 
 var maxTotalValue = function(nums, k) {
-    
-};
+    let mn = Infinity;
+    let mx = -Infinity;
 
+    for (const num of nums) {
+        mn = Math.min(mn, num);
+        mx = Math.max(mx, num);
+    }
+
+    return k * (mx - mn);
+};
 
 console.log("==========================================")
 // console.log("==========================================")
