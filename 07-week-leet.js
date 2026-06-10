@@ -2066,7 +2066,133 @@ console.log("==========================================")
 // @return {number}
 
 var maxTotalValue = function(nums, k) {
-    
+    const n = nums.length;
+
+    // Sparse table logs
+    const lg = new Array(n + 1).fill(0);
+    for (let i = 2; i <= n; i++) {
+        lg[i] = lg[i >> 1] + 1;
+    }
+
+    const m = lg[n] + 1;
+
+    const stMax = Array.from({ length: m }, () => new Array(n));
+    const stMin = Array.from({ length: m }, () => new Array(n));
+
+    for (let i = 0; i < n; i++) {
+        stMax[0][i] = nums[i];
+        stMin[0][i] = nums[i];
+    }
+
+    for (let j = 1; j < m; j++) {
+        const len = 1 << j;
+        const half = len >> 1;
+
+        for (let i = 0; i + len <= n; i++) {
+            stMax[j][i] = Math.max(
+                stMax[j - 1][i],
+                stMax[j - 1][i + half]
+            );
+
+            stMin[j][i] = Math.min(
+                stMin[j - 1][i],
+                stMin[j - 1][i + half]
+            );
+        }
+    }
+
+    function value(l, r) {
+        const len = r - l + 1;
+        const p = lg[len];
+
+        const mx = Math.max(
+            stMax[p][l],
+            stMax[p][r - (1 << p) + 1]
+        );
+
+        const mn = Math.min(
+            stMin[p][l],
+            stMin[p][r - (1 << p) + 1]
+        );
+
+        return mx - mn;
+    }
+
+    class MaxHeap {
+        constructor() {
+            this.h = [];
+        }
+
+        push(x) {
+            const h = this.h;
+            h.push(x);
+
+            let i = h.length - 1;
+            while (i > 0) {
+                const p = (i - 1) >> 1;
+                if (h[p][0] >= h[i][0]) break;
+
+                [h[p], h[i]] = [h[i], h[p]];
+                i = p;
+            }
+        }
+
+        pop() {
+            const h = this.h;
+            const top = h[0];
+            const last = h.pop();
+
+            if (h.length) {
+                h[0] = last;
+
+                let i = 0;
+
+                while (true) {
+                    let largest = i;
+                    const l = i * 2 + 1;
+                    const r = l + 1;
+
+                    if (l < h.length && h[l][0] > h[largest][0]) {
+                        largest = l;
+                    }
+
+                    if (r < h.length && h[r][0] > h[largest][0]) {
+                        largest = r;
+                    }
+
+                    if (largest === i) break;
+
+                    [h[i], h[largest]] = [h[largest], h[i]];
+                    i = largest;
+                }
+            }
+
+            return top;
+        }
+
+        size() {
+            return this.h.length;
+        }
+    }
+
+    const heap = new MaxHeap();
+
+    for (let l = 0; l < n; l++) {
+        heap.push([value(l, n - 1), l, n - 1]);
+    }
+
+    let ans = 0n;
+
+    for (let t = 0; t < k; t++) {
+        const [val, l, r] = heap.pop();
+        ans += BigInt(val);
+
+        if (r > l) {
+            heap.push([value(l, r - 1), l, r - 1]);
+        }
+    }
+
+    return Number(ans);
 };
 
 
