@@ -2061,7 +2061,13 @@ Choose nums[1..3] = [2, 5, 1]. The maximum is 5 and the minimum is 1, so the val
 Choose nums[2..3] = [5, 1]. The maximum is 5 and the minimum is 1, so the value is again 4.
 Adding these gives 4 + 4 + 4 = 12.
 
+@param {number[]} nums
+@param {number} k
+@return {number}
 
+var maxTotalValue = function(nums, k) {
+    
+};
 
 
 console.log("==========================================")
