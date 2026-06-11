@@ -2231,9 +2231,43 @@ console.log("==========================================")
 // @return {number}
 
 var assignEdgeWeights = function(edges) {
-    
-};
+    const MOD = 1000000007n;
+    const n = edges.length + 1;
 
+    const graph = Array.from({ length: n + 1 }, () => []);
+
+    for (const [u, v] of edges) {
+        graph[u].push(v);
+        graph[v].push(u);
+    }
+
+    let maxDepth = 0;
+
+    const dfs = (node, parent, depth) => {
+        maxDepth = Math.max(maxDepth, depth);
+
+        for (const nei of graph[node]) {
+            if (nei !== parent) {
+                dfs(nei, node, depth + 1);
+            }
+        }
+    };
+
+    dfs(1, 0, 0);
+
+    // fast power: 2^(maxDepth - 1) mod MOD
+    let exp = maxDepth - 1;
+    let base = 2n;
+    let ans = 1n;
+
+    while (exp > 0) {
+        if (exp & 1) ans = (ans * base) % MOD;
+        base = (base * base) % MOD;
+        exp >>= 1;
+    }
+
+    return Number(ans);
+};
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
