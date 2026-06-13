@@ -2434,7 +2434,13 @@ Explanation:​​​​​​​
 The weight of "abcd" is 7 + 5 + 3 + 4 = 19. The result modulo 26 is 19 % 26 = 19, which maps to 'g'.
 Thus, the string formed by concatenating the mapped characters is "g".
 
-
+@param {string[]} words
+@param {number[]} weights
+@return {string}
+ 
+var mapWordWeights = function(words, weights) {
+    
+};
 
 
 console.log("==========================================")
