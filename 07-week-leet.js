@@ -2490,6 +2490,18 @@ Output: 100001
 Explanation:
 There is only one node with a twin in the linked list having twin sum of 1 + 100000 = 100001.
 
+Definition for singly-linked list.
+function ListNode(val, next) {
+   this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+
+@param {ListNode} head
+@return {number}
+
+var pairSum = function(head) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
