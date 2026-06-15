@@ -2566,7 +2566,18 @@ The above figure represents the given linked list.
 For n = 2, node 1 with value 1 is the middle node, which is marked in red.
 Node 0 with value 2 is the only node remaining after removing node 1.
  
+Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
 
+@param {ListNode} head
+@return {ListNode}
+
+var deleteMiddle = function(head) {
+    
+};
 
 
 console.log("==========================================")
