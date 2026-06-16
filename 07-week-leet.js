@@ -2627,7 +2627,12 @@ i	s[i]	Operation	Current result
 2	'#'	Duplicate the string	""
 Thus, the final result is "".
 
+@param {string} s
+@return {string}
 
+var processStr = function(s) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
