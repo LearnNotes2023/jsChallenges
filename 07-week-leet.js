@@ -2631,7 +2631,51 @@ console.log("==========================================")
 // @return {string}
 
 var processStr = function(s) {
-    
+    const deque = {};
+    let left = 0;
+    let right = -1;
+    let reversed = false;
+
+    const pushBack = (ch) => deque[++right] = ch;
+    const pushFront = (ch) => deque[--left] = ch;
+
+    const popBack = () => {
+        if (left <= right) delete deque[right--];
+    };
+
+    const popFront = () => {
+        if (left <= right) delete deque[left++];
+    };
+
+    const getString = () => {
+        const res = [];
+        if (!reversed) {
+            for (let i = left; i <= right; i++) res.push(deque[i]);
+        } else {
+            for (let i = right; i >= left; i--) res.push(deque[i]);
+        }
+        return res;
+    };
+
+    for (const ch of s) {
+        if (ch >= 'a' && ch <= 'z') {
+            if (!reversed) pushBack(ch);
+            else pushFront(ch);
+        } else if (ch === '*') {
+            if (!reversed) popBack();
+            else popFront();
+        } else if (ch === '#') {
+            const curr = getString();
+            for (const c of curr) {
+                if (!reversed) pushBack(c);
+                else pushFront(c);
+            }
+        } else if (ch === '%') {
+            reversed = !reversed;
+        }
+    }
+
+    return getString().join('');
 };
 
 console.log("==========================================")
