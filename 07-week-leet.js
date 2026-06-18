@@ -2698,7 +2698,13 @@ Example 3:
 Input: hour = 3, minutes = 15
 Output: 7.5
  
+@param {number} hour
+@param {number} minutes
+@return {number}
 
+var angleClock = function(hour, minutes) {
+    
+};
 
 
 
