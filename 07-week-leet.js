@@ -2773,7 +2773,12 @@ Input: gain = [-4,-3,-2,-1,4,3,2]
 Output: 0
 Explanation: The altitudes are [0,-4,-7,-9,-10,-6,-3,-1]. The highest is 0.
 
+@param {number[]} gain
+@return {number}
 
+var largestAltitude = function(gain) {
+    
+};
 
 
 console.log("==========================================")
