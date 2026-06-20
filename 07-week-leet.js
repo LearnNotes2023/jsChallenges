@@ -2829,7 +2829,50 @@ console.log("==========================================")
 // @return {number}
 
 var maxBuilding = function(n, restrictions) {
-    
+    restrictions.push([1, 0]);
+
+    restrictions.sort((a, b) => a[0] - b[0]);
+
+    if (restrictions[restrictions.length - 1][0] !== n) {
+        restrictions.push([n, n - 1]);
+    } else {
+        restrictions[restrictions.length - 1][1] =
+            Math.min(restrictions[restrictions.length - 1][1], n - 1);
+    }
+
+    // left -> right
+    for (let i = 1; i < restrictions.length; i++) {
+        const d = restrictions[i][0] - restrictions[i - 1][0];
+        restrictions[i][1] = Math.min(
+            restrictions[i][1],
+            restrictions[i - 1][1] + d
+        );
+    }
+
+    // right -> left
+    for (let i = restrictions.length - 2; i >= 0; i--) {
+        const d = restrictions[i + 1][0] - restrictions[i][0];
+        restrictions[i][1] = Math.min(
+            restrictions[i][1],
+            restrictions[i + 1][1] + d
+        );
+    }
+
+    let ans = 0;
+
+    for (let i = 1; i < restrictions.length; i++) {
+        const [id1, h1] = restrictions[i - 1];
+        const [id2, h2] = restrictions[i];
+
+        const d = id2 - id1;
+
+        ans = Math.max(
+            ans,
+            Math.floor((h1 + h2 + d) / 2)
+        );
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
