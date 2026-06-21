@@ -2907,7 +2907,26 @@ console.log("==========================================")
 // @return {number}
 
 var maxIceCream = function(costs, coins) {
-    
+    let maxCost = Math.max(...costs);
+
+    const freq = new Array(maxCost + 1).fill(0);
+
+    for (const cost of costs) {
+        freq[cost]++;
+    }
+
+    let count = 0;
+
+    for (let cost = 1; cost <= maxCost && coins >= cost; cost++) {
+        if (freq[cost] === 0) continue;
+
+        const canBuy = Math.min(freq[cost], Math.floor(coins / cost));
+
+        count += canBuy;
+        coins -= canBuy * cost;
+    }
+
+    return count;
 };
 
 console.log("==========================================")
