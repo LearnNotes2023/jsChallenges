@@ -2902,7 +2902,13 @@ Input: costs = [1,6,3,1,2,5], coins = 20
 Output: 6
 Explanation: The boy can buy all the ice cream bars for a total price of 1 + 6 + 3 + 1 + 2 + 5 = 18.
 
+@param {number[]} costs
+@param {number} coins
+@return {number}
 
+var maxIceCream = function(costs, coins) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
