@@ -3084,6 +3084,15 @@ Explanation:
 [3, 1, 2], [3, 1, 3], [3, 2, 3]
 All arrays meet the ZigZag conditions.
 
+@param {number} n
+@param {number} l
+@param {number} r
+@return {number}
+
+var zigZagArrays = function(n, l, r) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
