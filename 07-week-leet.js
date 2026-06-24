@@ -3090,7 +3090,83 @@ console.log("==========================================")
 // @return {number}
 
 var zigZagArrays = function(n, l, r) {
-    
+    const MOD = 1000000007n;
+    const m = r - l + 1;
+
+    if (n === 1) return m;
+
+    const size = 2 * m;
+
+    const mulMat = (A, B) => {
+        const C = Array.from({ length: size }, () =>
+            Array(size).fill(0n)
+        );
+
+        for (let i = 0; i < size; i++) {
+            for (let k = 0; k < size; k++) {
+                if (A[i][k] === 0n) continue;
+                const aik = A[i][k];
+
+                for (let j = 0; j < size; j++) {
+                    if (B[k][j] === 0n) continue;
+                    C[i][j] = (C[i][j] + aik * B[k][j]) % MOD;
+                }
+            }
+        }
+        return C;
+    };
+
+    const mulMatVec = (M, v) => {
+        const res = Array(size).fill(0n);
+
+        for (let i = 0; i < size; i++) {
+            let cur = 0n;
+            for (let j = 0; j < size; j++) {
+                if (M[i][j] === 0n) continue;
+                cur = (cur + M[i][j] * v[j]) % MOD;
+            }
+            res[i] = cur;
+        }
+        return res;
+    };
+
+    // Transition matrix
+    let T = Array.from({ length: size }, () =>
+        Array(size).fill(0n)
+    );
+
+    // state 0..m-1     => next comparison must be UP
+    // state m..2m-1    => next comparison must be DOWN
+    for (let x = 0; x < m; x++) {
+        // (UP, x) -> (DOWN, y), y > x
+        for (let y = x + 1; y < m; y++) {
+            T[m + y][x] = 1n;
+        }
+
+        // (DOWN, x) -> (UP, y), y < x
+        for (let y = 0; y < x; y++) {
+            T[y][m + x] = 1n;
+        }
+    }
+
+    // Initial vector for length 1:
+    // every starting value can begin either an up-pattern
+    // or a down-pattern.
+    let vec = Array(size).fill(1n);
+
+    let p = n - 1;
+    let M = T;
+
+    while (p > 0) {
+        if (p & 1) vec = mulMatVec(M, vec);
+        p >>= 1;
+        if (p) M = mulMat(M, M);
+    }
+
+    let ans = 0n;
+    for (const x of vec) ans = (ans + x) % MOD;
+
+    return Number(ans);
 };
 
 console.log("==========================================")
