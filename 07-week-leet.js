@@ -3209,7 +3209,58 @@ console.log("==========================================")
 // @return {number}
 
 var countMajoritySubarrays = function(nums, target) {
-    
+    const n = nums.length;
+
+    const pref = [0];
+    let sum = 0;
+
+    for (const x of nums) {
+        sum += (x === target ? 1 : -1);
+        pref.push(sum);
+    }
+
+    // Coordinate compression
+    const vals = [...new Set(pref)].sort((a, b) => a - b);
+    const rank = new Map();
+    for (let i = 0; i < vals.length; i++) {
+        rank.set(vals[i], i + 1);
+    }
+
+    class Fenwick {
+        constructor(n) {
+            this.bit = new Array(n + 1).fill(0);
+        }
+
+        add(idx, val) {
+            while (idx < this.bit.length) {
+                this.bit[idx] += val;
+                idx += idx & -idx;
+            }
+        }
+
+        query(idx) {
+            let res = 0;
+            while (idx > 0) {
+                res += this.bit[idx];
+                idx -= idx & -idx;
+            }
+            return res;
+        }
+    }
+
+    const fw = new Fenwick(vals.length);
+    let ans = 0;
+
+    for (const p of pref) {
+        const r = rank.get(p);
+
+        // Count previous prefix sums strictly smaller than p
+        ans += fw.query(r - 1);
+
+        fw.add(r, 1);
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
