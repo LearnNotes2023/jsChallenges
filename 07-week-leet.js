@@ -3301,7 +3301,44 @@ console.log("==========================================")
 // @return {number}
 
 var countMajoritySubarrays = function(nums, target) {
-    
+    const n = nums.length;
+    const size = 2 * n + 5;
+    const offset = n + 2;
+
+    const bit = new Array(size).fill(0);
+
+    function update(i) {
+        while (i < size) {
+            bit[i]++;
+            i += i & -i;
+        }
+    }
+
+    function query(i) {
+        let res = 0;
+        while (i > 0) {
+            res += bit[i];
+            i -= i & -i;
+        }
+        return res;
+    }
+
+    let ans = 0;
+    let prefix = 0;
+
+    // pref = 0
+    update(offset);
+
+    for (const x of nums) {
+        prefix += (x === target ? 1 : -1);
+
+        // count previous prefix sums < current prefix
+        ans += query(prefix + offset - 1);
+
+        update(prefix + offset);
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
