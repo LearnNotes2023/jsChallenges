@@ -3296,7 +3296,13 @@ Explanation:
 target = 4 does not appear in nums at all. 
 Therefore, there cannot be any subarray where 4 is the majority element. Hence the answer is 0.
 
+@param {number[]} nums
+@param {number} target
+@return {number}
 
+var countMajoritySubarrays = function(nums, target) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
