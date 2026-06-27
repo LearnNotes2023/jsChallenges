@@ -3366,6 +3366,12 @@ which follows the pattern. Hence the answer is 1.
 Note that we could have also selected the subsets {2}, {3}, or {4}, there may be 
 multiple subsets which provide the same answer. 
 
+@param {number[]} nums
+@return {number}
+
+var maximumLength = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
