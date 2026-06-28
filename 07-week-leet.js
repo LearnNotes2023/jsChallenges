@@ -3434,7 +3434,12 @@ Input: arr = [1,2,3,4,5]
 Output: 5
 Explanation: The array already satisfies the conditions, and the largest element is 5.
 
+@param {number[]} arr
+@return {number}
 
+var maximumElementAfterDecrementingAndRearranging = function(arr) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
