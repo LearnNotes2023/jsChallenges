@@ -3481,6 +3481,13 @@ Input: patterns = ["a","a","a"], word = "ab"
 Output: 3
 Explanation: Each of the patterns appears as a substring in word "ab".
 
+@param {string[]} patterns
+@param {string} word
+@return {number}
+
+var numOfStrings = function(patterns, word) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
