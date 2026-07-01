@@ -3579,7 +3579,13 @@ Example 3:
 Input: candidates = [2], target = 1
 Output: []
 
+@param {number[]} candidates
+@param {number} target
+@return {number[][]}
 
+var combinationSum = function(candidates, target) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
