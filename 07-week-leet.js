@@ -3613,10 +3613,6 @@ console.log("==========================================")
 
 3286. Find a Safe Walk Through a Grid
 Medium
-Topics
-premium lock icon
-Companies
-Hint
 You are given an m x n binary matrix grid and an integer health.
 You start on the upper-left corner (0, 0) and would like to get to the lower-right corner (m - 1, n - 1).
 You can move up, down, left, or right from one cell to another adjacent cell 
@@ -3644,6 +3640,13 @@ The final cell can be reached safely by walking along the gray cells below.
 Any path that does not go through the cell (1, 1) is unsafe since your health will drop to 0 
 when reaching the final cell.
 
+@param {number[][]} grid
+@param {number} health
+@return {boolean}
+
+var findSafeWalk = function(grid, health) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
