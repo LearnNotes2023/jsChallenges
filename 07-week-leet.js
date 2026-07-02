@@ -3645,7 +3645,45 @@ console.log("==========================================")
 // @return {boolean}
 
 var findSafeWalk = function(grid, health) {
-    
+    const m = grid.length;
+    const n = grid[0].length;
+
+    const dist = Array.from({ length: m }, () =>
+        Array(n).fill(Infinity)
+    );
+
+    dist[0][0] = grid[0][0];
+
+    const deque = [[0, 0]];
+    const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+
+    while (deque.length) {
+        const [r, c] = deque.shift();
+
+        for (const [dr, dc] of dirs) {
+            const nr = r + dr;
+            const nc = c + dc;
+
+            if (
+                nr < 0 || nr >= m ||
+                nc < 0 || nc >= n
+            ) continue;
+
+            const cost = dist[r][c] + grid[nr][nc];
+
+            if (cost < dist[nr][nc]) {
+                dist[nr][nc] = cost;
+
+                if (grid[nr][nc] === 0) {
+                    deque.unshift([nr, nc]);
+                } else {
+                    deque.push([nr, nc]);
+                }
+            }
+        }
+    }
+
+    return dist[m - 1][n - 1] < health;
 };
 
 console.log("==========================================")
