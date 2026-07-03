@@ -3735,7 +3735,80 @@ console.log("==========================================")
 // @return {number}
 
 var findMaxPathScore = function(edges, online, k) {
-    
+    let n = online.length;
+
+    let graph = Array.from({ length: n }, () => []);
+    let indegree = new Array(n).fill(0);
+
+    let costs = [];
+
+    for (let [u, v, c] of edges) {
+        graph[u].push([v, c]);
+        indegree[v]++;
+        costs.push(c);
+    }
+
+    // Topological order
+    let queue = [];
+    for (let i = 0; i < n; i++) {
+        if (indegree[i] === 0) queue.push(i);
+    }
+
+    let topo = [];
+    let head = 0;
+    while (head < queue.length) {
+        let u = queue[head++];
+        topo.push(u);
+        for (let [v] of graph[u]) {
+            if (--indegree[v] === 0) {
+                queue.push(v);
+            }
+        }
+    }
+
+    costs.sort((a, b) => a - b);
+    costs = [...new Set(costs)];
+
+    function can(limit) {
+        const INF = Number.MAX_SAFE_INTEGER;
+        let dist = new Array(n).fill(INF);
+        dist[0] = 0;
+
+        for (let u of topo) {
+            if (dist[u] === INF) continue;
+
+            // intermediate offline nodes are forbidden
+            if (u !== 0 && u !== n - 1 && !online[u]) continue;
+
+            for (let [v, c] of graph[u]) {
+                if (c < limit) continue;
+                if (v !== n - 1 && !online[v]) continue;
+
+                if (dist[v] > dist[u] + c) {
+                    dist[v] = dist[u] + c;
+                }
+            }
+        }
+
+        return dist[n - 1] <= k;
+    }
+
+    let left = 0;
+    let right = costs.length - 1;
+    let ans = -1;
+
+    while (left <= right) {
+        let mid = (left + right) >> 1;
+
+        if (can(costs[mid])) {
+            ans = costs[mid];
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
