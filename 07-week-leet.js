@@ -3729,7 +3729,14 @@ Total cost = 6 + 6 = 12 <= k, so this path is valid.
 The minimum edge‐cost along this path is min(6, 6) = 6.
 Among the two valid paths, their scores are 5 and 6. Therefore, the answer is 6.
 
+@param {number[][]} edges
+@param {boolean[]} online
+@param {number} k
+@return {number}
 
+var findMaxPathScore = function(edges, online, k) {
+    
+};
 
 console.log("==========================================")
 
