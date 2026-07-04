@@ -3840,7 +3840,13 @@ Output: 2
 Explanation: The path from city 1 to 4 with the minimum score is: 1 -> 2 -> 1 -> 3 -> 4. 
 The score of this path is min(2,2,4,7) = 2.
 
+@param {number} n
+@param {number[][]} roads
+@return {number}
 
+var minScore = function(n, roads) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
