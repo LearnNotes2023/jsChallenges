@@ -3845,7 +3845,31 @@ console.log("==========================================")
 // @return {number}
 
 var minScore = function(n, roads) {
-    
+    const graph = Array.from({ length: n + 1 }, () => []);
+
+    for (const [a, b, d] of roads) {
+        graph[a].push([b, d]);
+        graph[b].push([a, d]);
+    }
+
+    const visited = new Array(n + 1).fill(false);
+    let answer = Infinity;
+
+    function dfs(city) {
+        visited[city] = true;
+
+        for (const [next, dist] of graph[city]) {
+            answer = Math.min(answer, dist);
+
+            if (!visited[next]) {
+                dfs(next);
+            }
+        }
+    }
+
+    dfs(1);
+
+    return answer;
 };
 
 console.log("==========================================")
