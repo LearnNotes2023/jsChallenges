@@ -3973,6 +3973,12 @@ Example 2:
 Input: intervals = [[1,4],[2,3]]
 Output: 1
 
+@param {number[][]} intervals
+@return {number}
+
+var removeCoveredIntervals = function(intervals) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
