@@ -4022,7 +4022,12 @@ Explanation:
 The non-zero digit is 1, so x = 1 and sum = 1.
 Therefore, the answer is x * sum = 1 * 1 = 1.
 
+@param {number} n
+@return {number}
 
+var sumAndMultiply = function(n) {
+    
+};
 
 
 console.log("==========================================")
