@@ -4026,9 +4026,20 @@ console.log("==========================================")
 // @return {number}
 
 var sumAndMultiply = function(n) {
-    
-};
+    let x = "";
+    let sum = 0;
 
+    for (const digit of String(n)) {
+        if (digit !== "0") {
+            x += digit;
+            sum += Number(digit);
+        }
+    }
+
+    if (x === "") return 0;
+
+    return Number(x) * sum;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
