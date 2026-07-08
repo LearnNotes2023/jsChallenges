@@ -4097,11 +4097,83 @@ console.log("==========================================")
 // @param {number[][]} queries
 // @return {number[]}
 
-var sumAndMultiply = function(s, queries) {
-    
+var sumAndMultiply = function (s, queries) {
+    const MOD = 1000000007n;
+    const n = s.length;
+
+    // powers of 10
+    const pow10 = new Array(n + 1);
+    pow10[0] = 1n;
+    for (let i = 1; i <= n; i++) {
+        pow10[i] = (pow10[i - 1] * 10n) % MOD;
+    }
+
+    const size = 4 * n;
+    const val = new Array(size).fill(0n); // BigInt
+    const len = new Array(size).fill(0);
+    const sum = new Array(size).fill(0);
+
+    function pull(node) {
+        const L = node * 2;
+        const R = node * 2 + 1;
+
+        len[node] = len[L] + len[R];
+        sum[node] = sum[L] + sum[R];
+        val[node] = (val[L] * pow10[len[R]] + val[R]) % MOD;
+    }
+
+    function build(node, l, r) {
+        if (l === r) {
+            const d = s.charCodeAt(l) - 48;
+            if (d !== 0) {
+                val[node] = BigInt(d);
+                len[node] = 1;
+                sum[node] = d;
+            }
+            return;
+        }
+
+        const mid = (l + r) >> 1;
+        build(node * 2, l, mid);
+        build(node * 2 + 1, mid + 1, r);
+        pull(node);
+    }
+
+    function query(node, l, r, ql, qr) {
+        if (ql <= l && r <= qr) {
+            return {
+                val: val[node],
+                len: len[node],
+                sum: sum[node]
+            };
+        }
+
+        const mid = (l + r) >> 1;
+
+        if (qr <= mid) return query(node * 2, l, mid, ql, qr);
+        if (ql > mid) return query(node * 2 + 1, mid + 1, r, ql, qr);
+
+        const left = query(node * 2, l, mid, ql, qr);
+        const right = query(node * 2 + 1, mid + 1, r, ql, qr);
+
+        return {
+            len: left.len + right.len,
+            sum: left.sum + right.sum,
+            val: (left.val * pow10[right.len] + right.val) % MOD
+        };
+    }
+
+    build(1, 0, n - 1);
+
+    const ans = [];
+
+    for (const [l, r] of queries) {
+        const res = query(1, 0, n - 1, l, r);
+        ans.push(Number((res.val * BigInt(res.sum)) % MOD));
+    }
+
+    return ans;
 };
-
-
 
 // console.log("==========================================")
 // console.log("==========================================")
