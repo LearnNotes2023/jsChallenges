@@ -4211,7 +4211,16 @@ and |nums[2] - nums[3]| = |6 - 8| = 2, both of which are within maxDiff.
 Query [2,3]: There is an edge between Node 2 and Node 3 because |nums[2] - nums[3]| = |6 - 8| = 2, 
 which is equal to maxDiff.
 Thus, the final answer after processing all the queries is [false, false, true, true].
- 
+
+@param {number} n
+@param {number[]} nums
+@param {number} maxDiff
+@param {number[][]} queries
+@return {boolean[]}
+
+var pathExistenceQueries = function(n, nums, maxDiff, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
