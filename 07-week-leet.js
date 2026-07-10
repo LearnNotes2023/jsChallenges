@@ -4293,7 +4293,80 @@ console.log("==========================================")
 // @return {number[]}
 
 var pathExistenceQueries = function(n, nums, maxDiff, queries) {
-    
+    const order = Array.from({ length: n }, (_, i) => i);
+
+    order.sort((a, b) => nums[a] - nums[b]);
+
+    const pos = new Array(n);
+
+    const values = new Array(n);
+
+    for (let i = 0; i < n; i++) {
+        values[i] = nums[order[i]];
+        pos[order[i]] = i;
+    }
+
+    let LOG = 1;
+
+    while (2 ** LOG <= n) {
+        LOG++;
+    }
+
+    const jump = Array.from({ length: LOG }, () => new Array(n));
+
+    let r = 0;
+
+    for (let i = 0; i < n; i++) {
+        if (r < i) {
+            r = i;
+        }
+
+        while (r + 1 < n && values[r + 1] - values[i] <= maxDiff) {
+            r++;
+        }
+
+        jump[0][i] = r;
+    }
+
+    for (let p = 1; p < LOG; p++) {
+        for (let i = 0; i < n; i++) {
+            jump[p][i] = jump[p - 1][jump[p - 1][i]];
+        }
+    }
+
+    const answer = new Array(queries.length);
+
+    for (let q = 0; q < queries.length; q++) {
+        let left = pos[queries[q][0]];
+        let right = pos[queries[q][1]];
+
+        if (left > right) {
+            [left, right] = [right, left];
+        }
+
+        if (left === right) {
+            answer[q] = 0;
+            continue;
+        }
+
+        let current = left;
+        let distance = 0;
+
+        for (let p = LOG - 1; p >= 0; p--) {
+            if (jump[p][current] < right) {
+                current = jump[p][current];
+                distance += 2 ** p;
+            }
+        }
+
+        if (jump[0][current] >= right) {
+            answer[q] = distance + 1;
+        } else {
+            answer[q] = -1;
+        }
+    }
+
+    return answer;
 };
 
 console.log("==========================================")
