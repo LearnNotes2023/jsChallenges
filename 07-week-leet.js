@@ -4286,6 +4286,16 @@ Nodes 0 and 2: |nums[0] - nums[2]| = |3 - 1| = 2 > 1
 Nodes 1 and 2: |nums[1] - nums[2]| = |6 - 1| = 5 > 1
 Thus, no node can reach any other node, and the output is [0, -1, -1].
 
+@param {number} n
+@param {number[]} nums
+@param {number} maxDiff
+@param {number[][]} queries
+@return {number[]}
+
+var pathExistenceQueries = function(n, nums, maxDiff, queries) {
+    
+};
+
 console.log("==========================================")
 // console.log("==========================================")
 // console.log("==========================================")
