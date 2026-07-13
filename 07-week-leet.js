@@ -4494,7 +4494,20 @@ console.log("==========================================")
 // @return {number[]}
 
 var sequentialDigits = function(low, high) {
-    
+    const result = [];
+    const digits = "123456789";
+
+    for (let len = 2; len <= 9; len++) {
+        for (let start = 0; start <= 9 - len; start++) {
+            const num = Number(digits.slice(start, start + len));
+
+            if (num >= low && num <= high) {
+                result.push(num);
+            }
+        }
+    }
+
+    return result;
 };
 
 console.log("==========================================")
