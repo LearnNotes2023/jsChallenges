@@ -4629,7 +4629,7 @@ console.log("==========================================")
 // @return {number}
 
 var gcdOfOddEvenSums = function(n) {
-    
+    return n;
 };
 
 console.log("==========================================")
