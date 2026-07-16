@@ -4674,15 +4674,41 @@ console.log("==========================================")
 // prefixGcd = [3, 6, 2, 8]. After sorting, it forms [2, 3, 6, 8].
 // Form pairs: gcd(2, 8) = 2 and gcd(3, 6) = 3. Thus, the sum is 2 + 3 = 5.
 
-@param {number[]} nums
-@return {number}
+// @param {number[]} nums
+// @return {number}
 
 var gcdSum = function(nums) {
-    
+    const gcd = (a, b) => {
+        while (b !== 0) {
+            let t = a % b;
+            a = b;
+            b = t;
+        }
+        return a;
+    };
+
+    const prefixGcd = [];
+    let mx = 0;
+
+    for (const x of nums) {
+        mx = Math.max(mx, x);
+        prefixGcd.push(gcd(x, mx));
+    }
+
+    prefixGcd.sort((a, b) => a - b);
+
+    let left = 0;
+    let right = prefixGcd.length - 1;
+    let ans = 0;
+
+    while (left < right) {
+        ans += gcd(prefixGcd[left], prefixGcd[right]);
+        left++;
+        right--;
+    }
+
+    return ans;
 };
-
-
-
 
 console.log("==========================================")
 // console.log("==========================================")
