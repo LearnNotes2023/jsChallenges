@@ -4746,7 +4746,56 @@ console.log("==========================================")
 // @return {number[]}
 
 var gcdValues = function(nums, queries) {
-    
+    const maxVal = Math.max(...nums);
+
+    // Frequency of each number
+    const freq = new Array(maxVal + 1).fill(0);
+    for (const x of nums) freq[x]++;
+
+    // cnt[d] = numbers divisible by d
+    const cnt = new Array(maxVal + 1).fill(0);
+    for (let d = 1; d <= maxVal; d++) {
+        for (let m = d; m <= maxVal; m += d) {
+            cnt[d] += freq[m];
+        }
+    }
+
+    // exactPairs[d] = pairs with gcd exactly d
+    const exactPairs = new Array(maxVal + 1).fill(0);
+
+    for (let d = maxVal; d >= 1; d--) {
+        let pairs = cnt[d] * (cnt[d] - 1) / 2;
+
+        for (let m = d * 2; m <= maxVal; m += d) {
+            pairs -= exactPairs[m];
+        }
+
+        exactPairs[d] = pairs;
+    }
+
+    // Prefix counts over gcd values
+    const prefix = [];
+    let total = 0;
+    for (let d = 1; d <= maxVal; d++) {
+        if (exactPairs[d] > 0) {
+            total += exactPairs[d];
+            prefix.push([d, total]);
+        }
+    }
+
+    const ans = [];
+
+    for (const q of queries) {
+        let l = 0, r = prefix.length - 1;
+        while (l < r) {
+            const mid = (l + r) >> 1;
+            if (prefix[mid][1] > q) r = mid;
+            else l = mid + 1;
+        }
+        ans.push(prefix[l][0]);
+    }
+
+    return ans;
 };
 
 console.log("==========================================")
