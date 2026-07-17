@@ -4741,6 +4741,13 @@ Output: [2,2]
 Explanation:
 gcdPairs = [2].
 
+@param {number[]} nums
+@param {number[]} queries
+@return {number[]}
+
+var gcdValues = function(nums, queries) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
