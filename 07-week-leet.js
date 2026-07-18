@@ -4829,7 +4829,13 @@ The smallest number in nums is 3.
 The largest number in nums is 3.
 The greatest common divisor of 3 and 3 is 3.
 
-
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findGCD = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
