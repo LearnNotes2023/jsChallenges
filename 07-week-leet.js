@@ -4833,7 +4833,16 @@ console.log("==========================================")
 // @return {number}
 
 var findGCD = function(nums) {
-    
+    let min = Math.min(...nums);
+    let max = Math.max(...nums);
+
+    while (max % min !== 0) {
+        let temp = max % min;
+        max = min;
+        min = temp;
+    }
+
+    return min;
 };
 
 console.log("==========================================")
