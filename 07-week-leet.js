@@ -4993,7 +4993,48 @@ console.log("==========================================")
 // @return {number}
 
 var maxActiveSectionsAfterTrade = function(s) {
-    
+    const t = "1" + s + "1";
+
+    // Count existing 1's.
+    let ones = 0;
+    for (const c of s) {
+        if (c === '1') ones++;
+    }
+
+    // Run-length encoding.
+    const runs = [];
+    let i = 0;
+    while (i < t.length) {
+        let j = i;
+        while (j < t.length && t[j] === t[i]) j++;
+        runs.push({
+            ch: t[i],
+            len: j - i
+        });
+        i = j;
+    }
+
+    let ans = ones;
+
+    // Every removable 1-run has a 0-run before and after it.
+    for (let i = 1; i + 1 < runs.length; i++) {
+        if (
+            runs[i].ch !== '1' ||
+            runs[i - 1].ch !== '0' ||
+            runs[i + 1].ch !== '0'
+        ) continue;
+
+        // Remove this 1-run.
+        // The surrounding zero runs merge.
+        let merged = runs[i - 1].len + runs[i].len + runs[i + 1].len;
+
+        // Flipping the merged zero run:
+        let active = ones - runs[i].len + merged;
+
+        ans = Math.max(ans, active);
+    }
+
+    return Math.min(ans, s.length);
 };
 
 console.log("==========================================")
