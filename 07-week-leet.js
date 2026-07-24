@@ -5318,7 +5318,12 @@ Output: 4
 Explanation:
 The possible XOR triplet values are {6, 7, 8, 9}. Thus, the output is 4.
 
+@param {number[]} nums
+@return {number}
 
+var uniqueXorTriplets = function(nums) {
+    
+};
 
 
 console.log("==========================================")
