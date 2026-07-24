@@ -5322,9 +5322,31 @@ console.log("==========================================")
 // @return {number}
 
 var uniqueXorTriplets = function(nums) {
-    
-};
+    const mx = (Math.max(...nums) << 1);
 
+    // All possible XORs of two elements
+    const pair = new Array(mx).fill(false);
+    for (const a of nums) {
+        for (const b of nums) {
+            pair[a ^ b] = true;
+        }
+    }
+
+    // All possible XORs of three elements
+    const seen = new Array(mx).fill(false);
+    for (let x = 0; x < mx; x++) {
+        if (!pair[x]) continue;
+        for (const c of nums) {
+            seen[x ^ c] = true;
+        }
+    }
+
+    let ans = 0;
+    for (const v of seen) {
+        if (v) ans++;
+    }
+    return ans;
+};
 
 console.log("==========================================")
 // console.log("==========================================")
