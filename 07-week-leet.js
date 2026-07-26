@@ -5406,7 +5406,12 @@ Example 3:
 Input: nums = [-1,-2,-3]
 Output: -6
 
+@param {number[]} nums
+@return {number}
 
+var maximumProduct = function(nums) {
+    
+};
 
 console.log("==========================================")
 // console.log("==========================================")
